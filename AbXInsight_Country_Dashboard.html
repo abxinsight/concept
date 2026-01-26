@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AbXInsight - Country Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+  <nav class="bg-white border-b px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <svg width="36" height="36" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="url(#nG)"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g><defs><linearGradient id="nG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
+      <span class="text-lg font-bold text-gray-800">AbXInsight</span>
+      <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Country</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <a href="#" class="text-sm text-gray-600">Home</a>
+      <a href="#" class="text-sm text-purple-600 font-medium">Dashboard</a>
+      <a href="#" class="text-sm text-gray-600">Facilities</a>
+      <a href="#" class="text-sm text-gray-600">Reports</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-semibold text-sm">MH</div>
+      <span class="text-sm text-gray-600">Ministry User</span>
+    </div>
+  </nav>
+
+  <div class="p-6">
+    <div class="mb-6 flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-800">National Antibiotic Use Dashboard</h1>
+        <p class="text-gray-600">Republic of Example - 2025</p>
+      </div>
+      <div class="flex gap-3">
+        <select class="px-4 py-2 border rounded-lg text-sm"><option>2025</option><option>2024</option></select>
+        <button class="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium">Export to GLASS</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-xl p-5 border">
+        <p class="text-sm text-gray-500 mb-1">National DID</p>
+        <p class="text-3xl font-bold text-gray-800">18.4</p>
+        <p class="text-sm text-gray-500 mt-1">DDD/1000 inh/day</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border">
+        <p class="text-sm text-gray-500 mb-1">Reporting Facilities</p>
+        <p class="text-3xl font-bold text-purple-600">847</p>
+        <p class="text-sm text-green-600 mt-1">92% coverage</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border">
+        <p class="text-sm text-gray-500 mb-1">AWaRe Access</p>
+        <p class="text-3xl font-bold text-green-600">58%</p>
+        <p class="text-sm text-amber-600 mt-1">Target: 60%</p>
+      </div>
+      <div class="bg-white rounded-xl p-5 border">
+        <p class="text-sm text-gray-500 mb-1">Population</p>
+        <p class="text-3xl font-bold text-gray-800">12.4M</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-6">
+      <div class="col-span-2 bg-white rounded-xl p-5 border">
+        <h3 class="font-semibold text-gray-800 mb-4">Regional Breakdown (DID)</h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="p-4 bg-purple-50 rounded-lg text-center">
+            <p class="text-2xl font-bold text-purple-700">22.1</p>
+            <p class="text-sm text-gray-600">Capital</p>
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg text-center">
+            <p class="text-2xl font-bold text-gray-700">17.8</p>
+            <p class="text-sm text-gray-600">North</p>
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg text-center">
+            <p class="text-2xl font-bold text-gray-700">16.2</p>
+            <p class="text-sm text-gray-600">East</p>
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg text-center">
+            <p class="text-2xl font-bold text-gray-700">19.4</p>
+            <p class="text-sm text-gray-600">West</p>
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg text-center">
+            <p class="text-2xl font-bold text-gray-700">14.9</p>
+            <p class="text-sm text-gray-600">South</p>
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg text-center">
+            <p class="text-2xl font-bold text-gray-700">18.1</p>
+            <p class="text-sm text-gray-600">Central</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-5 border">
+        <h3 class="font-semibold text-gray-800 mb-4">By Sector</h3>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between text-sm mb-1"><span>Community</span><span>68%</span></div>
+            <div class="h-2 bg-gray-100 rounded-full"><div class="h-2 bg-purple-500 rounded-full" style="width:68%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1"><span>Hospital IP</span><span>22%</span></div>
+            <div class="h-2 bg-gray-100 rounded-full"><div class="h-2 bg-purple-400 rounded-full" style="width:22%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1"><span>Hospital OP</span><span>10%</span></div>
+            <div class="h-2 bg-gray-100 rounded-full"><div class="h-2 bg-purple-300 rounded-full" style="width:10%"></div></div>
+          </div>
+        </div>
+        <div class="mt-6 pt-4 border-t">
+          <h4 class="font-medium text-gray-700 mb-3">AWaRe</h4>
+          <div class="flex gap-2">
+            <div class="flex-1 p-2 bg-green-50 rounded text-center"><p class="font-bold text-green-600">58%</p><p class="text-xs">Access</p></div>
+            <div class="flex-1 p-2 bg-amber-50 rounded text-center"><p class="font-bold text-amber-600">34%</p><p class="text-xs">Watch</p></div>
+            <div class="flex-1 p-2 bg-red-50 rounded text-center"><p class="font-bold text-red-600">8%</p><p class="text-xs">Reserve</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 bg-white rounded-xl p-5 border">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-semibold text-gray-800">Facility Overview</h3>
+        <input type="text" placeholder="Search..." class="px-3 py-2 border rounded-lg text-sm">
+      </div>
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="text-left py-3 px-4">Facility</th>
+            <th class="text-left py-3 px-4">Region</th>
+            <th class="text-left py-3 px-4">Type</th>
+            <th class="text-left py-3 px-4">DID</th>
+            <th class="text-left py-3 px-4">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-t"><td class="py-3 px-4">Central Hospital</td><td class="py-3 px-4">Capital</td><td class="py-3 px-4">Tertiary</td><td class="py-3 px-4">24.2</td><td class="py-3 px-4"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">Active</span></td></tr>
+          <tr class="border-t"><td class="py-3 px-4">Northern Regional</td><td class="py-3 px-4">North</td><td class="py-3 px-4">Secondary</td><td class="py-3 px-4">18.7</td><td class="py-3 px-4"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">Active</span></td></tr>
+          <tr class="border-t"><td class="py-3 px-4">District Health Center</td><td class="py-3 px-4">South</td><td class="py-3 px-4">Primary</td><td class="py-3 px-4">12.1</td><td class="py-3 px-4"><span class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs">Pending</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>

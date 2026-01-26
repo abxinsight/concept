@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AbXInsight - User Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .screen-label { background: #1E293B; color: white; padding: 8px 16px; font-size: 12px; font-weight: 600; }
+  </style>
+</head>
+<body class="bg-gray-200 min-h-screen p-8">
+
+  <div class="max-w-7xl mx-auto mb-8">
+    <div class="flex items-center gap-4 mb-4">
+      <svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="url(#hG)"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g><defs><linearGradient id="hG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800">User Management</h1>
+        <p class="text-gray-600">Account settings and team member management</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- User List Screen -->
+  <div class="max-w-7xl mx-auto mb-10">
+    <div class="border-2 border-gray-300 rounded-xl overflow-hidden">
+      <div class="screen-label flex justify-between">
+        <span>SCREEN: User Management - List View</span>
+        <span class="text-gray-400">Route: /hospital/settings/users</span>
+      </div>
+      <div class="bg-white p-6">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="text-xl font-bold text-gray-800">Team Members</h2>
+            <p class="text-gray-500 text-sm">Manage users who can access your facility data</p>
+          </div>
+          <button class="px-4 py-2 bg-teal-600 text-white font-medium rounded-lg flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+            Invite User
+          </button>
+        </div>
+
+        <div class="border rounded-lg overflow-hidden">
+          <table class="w-full">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">User</th>
+                <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Role</th>
+                <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Status</th>
+                <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Last Active</th>
+                <th class="text-left py-3 px-4 text-sm font-medium text-gray-600">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t">
+                <td class="py-3 px-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 font-semibold">JD</div>
+                    <div>
+                      <p class="font-medium text-gray-800">John Doe</p>
+                      <p class="text-sm text-gray-500">john@hospital.org</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3 px-4"><span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Admin</span></td>
+                <td class="py-3 px-4"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">Active</span></td>
+                <td class="py-3 px-4 text-sm text-gray-500">Just now</td>
+                <td class="py-3 px-4"><span class="text-xs text-gray-400">You</span></td>
+              </tr>
+              <tr class="border-t">
+                <td class="py-3 px-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-semibold">SM</div>
+                    <div>
+                      <p class="font-medium text-gray-800">Sarah Miller</p>
+                      <p class="text-sm text-gray-500">sarah@hospital.org</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3 px-4"><span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Editor</span></td>
+                <td class="py-3 px-4"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">Active</span></td>
+                <td class="py-3 px-4 text-sm text-gray-500">2 hours ago</td>
+                <td class="py-3 px-4">
+                  <button class="text-teal-600 text-sm font-medium mr-3">Edit</button>
+                  <button class="text-red-600 text-sm font-medium">Remove</button>
+                </td>
+              </tr>
+              <tr class="border-t">
+                <td class="py-3 px-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 font-semibold">RJ</div>
+                    <div>
+                      <p class="font-medium text-gray-800">Robert Johnson</p>
+                      <p class="text-sm text-gray-500">robert@hospital.org</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3 px-4"><span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium">Viewer</span></td>
+                <td class="py-3 px-4"><span class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs">Pending</span></td>
+                <td class="py-3 px-4 text-sm text-gray-500">Invited 3 days ago</td>
+                <td class="py-3 px-4">
+                  <button class="text-teal-600 text-sm font-medium mr-3">Resend</button>
+                  <button class="text-red-600 text-sm font-medium">Cancel</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Role Legend -->
+        <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+          <h4 class="font-medium text-gray-700 mb-3">Role Permissions</h4>
+          <div class="grid grid-cols-3 gap-4 text-sm">
+            <div>
+              <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Admin</span>
+              <p class="text-gray-600 mt-1">Full access: manage users, settings, data, reports</p>
+            </div>
+            <div>
+              <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Editor</span>
+              <p class="text-gray-600 mt-1">Add/edit data, view reports, no user management</p>
+            </div>
+            <div>
+              <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium">Viewer</span>
+              <p class="text-gray-600 mt-1">View-only access to dashboard and reports</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Invite User Modal -->
+  <div class="max-w-7xl mx-auto mb-10">
+    <div class="border-2 border-gray-300 rounded-xl overflow-hidden">
+      <div class="screen-label flex justify-between">
+        <span>MODAL: Invite User</span>
+        <span class="text-gray-400">Overlay on user list</span>
+      </div>
+      <div class="bg-gray-900 bg-opacity-50 p-8 flex items-center justify-center min-h-[400px]">
+        <div class="bg-white rounded-xl p-6 w-full max-w-md">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-800">Invite Team Member</h3>
+            <button class="text-gray-400 hover:text-gray-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+          </div>
+          <form class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Email address</label>
+              <input type="email" placeholder="colleague@hospital.org" class="w-full px-4 py-3 border rounded-lg">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
+              <select class="w-full px-4 py-3 border rounded-lg">
+                <option>Viewer - View only access</option>
+                <option>Editor - Can add and edit data</option>
+                <option>Admin - Full access</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Personal message (optional)</label>
+              <textarea rows="2" placeholder="Welcome to our team..." class="w-full px-4 py-3 border rounded-lg"></textarea>
+            </div>
+            <div class="flex gap-3 pt-2">
+              <button type="submit" class="flex-1 py-3 bg-teal-600 text-white font-medium rounded-lg">Send Invitation</button>
+              <button type="button" class="px-4 py-3 border text-gray-700 font-medium rounded-lg">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Account Settings -->
+  <div class="max-w-7xl mx-auto">
+    <div class="border-2 border-gray-300 rounded-xl overflow-hidden">
+      <div class="screen-label flex justify-between">
+        <span>SCREEN: Account Settings</span>
+        <span class="text-gray-400">Route: /hospital/settings/account</span>
+      </div>
+      <div class="bg-white p-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-6">Account Settings</h2>
+        
+        <div class="grid grid-cols-2 gap-8">
+          <!-- Profile -->
+          <div class="space-y-4">
+            <h3 class="font-semibold text-gray-700">Profile</h3>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Full name</label>
+              <input type="text" value="John Doe" class="w-full px-4 py-3 border rounded-lg">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+              <input type="email" value="john@hospital.org" class="w-full px-4 py-3 border rounded-lg">
+            </div>
+            <button class="px-4 py-2 bg-teal-600 text-white font-medium rounded-lg">Save Changes</button>
+          </div>
+          
+          <!-- Subscription -->
+          <div class="space-y-4">
+            <h3 class="font-semibold text-gray-700">Subscription</h3>
+            <div class="p-4 bg-gray-50 rounded-lg">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-medium text-gray-800">Current Plan</span>
+                <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">BASIC (Free)</span>
+              </div>
+              <p class="text-sm text-gray-500">Upgrade to Pro for reports, AI extraction & more</p>
+            </div>
+            <div class="p-4 border-2 border-teal-200 rounded-lg bg-teal-50">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-medium text-teal-800">Upgrade to Pro</span>
+                <span class="text-teal-700 font-bold">$299/year</span>
+              </div>
+              <button class="w-full py-2 bg-teal-600 text-white font-medium rounded-lg mt-2">Upgrade Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

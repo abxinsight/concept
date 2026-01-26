@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AbXInsight - Technical Implementation Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    code, pre { font-family: 'Fira Code', monospace; }
+    .code-block { background: #1E293B; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow-x: auto; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <div class="max-w-4xl mx-auto px-6 py-8">
+    <!-- Header -->
+    <div class="flex items-center gap-4 mb-8">
+      <svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="url(#hG)"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g><defs><linearGradient id="hG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800">Technical Implementation Guide</h1>
+        <p class="text-gray-600">AbXInsight - Antibiotic Use Tracking Platform</p>
+      </div>
+    </div>
+
+    <!-- TOC -->
+    <div class="bg-white rounded-xl p-6 border mb-8">
+      <h2 class="font-bold text-gray-800 mb-4">Contents</h2>
+      <ol class="list-decimal list-inside space-y-2 text-teal-600">
+        <li><a href="#ddd" class="hover:underline">DDD Calculation Methodology</a></li>
+        <li><a href="#aware" class="hover:underline">AWaRe Classification</a></li>
+        <li><a href="#metrics" class="hover:underline">Key Metrics & Formulas</a></li>
+        <li><a href="#schema" class="hover:underline">Database Schema</a></li>
+        <li><a href="#api" class="hover:underline">API Endpoints</a></li>
+      </ol>
+    </div>
+
+    <!-- DDD Section -->
+    <section id="ddd" class="bg-white rounded-xl p-6 border mb-8">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">1. DDD Calculation Methodology</h2>
+      
+      <p class="text-gray-600 mb-4">The Defined Daily Dose (DDD) is the assumed average maintenance dose per day for a drug used for its main indication in adults. DDDs are assigned by WHO.</p>
+      
+      <h3 class="font-semibold text-gray-700 mt-6 mb-3">Hospital Setting (DDD/100 Patient-Days)</h3>
+      <div class="code-block mb-4">
+        <pre>DDD/100 Patient-Days = (Total Grams Used / DDD in Grams) × 100 / Patient-Days
+
+Where:
+- Total Grams Used = Quantity × Strength per unit
+- Patient-Days = Number of beds × Occupancy rate × Days in period</pre>
+      </div>
+      
+      <h3 class="font-semibold text-gray-700 mt-6 mb-3">Country Setting (DID - DDD/1000 Inhabitants/Day)</h3>
+      <div class="code-block mb-4">
+        <pre>DID = (Total DDDs / Population) × 1000 / Days in Period
+
+Where:
+- Total DDDs = Total quantity consumed / DDD value
+- Population = Country or region population
+- Days in Period = Usually 365 for annual data</pre>
+      </div>
+      
+      <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg mt-4">
+        <p class="text-sm text-amber-800"><strong>Note:</strong> DDD values are obtained from the WHO ATC/DDD Index. The platform includes a pre-loaded catalogue with DDD values for common antibiotics.</p>
+      </div>
+    </section>
+
+    <!-- AWaRe Section -->
+    <section id="aware" class="bg-white rounded-xl p-6 border mb-8">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">2. AWaRe Classification</h2>
+      
+      <p class="text-gray-600 mb-4">WHO's AWaRe classification groups antibiotics into three categories based on their impact on antimicrobial resistance.</p>
+      
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="p-4 bg-green-50 border border-green-200 rounded-lg">
+          <h4 class="font-bold text-green-700 mb-2">Access</h4>
+          <p class="text-sm text-green-600">First/second choice for common infections. Generally narrow spectrum, lower resistance potential.</p>
+          <p class="text-xs text-green-500 mt-2">Target: ≥60% of use</p>
+        </div>
+        <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+          <h4 class="font-bold text-amber-700 mb-2">Watch</h4>
+          <p class="text-sm text-amber-600">Higher resistance potential. First/second choice only for specific, limited indications.</p>
+          <p class="text-xs text-amber-500 mt-2">Target: Minimize use</p>
+        </div>
+        <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
+          <h4 class="font-bold text-red-700 mb-2">Reserve</h4>
+          <p class="text-sm text-red-600">Last resort antibiotics. Use only for confirmed/suspected infections due to MDR organisms.</p>
+          <p class="text-xs text-red-500 mt-2">Target: Use only when essential</p>
+        </div>
+      </div>
+      
+      <h3 class="font-semibold text-gray-700 mb-3">Common Examples</h3>
+      <table class="w-full text-sm border-collapse">
+        <thead class="bg-gray-50">
+          <tr><th class="text-left py-2 px-3 border">Antibiotic</th><th class="text-left py-2 px-3 border">AWaRe</th><th class="text-left py-2 px-3 border">ATC Code</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="py-2 px-3 border">Amoxicillin</td><td class="py-2 px-3 border"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">Access</span></td><td class="py-2 px-3 border">J01CA04</td></tr>
+          <tr><td class="py-2 px-3 border">Ceftriaxone</td><td class="py-2 px-3 border"><span class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs">Watch</span></td><td class="py-2 px-3 border">J01DD04</td></tr>
+          <tr><td class="py-2 px-3 border">Azithromycin</td><td class="py-2 px-3 border"><span class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs">Watch</span></td><td class="py-2 px-3 border">J01FA10</td></tr>
+          <tr><td class="py-2 px-3 border">Meropenem</td><td class="py-2 px-3 border"><span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs">Reserve</span></td><td class="py-2 px-3 border">J01DH02</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Metrics Section -->
+    <section id="metrics" class="bg-white rounded-xl p-6 border mb-8">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">3. Key Metrics & Formulas</h2>
+      
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50">
+          <tr><th class="text-left py-3 px-4 border">Metric</th><th class="text-left py-3 px-4 border">Formula</th><th class="text-left py-3 px-4 border">Context</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="py-3 px-4 border font-medium">DDD/100 Patient-Days</td><td class="py-3 px-4 border"><code>(DDDs × 100) / Patient-Days</code></td><td class="py-3 px-4 border">Hospital</td></tr>
+          <tr><td class="py-3 px-4 border font-medium">DDD/100 Admissions</td><td class="py-3 px-4 border"><code>(DDDs × 100) / Admissions</code></td><td class="py-3 px-4 border">Hospital</td></tr>
+          <tr><td class="py-3 px-4 border font-medium">DID</td><td class="py-3 px-4 border"><code>(DDDs × 1000) / (Population × Days)</code></td><td class="py-3 px-4 border">Country</td></tr>
+          <tr><td class="py-3 px-4 border font-medium">AWaRe Access %</td><td class="py-3 px-4 border"><code>(Access DDDs / Total DDDs) × 100</code></td><td class="py-3 px-4 border">Both</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Schema Section -->
+    <section id="schema" class="bg-white rounded-xl p-6 border mb-8">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">4. Database Schema (Simplified)</h2>
+      
+      <div class="code-block text-sm">
+        <pre>-- Core Tables
+facilities (id, name, type, region_id, country_id, beds, tier)
+products (id, name, atc_code, ddd_value, ddd_unit, aware_category, strength, form)
+consumption_records (id, facility_id, product_id, period, quantity, unit, ward_id)
+wards (id, facility_id, name, type)
+
+-- Metrics Tables  
+monthly_metrics (id, facility_id, period, total_ddd, patient_days, ddd_per_100)
+aware_breakdown (id, facility_id, period, access_pct, watch_pct, reserve_pct)
+
+-- User Tables
+users (id, email, password_hash, name, role, facility_id, tier)
+subscriptions (id, user_id, plan, status, expires_at)</pre>
+      </div>
+    </section>
+
+    <!-- API Section -->
+    <section id="api" class="bg-white rounded-xl p-6 border">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">5. API Endpoints (Reference)</h2>
+      
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50">
+          <tr><th class="text-left py-2 px-3 border">Method</th><th class="text-left py-2 px-3 border">Endpoint</th><th class="text-left py-2 px-3 border">Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="py-2 px-3 border"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">GET</span></td><td class="py-2 px-3 border"><code>/api/dashboard/metrics</code></td><td class="py-2 px-3 border">Get dashboard summary</td></tr>
+          <tr><td class="py-2 px-3 border"><span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">POST</span></td><td class="py-2 px-3 border"><code>/api/consumption</code></td><td class="py-2 px-3 border">Add consumption record</td></tr>
+          <tr><td class="py-2 px-3 border"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">GET</span></td><td class="py-2 px-3 border"><code>/api/products</code></td><td class="py-2 px-3 border">List antibiotic catalogue</td></tr>
+          <tr><td class="py-2 px-3 border"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">GET</span></td><td class="py-2 px-3 border"><code>/api/reports/aware</code></td><td class="py-2 px-3 border">AWaRe breakdown report</td></tr>
+          <tr><td class="py-2 px-3 border"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">GET</span></td><td class="py-2 px-3 border"><code>/api/export/glass</code></td><td class="py-2 px-3 border">WHO GLASS format export</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AbXInsight - Login & Registration Flow</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .screen-container { border: 2px solid #E5E7EB; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    .screen-label { background: #1E293B; color: white; padding: 8px 16px; font-size: 12px; font-weight: 600; }
+    .tier-card { transition: all 0.2s ease; }
+    .tier-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.1); }
+  </style>
+</head>
+<body class="bg-gray-200 min-h-screen p-8">
+  
+  <!-- Header -->
+  <div class="max-w-7xl mx-auto mb-8">
+    <div class="flex items-center gap-4 mb-4">
+      <svg width="48" height="48" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="14" fill="url(#hG)"/>
+        <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g>
+        <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g>
+        <defs><linearGradient id="hG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
+      </svg>
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800">AbXInsight - User Flow Design</h1>
+        <p class="text-gray-600">Login, Registration & Dashboard Selection for Quickfox Team</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flow Diagram -->
+  <div class="max-w-7xl mx-auto mb-10">
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <h2 class="text-lg font-bold text-gray-800 mb-4">User Flow Overview</h2>
+      <div class="flex items-center justify-center gap-3 flex-wrap text-sm">
+        <div class="px-3 py-2 bg-gray-100 rounded-lg">Landing Page</div>
+        <span class="text-gray-400">→</span>
+        <div class="px-3 py-2 bg-teal-100 rounded-lg">Login / Register</div>
+        <span class="text-gray-400">→</span>
+        <div class="px-3 py-2 bg-purple-100 rounded-lg border-2 border-purple-400">Dashboard Selection<br><span class="text-xs">(New users only)</span></div>
+        <span class="text-gray-400">→</span>
+        <div class="px-3 py-2 bg-teal-500 text-white rounded-lg">Hospital Home</div>
+        <span class="text-gray-300">or</span>
+        <div class="px-3 py-2 bg-purple-500 text-white rounded-lg">Country Home</div>
+      </div>
+      <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-800">
+        <strong>Important:</strong> Dashboard Selection only appears after <strong>new registration</strong>. Returning users go directly to their module home.
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 1: LOGIN -->
+  <div class="max-w-7xl mx-auto mb-10">
+    <div class="screen-container">
+      <div class="screen-label flex justify-between">
+        <span>SCREEN 1: Login</span>
+        <span class="text-gray-400">Route: /login</span>
+      </div>
+      <div class="bg-gradient-to-br from-teal-600 to-purple-600 min-h-[500px] flex">
+        <div class="w-1/2 p-10 text-white flex flex-col justify-center">
+          <div class="flex items-center gap-3 mb-6">
+            <svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="white"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#0D9488"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#7C3AED" fill-opacity="0.5"/></g></svg>
+            <div><h1 class="text-2xl font-bold">AbXInsight</h1><p class="text-teal-200 text-sm">Track Antibiotic Use. Combat AMR.</p></div>
+          </div>
+          <h2 class="text-3xl font-bold mb-4">Track. Analyze.<br>Improve Stewardship.</h2>
+          <p class="text-teal-100">Monitor antibiotic use at hospital or country level.</p>
+        </div>
+        <div class="w-1/2 bg-white flex items-center justify-center p-10">
+          <div class="w-full max-w-sm">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Welcome back</h2>
+            <div class="space-y-4">
+              <div><label class="block text-sm font-medium text-gray-700 mb-1">Email</label><input type="email" class="w-full px-4 py-3 border rounded-lg" placeholder="you@example.com"></div>
+              <div><label class="block text-sm font-medium text-gray-700 mb-1">Password</label><input type="password" class="w-full px-4 py-3 border rounded-lg" placeholder="••••••••"></div>
+              <button class="w-full py-3 bg-gradient-to-r from-teal-600 to-purple-600 text-white font-semibold rounded-lg">Sign In</button>
+            </div>
+            <p class="mt-4 text-center text-sm text-gray-500">Don't have an account? <a href="#" class="text-teal-600 font-medium">Create one</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: REGISTER -->
+  <div class="max-w-7xl mx-auto mb-10">
+    <div class="screen-container">
+      <div class="screen-label flex justify-between">
+        <span>SCREEN 2: Register</span>
+        <span class="text-gray-400">Route: /register</span>
+      </div>
+      <div class="bg-gradient-to-br from-teal-600 to-purple-600 min-h-[500px] flex">
+        <div class="w-1/2 p-10 text-white flex flex-col justify-center">
+          <div class="flex items-center gap-3 mb-6">
+            <svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="white"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#0D9488"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#7C3AED" fill-opacity="0.5"/></g></svg>
+            <div><h1 class="text-2xl font-bold">AbXInsight</h1><p class="text-teal-200 text-sm">Track Antibiotic Use. Combat AMR.</p></div>
+          </div>
+          <h2 class="text-3xl font-bold mb-4">Join the fight<br>against AMR.</h2>
+          <p class="text-teal-100">Free Basic tier available for all hospitals and countries.</p>
+        </div>
+        <div class="w-1/2 bg-white flex items-center justify-center p-10">
+          <div class="w-full max-w-sm">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Create account</h2>
+            <div class="space-y-4">
+              <div class="grid grid-cols-2 gap-3">
+                <div><label class="block text-sm font-medium text-gray-700 mb-1">First name</label><input class="w-full px-3 py-2 border rounded-lg"></div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-1">Last name</label><input class="w-full px-3 py-2 border rounded-lg"></div>
+              </div>
+              <div><label class="block text-sm font-medium text-gray-700 mb-1">Email</label><input type="email" class="w-full px-4 py-3 border rounded-lg"></div>
+              <div><label class="block text-sm font-medium text-gray-700 mb-1">Password</label><input type="password" class="w-full px-4 py-3 border rounded-lg"></div>
+              <button class="w-full py-3 bg-gradient-to-r from-teal-600 to-purple-600 text-white font-semibold rounded-lg">Create Account</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: DASHBOARD SELECTION (FIXED) -->
+  <div class="max-w-7xl mx-auto mb-10">
+    <div class="screen-container">
+      <div class="screen-label flex justify-between bg-purple-900">
+        <span>SCREEN 3: Dashboard Selection (New Users Only) ⭐ CRITICAL</span>
+        <span class="text-purple-300">Route: /select-dashboard</span>
+      </div>
+      <div class="bg-gray-50 p-8">
+        
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <svg class="mx-auto mb-4" width="56" height="56" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="url(#sG)"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g><defs><linearGradient id="sG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
+          <h1 class="text-2xl font-bold text-gray-800">Welcome to AbXInsight!</h1>
+          <p class="text-gray-600">Choose your antibiotic use tracking environment</p>
+        </div>
+
+        <!-- Two Column Selection -->
+        <div class="grid grid-cols-2 gap-8 max-w-5xl mx-auto">
+          
+          <!-- Hospital Tracking -->
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+              </div>
+              <div>
+                <h2 class="font-bold text-gray-800">Hospital Tracking</h2>
+                <p class="text-xs text-gray-500">For hospitals & healthcare facilities</p>
+              </div>
+            </div>
+            
+            <!-- Basic -->
+            <div class="tier-card bg-white rounded-xl border-2 border-teal-500 p-4 mb-3">
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-bold">BASIC</span>
+                <span class="text-xl font-bold">Free</span>
+              </div>
+              <p class="text-sm text-gray-600 mb-3">Individual hospitals starting stewardship</p>
+              <button class="w-full py-2 bg-teal-600 text-white text-sm font-medium rounded-lg">Start Free →</button>
+            </div>
+            
+            <!-- Pro -->
+            <div class="tier-card bg-white rounded-xl border p-4 mb-3">
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-bold">PRO</span>
+                <span class="text-xl font-bold">$299<span class="text-sm text-gray-500">/yr</span></span>
+              </div>
+              <p class="text-sm text-gray-600 mb-3">Hospital networks, reports, AI extraction</p>
+              <button class="w-full py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg">Upgrade to Pro</button>
+            </div>
+            
+            <!-- Ultra -->
+            <div class="tier-card bg-white rounded-xl border p-4">
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-bold">ULTRA</span>
+                <span class="text-xl font-bold">$499<span class="text-sm text-gray-500">/yr</span></span>
+              </div>
+              <p class="text-sm text-gray-600 mb-3">AI Stewardship Agent, custom metrics</p>
+              <button class="w-full py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg">Upgrade to Ultra</button>
+            </div>
+          </div>
+
+          <!-- Country Tracking -->
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </div>
+              <div>
+                <h2 class="font-bold text-gray-800">Country Tracking</h2>
+                <p class="text-xs text-gray-500">For ministries & governments</p>
+              </div>
+            </div>
+            
+            <!-- Basic -->
+            <div class="tier-card bg-white rounded-xl border-2 border-purple-500 p-4 mb-3">
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-bold">BASIC</span>
+                <span class="text-xl font-bold">Free</span>
+              </div>
+              <p class="text-sm text-gray-600 mb-3">WHO GLASS / WPRACSS / ESAC-Net export</p>
+              <button class="w-full py-2 bg-purple-600 text-white text-sm font-medium rounded-lg">Start Free →</button>
+            </div>
+            
+            <!-- Pro -->
+            <div class="tier-card bg-white rounded-xl border p-4 mb-3">
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-bold">PRO</span>
+                <span class="text-xl font-bold">$299<span class="text-sm text-gray-500">/yr</span></span>
+              </div>
+              <p class="text-sm text-gray-600 mb-3">Regional breakdown, facility drill-down</p>
+              <button class="w-full py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg">Upgrade to Pro</button>
+            </div>
+            
+            <!-- Ultra -->
+            <div class="tier-card bg-white rounded-xl border p-4">
+              <div class="flex justify-between items-center mb-2">
+                <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-bold">ULTRA</span>
+                <span class="text-xl font-bold">$499<span class="text-sm text-gray-500">/yr</span></span>
+              </div>
+              <p class="text-sm text-gray-600 mb-3">AI Policy Advisor, custom metrics, API</p>
+              <button class="w-full py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg">Upgrade to Ultra</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Design Notes -->
+  <div class="max-w-7xl mx-auto">
+    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+      <h2 class="font-bold text-yellow-800 mb-4">📋 Quickfox Implementation Notes</h2>
+      <div class="grid grid-cols-3 gap-6 text-sm">
+        <div>
+          <h3 class="font-semibold text-yellow-800 mb-2">User Flow</h3>
+          <ul class="text-yellow-700 space-y-1">
+            <li>• <strong>New users:</strong> Register → Dashboard Selection → Module Home</li>
+            <li>• <strong>Returning users:</strong> Login → Directly to Module Home</li>
+            <li>• Store user's module choice in database</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold text-yellow-800 mb-2">Pricing</h3>
+          <ul class="text-yellow-700 space-y-1">
+            <li>• Basic: Free (both modules)</li>
+            <li>• Pro: $299/year (both modules)</li>
+            <li>• Ultra: $499/year (both modules)</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold text-yellow-800 mb-2">Terminology</h3>
+          <ul class="text-yellow-700 space-y-1">
+            <li>• Use "Antibiotic Use Tracking"</li>
+            <li>• Use "Country" not "National"</li>
+            <li>• Brand: <strong>AbXInsight</strong> (capital I)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AbXInsight - Master Design & Development Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .section-card { border: 2px solid #E5E7EB; border-radius: 16px; overflow: hidden; }
+    .section-header { background: linear-gradient(135deg, #0D9488 0%, #7C3AED 100%); color: white; padding: 16px 24px; }
+    code { background: #F1F5F9; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+    .check { color: #10B981; }
+    .cross { color: #EF4444; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-teal-600 to-purple-600 text-white py-8 px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center gap-4 mb-4">
+        <svg width="56" height="56" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="white" fill-opacity="0.2"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g></svg>
+        <div>
+          <h1 class="text-3xl font-bold">AbXInsight Platform</h1>
+          <p class="text-teal-100">Master Design & Development Guide for Quickfox</p>
+        </div>
+      </div>
+      <p class="text-white/80 max-w-2xl">Single source of truth for naming conventions, pricing, features, and implementation guidance.</p>
+      <div class="flex gap-3 mt-4">
+        <span class="px-3 py-1 bg-white/20 rounded-lg text-sm">Version 2.0</span>
+        <span class="px-3 py-1 bg-white/20 rounded-lg text-sm">January 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-8 py-8">
+
+    <!-- Section 1: Terminology -->
+    <div class="section-card mb-8">
+      <div class="section-header">
+        <h2 class="text-xl font-bold">1. Standard Terminology</h2>
+      </div>
+      <div class="p-6 bg-white">
+        <div class="grid grid-cols-2 gap-8">
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">🏥 Hospital Module</h3>
+            <table class="w-full text-sm">
+              <tr class="border-b"><td class="py-2 text-gray-600">Module Name:</td><td class="py-2 font-medium">Hospital Tracking</td></tr>
+              <tr class="border-b"><td class="py-2 text-gray-600">Route Prefix:</td><td class="py-2"><code>/hospital/</code></td></tr>
+              <tr class="border-b"><td class="py-2 text-gray-600">Primary Color:</td><td class="py-2"><span class="inline-flex items-center gap-2"><span class="w-4 h-4 bg-teal-600 rounded"></span> Teal #0D9488</span></td></tr>
+              <tr><td class="py-2 text-gray-600">Key Metric:</td><td class="py-2">DDD/100 Patient-Days</td></tr>
+            </table>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">🌍 Country Module</h3>
+            <table class="w-full text-sm">
+              <tr class="border-b"><td class="py-2 text-gray-600">Module Name:</td><td class="py-2 font-medium">Country Tracking</td></tr>
+              <tr class="border-b"><td class="py-2 text-gray-600">Route Prefix:</td><td class="py-2"><code>/country/</code></td></tr>
+              <tr class="border-b"><td class="py-2 text-gray-600">Primary Color:</td><td class="py-2"><span class="inline-flex items-center gap-2"><span class="w-4 h-4 bg-purple-600 rounded"></span> Purple #7C3AED</span></td></tr>
+              <tr><td class="py-2 text-gray-600">Key Metric:</td><td class="py-2">DID (DDD/1000 Inhabitants/Day)</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <h4 class="font-bold text-red-800 mb-2">⚠️ DO NOT USE:</h4>
+          <ul class="text-sm text-red-700 grid grid-cols-3 gap-2">
+            <li>❌ "AMC Monitoring" → Use "Antibiotic Use Tracking"</li>
+            <li>❌ "National" → Use "Country"</li>
+            <li>❌ "AbXuse" → Use "AbXInsight"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Pricing -->
+    <div class="section-card mb-8">
+      <div class="section-header">
+        <h2 class="text-xl font-bold">2. Pricing Tiers (Official)</h2>
+      </div>
+      <div class="p-6 bg-white">
+        <p class="text-sm text-gray-600 mb-4">Same pricing structure for both Hospital and Country modules</p>
+        
+        <div class="grid grid-cols-3 gap-4">
+          <!-- Basic -->
+          <div class="border-2 border-gray-300 rounded-xl p-5">
+            <div class="flex justify-between items-center mb-3">
+              <span class="px-3 py-1 bg-gray-500 text-white rounded-full text-xs font-bold">BASIC</span>
+              <span class="text-2xl font-bold">Free</span>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">Individual facilities starting out</p>
+            <ul class="text-sm space-y-2">
+              <li class="flex items-center gap-2"><span class="check">✓</span> Core Dashboard</li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> Data Entry & Upload</li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> Antibiotic Catalogue</li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> AWaRe Classification</li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> WHO GLASS Export (Country)</li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross">✗</span> Reports & Export</li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross">✗</span> AI Features</li>
+            </ul>
+          </div>
+          
+          <!-- Pro -->
+          <div class="border-2 border-teal-500 rounded-xl p-5 relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-teal-500 text-white text-xs font-bold rounded-full">POPULAR</div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="px-3 py-1 bg-teal-600 text-white rounded-full text-xs font-bold">PRO</span>
+              <div><span class="text-2xl font-bold">$299</span><span class="text-gray-500">/year</span></div>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">Networks, detailed analysis, reports</p>
+            <ul class="text-sm space-y-2">
+              <li class="flex items-center gap-2"><span class="check">✓</span> Everything in Basic</li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> <strong>Reports & PDF Export</strong></li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> <strong>Multi-facility Comparison</strong></li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> <strong>AI Data Extraction</strong> <span class="px-1 py-0.5 bg-amber-100 text-amber-700 rounded text-xs">BETA</span></li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> <strong>Training Modules</strong></li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> <strong>Designated Support</strong></li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross">✗</span> AI Stewardship Agent</li>
+            </ul>
+          </div>
+          
+          <!-- Ultra -->
+          <div class="border-2 border-purple-500 rounded-xl p-5 bg-gradient-to-br from-purple-50 to-white">
+            <div class="flex justify-between items-center mb-3">
+              <span class="px-3 py-1 bg-purple-600 text-white rounded-full text-xs font-bold">ULTRA</span>
+              <div><span class="text-2xl font-bold">$499</span><span class="text-gray-500">/year</span></div>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">AI-powered optimization</p>
+            <ul class="text-sm space-y-2">
+              <li class="flex items-center gap-2"><span class="check">✓</span> Everything in Pro</li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> <strong>AI Stewardship Agent</strong></li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> <strong>Custom Metrics Builder</strong></li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> <strong>Anomaly Detection</strong></li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> <strong>Spending Analysis</strong></li>
+              <li class="flex items-center gap-2"><span class="check">✓</span> <strong>API Access</strong> (Country)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Feature Matrix -->
+    <div class="section-card mb-8">
+      <div class="section-header">
+        <h2 class="text-xl font-bold">3. Feature Access Matrix</h2>
+      </div>
+      <div class="p-6 bg-white">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="bg-gray-50">
+              <th class="text-left py-3 px-4 border font-semibold">Feature</th>
+              <th class="text-center py-3 px-4 border w-20"><span class="px-2 py-1 bg-gray-500 text-white rounded text-xs">BASIC</span></th>
+              <th class="text-center py-3 px-4 border w-20"><span class="px-2 py-1 bg-teal-600 text-white rounded text-xs">PRO</span></th>
+              <th class="text-center py-3 px-4 border w-20"><span class="px-2 py-1 bg-purple-600 text-white rounded text-xs">ULTRA</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="py-2 px-4 border">Core Dashboard</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td></tr>
+            <tr class="bg-gray-50"><td class="py-2 px-4 border">Data Entry (Manual & Upload)</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td></tr>
+            <tr><td class="py-2 px-4 border">Antibiotic Catalogue</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td></tr>
+            <tr class="bg-gray-50"><td class="py-2 px-4 border">AWaRe Classification</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td></tr>
+            <tr><td class="py-2 px-4 border">WHO GLASS / WPRACSS / ESAC-Net Export</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td></tr>
+            <tr class="bg-gray-50"><td class="py-2 px-4 border font-medium">Reports & PDF Export</td><td class="text-center border cross">✗</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td></tr>
+            <tr><td class="py-2 px-4 border font-medium">Multi-facility Comparison</td><td class="text-center border cross">✗</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td></tr>
+            <tr class="bg-gray-50"><td class="py-2 px-4 border font-medium">AI Data Extraction <span class="px-1 py-0.5 bg-amber-100 text-amber-700 rounded text-xs">BETA</span></td><td class="text-center border cross">✗</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td></tr>
+            <tr><td class="py-2 px-4 border font-medium">Training Modules</td><td class="text-center border cross">✗</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td></tr>
+            <tr class="bg-gray-50"><td class="py-2 px-4 border font-medium">Designated User Support</td><td class="text-center border cross">✗</td><td class="text-center border check">✓</td><td class="text-center border check">✓</td></tr>
+            <tr><td class="py-2 px-4 border font-medium">AI Stewardship / Policy Agent</td><td class="text-center border cross">✗</td><td class="text-center border cross">✗</td><td class="text-center border check">✓</td></tr>
+            <tr class="bg-gray-50"><td class="py-2 px-4 border font-medium">Custom Metrics Builder</td><td class="text-center border cross">✗</td><td class="text-center border cross">✗</td><td class="text-center border check">✓</td></tr>
+            <tr><td class="py-2 px-4 border font-medium">Spending Analysis</td><td class="text-center border cross">✗</td><td class="text-center border cross">✗</td><td class="text-center border check">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Section 4: User Journey -->
+    <div class="section-card mb-8">
+      <div class="section-header">
+        <h2 class="text-xl font-bold">4. User Journey Flow</h2>
+      </div>
+      <div class="p-6 bg-white">
+        <div class="grid grid-cols-2 gap-6">
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <h4 class="font-semibold text-gray-700 mb-2">New User (Register)</h4>
+            <div class="flex items-center gap-2 text-sm">
+              <code>/register</code> → <code>/select-dashboard</code> → <code>/hospital/home</code> or <code>/country/home</code>
+            </div>
+            <p class="text-xs text-gray-500 mt-2">Must complete Dashboard Selection to choose module & tier</p>
+          </div>
+          <div class="p-4 bg-teal-50 rounded-lg">
+            <h4 class="font-semibold text-gray-700 mb-2">Returning User (Login)</h4>
+            <div class="flex items-center gap-2 text-sm">
+              <code>/login</code> → <strong>Directly to module home</strong>
+            </div>
+            <p class="text-xs text-gray-500 mt-2">Skip Dashboard Selection, go straight to /hospital/home or /country/home</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: Routes -->
+    <div class="section-card mb-8">
+      <div class="section-header">
+        <h2 class="text-xl font-bold">5. Route Reference</h2>
+      </div>
+      <div class="p-6 bg-white">
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-semibold text-teal-700 mb-3">🏥 Hospital Routes</h4>
+            <table class="w-full text-sm">
+              <tr class="border-b"><td class="py-1"><code>/hospital/home</code></td><td class="py-1 text-gray-500">Landing page</td></tr>
+              <tr class="border-b"><td class="py-1"><code>/hospital/dashboard</code></td><td class="py-1 text-gray-500">Main dashboard</td></tr>
+              <tr class="border-b"><td class="py-1"><code>/hospital/data-entry</code></td><td class="py-1 text-gray-500">Data entry hub</td></tr>
+              <tr class="border-b"><td class="py-1"><code>/hospital/catalogue</code></td><td class="py-1 text-gray-500">Product catalogue</td></tr>
+              <tr class="border-b"><td class="py-1"><code>/hospital/reports</code></td><td class="py-1 text-gray-500">Reports (PRO+)</td></tr>
+              <tr class="border-b"><td class="py-1"><code>/hospital/ai-agent</code></td><td class="py-1 text-gray-500">AI Agent (ULTRA)</td></tr>
+              <tr><td class="py-1"><code>/hospital/settings</code></td><td class="py-1 text-gray-500">Settings</td></tr>
+            </table>
+          </div>
+          <div>
+            <h4 class="font-semibold text-purple-700 mb-3">🌍 Country Routes</h4>
+            <table class="w-full text-sm">
+              <tr class="border-b"><td class="py-1"><code>/country/home</code></td><td class="py-1 text-gray-500">Landing page</td></tr>
+              <tr class="border-b"><td class="py-1"><code>/country/dashboard</code></td><td class="py-1 text-gray-500">Main dashboard</td></tr>
+              <tr class="border-b"><td class="py-1"><code>/country/facilities</code></td><td class="py-1 text-gray-500">Facility registry</td></tr>
+              <tr class="border-b"><td class="py-1"><code>/country/reports</code></td><td class="py-1 text-gray-500">Reports & GLASS</td></tr>
+              <tr class="border-b"><td class="py-1"><code>/country/ai-advisor</code></td><td class="py-1 text-gray-500">AI Advisor (ULTRA)</td></tr>
+              <tr><td class="py-1"><code>/country/settings</code></td><td class="py-1 text-gray-500">Settings</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 6: Brand -->
+    <div class="section-card mb-8">
+      <div class="section-header">
+        <h2 class="text-xl font-bold">6. Brand Guidelines</h2>
+      </div>
+      <div class="p-6 bg-white">
+        <div class="grid grid-cols-3 gap-6">
+          <div>
+            <h4 class="font-semibold text-gray-700 mb-3">Name & Tagline</h4>
+            <p class="text-2xl font-bold mb-2"><span class="text-teal-600">AbX</span><span class="text-purple-600">Insight</span></p>
+            <p class="text-sm text-gray-600">Track Antibiotic Use. Combat AMR.</p>
+            <p class="text-xs text-gray-400 mt-2">Note: Capital I in "Insight"</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-700 mb-3">Colors</h4>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2"><span class="w-6 h-6 bg-teal-600 rounded"></span><span class="text-sm">Teal: #0D9488</span></div>
+              <div class="flex items-center gap-2"><span class="w-6 h-6 bg-purple-600 rounded"></span><span class="text-sm">Purple: #7C3AED</span></div>
+              <div class="flex items-center gap-2"><span class="w-6 h-6 bg-gray-500 rounded"></span><span class="text-sm">Basic: #64748B</span></div>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-700 mb-3">Logo</h4>
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <rect width="64" height="64" rx="14" fill="url(#bG)"/>
+              <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g>
+              <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g>
+              <defs><linearGradient id="bG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
+            </svg>
+            <p class="text-xs text-gray-400 mt-2">X-crossed capsules icon</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="bg-gray-800 text-white py-6 px-8">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <svg width="32" height="32" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="url(#fG)"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g><defs><linearGradient id="fG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
+        <span class="font-semibold">AbXInsight Master Guide</span>
+      </div>
+      <span class="text-gray-400 text-sm">Version 2.0 • January 2026 • For Quickfox</span>
+    </div>
+  </div>
+
+</body>
+</html>

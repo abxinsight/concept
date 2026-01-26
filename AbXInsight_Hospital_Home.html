@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AbXInsight - Hospital Home Landing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .nav-card { transition: all 0.2s ease; }
+    .nav-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15); }
+    .locked { opacity: 0.6; pointer-events: none; }
+    .screen-label { background: #1E293B; color: white; padding: 8px 16px; font-size: 12px; font-weight: 600; }
+  </style>
+</head>
+<body class="bg-gray-200 min-h-screen p-8">
+
+  <!-- Header -->
+  <div class="max-w-7xl mx-auto mb-8">
+    <div class="flex items-center gap-4 mb-4">
+      <svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="url(#hG)"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g><defs><linearGradient id="hG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800">Hospital Home Landing Page</h1>
+        <p class="text-gray-600">Main navigation hub for Hospital module users</p>
+      </div>
+    </div>
+    <div class="flex gap-3">
+      <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm font-medium">Route: /hospital/home</span>
+    </div>
+  </div>
+
+  <!-- BASIC TIER VIEW -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="border-2 border-gray-300 rounded-xl overflow-hidden">
+      <div class="screen-label flex justify-between items-center">
+        <span>BASIC TIER VIEW (Free)</span>
+        <span class="px-2 py-1 bg-gray-600 rounded text-xs">BASIC</span>
+      </div>
+      <div class="bg-gray-50 min-h-[600px]">
+        <!-- Top Nav -->
+        <div class="bg-white border-b px-6 py-3 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <svg width="36" height="36" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="url(#n1)"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g><defs><linearGradient id="n1" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
+            <span class="text-lg font-bold text-gray-800">AbXInsight</span>
+            <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Hospital</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <button class="px-4 py-2 bg-teal-600 text-white text-sm font-medium rounded-lg">Upgrade to Pro</button>
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 font-semibold text-sm">JD</div>
+              <span class="text-sm text-gray-600">John Doe</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="p-8">
+          <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">Welcome to Hospital Tracking</h1>
+            <p class="text-gray-600">Track antibiotic use at your facility</p>
+          </div>
+
+          <!-- Navigation Cards -->
+          <div class="grid grid-cols-3 gap-4 mb-6">
+            <!-- Dashboard -->
+            <div class="nav-card bg-white rounded-xl p-5 border-2 border-teal-500 cursor-pointer">
+              <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-3">
+                <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+              </div>
+              <h3 class="font-semibold text-gray-800">Dashboard</h3>
+              <p class="text-sm text-gray-500 mt-1">View antibiotic use metrics & AWaRe</p>
+            </div>
+            <!-- Data Entry -->
+            <div class="nav-card bg-white rounded-xl p-5 border border-gray-200 cursor-pointer">
+              <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-3">
+                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+              </div>
+              <h3 class="font-semibold text-gray-800">Data Entry</h3>
+              <p class="text-sm text-gray-500 mt-1">Enter or upload consumption data</p>
+            </div>
+            <!-- Catalogue -->
+            <div class="nav-card bg-white rounded-xl p-5 border border-gray-200 cursor-pointer">
+              <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-3">
+                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+              </div>
+              <h3 class="font-semibold text-gray-800">Catalogue</h3>
+              <p class="text-sm text-gray-500 mt-1">Manage antibiotic products</p>
+            </div>
+          </div>
+
+          <!-- Locked Features -->
+          <div class="grid grid-cols-3 gap-4">
+            <!-- Reports - LOCKED -->
+            <div class="nav-card locked bg-white rounded-xl p-5 border border-gray-200 relative">
+              <div class="absolute top-3 right-3">
+                <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+              </div>
+              <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-3">
+                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              </div>
+              <h3 class="font-semibold text-gray-400">Reports</h3>
+              <p class="text-sm text-gray-400 mt-1">Generate PDF reports</p>
+              <span class="inline-block mt-2 px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs">PRO</span>
+            </div>
+            <!-- Training - LOCKED -->
+            <div class="nav-card locked bg-white rounded-xl p-5 border border-gray-200 relative">
+              <div class="absolute top-3 right-3">
+                <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+              </div>
+              <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-3">
+                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+              </div>
+              <h3 class="font-semibold text-gray-400">Training</h3>
+              <p class="text-sm text-gray-400 mt-1">Stewardship training modules</p>
+              <span class="inline-block mt-2 px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs">PRO</span>
+            </div>
+            <!-- AI Agent - LOCKED -->
+            <div class="nav-card locked bg-white rounded-xl p-5 border border-gray-200 relative">
+              <div class="absolute top-3 right-3">
+                <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+              </div>
+              <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-3">
+                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              </div>
+              <h3 class="font-semibold text-gray-400">AI Agent</h3>
+              <p class="text-sm text-gray-400 mt-1">AI stewardship recommendations</p>
+              <span class="inline-block mt-2 px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs">ULTRA</span>
+            </div>
+          </div>
+
+          <!-- Upgrade Banner -->
+          <div class="mt-6 p-4 bg-gradient-to-r from-teal-50 to-purple-50 border border-teal-200 rounded-xl">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="font-semibold text-gray-800">Upgrade to unlock more features</h4>
+                <p class="text-sm text-gray-600">Get reports, AI extraction, training & more with Pro ($299/year)</p>
+              </div>
+              <button class="px-4 py-2 bg-teal-600 text-white font-medium rounded-lg">Compare Plans</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRO TIER VIEW -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="border-2 border-teal-400 rounded-xl overflow-hidden">
+      <div class="screen-label flex justify-between items-center bg-teal-700">
+        <span>PRO TIER VIEW ($299/year)</span>
+        <span class="px-2 py-1 bg-teal-500 rounded text-xs">PRO</span>
+      </div>
+      <div class="bg-gray-50 p-8">
+        <p class="text-gray-600 mb-4">Pro users see all Basic features plus:</p>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="nav-card bg-white rounded-xl p-5 border border-teal-300 cursor-pointer">
+            <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-3">
+              <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            </div>
+            <h3 class="font-semibold text-gray-800">Reports</h3>
+            <p class="text-sm text-gray-500 mt-1">Monthly/Annual PDF reports</p>
+            <span class="inline-block mt-2 px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs">UNLOCKED</span>
+          </div>
+          <div class="nav-card bg-white rounded-xl p-5 border border-teal-300 cursor-pointer">
+            <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-3">
+              <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            </div>
+            <h3 class="font-semibold text-gray-800">Training</h3>
+            <p class="text-sm text-gray-500 mt-1">Stewardship training modules</p>
+            <span class="inline-block mt-2 px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs">UNLOCKED</span>
+          </div>
+          <div class="nav-card locked bg-white rounded-xl p-5 border border-gray-200 relative">
+            <div class="absolute top-3 right-3">
+              <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+            </div>
+            <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-3">
+              <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            </div>
+            <h3 class="font-semibold text-gray-400">AI Agent</h3>
+            <p class="text-sm text-gray-400 mt-1">AI stewardship recommendations</p>
+            <span class="inline-block mt-2 px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs">ULTRA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ULTRA TIER VIEW -->
+  <div class="max-w-7xl mx-auto">
+    <div class="border-2 border-purple-400 rounded-xl overflow-hidden">
+      <div class="screen-label flex justify-between items-center bg-purple-700">
+        <span>ULTRA TIER VIEW ($499/year) - All Features Unlocked</span>
+        <span class="px-2 py-1 bg-purple-500 rounded text-xs">ULTRA</span>
+      </div>
+      <div class="bg-gray-50 p-8">
+        <p class="text-gray-600 mb-4">Ultra users have full access to all features including AI Stewardship Agent</p>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="nav-card bg-white rounded-xl p-5 border border-purple-300 cursor-pointer bg-gradient-to-br from-purple-50 to-white">
+            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-3">
+              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            </div>
+            <h3 class="font-semibold text-gray-800">AI Stewardship Agent</h3>
+            <p class="text-sm text-gray-500 mt-1">AI-powered recommendations & optimization</p>
+            <span class="inline-block mt-2 px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs">UNLOCKED</span>
+          </div>
+          <div class="nav-card bg-white rounded-xl p-5 border border-purple-300 cursor-pointer">
+            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-3">
+              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path></svg>
+            </div>
+            <h3 class="font-semibold text-gray-800">Custom Metrics</h3>
+            <p class="text-sm text-gray-500 mt-1">Build your own tracking metrics</p>
+            <span class="inline-block mt-2 px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs">UNLOCKED</span>
+          </div>
+          <div class="nav-card bg-white rounded-xl p-5 border border-purple-300 cursor-pointer">
+            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-3">
+              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <h3 class="font-semibold text-gray-800">Spending Analysis</h3>
+            <p class="text-sm text-gray-500 mt-1">Cost tracking & optimization</p>
+            <span class="inline-block mt-2 px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs">UNLOCKED</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

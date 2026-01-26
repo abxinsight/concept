@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AbXInsight - Platform Sitemap & Information Architecture</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .route-box { border-left: 3px solid; padding-left: 12px; }
+    .hospital-route { border-color: #0D9488; background: #F0FDFA; }
+    .country-route { border-color: #7C3AED; background: #FAF5FF; }
+    .public-route { border-color: #64748B; background: #F8FAFC; }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+
+  <!-- Header -->
+  <div class="max-w-7xl mx-auto mb-8">
+    <div class="flex items-center gap-4 mb-4">
+      <svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="url(#hG)"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g><defs><linearGradient id="hG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800">AbXInsight Platform Sitemap</h1>
+        <p class="text-gray-600">Complete Information Architecture & Route Reference</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="max-w-7xl mx-auto mb-8">
+    <div class="bg-white rounded-xl p-4 shadow-sm flex gap-6">
+      <div class="flex items-center gap-2"><span class="w-4 h-4 bg-gray-500 rounded"></span><span class="text-sm">Public Routes</span></div>
+      <div class="flex items-center gap-2"><span class="w-4 h-4 bg-teal-500 rounded"></span><span class="text-sm">Hospital Module</span></div>
+      <div class="flex items-center gap-2"><span class="w-4 h-4 bg-purple-500 rounded"></span><span class="text-sm">Country Module</span></div>
+      <div class="flex items-center gap-2 ml-auto">
+        <span class="px-2 py-1 bg-gray-100 rounded text-xs">BASIC</span>
+        <span class="px-2 py-1 bg-teal-100 rounded text-xs">PRO</span>
+        <span class="px-2 py-1 bg-purple-100 rounded text-xs">ULTRA</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto grid grid-cols-3 gap-6">
+
+    <!-- Public Routes -->
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+        <span class="w-8 h-8 bg-gray-500 rounded-lg flex items-center justify-center text-white text-sm">🌐</span>
+        Public Routes
+      </h2>
+      <div class="space-y-3">
+        <div class="route-box public-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/</code>
+          <p class="text-xs text-gray-600 mt-1">Marketing landing page</p>
+        </div>
+        <div class="route-box public-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/login</code>
+          <p class="text-xs text-gray-600 mt-1">User login</p>
+        </div>
+        <div class="route-box public-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/register</code>
+          <p class="text-xs text-gray-600 mt-1">New user registration</p>
+        </div>
+        <div class="route-box public-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/select-dashboard</code>
+          <p class="text-xs text-gray-600 mt-1">Module selection (new users only)</p>
+        </div>
+        <div class="route-box public-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/forgot-password</code>
+          <p class="text-xs text-gray-600 mt-1">Password reset</p>
+        </div>
+        <div class="route-box public-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/pricing</code>
+          <p class="text-xs text-gray-600 mt-1">Pricing page</p>
+        </div>
+        <div class="route-box public-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/about</code>
+          <p class="text-xs text-gray-600 mt-1">About AbXInsight</p>
+        </div>
+        <div class="route-box public-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/contact</code>
+          <p class="text-xs text-gray-600 mt-1">Contact form</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hospital Routes -->
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+        <span class="w-8 h-8 bg-teal-500 rounded-lg flex items-center justify-center text-white text-sm">🏥</span>
+        Hospital Module
+      </h2>
+      <div class="space-y-3">
+        <div class="route-box hospital-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/hospital/home</code>
+          <p class="text-xs text-gray-600 mt-1">Hospital landing page</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
+        </div>
+        <div class="route-box hospital-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/hospital/dashboard</code>
+          <p class="text-xs text-gray-600 mt-1">Main analytics dashboard</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
+        </div>
+        <div class="route-box hospital-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/hospital/data-entry</code>
+          <p class="text-xs text-gray-600 mt-1">Data entry hub</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
+        </div>
+        <div class="route-box hospital-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/hospital/catalogue</code>
+          <p class="text-xs text-gray-600 mt-1">Antibiotic product catalogue</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
+        </div>
+        <div class="route-box hospital-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/hospital/reports</code>
+          <p class="text-xs text-gray-600 mt-1">Reports & exports</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-teal-200 text-teal-800 rounded text-xs">PRO+</span>
+        </div>
+        <div class="route-box hospital-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/hospital/training</code>
+          <p class="text-xs text-gray-600 mt-1">Training modules</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-teal-200 text-teal-800 rounded text-xs">PRO+</span>
+        </div>
+        <div class="route-box hospital-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/hospital/ai-agent</code>
+          <p class="text-xs text-gray-600 mt-1">AI Stewardship Agent</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-purple-200 text-purple-800 rounded text-xs">ULTRA</span>
+        </div>
+        <div class="route-box hospital-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/hospital/settings</code>
+          <p class="text-xs text-gray-600 mt-1">Facility & user settings</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Country Routes -->
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+        <span class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white text-sm">🌍</span>
+        Country Module
+      </h2>
+      <div class="space-y-3">
+        <div class="route-box country-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/country/home</code>
+          <p class="text-xs text-gray-600 mt-1">Country landing page</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
+        </div>
+        <div class="route-box country-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/country/dashboard</code>
+          <p class="text-xs text-gray-600 mt-1">National surveillance dashboard</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
+        </div>
+        <div class="route-box country-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/country/facilities</code>
+          <p class="text-xs text-gray-600 mt-1">Facility registry</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
+        </div>
+        <div class="route-box country-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/country/glass-export</code>
+          <p class="text-xs text-gray-600 mt-1">WHO GLASS / WPRACSS export</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
+        </div>
+        <div class="route-box country-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/country/reports</code>
+          <p class="text-xs text-gray-600 mt-1">National reports</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-purple-200 text-purple-800 rounded text-xs">PRO+</span>
+        </div>
+        <div class="route-box country-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/country/benchmarking</code>
+          <p class="text-xs text-gray-600 mt-1">Regional benchmarking</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-purple-200 text-purple-800 rounded text-xs">PRO+</span>
+        </div>
+        <div class="route-box country-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/country/ai-advisor</code>
+          <p class="text-xs text-gray-600 mt-1">AI Policy Advisor</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-purple-200 text-purple-800 rounded text-xs">ULTRA</span>
+        </div>
+        <div class="route-box country-route p-3 rounded-r-lg">
+          <code class="text-sm font-mono">/country/settings</code>
+          <p class="text-xs text-gray-600 mt-1">Country & user settings</p>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- User Flow Diagram -->
+  <div class="max-w-7xl mx-auto mt-8">
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <h2 class="text-lg font-bold text-gray-800 mb-4">User Flow Diagram</h2>
+      <div class="flex items-center justify-center gap-2 text-sm flex-wrap">
+        <div class="px-3 py-2 bg-gray-100 rounded-lg">/ (Landing)</div>
+        <span>→</span>
+        <div class="px-3 py-2 bg-gray-100 rounded-lg">/register</div>
+        <span>→</span>
+        <div class="px-3 py-2 bg-purple-100 rounded-lg border-2 border-purple-300">/select-dashboard</div>
+        <span>→</span>
+        <div class="flex gap-2">
+          <div class="px-3 py-2 bg-teal-500 text-white rounded-lg">/hospital/home</div>
+          <span class="text-gray-400">or</span>
+          <div class="px-3 py-2 bg-purple-500 text-white rounded-lg">/country/home</div>
+        </div>
+      </div>
+      <p class="text-center text-xs text-gray-500 mt-4">Returning users skip /select-dashboard and go directly to their module home</p>
+    </div>
+  </div>
+
+</body>
+</html>
