@@ -3,163 +3,1823 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AbXInsight - Technical Implementation Guide</title>
+  <title>AbXInsight - Hospital AMC Computation Guide for Quickfox</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     body { font-family: 'Inter', sans-serif; }
-    code, pre { font-family: 'Fira Code', monospace; }
-    .code-block { background: #1E293B; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow-x: auto; }
+    .formula-box { background: #F0FDF4; border: 2px solid #10B981; border-radius: 8px; padding: 16px; font-family: monospace; }
+    .essential { background: #FEF3C7; border-left: 4px solid #F59E0B; }
+    .optional { background: #F1F5F9; border-left: 4px solid #94A3B8; }
+    .critical { background: #FEE2E2; border-left: 4px solid #EF4444; }
+    code { background: #F1F5F9; padding: 2px 6px; border-radius: 4px; font-size: 0.875rem; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #E5E7EB; padding: 12px; text-align: left; }
+    th { background: #F9FAFB; font-weight: 600; }
+    .toc-link { color: #0D9488; text-decoration: none; }
+    .toc-link:hover { text-decoration: underline; }
+    @media print { 
+      .no-print { display: none; }
+      .page-break { page-break-before: always; }
+    }
   </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
-
-  <div class="max-w-4xl mx-auto px-6 py-8">
-    <!-- Header -->
-    <div class="flex items-center gap-4 mb-8">
-      <svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="url(#hG)"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g><defs><linearGradient id="hG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
-      <div>
-        <h1 class="text-3xl font-bold text-gray-800">Technical Implementation Guide</h1>
-        <p class="text-gray-600">AbXInsight - Antibiotic Use Tracking Platform</p>
+<body class="bg-white">
+  
+  <!-- Cover -->
+  <div class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-teal-600 to-teal-800 text-white p-12">
+    <div class="text-center">
+      <div class="flex items-center justify-center gap-4 mb-8">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <rect width="64" height="64" rx="14" fill="white"/>
+          <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#0D9488"/></g>
+          <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#7C3AED" fill-opacity="0.5"/></g>
+        </svg>
+      </div>
+      <h1 class="text-5xl font-bold mb-4">Hospital Antibiotic Use Computation</h1>
+      <h2 class="text-2xl font-light mb-8">Technical Implementation Guide for Quickfox</h2>
+      <div class="mt-12 text-teal-200">
+        <p class="mb-2">Version 1.0 | January 2026</p>
+        <p>Based on WHO GLASS Hospital AMC Surveillance Methodology</p>
       </div>
     </div>
+  </div>
 
-    <!-- TOC -->
-    <div class="bg-white rounded-xl p-6 border mb-8">
-      <h2 class="font-bold text-gray-800 mb-4">Contents</h2>
-      <ol class="list-decimal list-inside space-y-2 text-teal-600">
-        <li><a href="#ddd" class="hover:underline">DDD Calculation Methodology</a></li>
-        <li><a href="#aware" class="hover:underline">AWaRe Classification</a></li>
-        <li><a href="#metrics" class="hover:underline">Key Metrics & Formulas</a></li>
-        <li><a href="#schema" class="hover:underline">Database Schema</a></li>
-        <li><a href="#api" class="hover:underline">API Endpoints</a></li>
+  <!-- Table of Contents -->
+  <div class="max-w-4xl mx-auto px-8 py-12">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Table of Contents</h2>
+    <div class="space-y-2">
+      <p><a href="#section-1" class="toc-link">1. Executive Summary</a></p>
+      <p><a href="#section-2" class="toc-link">2. Core Concepts</a></p>
+      <p class="pl-4"><a href="#section-2-1" class="toc-link">2.1 What is a DDD?</a></p>
+      <p class="pl-4"><a href="#section-2-2" class="toc-link">2.2 Consumption Density</a></p>
+      <p class="pl-4"><a href="#section-2-3" class="toc-link">2.3 AWaRe Classification</a></p>
+      <p><a href="#section-3" class="toc-link">3. Essential vs Optional Variables</a></p>
+      <p class="pl-4"><a href="#section-3-1" class="toc-link">3.1 Minimum Viable Data</a></p>
+      <p class="pl-4"><a href="#section-3-2" class="toc-link">3.2 Enhanced Analytics Data</a></p>
+      <p><a href="#section-4" class="toc-link">4. Calculation Formulas</a></p>
+      <p class="pl-4"><a href="#section-4-1" class="toc-link">4.1 DDD Count Calculation</a></p>
+      <p class="pl-4"><a href="#section-4-2" class="toc-link">4.2 Consumption Density Calculation</a></p>
+      <p class="pl-4"><a href="#section-4-3" class="toc-link">4.3 AWaRe Proportions</a></p>
+      <p><a href="#section-5" class="toc-link">5. Data Input Workflows</a></p>
+      <p class="pl-4"><a href="#section-5-1" class="toc-link">5.1 Product-Level vs Substance-Level</a></p>
+      <p class="pl-4"><a href="#section-5-2" class="toc-link">5.2 File Upload Processing</a></p>
+      <p><a href="#section-6" class="toc-link">6. Dashboard Implementation</a></p>
+      <p class="pl-4"><a href="#section-6-1" class="toc-link">6.1 Widget Specifications</a></p>
+      <p class="pl-4"><a href="#section-6-2" class="toc-link">6.2 Tier Feature Mapping</a></p>
+      <p><a href="#section-7" class="toc-link">7. Validation Rules</a></p>
+      <p><a href="#section-8" class="toc-link">8. Database Implementation Reference</a></p>
+      <p class="mt-4 pt-2 border-t"><a href="#section-9" class="toc-link font-semibold">9. Hospital vs National Module: Shared & Different Variables</a></p>
+      <p class="pl-4"><a href="#section-9" class="toc-link">9.1 Shared Variables (Used by Both)</a></p>
+      <p class="pl-4"><a href="#section-9" class="toc-link">9.2 Hospital Module-Specific Variables</a></p>
+      <p class="pl-4"><a href="#section-9" class="toc-link">9.3 National Module-Specific Variables</a></p>
+      <p class="pl-4"><a href="#section-9" class="toc-link">9.4 Data Flow: Hospital → National</a></p>
+      <p class="pl-4"><a href="#section-9" class="toc-link">9.5 Quick Reference: Module Comparison</a></p>
+    </div>
+  </div>
+
+  <!-- Section 1: Executive Summary -->
+  <div class="page-break"></div>
+  <div id="section-1" class="max-w-4xl mx-auto px-8 py-12">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">1. Executive Summary</h2>
+    
+    <p class="text-gray-700 mb-6">
+      This guide explains how AbXInsight computes antimicrobial consumption (AMC) metrics for hospitals. 
+      The methodology follows WHO GLASS guidelines to ensure international comparability and alignment 
+      with global AMR surveillance standards.
+    </p>
+
+    <div class="bg-teal-50 border border-teal-200 rounded-xl p-6 mb-6">
+      <h3 class="font-bold text-teal-800 mb-3">🎯 What AbXInsight Does</h3>
+      <ol class="space-y-2 text-teal-700">
+        <li><strong>1.</strong> Accepts consumption data (dispensing, procurement, or prescribing records)</li>
+        <li><strong>2.</strong> Converts quantities to standardized DDD (Defined Daily Doses)</li>
+        <li><strong>3.</strong> Normalizes by hospital activity (patient-days, admissions, etc.)</li>
+        <li><strong>4.</strong> Stratifies by AWaRe category, route, ward, and antimicrobial class</li>
+        <li><strong>5.</strong> Visualizes trends and benchmarks in interactive dashboards</li>
       </ol>
     </div>
 
-    <!-- DDD Section -->
-    <section id="ddd" class="bg-white rounded-xl p-6 border mb-8">
-      <h2 class="text-xl font-bold text-gray-800 mb-4">1. DDD Calculation Methodology</h2>
-      
-      <p class="text-gray-600 mb-4">The Defined Daily Dose (DDD) is the assumed average maintenance dose per day for a drug used for its main indication in adults. DDDs are assigned by WHO.</p>
-      
-      <h3 class="font-semibold text-gray-700 mt-6 mb-3">Hospital Setting (DDD/100 Patient-Days)</h3>
-      <div class="code-block mb-4">
-        <pre>DDD/100 Patient-Days = (Total Grams Used / DDD in Grams) × 100 / Patient-Days
+    <div class="grid grid-cols-3 gap-4">
+      <div class="bg-green-50 rounded-xl p-4 text-center">
+        <p class="text-3xl font-bold text-green-600">DDD</p>
+        <p class="text-sm text-gray-600">Numerator</p>
+        <p class="text-xs text-gray-500">What was consumed</p>
+      </div>
+      <div class="bg-gray-100 rounded-xl p-4 text-center">
+        <p class="text-3xl font-bold text-gray-600">÷</p>
+        <p class="text-sm text-gray-600">Divided by</p>
+      </div>
+      <div class="bg-blue-50 rounded-xl p-4 text-center">
+        <p class="text-3xl font-bold text-blue-600">Denominator</p>
+        <p class="text-sm text-gray-600">Hospital Activity</p>
+        <p class="text-xs text-gray-500">Patient-days, admissions</p>
+      </div>
+    </div>
+  </div>
 
-Where:
-- Total Grams Used = Quantity × Strength per unit
-- Patient-Days = Number of beds × Occupancy rate × Days in period</pre>
-      </div>
-      
-      <h3 class="font-semibold text-gray-700 mt-6 mb-3">Country Setting (DID - DDD/1000 Inhabitants/Day)</h3>
-      <div class="code-block mb-4">
-        <pre>DID = (Total DDDs / Population) × 1000 / Days in Period
+  <!-- Section 2: Core Concepts -->
+  <div class="page-break"></div>
+  <div id="section-2" class="max-w-4xl mx-auto px-8 py-12">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">2. Core Concepts</h2>
 
-Where:
-- Total DDDs = Total quantity consumed / DDD value
-- Population = Country or region population
-- Days in Period = Usually 365 for annual data</pre>
-      </div>
+    <div id="section-2-1" class="mb-10">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">2.1 What is a DDD?</h3>
+      <p class="text-gray-700 mb-4">
+        The <strong>Defined Daily Dose (DDD)</strong> is the assumed average maintenance dose per day for a drug 
+        used for its main indication in adults. DDDs are assigned by the WHO Collaborating Centre for Drug Statistics.
+      </p>
       
-      <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg mt-4">
-        <p class="text-sm text-amber-800"><strong>Note:</strong> DDD values are obtained from the WHO ATC/DDD Index. The platform includes a pre-loaded catalogue with DDD values for common antibiotics.</p>
+      <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-4">
+        <h4 class="font-semibold text-amber-800 mb-2">⚠️ Important Clarifications</h4>
+        <ul class="space-y-2 text-amber-700 text-sm">
+          <li>• DDD is a <strong>statistical unit</strong>, not a recommended dose</li>
+          <li>• DDD values are route-specific (oral vs parenteral may differ)</li>
+          <li>• DDD values are updated annually by WHOCC (version must be tracked)</li>
+          <li>• Combination products have special DDD assignment rules</li>
+        </ul>
       </div>
-    </section>
 
-    <!-- AWaRe Section -->
-    <section id="aware" class="bg-white rounded-xl p-6 border mb-8">
-      <h2 class="text-xl font-bold text-gray-800 mb-4">2. AWaRe Classification</h2>
-      
-      <p class="text-gray-600 mb-4">WHO's AWaRe classification groups antibiotics into three categories based on their impact on antimicrobial resistance.</p>
-      
-      <div class="grid grid-cols-3 gap-4 mb-6">
-        <div class="p-4 bg-green-50 border border-green-200 rounded-lg">
-          <h4 class="font-bold text-green-700 mb-2">Access</h4>
-          <p class="text-sm text-green-600">First/second choice for common infections. Generally narrow spectrum, lower resistance potential.</p>
-          <p class="text-xs text-green-500 mt-2">Target: ≥60% of use</p>
-        </div>
-        <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg">
-          <h4 class="font-bold text-amber-700 mb-2">Watch</h4>
-          <p class="text-sm text-amber-600">Higher resistance potential. First/second choice only for specific, limited indications.</p>
-          <p class="text-xs text-amber-500 mt-2">Target: Minimize use</p>
-        </div>
-        <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
-          <h4 class="font-bold text-red-700 mb-2">Reserve</h4>
-          <p class="text-sm text-red-600">Last resort antibiotics. Use only for confirmed/suspected infections due to MDR organisms.</p>
-          <p class="text-xs text-red-500 mt-2">Target: Use only when essential</p>
-        </div>
-      </div>
-      
-      <h3 class="font-semibold text-gray-700 mb-3">Common Examples</h3>
-      <table class="w-full text-sm border-collapse">
-        <thead class="bg-gray-50">
-          <tr><th class="text-left py-2 px-3 border">Antibiotic</th><th class="text-left py-2 px-3 border">AWaRe</th><th class="text-left py-2 px-3 border">ATC Code</th></tr>
+      <table class="mb-6">
+        <thead>
+          <tr>
+            <th>Antimicrobial</th>
+            <th>ATC Code</th>
+            <th>Route</th>
+            <th>DDD Value</th>
+            <th>Unit</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td class="py-2 px-3 border">Amoxicillin</td><td class="py-2 px-3 border"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">Access</span></td><td class="py-2 px-3 border">J01CA04</td></tr>
-          <tr><td class="py-2 px-3 border">Ceftriaxone</td><td class="py-2 px-3 border"><span class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs">Watch</span></td><td class="py-2 px-3 border">J01DD04</td></tr>
-          <tr><td class="py-2 px-3 border">Azithromycin</td><td class="py-2 px-3 border"><span class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs">Watch</span></td><td class="py-2 px-3 border">J01FA10</td></tr>
-          <tr><td class="py-2 px-3 border">Meropenem</td><td class="py-2 px-3 border"><span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs">Reserve</span></td><td class="py-2 px-3 border">J01DH02</td></tr>
+          <tr>
+            <td>Amoxicillin</td>
+            <td>J01CA04</td>
+            <td>Oral</td>
+            <td>1.5</td>
+            <td>g</td>
+          </tr>
+          <tr>
+            <td>Amoxicillin</td>
+            <td>J01CA04</td>
+            <td>Parenteral</td>
+            <td>3</td>
+            <td>g</td>
+          </tr>
+          <tr>
+            <td>Ceftriaxone</td>
+            <td>J01DD04</td>
+            <td>Parenteral</td>
+            <td>2</td>
+            <td>g</td>
+          </tr>
+          <tr>
+            <td>Ciprofloxacin</td>
+            <td>J01MA02</td>
+            <td>Oral</td>
+            <td>1</td>
+            <td>g</td>
+          </tr>
+          <tr>
+            <td>Metronidazole</td>
+            <td>J01XD01</td>
+            <td>Oral</td>
+            <td>1.5</td>
+            <td>g</td>
+          </tr>
         </tbody>
       </table>
-    </section>
+    </div>
 
-    <!-- Metrics Section -->
-    <section id="metrics" class="bg-white rounded-xl p-6 border mb-8">
-      <h2 class="text-xl font-bold text-gray-800 mb-4">3. Key Metrics & Formulas</h2>
-      
-      <table class="w-full text-sm">
-        <thead class="bg-gray-50">
-          <tr><th class="text-left py-3 px-4 border">Metric</th><th class="text-left py-3 px-4 border">Formula</th><th class="text-left py-3 px-4 border">Context</th></tr>
+    <div id="section-2-2" class="mb-10">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">2.2 Consumption Density</h3>
+      <p class="text-gray-700 mb-4">
+        Raw DDD counts are meaningless without context. <strong>Consumption density</strong> normalizes 
+        consumption by hospital activity, enabling comparison across hospitals of different sizes and over time.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Formula</th>
+            <th>Use Case</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td class="py-3 px-4 border font-medium">DDD/100 Patient-Days</td><td class="py-3 px-4 border"><code>(DDDs × 100) / Patient-Days</code></td><td class="py-3 px-4 border">Hospital</td></tr>
-          <tr><td class="py-3 px-4 border font-medium">DDD/100 Admissions</td><td class="py-3 px-4 border"><code>(DDDs × 100) / Admissions</code></td><td class="py-3 px-4 border">Hospital</td></tr>
-          <tr><td class="py-3 px-4 border font-medium">DID</td><td class="py-3 px-4 border"><code>(DDDs × 1000) / (Population × Days)</code></td><td class="py-3 px-4 border">Country</td></tr>
-          <tr><td class="py-3 px-4 border font-medium">AWaRe Access %</td><td class="py-3 px-4 border"><code>(Access DDDs / Total DDDs) × 100</code></td><td class="py-3 px-4 border">Both</td></tr>
+          <tr>
+            <td><strong>DDD per 100 Patient-Days</strong></td>
+            <td>(DDD ÷ Patient-Days) × 100</td>
+            <td>WHO GLASS recommended; best for inpatient</td>
+          </tr>
+          <tr>
+            <td><strong>DDD per 100 Bed-Days</strong></td>
+            <td>(DDD ÷ Bed-Days) × 100</td>
+            <td>When patient-days unavailable</td>
+          </tr>
+          <tr>
+            <td><strong>DDD per 100 Admissions</strong></td>
+            <td>(DDD ÷ Admissions) × 100</td>
+            <td>When daily data unavailable; captures intensity per stay</td>
+          </tr>
+          <tr>
+            <td><strong>DDD per 1000 Inhabitants per Day</strong></td>
+            <td>(DDD ÷ Population ÷ Days) × 1000</td>
+            <td>Community/national level only</td>
+          </tr>
         </tbody>
       </table>
-    </section>
+    </div>
 
-    <!-- Schema Section -->
-    <section id="schema" class="bg-white rounded-xl p-6 border mb-8">
-      <h2 class="text-xl font-bold text-gray-800 mb-4">4. Database Schema (Simplified)</h2>
-      
-      <div class="code-block text-sm">
-        <pre>-- Core Tables
-facilities (id, name, type, region_id, country_id, beds, tier)
-products (id, name, atc_code, ddd_value, ddd_unit, aware_category, strength, form)
-consumption_records (id, facility_id, product_id, period, quantity, unit, ward_id)
-wards (id, facility_id, name, type)
+    <div id="section-2-3" class="mb-10">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">2.3 AWaRe Classification</h3>
+      <p class="text-gray-700 mb-4">
+        WHO's AWaRe classification groups antibiotics by their potential for resistance and need for stewardship.
+        The <strong>WHO target is ≥60% Access antibiotics</strong>.
+      </p>
 
--- Metrics Tables  
-monthly_metrics (id, facility_id, period, total_ddd, patient_days, ddd_per_100)
-aware_breakdown (id, facility_id, period, access_pct, watch_pct, reserve_pct)
-
--- User Tables
-users (id, email, password_hash, name, role, facility_id, tier)
-subscriptions (id, user_id, plan, status, expires_at)</pre>
+      <div class="grid grid-cols-3 gap-4">
+        <div class="bg-green-100 rounded-xl p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+            <span class="font-bold text-green-800">Access</span>
+          </div>
+          <p class="text-sm text-green-700">
+            First or second choice for common infections. 
+            Narrower spectrum, lower resistance potential.
+          </p>
+          <p class="text-xs text-green-600 mt-2">Examples: Amoxicillin, Metronidazole</p>
+        </div>
+        <div class="bg-amber-100 rounded-xl p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-4 h-4 bg-amber-500 rounded-full"></div>
+            <span class="font-bold text-amber-800">Watch</span>
+          </div>
+          <p class="text-sm text-amber-700">
+            Higher resistance potential. 
+            First choice only for specific, limited indications.
+          </p>
+          <p class="text-xs text-amber-600 mt-2">Examples: Ciprofloxacin, Ceftriaxone</p>
+        </div>
+        <div class="bg-red-100 rounded-xl p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+            <span class="font-bold text-red-800">Reserve</span>
+          </div>
+          <p class="text-sm text-red-700">
+            Last resort antibiotics. 
+            Should be used only for MDR infections.
+          </p>
+          <p class="text-xs text-red-600 mt-2">Examples: Colistin, Linezolid</p>
+        </div>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- API Section -->
-    <section id="api" class="bg-white rounded-xl p-6 border">
-      <h2 class="text-xl font-bold text-gray-800 mb-4">5. API Endpoints (Reference)</h2>
+  <!-- Section 3: Essential vs Optional Variables -->
+  <div class="page-break"></div>
+  <div id="section-3" class="max-w-4xl mx-auto px-8 py-12">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">3. Essential vs Optional Variables</h2>
+
+    <div id="section-3-1" class="mb-10">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">3.1 Minimum Viable Data (BASIC Tier)</h3>
+      <p class="text-gray-700 mb-4">
+        These variables are <strong>required</strong> to calculate basic consumption metrics.
+        Without these, no meaningful analysis is possible.
+      </p>
+
+      <div class="essential p-6 rounded-r-xl mb-6">
+        <h4 class="font-bold text-amber-800 mb-4">🔸 ESSENTIAL: Product Identification</h4>
+        <table class="bg-white">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>product_id</code></td>
+              <td>String</td>
+              <td>Unique identifier for each product (auto-generated or hospital-assigned)</td>
+              <td>"PRD-00142" or "AMX-500-O-100"</td>
+            </tr>
+            <tr>
+              <td><code>generic_name</code></td>
+              <td>String</td>
+              <td>INN (International Nonproprietary Name)</td>
+              <td>"Amoxicillin"</td>
+            </tr>
+            <tr>
+              <td><code>brand_name</code></td>
+              <td>String</td>
+              <td>Commercial/trade name (optional but recommended)</td>
+              <td>"Amoxil", "Moxatag", "Trimox"</td>
+            </tr>
+            <tr>
+              <td><code>manufacturer</code></td>
+              <td>String</td>
+              <td>Manufacturer name (optional)</td>
+              <td>"GSK", "Pfizer", "Local Pharma Co."</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+          <p class="text-sm text-blue-700">
+            <strong>💡 Search Strategy:</strong> The Quick Entry search should index <code>product_id</code>, 
+            <code>generic_name</code>, <code>brand_name</code>, and <code>atc5</code> for fast lookup. 
+            Users can search by any of these fields.
+          </p>
+        </div>
+      </div>
+
+      <div class="essential p-6 rounded-r-xl mb-6">
+        <h4 class="font-bold text-amber-800 mb-4">🔸 ESSENTIAL: Consumption Data</h4>
+        <table class="bg-white">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>substance_label</code> or <code>product_label</code></td>
+              <td>String</td>
+              <td>Name of antimicrobial</td>
+              <td>"Amoxicillin 500mg caps"</td>
+            </tr>
+            <tr>
+              <td><code>atc5</code></td>
+              <td>String(7)</td>
+              <td>ATC code at substance level</td>
+              <td>"J01CA04"</td>
+            </tr>
+            <tr>
+              <td><code>route_admin</code></td>
+              <td>Enum</td>
+              <td>Route of administration</td>
+              <td>"O" (oral), "P" (parenteral)</td>
+            </tr>
+            <tr>
+              <td><code>quantity_value</code></td>
+              <td>Decimal</td>
+              <td>Number dispensed/procured</td>
+              <td>1000</td>
+            </tr>
+            <tr>
+              <td><code>quantity_type</code></td>
+              <td>Enum</td>
+              <td>Unit of quantity</td>
+              <td>"packages" or "items"</td>
+            </tr>
+            <tr>
+              <td><code>strength</code></td>
+              <td>Decimal</td>
+              <td>Amount per unit</td>
+              <td>500</td>
+            </tr>
+            <tr>
+              <td><code>strength_unit</code></td>
+              <td>String</td>
+              <td>Unit of strength</td>
+              <td>"mg"</td>
+            </tr>
+            <tr>
+              <td><code>packsize</code></td>
+              <td>Integer</td>
+              <td>Items per package (if packages)</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td><code>period</code></td>
+              <td>Date/Period</td>
+              <td>Time period of consumption</td>
+              <td>"2025-Q1" or "2025-01"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="essential p-6 rounded-r-xl mb-6">
+        <h4 class="font-bold text-amber-800 mb-4">🔸 ESSENTIAL: Denominator Data</h4>
+        <table class="bg-white">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>patient_days</code></td>
+              <td>Integer</td>
+              <td>Sum of inpatient days in period</td>
+              <td>⭐ Preferred</td>
+            </tr>
+            <tr>
+              <td><code>admissions</code></td>
+              <td>Integer</td>
+              <td>Number of admissions in period</td>
+              <td>Alternative</td>
+            </tr>
+            <tr>
+              <td><code>bed_days</code></td>
+              <td>Integer</td>
+              <td>Occupied bed days in period</td>
+              <td>Alternative</td>
+            </tr>
+            <tr>
+              <td><code>period</code></td>
+              <td>Date/Period</td>
+              <td>Must match consumption period</td>
+              <td>Required</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="critical p-6 rounded-r-xl">
+        <h4 class="font-bold text-red-800 mb-2">⛔ CRITICAL RULE: Numerator-Denominator Match</h4>
+        <p class="text-red-700 text-sm">
+          The coverage of consumption data (numerator) and activity data (denominator) must match exactly.
+          If consumption is hospital-wide, denominators must be hospital-wide.
+          If consumption is ward-level, denominators must be ward-level.
+          Mismatched coverage produces invalid metrics.
+        </p>
+      </div>
+    </div>
+
+    <div id="section-3-2" class="mb-10">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">3.2 Enhanced Analytics Data (PRO/ULTRA)</h3>
       
-      <table class="w-full text-sm">
-        <thead class="bg-gray-50">
-          <tr><th class="text-left py-2 px-3 border">Method</th><th class="text-left py-2 px-3 border">Endpoint</th><th class="text-left py-2 px-3 border">Description</th></tr>
+      <div class="optional p-6 rounded-r-xl mb-6">
+        <h4 class="font-bold text-gray-700 mb-4">🔹 OPTIONAL: Ward/Department Stratification</h4>
+        <table class="bg-white">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Enables</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ward_id</code></td>
+              <td>String</td>
+              <td>Unique ward identifier</td>
+              <td>Ward-level dashboards</td>
+            </tr>
+            <tr>
+              <td><code>ward_name</code></td>
+              <td>String</td>
+              <td>Display name</td>
+              <td>Labels in charts</td>
+            </tr>
+            <tr>
+              <td><code>department_id</code></td>
+              <td>String</td>
+              <td>Department grouping</td>
+              <td>Department roll-ups</td>
+            </tr>
+            <tr>
+              <td><code>is_icu</code></td>
+              <td>Boolean</td>
+              <td>ICU flag</td>
+              <td>ICU vs non-ICU benchmarks</td>
+            </tr>
+            <tr>
+              <td><code>inpatient_outpatient_flag</code></td>
+              <td>Enum</td>
+              <td>Care setting</td>
+              <td>Inpatient vs outpatient analysis</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="optional p-6 rounded-r-xl mb-6">
+        <h4 class="font-bold text-gray-700 mb-4">🔹 OPTIONAL: Product Details</h4>
+        <table class="bg-white">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Enables</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>form</code></td>
+              <td>String</td>
+              <td>Dosage form (tablet, vial, suspension)</td>
+              <td>Formulation analysis</td>
+            </tr>
+            <tr>
+              <td><code>combination</code></td>
+              <td>Boolean</td>
+              <td>Is combination product</td>
+              <td>Combination tracking</td>
+            </tr>
+            <tr>
+              <td><code>paediatric_product</code></td>
+              <td>Boolean</td>
+              <td>Pediatric formulation</td>
+              <td>Pediatric consumption</td>
+            </tr>
+            <tr>
+              <td><code>unit_cost</code></td>
+              <td>Decimal</td>
+              <td>Cost per unit</td>
+              <td>Spending analysis (ULTRA)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="optional p-6 rounded-r-xl">
+        <h4 class="font-bold text-gray-700 mb-4">🔹 OPTIONAL: Contextual Information</h4>
+        <table class="bg-white">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Enables</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>hospital_type</code></td>
+              <td>String</td>
+              <td>Primary/Secondary/Tertiary</td>
+              <td>Peer benchmarking</td>
+            </tr>
+            <tr>
+              <td><code>bed_capacity</code></td>
+              <td>Integer</td>
+              <td>Total beds</td>
+              <td>Size-based comparisons</td>
+            </tr>
+            <tr>
+              <td><code>teaching_status</code></td>
+              <td>Boolean</td>
+              <td>Teaching hospital</td>
+              <td>Teaching vs non-teaching</td>
+            </tr>
+            <tr>
+              <td><code>stewardship_program</code></td>
+              <td>Boolean</td>
+              <td>AMS program exists</td>
+              <td>Stewardship impact analysis</td>
+            </tr>
+            <tr>
+              <td><code>data_source_type</code></td>
+              <td>Enum</td>
+              <td>Purchase/dispensing/prescribing</td>
+              <td>Data quality assessment</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: Calculation Formulas -->
+  <div class="page-break"></div>
+  <div id="section-4" class="max-w-4xl mx-auto px-8 py-12">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">4. Calculation Formulas</h2>
+
+    <div id="section-4-1" class="mb-10">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">4.1 DDD Count Calculation</h3>
+      
+      <div class="formula-box mb-6">
+        <p class="text-lg font-bold text-green-800 mb-2">Step 1: Calculate Total Grams</p>
+        <code class="text-sm">
+          total_grams = quantity_value × packsize × strength × unit_conversion_factor
+        </code>
+        <p class="text-sm text-gray-600 mt-2">
+          where <code>unit_conversion_factor</code> converts strength_unit to grams (mg→0.001, g→1, MU→varies)
+        </p>
+      </div>
+
+      <div class="formula-box mb-6">
+        <p class="text-lg font-bold text-green-800 mb-2">Step 2: Calculate DDD Count</p>
+        <code class="text-sm">
+          ddd_count = total_grams ÷ ddd_value_in_grams
+        </code>
+        <p class="text-sm text-gray-600 mt-2">
+          where <code>ddd_value_in_grams</code> comes from <code>dim_ddd_value</code> table for the matching substance, route, and ATC/DDD version
+        </p>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-6 mb-6">
+        <h4 class="font-semibold text-gray-800 mb-3">📌 Worked Example</h4>
+        <table class="text-sm">
+          <tr><td class="font-medium pr-4">Product:</td><td>Amoxicillin 500mg capsules, box of 100</td></tr>
+          <tr><td class="font-medium pr-4">Quantity dispensed:</td><td>50 boxes</td></tr>
+          <tr><td class="font-medium pr-4">Route:</td><td>Oral</td></tr>
+          <tr><td class="font-medium pr-4">DDD (oral):</td><td>1.5 g</td></tr>
+        </table>
+        <div class="mt-4 p-4 bg-white rounded border">
+          <p><strong>Step 1:</strong> total_grams = 50 × 100 × 500 × 0.001 = 2,500 grams</p>
+          <p><strong>Step 2:</strong> ddd_count = 2,500 ÷ 1.5 = <strong>1,666.67 DDDs</strong></p>
+        </div>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 rounded-xl p-6">
+        <h4 class="font-semibold text-amber-800 mb-2">⚠️ Special Cases</h4>
+        <ul class="space-y-2 text-sm text-amber-700">
+          <li><strong>Liquid formulations:</strong> Use <code>strength_vol</code> and <code>volume</code> fields.
+            <br>total_grams = quantity × (strength ÷ strength_vol) × volume</li>
+          <li><strong>Combination products:</strong> Some have DDD = 1 UD (unit dose). Count units directly.</li>
+          <li><strong>Items vs Packages:</strong> If <code>quantity_type = "items"</code>, don't multiply by packsize.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="section-4-2" class="mb-10">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">4.2 Consumption Density Calculation</h3>
+
+      <div class="formula-box mb-6">
+        <p class="text-lg font-bold text-green-800 mb-2">DDD per 100 Patient-Days (Recommended)</p>
+        <code class="text-sm">
+          ddd_per_100_patient_days = (sum(ddd_count) ÷ patient_days) × 100
+        </code>
+      </div>
+
+      <div class="formula-box mb-6">
+        <p class="text-lg font-bold text-green-800 mb-2">DDD per 100 Admissions</p>
+        <code class="text-sm">
+          ddd_per_100_admissions = (sum(ddd_count) ÷ admissions) × 100
+        </code>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-6">
+        <h4 class="font-semibold text-gray-800 mb-3">📌 Worked Example</h4>
+        <table class="text-sm">
+          <tr><td class="font-medium pr-4">Total DDDs (Q1 2025):</td><td>15,000</td></tr>
+          <tr><td class="font-medium pr-4">Patient-days (Q1 2025):</td><td>32,000</td></tr>
+          <tr><td class="font-medium pr-4">Admissions (Q1 2025):</td><td>4,200</td></tr>
+        </table>
+        <div class="mt-4 p-4 bg-white rounded border">
+          <p><strong>Per 100 Patient-Days:</strong> (15,000 ÷ 32,000) × 100 = <strong>46.9</strong></p>
+          <p><strong>Per 100 Admissions:</strong> (15,000 ÷ 4,200) × 100 = <strong>357.1</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="section-4-3">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">4.3 AWaRe Proportions</h3>
+
+      <div class="formula-box mb-6">
+        <p class="text-lg font-bold text-green-800 mb-2">AWaRe Category Share</p>
+        <code class="text-sm">
+          access_share = sum(ddd_count WHERE aware = 'Access') ÷ sum(ddd_count) × 100
+        </code>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Formula</th>
+            <th>WHO Target</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td class="py-2 px-3 border"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">GET</span></td><td class="py-2 px-3 border"><code>/api/dashboard/metrics</code></td><td class="py-2 px-3 border">Get dashboard summary</td></tr>
-          <tr><td class="py-2 px-3 border"><span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">POST</span></td><td class="py-2 px-3 border"><code>/api/consumption</code></td><td class="py-2 px-3 border">Add consumption record</td></tr>
-          <tr><td class="py-2 px-3 border"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">GET</span></td><td class="py-2 px-3 border"><code>/api/products</code></td><td class="py-2 px-3 border">List antibiotic catalogue</td></tr>
-          <tr><td class="py-2 px-3 border"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">GET</span></td><td class="py-2 px-3 border"><code>/api/reports/aware</code></td><td class="py-2 px-3 border">AWaRe breakdown report</td></tr>
-          <tr><td class="py-2 px-3 border"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">GET</span></td><td class="py-2 px-3 border"><code>/api/export/glass</code></td><td class="py-2 px-3 border">WHO GLASS format export</td></tr>
+          <tr>
+            <td>Access Share %</td>
+            <td>Access DDD ÷ Total DDD × 100</td>
+            <td class="text-green-600 font-semibold">≥ 60%</td>
+          </tr>
+          <tr>
+            <td>Watch Share %</td>
+            <td>Watch DDD ÷ Total DDD × 100</td>
+            <td class="text-amber-600">Monitor</td>
+          </tr>
+          <tr>
+            <td>Reserve Share %</td>
+            <td>Reserve DDD ÷ Total DDD × 100</td>
+            <td class="text-red-600">Minimize</td>
+          </tr>
+          <tr>
+            <td>Oral Share %</td>
+            <td>Oral DDD ÷ Total DDD × 100</td>
+            <td class="text-teal-600 font-semibold">≥ 60%</td>
+          </tr>
         </tbody>
       </table>
-    </section>
+    </div>
+  </div>
 
+  <!-- Section 5: Data Input Workflows -->
+  <div class="page-break"></div>
+  <div id="section-5" class="max-w-4xl mx-auto px-8 py-12">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">5. Data Input Workflows</h2>
+
+    <div id="section-5-1" class="mb-10">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">5.1 Product-Level vs Substance-Level Input</h3>
+
+      <div class="grid grid-cols-2 gap-6 mb-6">
+        <div class="bg-blue-50 rounded-xl p-6">
+          <h4 class="font-bold text-blue-800 mb-3">Product-Level Entry</h4>
+          <p class="text-sm text-blue-700 mb-4">
+            User enters specific products with full details (strength, form, pack size).
+            System maps to substance and calculates DDD.
+          </p>
+          <ul class="text-sm text-blue-600 space-y-1">
+            <li>✅ More accurate DDD calculations</li>
+            <li>✅ Enables formulation analysis</li>
+            <li>❌ Requires product master data</li>
+            <li>❌ More data entry burden</li>
+          </ul>
+        </div>
+        <div class="bg-purple-50 rounded-xl p-6">
+          <h4 class="font-bold text-purple-800 mb-3">Substance-Level Entry</h4>
+          <p class="text-sm text-purple-700 mb-4">
+            User enters aggregated totals by substance (e.g., "total grams of amoxicillin").
+            Simpler but less granular.
+          </p>
+          <ul class="text-sm text-purple-600 space-y-1">
+            <li>✅ Simpler data entry</li>
+            <li>✅ Works with aggregated reports</li>
+            <li>❌ Less detailed analysis</li>
+            <li>❌ Route must still be specified</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="section-5-2">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">5.2 File Upload Processing</h3>
+      
+      <div class="bg-gray-50 rounded-xl p-6 mb-6">
+        <h4 class="font-semibold text-gray-800 mb-4">Expected File Structure (CSV/Excel)</h4>
+        <div class="overflow-x-auto">
+          <table class="text-xs">
+            <thead>
+              <tr>
+                <th>product_name</th>
+                <th>atc_code</th>
+                <th>route</th>
+                <th>strength</th>
+                <th>strength_unit</th>
+                <th>packsize</th>
+                <th>qty_packages</th>
+                <th>period</th>
+                <th>ward</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Amoxicillin 500mg</td>
+                <td>J01CA04</td>
+                <td>O</td>
+                <td>500</td>
+                <td>mg</td>
+                <td>100</td>
+                <td>50</td>
+                <td>2025-01</td>
+                <td>ICU</td>
+              </tr>
+              <tr>
+                <td>Ceftriaxone 1g</td>
+                <td>J01DD04</td>
+                <td>P</td>
+                <td>1</td>
+                <td>g</td>
+                <td>10</td>
+                <td>200</td>
+                <td>2025-01</td>
+                <td>Surgery</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="bg-teal-50 border border-teal-200 rounded-xl p-6">
+        <h4 class="font-semibold text-teal-800 mb-3">Processing Pipeline</h4>
+        <ol class="space-y-3 text-sm text-teal-700">
+          <li><strong>1. Validation:</strong> Check required columns present, data types correct</li>
+          <li><strong>2. ATC Lookup:</strong> Verify ATC codes exist in reference table</li>
+          <li><strong>3. DDD Lookup:</strong> Get DDD value for substance + route combination</li>
+          <li><strong>4. Calculation:</strong> Compute total_grams and ddd_count for each row</li>
+          <li><strong>5. AWaRe Mapping:</strong> Assign AWaRe category based on ATC code</li>
+          <li><strong>6. Aggregation:</strong> Sum by desired dimensions (ward, period, etc.)</li>
+          <li><strong>7. Storage:</strong> Write to <code>fact_consumption</code> table with status = "pending"</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 6: Dashboard Implementation -->
+  <div class="page-break"></div>
+  <div id="section-6" class="max-w-4xl mx-auto px-8 py-12">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">6. Dashboard Implementation</h2>
+
+    <div id="section-6-1" class="mb-10">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">6.1 Widget Specifications</h3>
+
+      <table class="mb-6">
+        <thead>
+          <tr>
+            <th>Widget</th>
+            <th>Metric</th>
+            <th>Data Source</th>
+            <th>Tier</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-yellow-50">
+            <td colspan="4" class="font-semibold text-gray-600">CORE METRICS</td>
+          </tr>
+          <tr>
+            <td><strong>Total Consumption</strong></td>
+            <td>DDD/100 patient-days (switchable)</td>
+            <td>SUM(ddd_count) ÷ patient_days × 100</td>
+            <td><span class="px-2 py-1 bg-gray-500 text-white rounded text-xs">BASIC</span></td>
+          </tr>
+          <tr>
+            <td><strong>Route Distribution</strong></td>
+            <td>% Oral vs Parenteral</td>
+            <td>SUM(ddd) GROUP BY route_admin</td>
+            <td><span class="px-2 py-1 bg-gray-500 text-white rounded text-xs">BASIC</span></td>
+          </tr>
+          <tr>
+            <td><strong>AWaRe Distribution</strong></td>
+            <td>% Access/Watch/Reserve</td>
+            <td>SUM(ddd) GROUP BY aware_category</td>
+            <td><span class="px-2 py-1 bg-gray-500 text-white rounded text-xs">BASIC</span></td>
+          </tr>
+          <tr class="bg-teal-50">
+            <td colspan="4" class="font-semibold text-gray-600">ADVANCED ANALYTICS</td>
+          </tr>
+          <tr>
+            <td><strong>Top 10 Antibiotics</strong></td>
+            <td>Ranked by DDD consumption</td>
+            <td>ORDER BY SUM(ddd) LIMIT 10</td>
+            <td><span class="px-2 py-1 bg-teal-600 text-white rounded text-xs">PRO</span></td>
+          </tr>
+          <tr>
+            <td><strong>Ward Comparison</strong></td>
+            <td>DDD/100 bed-days by ward</td>
+            <td>SUM(ddd) GROUP BY ward_id</td>
+            <td><span class="px-2 py-1 bg-teal-600 text-white rounded text-xs">PRO</span></td>
+          </tr>
+          <tr>
+            <td><strong>Monthly Trends</strong></td>
+            <td>Time series comparison</td>
+            <td>SUM(ddd) GROUP BY period</td>
+            <td><span class="px-2 py-1 bg-teal-600 text-white rounded text-xs">PRO</span></td>
+          </tr>
+          <tr class="bg-purple-50">
+            <td colspan="4" class="font-semibold text-gray-600">ENTERPRISE FEATURES</td>
+          </tr>
+          <tr>
+            <td><strong>Spending Analysis</strong></td>
+            <td>Cost by AWaRe category</td>
+            <td>SUM(unit_cost × quantity)</td>
+            <td><span class="px-2 py-1 bg-purple-600 text-white rounded text-xs">ULTRA</span></td>
+          </tr>
+          <tr>
+            <td><strong>AI Insights</strong></td>
+            <td>Anomaly detection, recommendations</td>
+            <td>ML analysis of consumption patterns</td>
+            <td><span class="px-2 py-1 bg-purple-600 text-white rounded text-xs">ULTRA</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="section-6-2">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">6.2 Tier Feature Mapping</h3>
+
+      <div class="grid grid-cols-3 gap-4">
+        <div class="bg-gray-100 rounded-xl p-6">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="px-3 py-1 bg-gray-600 text-white rounded-full text-sm font-semibold">BASIC</span>
+            <span class="text-gray-500 text-sm">Free</span>
+          </div>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Total consumption metric
+            </li>
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              AWaRe pie chart
+            </li>
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Oral/Parenteral ratio
+            </li>
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Basic data export
+            </li>
+            <li class="flex items-center gap-2 text-gray-400">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <span class="line-through">Ward breakdown</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-teal-50 rounded-xl p-6 border-2 border-teal-500">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="px-3 py-1 bg-teal-600 text-white rounded-full text-sm font-semibold">PRO</span>
+            <span class="text-teal-600 text-sm">$X/month</span>
+          </div>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Everything in Basic
+            </li>
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Top 10 antibiotics chart
+            </li>
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Ward-level breakdown
+            </li>
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Monthly trend analysis
+            </li>
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Network view (multi-facility)
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-purple-50 rounded-xl p-6 border-2 border-purple-500">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="px-3 py-1 bg-purple-600 text-white rounded-full text-sm font-semibold">ULTRA</span>
+            <span class="text-purple-600 text-sm">$XX/month</span>
+          </div>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Everything in Pro
+            </li>
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Spending analysis
+            </li>
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              AI Stewardship Advisor
+            </li>
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Custom reports & API
+            </li>
+            <li class="flex items-center gap-2 text-green-600">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              National dashboard sharing
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 7: Validation Rules -->
+  <div class="page-break"></div>
+  <div id="section-7" class="max-w-4xl mx-auto px-8 py-12">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">7. Validation Rules</h2>
+
+    <div class="mb-8">
+      <h3 class="text-lg font-bold text-gray-800 mb-4">Essential Validation (Block if failed)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Rule</th>
+            <th>Check</th>
+            <th>Error Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ATC Code Valid</td>
+            <td><code>atc5</code> exists in dim_substance</td>
+            <td>"Invalid ATC code: {value}"</td>
+          </tr>
+          <tr>
+            <td>Route Required</td>
+            <td><code>route_admin</code> ∈ ['O','P','Rectal','Inhal',...]</td>
+            <td>"Route of administration required"</td>
+          </tr>
+          <tr>
+            <td>DDD Available</td>
+            <td>DDD value exists for substance + route</td>
+            <td>"No DDD defined for {substance} ({route})"</td>
+          </tr>
+          <tr>
+            <td>Quantity Positive</td>
+            <td><code>quantity_value</code> > 0</td>
+            <td>"Quantity must be positive"</td>
+          </tr>
+          <tr>
+            <td>Packsize Present</td>
+            <td>If <code>quantity_type</code> = 'packages', packsize required</td>
+            <td>"Packsize required when entering packages"</td>
+          </tr>
+          <tr>
+            <td>Period Match</td>
+            <td>Denominator exists for same hospital + period</td>
+            <td>"No activity data for period {period}"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mb-8">
+      <h3 class="text-lg font-bold text-gray-800 mb-4">Plausibility Validation (Warn but allow)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Rule</th>
+            <th>Threshold</th>
+            <th>Warning Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>High Consumption</td>
+            <td>DDD/100 patient-days > 200</td>
+            <td>"⚠️ Unusually high consumption detected"</td>
+          </tr>
+          <tr>
+            <td>ICU Threshold</td>
+            <td>ICU DDD/100 bed-days > 300</td>
+            <td>"⚠️ ICU consumption may need review"</td>
+          </tr>
+          <tr>
+            <td>Reserve High</td>
+            <td>Reserve antibiotics > 10% of total</td>
+            <td>"⚠️ Reserve antibiotic use above typical"</td>
+          </tr>
+          <tr>
+            <td>Data Source Change</td>
+            <td><code>data_source_type</code> differs from previous period</td>
+            <td>"⚠️ Data source changed - trends may not be comparable"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bg-red-50 border border-red-200 rounded-xl p-6">
+      <h3 class="font-bold text-red-800 mb-3">⛔ Data Quality Blocking Rules</h3>
+      <ul class="space-y-2 text-red-700 text-sm">
+        <li><strong>Missing Denominators:</strong> Do not calculate density metrics if no activity data exists for the period. Display "Denominator data required" instead of incorrect values.</li>
+        <li><strong>Coverage Mismatch:</strong> If ward-level consumption is entered but only hospital-level denominators exist, block ward-level metrics. Only calculate at matching granularity.</li>
+        <li><strong>Version Tracking:</strong> Always store <code>atc_ddd_version_id</code> with consumption records. Different versions may yield different DDD counts for the same data.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Section 8: Database Reference -->
+  <div class="page-break"></div>
+  <div id="section-8" class="max-w-4xl mx-auto px-8 py-12">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">8. Database Implementation Reference</h2>
+
+    <p class="text-gray-700 mb-6">
+      The database follows a hybrid star schema with dimension and fact tables.
+      This section summarizes the key tables. See the full Database Structure document for complete specifications.
+    </p>
+
+    <div class="mb-8">
+      <h3 class="text-lg font-bold text-gray-800 mb-4">Key Fact Tables</h3>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-blue-50 rounded-xl p-4">
+          <h4 class="font-bold text-blue-800 mb-2">fact_consumption</h4>
+          <p class="text-sm text-blue-700 mb-2">Core table for all consumption data</p>
+          <ul class="text-xs text-blue-600 space-y-1">
+            <li>• Links to hospital, ward, period, product/substance</li>
+            <li>• Stores quantities, calculated DDD, validation status</li>
+            <li>• Tracks ATC/DDD version for reproducibility</li>
+          </ul>
+        </div>
+        <div class="bg-green-50 rounded-xl p-4">
+          <h4 class="font-bold text-green-800 mb-2">fact_hospital_activity</h4>
+          <p class="text-sm text-green-700 mb-2">Denominator data by period</p>
+          <ul class="text-xs text-green-600 space-y-1">
+            <li>• patient_days, admissions, bed_days</li>
+            <li>• Matches coverage level of consumption data</li>
+            <li>• Includes validation status</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-8">
+      <h3 class="text-lg font-bold text-gray-800 mb-4">Key Dimension Tables</h3>
+      <div class="grid grid-cols-3 gap-3 text-sm">
+        <div class="bg-gray-100 rounded-lg p-3">
+          <p class="font-semibold">dim_substance</p>
+          <p class="text-xs text-gray-600">ATC codes, AWaRe, routes</p>
+        </div>
+        <div class="bg-gray-100 rounded-lg p-3">
+          <p class="font-semibold">dim_ddd_value</p>
+          <p class="text-xs text-gray-600">DDD per substance/route/version</p>
+        </div>
+        <div class="bg-gray-100 rounded-lg p-3">
+          <p class="font-semibold">dim_product</p>
+          <p class="text-xs text-gray-600">Product details, strengths</p>
+        </div>
+        <div class="bg-gray-100 rounded-lg p-3">
+          <p class="font-semibold">dim_hospital</p>
+          <p class="text-xs text-gray-600">Facility info, type, beds</p>
+        </div>
+        <div class="bg-gray-100 rounded-lg p-3">
+          <p class="font-semibold">dim_ward</p>
+          <p class="text-xs text-gray-600">Ward/department structure</p>
+        </div>
+        <div class="bg-gray-100 rounded-lg p-3">
+          <p class="font-semibold">dim_time_period</p>
+          <p class="text-xs text-gray-600">Year, quarter, month</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-teal-50 border border-teal-200 rounded-xl p-6">
+      <h3 class="font-bold text-teal-800 mb-3">📊 Materialized View: view_amc_metrics</h3>
+      <p class="text-sm text-teal-700 mb-3">Pre-computed metrics for dashboard performance:</p>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <ul class="space-y-1 text-teal-600">
+          <li>• ddd_per_100_patient_days</li>
+          <li>• ddd_per_1000_patient_days</li>
+          <li>• ddd_per_100_admissions</li>
+        </ul>
+        <ul class="space-y-1 text-teal-600">
+          <li>• aware_share_access</li>
+          <li>• aware_share_watch</li>
+          <li>• oral_share_percent</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 9: Hospital vs National Module Comparison -->
+  <div class="page-break"></div>
+  <div id="section-9" class="max-w-4xl mx-auto px-8 py-12">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">9. Hospital vs National Module: Shared & Different Variables</h2>
+
+    <p class="text-gray-700 mb-6">
+      AbXInsight has two main modules: <strong>Hospital Monitoring</strong> (for individual facilities) and 
+      <strong>Country Monitoring</strong> (for ministries of health aggregating data across facilities).
+      This section clarifies which data structures, variables, and calculations are shared between both modules
+      and which are unique to each.
+    </p>
+
+    <!-- Overview Diagram -->
+    <div class="bg-gradient-to-r from-teal-50 to-purple-50 rounded-xl p-6 mb-8">
+      <div class="grid grid-cols-3 gap-4">
+        <div class="bg-teal-100 rounded-xl p-4 border-2 border-teal-500">
+          <h4 class="font-bold text-teal-800 text-center mb-2">🏥 Hospital Module</h4>
+          <p class="text-xs text-teal-700 text-center">Single facility view</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 border-2 border-gray-300">
+          <h4 class="font-bold text-gray-700 text-center mb-2">🔗 Shared Core</h4>
+          <p class="text-xs text-gray-600 text-center">Same data model & calculations</p>
+        </div>
+        <div class="bg-purple-100 rounded-xl p-4 border-2 border-purple-500">
+          <h4 class="font-bold text-purple-800 text-center mb-2">🌍 National Module</h4>
+          <p class="text-xs text-purple-700 text-center">Multi-facility aggregation</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9.1 Shared Variables -->
+    <div class="mb-10">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">9.1 Shared Variables (Used by Both Modules)</h3>
+      <p class="text-gray-600 mb-4">
+        These dimension and reference tables are <strong>identical</strong> for both Hospital and National modules.
+        They form the common foundation of the AbXInsight data model.
+      </p>
+
+      <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-6">
+        <h4 class="font-bold text-green-800 mb-4">✅ SHARED: Reference Data (Dimension Tables)</h4>
+        <table class="bg-white text-sm">
+          <thead>
+            <tr>
+              <th>Table</th>
+              <th>Purpose</th>
+              <th>Key Fields</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>dim_substance</code></td>
+              <td>Master list of antimicrobials</td>
+              <td>substance_id, substance_label, atc5, route_admin, antimicrobial_group</td>
+            </tr>
+            <tr>
+              <td><code>dim_ddd_value</code></td>
+              <td>DDD values per substance/route</td>
+              <td>substance_id, atc_ddd_version_id, ddd_value, ddd_unit, ddd_value_in_grams</td>
+            </tr>
+            <tr>
+              <td><code>dim_atc_ddd_version</code></td>
+              <td>ATC/DDD version tracking</td>
+              <td>atc_ddd_version_id, release_year, effective_from</td>
+            </tr>
+            <tr>
+              <td><code>dim_aware_category</code></td>
+              <td>AWaRe classification</td>
+              <td>aware_id, aware_category (Access/Watch/Reserve)</td>
+            </tr>
+            <tr>
+              <td><code>bridge_substance_aware</code></td>
+              <td>Links substances to AWaRe</td>
+              <td>substance_id, aware_id</td>
+            </tr>
+            <tr>
+              <td><code>dim_time_period</code></td>
+              <td>Reporting periods</td>
+              <td>period_id, year, quarter, month, aggregation_level</td>
+            </tr>
+            <tr>
+              <td><code>dim_country</code></td>
+              <td>Country reference</td>
+              <td>country_id (ISO 3166), country_name</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-6">
+        <h4 class="font-bold text-green-800 mb-4">✅ SHARED: Core Calculations</h4>
+        <table class="bg-white text-sm">
+          <thead>
+            <tr>
+              <th>Calculation</th>
+              <th>Formula</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>DDD Count</strong></td>
+              <td><code>total_grams ÷ ddd_value_in_grams</code></td>
+              <td>Identical calculation at any level</td>
+            </tr>
+            <tr>
+              <td><strong>Total Grams</strong></td>
+              <td><code>qty × packsize × strength × unit_factor</code></td>
+              <td>Same formula, same unit conversions</td>
+            </tr>
+            <tr>
+              <td><strong>AWaRe %</strong></td>
+              <td><code>category_ddd ÷ total_ddd × 100</code></td>
+              <td>Same grouping logic</td>
+            </tr>
+            <tr>
+              <td><strong>Route %</strong></td>
+              <td><code>route_ddd ÷ total_ddd × 100</code></td>
+              <td>Oral vs Parenteral split</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+        <h4 class="font-bold text-green-800 mb-4">✅ SHARED: Data Entry Variables</h4>
+        <p class="text-sm text-green-700 mb-3">
+          When hospitals enter consumption data, these fields are captured identically whether the data stays
+          in the hospital module or flows up to national:
+        </p>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div>
+            <p class="font-semibold text-gray-700 mb-2">Product/Substance Info:</p>
+            <ul class="space-y-1 text-gray-600">
+              <li>• <code>atc5</code> (ATC code)</li>
+              <li>• <code>route_admin</code></li>
+              <li>• <code>strength</code> / <code>strength_unit</code></li>
+              <li>• <code>packsize</code></li>
+              <li>• <code>form</code> (optional)</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-700 mb-2">Quantity & Period:</p>
+            <ul class="space-y-1 text-gray-600">
+              <li>• <code>quantity_value</code></li>
+              <li>• <code>quantity_type</code> (packages/items)</li>
+              <li>• <code>period_id</code></li>
+              <li>• <code>data_source_type</code></li>
+              <li>• <code>atc_ddd_version_id</code></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9.2 Hospital-Specific Variables -->
+    <div class="mb-10">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">9.2 Hospital Module-Specific Variables</h3>
+      <p class="text-gray-600 mb-4">
+        These variables and features are <strong>only used in the Hospital module</strong> for facility-level 
+        monitoring and internal stewardship.
+      </p>
+
+      <div class="bg-teal-50 border border-teal-200 rounded-xl p-6 mb-6">
+        <h4 class="font-bold text-teal-800 mb-4">🏥 HOSPITAL ONLY: Organizational Structure</h4>
+        <table class="bg-white text-sm">
+          <thead>
+            <tr>
+              <th>Table/Field</th>
+              <th>Purpose</th>
+              <th>Why Hospital-Only</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>dim_ward</code></td>
+              <td>Ward/unit definitions</td>
+              <td>National level aggregates beyond wards</td>
+            </tr>
+            <tr>
+              <td><code>dim_department</code></td>
+              <td>Department groupings</td>
+              <td>Internal hospital structure only</td>
+            </tr>
+            <tr>
+              <td><code>ward_id</code> in fact tables</td>
+              <td>Ward-level consumption</td>
+              <td>National receives hospital totals, not ward detail</td>
+            </tr>
+            <tr>
+              <td><code>is_icu</code></td>
+              <td>ICU flag for benchmarks</td>
+              <td>ICU detail typically not reported nationally</td>
+            </tr>
+            <tr>
+              <td><code>inpatient_outpatient_flag</code></td>
+              <td>Care setting</td>
+              <td>May be aggregated at national level</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-teal-50 border border-teal-200 rounded-xl p-6 mb-6">
+        <h4 class="font-bold text-teal-800 mb-4">🏥 HOSPITAL ONLY: Denominators</h4>
+        <table class="bg-white text-sm">
+          <thead>
+            <tr>
+              <th>Denominator Type</th>
+              <th>Hospital Module</th>
+              <th>National Module</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Patient-Days</strong></td>
+              <td class="text-green-600">✓ By ward/hospital</td>
+              <td class="text-green-600">✓ Aggregated from hospitals</td>
+            </tr>
+            <tr>
+              <td><strong>Bed-Days</strong></td>
+              <td class="text-green-600">✓ By ward/hospital</td>
+              <td class="text-green-600">✓ Aggregated from hospitals</td>
+            </tr>
+            <tr>
+              <td><strong>Admissions</strong></td>
+              <td class="text-green-600">✓ By ward/hospital</td>
+              <td class="text-green-600">✓ Aggregated from hospitals</td>
+            </tr>
+            <tr>
+              <td><strong>Ward-Level Denominators</strong></td>
+              <td class="text-green-600">✓ Required for ward analysis</td>
+              <td class="text-red-400">✗ Not used</td>
+            </tr>
+            <tr>
+              <td><strong>Population (DID)</strong></td>
+              <td class="text-red-400">✗ Not applicable</td>
+              <td class="text-green-600">✓ For community data</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-teal-50 border border-teal-200 rounded-xl p-6 mb-6">
+        <h4 class="font-bold text-teal-800 mb-4">🏥 HOSPITAL ONLY: Metrics & Dashboards</h4>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div class="bg-white rounded-lg p-4">
+            <p class="font-semibold text-gray-700 mb-2">Exclusive Metrics:</p>
+            <ul class="space-y-1 text-gray-600">
+              <li>• DDD/100 bed-days <strong>by ward</strong></li>
+              <li>• Ward comparison charts</li>
+              <li>• ICU vs non-ICU breakdown</li>
+              <li>• DU75/DU90 indices</li>
+              <li>• Cost per DDD (with pricing data)</li>
+              <li>• Antibiotic % of hospital revenue</li>
+            </ul>
+          </div>
+          <div class="bg-white rounded-lg p-4">
+            <p class="font-semibold text-gray-700 mb-2">Exclusive Features:</p>
+            <ul class="space-y-1 text-gray-600">
+              <li>• Product-level detail view</li>
+              <li>• Spending analysis (ULTRA)</li>
+              <li>• AI Stewardship Advisor (ULTRA)</li>
+              <li>• Data entry validation workflow</li>
+              <li>• Internal benchmarking over time</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-teal-50 border border-teal-200 rounded-xl p-6">
+        <h4 class="font-bold text-teal-800 mb-4">🏥 HOSPITAL ONLY: User & Data Management</h4>
+        <table class="bg-white text-sm">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>User Roles</strong></td>
+              <td>Admin, Data Manager, Data Entry Specialist (3-tier hierarchy)</td>
+            </tr>
+            <tr>
+              <td><strong>Validation Workflow</strong></td>
+              <td>Pending → Validated/Rejected status per entry</td>
+            </tr>
+            <tr>
+              <td><strong>Product Master</strong></td>
+              <td>Hospital-specific product catalog with local pricing</td>
+            </tr>
+            <tr>
+              <td><strong>Data Consent</strong></td>
+              <td>Opt-in to share aggregated data with national</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 9.3 National-Specific Variables -->
+    <div class="mb-10">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">9.3 National Module-Specific Variables</h3>
+      <p class="text-gray-600 mb-4">
+        These variables and features are <strong>only used in the National module</strong> for country-level 
+        surveillance and WHO GLASS reporting.
+      </p>
+
+      <div class="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-6">
+        <h4 class="font-bold text-purple-800 mb-4">🌍 NATIONAL ONLY: Multi-Facility Management</h4>
+        <table class="bg-white text-sm">
+          <thead>
+            <tr>
+              <th>Table/Field</th>
+              <th>Purpose</th>
+              <th>Why National-Only</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>dim_hospital</code> (full use)</td>
+              <td>Registry of all facilities</td>
+              <td>Hospital module only sees own facility</td>
+            </tr>
+            <tr>
+              <td><code>hospital_type</code></td>
+              <td>Primary/Secondary/Tertiary</td>
+              <td>For stratified national reporting</td>
+            </tr>
+            <tr>
+              <td><code>geo_admin_level</code></td>
+              <td>Province/District grouping</td>
+              <td>Geographic aggregation</td>
+            </tr>
+            <tr>
+              <td><code>ownership</code></td>
+              <td>Public/Private classification</td>
+              <td>Sector analysis</td>
+            </tr>
+            <tr>
+              <td><code>teaching_status</code></td>
+              <td>Teaching hospital flag</td>
+              <td>Comparative benchmarking</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-6">
+        <h4 class="font-bold text-purple-800 mb-4">🌍 NATIONAL ONLY: Aggregation & Reporting</h4>
+        <table class="bg-white text-sm">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Facility Aggregation</strong></td>
+              <td>Sum DDDs across all reporting hospitals</td>
+            </tr>
+            <tr>
+              <td><strong>Geographic Roll-up</strong></td>
+              <td>Province/region level summaries</td>
+            </tr>
+            <tr>
+              <td><strong>Sector Comparison</strong></td>
+              <td>Public vs Private hospital consumption</td>
+            </tr>
+            <tr>
+              <td><strong>Hospital Type Stratification</strong></td>
+              <td>Compare primary/secondary/tertiary</td>
+            </tr>
+            <tr>
+              <td><strong>Coverage Tracking</strong></td>
+              <td>% of hospitals reporting, bed coverage %</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-6">
+        <h4 class="font-bold text-purple-800 mb-4">🌍 NATIONAL ONLY: Denominators</h4>
+        <table class="bg-white text-sm">
+          <thead>
+            <tr>
+              <th>Denominator</th>
+              <th>Source</th>
+              <th>Used For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>National Patient-Days</strong></td>
+              <td>Aggregated from hospitals</td>
+              <td>DDD/100 patient-days (national)</td>
+            </tr>
+            <tr>
+              <td><strong>Population</strong></td>
+              <td>National statistics bureau</td>
+              <td>DDD/1000 inhabitants/day (DID) for community data</td>
+            </tr>
+            <tr>
+              <td><strong>Total Hospital Beds</strong></td>
+              <td>Health system registry</td>
+              <td>Coverage calculations</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+          <p class="text-xs text-amber-700">
+            <strong>⚠️ Note:</strong> DDD/1000 inhabitants/day (DID) is used for <strong>community/retail</strong> 
+            consumption data. Hospital inpatient data should use patient-days, not population, as the denominator.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-6">
+        <h4 class="font-bold text-purple-800 mb-4">🌍 NATIONAL ONLY: WHO GLASS Integration</h4>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div class="bg-white rounded-lg p-4">
+            <p class="font-semibold text-gray-700 mb-2">GLASS Export Fields:</p>
+            <ul class="space-y-1 text-gray-600">
+              <li>• Country ISO code</li>
+              <li>• Reporting year</li>
+              <li>• ATC/DDD version used</li>
+              <li>• Total DDDs by ATC level</li>
+              <li>• Denominator type & value</li>
+              <li>• Data source type</li>
+              <li>• Coverage percentage</li>
+            </ul>
+          </div>
+          <div class="bg-white rounded-lg p-4">
+            <p class="font-semibold text-gray-700 mb-2">Quality Indicators:</p>
+            <ul class="space-y-1 text-gray-600">
+              <li>• % facilities reporting</li>
+              <li>• % beds covered</li>
+              <li>• Data completeness score</li>
+              <li>• Timeliness metrics</li>
+              <li>• Year-over-year comparability</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-purple-50 border border-purple-200 rounded-xl p-6">
+        <h4 class="font-bold text-purple-800 mb-4">🌍 NATIONAL ONLY: Dashboard Features</h4>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div class="bg-white rounded-lg p-4">
+            <p class="font-semibold text-gray-700 mb-2">Exclusive Visualizations:</p>
+            <ul class="space-y-1 text-gray-600">
+              <li>• National map with regional data</li>
+              <li>• Hospital ranking tables</li>
+              <li>• Facility compliance dashboard</li>
+              <li>• Reporting coverage heatmap</li>
+              <li>• Year-over-year national trends</li>
+            </ul>
+          </div>
+          <div class="bg-white rounded-lg p-4">
+            <p class="font-semibold text-gray-700 mb-2">Administrative Features:</p>
+            <ul class="space-y-1 text-gray-600">
+              <li>• Facility onboarding/approval</li>
+              <li>• Data submission monitoring</li>
+              <li>• Automated reminder system</li>
+              <li>• GLASS export generation</li>
+              <li>• Multi-user ministry access</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9.4 Data Flow Between Modules -->
+    <div class="mb-10">
+      <h3 class="text-xl font-bold text-gray-800 mb-4">9.4 Data Flow: Hospital → National</h3>
+      <p class="text-gray-600 mb-4">
+        When hospitals opt-in to share data with national surveillance, here's what flows between modules:
+      </p>
+
+      <div class="bg-gray-50 rounded-xl p-6 mb-6">
+        <div class="flex items-center justify-between mb-6">
+          <div class="text-center flex-1">
+            <div class="w-16 h-16 bg-teal-100 rounded-xl flex items-center justify-center mx-auto mb-2 border-2 border-teal-500">
+              <span class="text-2xl">🏥</span>
+            </div>
+            <p class="font-semibold text-gray-700">Hospital Module</p>
+            <p class="text-xs text-gray-500">Detailed facility data</p>
+          </div>
+          <div class="flex-1 px-4">
+            <div class="border-t-2 border-dashed border-gray-300 relative">
+              <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-3">
+                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="text-center flex-1">
+            <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-2 border-2 border-purple-500">
+              <span class="text-2xl">🌍</span>
+            </div>
+            <p class="font-semibold text-gray-700">National Module</p>
+            <p class="text-xs text-gray-500">Aggregated surveillance</p>
+          </div>
+        </div>
+
+        <table class="text-sm">
+          <thead>
+            <tr>
+              <th class="bg-teal-100 text-teal-800">Sent from Hospital</th>
+              <th class="bg-purple-100 text-purple-800">Received by National</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hospital-level DDD totals by substance</td>
+              <td>✓ Same</td>
+              <td>Ward detail stripped</td>
+            </tr>
+            <tr>
+              <td>Hospital-level denominators</td>
+              <td>✓ Same</td>
+              <td>Aggregated patient-days, admissions</td>
+            </tr>
+            <tr>
+              <td>Period (year/quarter/month)</td>
+              <td>✓ Same</td>
+              <td>Time alignment</td>
+            </tr>
+            <tr>
+              <td>ATC/DDD version used</td>
+              <td>✓ Same</td>
+              <td>For reproducibility</td>
+            </tr>
+            <tr>
+              <td>Data source type</td>
+              <td>✓ Same</td>
+              <td>Dispensing/procurement/etc.</td>
+            </tr>
+            <tr>
+              <td>Hospital metadata (type, beds)</td>
+              <td>✓ Same</td>
+              <td>For stratification</td>
+            </tr>
+            <tr class="bg-red-50">
+              <td class="text-red-600">Ward-level detail</td>
+              <td class="text-red-600">✗ Not sent</td>
+              <td>Stays in hospital module</td>
+            </tr>
+            <tr class="bg-red-50">
+              <td class="text-red-600">Product-level detail</td>
+              <td class="text-red-600">✗ Not sent</td>
+              <td>Aggregated to substance level</td>
+            </tr>
+            <tr class="bg-red-50">
+              <td class="text-red-600">Pricing/cost data</td>
+              <td class="text-red-600">✗ Not sent</td>
+              <td>Hospital-internal only</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 9.5 Summary Comparison Table -->
+    <div>
+      <h3 class="text-xl font-bold text-gray-800 mb-4">9.5 Quick Reference: Module Comparison</h3>
+
+      <table class="text-sm">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th class="bg-teal-50 text-teal-800">Hospital Module</th>
+            <th class="bg-purple-50 text-purple-800">National Module</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="font-semibold">Primary User</td>
+            <td>Hospital pharmacist, infection control, stewardship team</td>
+            <td>Ministry of Health, national AMR committee</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Data Granularity</td>
+            <td>Product → Substance → Ward → Hospital</td>
+            <td>Substance → Hospital → Region → National</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Primary Denominator</td>
+            <td>Patient-days (ward or hospital level)</td>
+            <td>Patient-days (aggregated) or Population (DID)</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Key Metrics</td>
+            <td>DDD/100 PD, AWaRe %, Oral %, DU75/90, Cost</td>
+            <td>DDD/100 PD, AWaRe %, Coverage %, Facility count</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Benchmarking</td>
+            <td>Internal (ward vs ward, year vs year)</td>
+            <td>Cross-facility, regional, hospital-type</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Data Entry</td>
+            <td>Direct entry or file upload</td>
+            <td>Receives from hospitals (or manual aggregate entry)</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Validation</td>
+            <td>Entry → Pending → Validated workflow</td>
+            <td>Hospital submission → National review</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">Export</td>
+            <td>Excel, PDF reports, share to national</td>
+            <td>WHO GLASS format, national reports</td>
+          </tr>
+          <tr>
+            <td class="font-semibold">User Tiers</td>
+            <td>Basic, Pro, Ultra</td>
+            <td>Basic, Pro, Ultra (different features)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="bg-gray-800 text-white py-8 px-12 mt-12">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
+              <rect width="64" height="64" rx="14" fill="url(#abxLogo10)"/>
+              <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g>
+              <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g>
+              <defs><linearGradient id="abxLogo10" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
+            </svg>
+        <div>
+          <p class="font-semibold">AbXInsight</p>
+          <p class="text-xs text-gray-400">Track Antibiotic Use. Combat AMR.</p>
+        </div>
+      </div>
+      <div class="text-right text-sm text-gray-400">
+        <p>Technical Guide v1.0</p>
+        <p>For Quickfox Development Team</p>
+      </div>
+    </div>
   </div>
 
 </body>

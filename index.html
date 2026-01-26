@@ -8,10 +8,23 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     body { font-family: 'Inter', sans-serif; }
-    .card-hover { transition: all 0.2s ease; }
-    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15); }
-    .gradient-border { background: linear-gradient(135deg, #0D9488, #7C3AED); padding: 2px; border-radius: 16px; }
-    .gradient-border-inner { background: white; border-radius: 14px; height: 100%; }
+    .card-hover {
+      transition: all 0.2s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+    }
+    .gradient-border {
+      background: linear-gradient(135deg, #0D9488, #7C3AED);
+      padding: 2px;
+      border-radius: 16px;
+    }
+    .gradient-border-inner {
+      background: white;
+      border-radius: 14px;
+      height: 100%;
+    }
   </style>
 </head>
 <body class="bg-gray-100 min-h-screen">
@@ -20,16 +33,11 @@
   <header class="bg-gradient-to-r from-teal-600 to-purple-600 text-white">
     <div class="max-w-6xl mx-auto px-6 py-12">
       <div class="flex items-center gap-4 mb-6">
-        <!-- New Logo -->
-        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="64" height="64" rx="14" fill="white" fill-opacity="0.2"/>
-          <g transform="rotate(-45, 32, 32)">
-            <rect x="24" y="14" width="16" height="36" rx="8" fill="white"/>
-          </g>
-          <g transform="rotate(45, 32, 32)">
-            <rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/>
-          </g>
-        </svg>
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <rect width="64" height="64" rx="14" fill="white" fill-opacity="0.15"/>
+              <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g>
+              <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g>
+            </svg>
         <div>
           <h1 class="text-4xl font-bold">AbXInsight Design System</h1>
           <p class="text-teal-100 text-lg">Development Hub for Quickfox Team</p>
@@ -40,8 +48,8 @@
         AbXInsight antibiotic use tracking platform.
       </p>
       <div class="flex gap-3 mt-6">
-        <span class="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium">11 Pages</span>
-        <span class="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium">Version 2.0</span>
+        <span class="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium">10 Pages</span>
+        <span class="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium">Version 1.0</span>
         <span class="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium">January 2026</span>
       </div>
     </div>
@@ -65,7 +73,7 @@
                 This is the single source of truth for all naming conventions, pricing tiers ($299/year Pro, $499/year Ultra), 
                 feature access matrix, and implementation checklist. <strong>Read this first before starting development.</strong>
               </p>
-              <a href="AbXInsight_Master_Guide.html" 
+              <a href="AbXInsight_Master_Guide_Quickfox.html" 
                  class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-600 to-purple-600 text-white font-semibold rounded-lg hover:opacity-90 transition">
                 Open Master Guide
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -88,7 +96,7 @@
         </span>
         Reference Documents
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- Platform Sitemap -->
         <a href="AbXInsight_Platform_Sitemap.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
           <div class="flex items-start gap-4">
@@ -106,7 +114,7 @@
         </a>
 
         <!-- Technical Guide -->
-        <a href="AbXInsight_Technical_Guide.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
+        <a href="AbXInsight_Hospital_AMC_Technical_Guide.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,22 +125,6 @@
               <h3 class="font-semibold text-gray-800">Technical Guide</h3>
               <p class="text-sm text-gray-500 mt-1">DDD calculations, AWaRe classification, database schema</p>
               <span class="inline-block mt-2 text-xs font-medium text-slate-600">REFERENCE DOC</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Logo Assets -->
-        <a href="AbXInsight_Logo_Final.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
-          <div class="flex items-start gap-4">
-            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-              <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-gray-800">Logo Assets</h3>
-              <p class="text-sm text-gray-500 mt-1">All logo versions, icons, brand guidelines</p>
-              <span class="inline-block mt-2 text-xs font-medium text-purple-600">BRAND ASSETS</span>
             </div>
           </div>
         </a>
@@ -151,7 +143,7 @@
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- Marketing Landing -->
-        <a href="AbXInsight_Marketing_Landing.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
+        <a href="AbXInsight_Marketing_Landing_Page.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,7 +163,7 @@
         </a>
 
         <!-- Login & Registration -->
-        <a href="AbXInsight_Login_Registration.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
+        <a href="AbXInsight_Login_Registration_Flow.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -202,7 +194,7 @@
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- Hospital Home -->
-        <a href="AbXInsight_Hospital_Home.html" class="card-hover block bg-white rounded-xl border-2 border-teal-200 p-5">
+        <a href="AbXInsight_Hospital_Home_Landing.html" class="card-hover block bg-white rounded-xl border-2 border-teal-200 p-5">
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 bg-teal-500 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -221,7 +213,7 @@
         </a>
 
         <!-- Hospital Dashboard -->
-        <a href="AbXInsight_Hospital_Dashboard.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
+        <a href="AbXInsight_Hospital_Dashboard_Mockup.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -230,7 +222,7 @@
             </div>
             <div>
               <h3 class="font-semibold text-gray-800">Hospital Dashboard</h3>
-              <p class="text-sm text-gray-500 mt-1">Antibiotic use metrics, AWaRe charts, trends</p>
+              <p class="text-sm text-gray-500 mt-1">AMC metrics, AWaRe charts, trends</p>
               <div class="flex gap-2 mt-2">
                 <span class="text-xs font-medium text-green-600">BUILD PAGE</span>
                 <span class="text-xs text-gray-400">/hospital/dashboard</span>
@@ -240,7 +232,7 @@
         </a>
 
         <!-- Data Entry -->
-        <a href="AbXInsight_Data_Entry.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
+        <a href="AbXInsight_Data_Entry_Mockups.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -259,7 +251,7 @@
         </a>
 
         <!-- User Management -->
-        <a href="AbXInsight_User_Management.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
+        <a href="AbXInsight_Account_User_Management.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -290,7 +282,7 @@
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- Country Dashboard -->
-        <a href="AbXInsight_Country_Dashboard.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
+        <a href="AbXInsight_National_Dashboard_Mockup.html" class="card-hover block bg-white rounded-xl border border-gray-200 p-5">
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -301,12 +293,31 @@
               <h3 class="font-semibold text-gray-800">Country Dashboard</h3>
               <p class="text-sm text-gray-500 mt-1">National surveillance, DID metrics, facility overview</p>
               <div class="flex gap-2 mt-2">
-                <span class="text-xs font-medium text-green-600">BUILD PAGE</span>
+                <span class="text-xs font-medium text-orange-600">NEEDS UPDATE</span>
                 <span class="text-xs text-gray-400">/country/dashboard</span>
               </div>
             </div>
           </div>
         </a>
+
+        <!-- Placeholder for Country Home -->
+        <div class="bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 p-5">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-400">Country Home</h3>
+              <p class="text-sm text-gray-400 mt-1">To be created (similar to Hospital Home)</p>
+              <div class="flex gap-2 mt-2">
+                <span class="text-xs font-medium text-gray-400">TODO</span>
+                <span class="text-xs text-gray-400">/country/home</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -314,7 +325,7 @@
     <section class="mb-12">
       <div class="bg-white rounded-xl border border-gray-200 p-6">
         <h2 class="text-lg font-bold text-gray-800 mb-4">📋 Quick Reference</h2>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <h3 class="font-semibold text-gray-700 mb-2">Pricing</h3>
             <table class="w-full text-sm">
@@ -337,29 +348,25 @@
             <div class="space-y-2">
               <div class="flex items-center gap-2">
                 <span class="w-4 h-4 bg-teal-600 rounded"></span>
-                <span class="text-sm text-gray-600">Teal: #0D9488</span>
+                <span class="text-sm text-gray-600">Hospital: #0D9488</span>
               </div>
               <div class="flex items-center gap-2">
                 <span class="w-4 h-4 bg-purple-600 rounded"></span>
-                <span class="text-sm text-gray-600">Purple: #7C3AED</span>
+                <span class="text-sm text-gray-600">Country: #7C3AED</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-4 h-4 bg-gray-500 rounded"></span>
+                <span class="text-sm text-gray-600">Basic: #64748B</span>
               </div>
             </div>
           </div>
           <div>
             <h3 class="font-semibold text-gray-700 mb-2">Key Terminology</h3>
             <ul class="text-sm text-gray-600 space-y-1">
-              <li>✓ "Antibiotic Use Tracking"</li>
               <li>✓ "Country Monitoring" (not National)</li>
               <li>✓ Routes: /country/* (not /national/*)</li>
+              <li>✓ Prices in USD per year</li>
             </ul>
-          </div>
-          <div>
-            <h3 class="font-semibold text-gray-700 mb-2">Brand Name</h3>
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-xl font-bold"><span class="text-teal-600">AbX</span><span class="text-purple-600">Insight</span></span>
-            </div>
-            <p class="text-xs text-gray-500">Capital I in "Insight"</p>
-            <p class="text-xs text-gray-500 mt-1">Tagline: Track Antibiotic Use. Combat AMR.</p>
           </div>
         </div>
       </div>
@@ -371,29 +378,20 @@
   <footer class="bg-gray-800 text-white py-8 px-6">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <svg width="40" height="40" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="64" height="64" rx="14" fill="url(#footerGrad)"/>
-          <g transform="rotate(-45, 32, 32)">
-            <rect x="24" y="14" width="16" height="36" rx="8" fill="white"/>
-          </g>
-          <g transform="rotate(45, 32, 32)">
-            <rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/>
-          </g>
-          <defs>
-            <linearGradient id="footerGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#0D9488"/>
-              <stop offset="1" stop-color="#7C3AED"/>
-            </linearGradient>
-          </defs>
-        </svg>
+        <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
+              <rect width="64" height="64" rx="14" fill="url(#abxLogo3)"/>
+              <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g>
+              <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g>
+              <defs><linearGradient id="abxLogo3" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
+            </svg>
         <div>
           <p class="font-semibold">AbXInsight Design System</p>
           <p class="text-sm text-gray-400">For Quickfox Development Team</p>
         </div>
       </div>
       <div class="text-sm text-gray-400 text-center md:text-right">
-        <p>Version 2.0 • January 2026</p>
-        <p>11 Pages • All mockups are interactive HTML</p>
+        <p>Version 1.0 • January 2026</p>
+        <p>10 Pages • All mockups are interactive HTML</p>
       </div>
     </div>
   </footer>

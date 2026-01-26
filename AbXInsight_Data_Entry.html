@@ -6,293 +6,1672 @@
   <title>AbXInsight - Data Entry Mockups</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     body { font-family: 'Inter', sans-serif; }
-    .screen-label { background: #1E293B; color: white; padding: 8px 16px; font-size: 12px; font-weight: 600; }
+    .screen-container {
+      border: 2px solid #E5E7EB;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .screen-label {
+      background: #1E293B;
+      color: white;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .drag-zone {
+      border: 2px dashed #CBD5E1;
+      transition: all 0.2s ease;
+    }
+    .drag-zone:hover {
+      border-color: #0D9488;
+      background: #F0FDFA;
+    }
+    .tier-badge { font-size: 10px; padding: 2px 8px; border-radius: 9999px; font-weight: 600; }
+    .basic-badge { background: #64748B; color: white; }
+    .pro-badge { background: #0D9488; color: white; }
+    .status-pending { background: #FEF3C7; color: #92400E; }
+    .status-validated { background: #D1FAE5; color: #065F46; }
+    .status-rejected { background: #FEE2E2; color: #991B1B; }
+    .aware-access { background: #D1FAE5; color: #065F46; }
+    .aware-watch { background: #FEF3C7; color: #92400E; }
+    .aware-reserve { background: #FEE2E2; color: #991B1B; }
+    .input-focus:focus {
+      outline: none;
+      border-color: #0D9488;
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+    }
+    .autocomplete-item:hover {
+      background: #F0FDFA;
+    }
+    .tab-active {
+      border-bottom: 2px solid #0D9488;
+      color: #0D9488;
+    }
   </style>
 </head>
 <body class="bg-gray-200 min-h-screen p-8">
-
+  
   <!-- Header -->
   <div class="max-w-7xl mx-auto mb-8">
-    <div class="flex items-center gap-4 mb-4">
-      <svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="url(#hG)"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g><defs><linearGradient id="hG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
-      <div>
-        <h1 class="text-3xl font-bold text-gray-800">Data Entry Mockups</h1>
-        <p class="text-gray-600">All data entry screens for antibiotic use tracking</p>
-      </div>
+    <h1 class="text-3xl font-bold text-gray-800">AbXInsight - Data Entry Mockups</h1>
+    <p class="text-gray-600 mt-2">Efficient data entry workflows for hospital consumption monitoring</p>
+    <div class="flex gap-4 mt-4">
+      <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">UI/UX Guide</span>
+      <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">Quickfox Design Team</span>
     </div>
   </div>
 
-  <!-- SCREEN 1: Data Entry Hub -->
-  <div class="max-w-7xl mx-auto mb-10">
-    <div class="border-2 border-gray-300 rounded-xl overflow-hidden">
-      <div class="screen-label flex justify-between">
-        <span>SCREEN 1: Data Entry Hub</span>
-        <span class="text-gray-400">Route: /hospital/data-entry</span>
+  <!-- ==================== SCREEN 1: Data Entry Hub ==================== -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="screen-container">
+      <div class="screen-label flex items-center justify-between">
+        <span>SCREEN 1: Data Entry Hub (Choose Entry Method)</span>
+        <span class="text-gray-400 font-normal">Route: /data-entry</span>
       </div>
-      <div class="bg-white p-8">
-        <h2 class="text-xl font-bold text-gray-800 mb-2">Add Antibiotic Use Data</h2>
-        <p class="text-gray-600 mb-6">Choose how you want to enter your data</p>
-        
-        <div class="grid grid-cols-3 gap-6">
-          <!-- Quick Entry -->
-          <div class="border-2 border-teal-500 rounded-xl p-6 cursor-pointer hover:shadow-lg transition">
-            <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
-              <svg class="w-7 h-7 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+      
+      <div class="bg-gray-50">
+        <!-- Mini Header -->
+        <div class="bg-white border-b px-6 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="flex items-center gap-2">
+                <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+              <rect width="64" height="64" rx="14" fill="url(#abxLogo20)"/>
+              <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g>
+              <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g>
+              <defs><linearGradient id="abxLogo20" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
+            </svg>
+                <span class="font-semibold text-gray-800">AbXInsight</span>
+              </div>
+              <span class="text-gray-300">|</span>
+              <span class="text-sm text-gray-600">Central General Hospital</span>
             </div>
-            <h3 class="font-semibold text-gray-800 mb-2">Quick Entry</h3>
-            <p class="text-sm text-gray-500">Manually enter individual antibiotic records</p>
+            <div class="flex items-center gap-3">
+              <span class="text-sm text-gray-500">Dr. Khamla S.</span>
+              <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                <span class="text-purple-600 font-medium text-sm">DK</span>
+              </div>
+            </div>
           </div>
-          
-          <!-- File Upload -->
-          <div class="border rounded-xl p-6 cursor-pointer hover:shadow-lg transition">
-            <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
-              <svg class="w-7 h-7 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+        </div>
+
+        <!-- Main Content -->
+        <div class="p-8">
+          <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-8">
+              <h1 class="text-2xl font-bold text-gray-800">Add Consumption Data</h1>
+              <p class="text-gray-500 mt-2">Choose how you'd like to enter your antimicrobial consumption data</p>
             </div>
-            <h3 class="font-semibold text-gray-800 mb-2">Upload File</h3>
-            <p class="text-sm text-gray-500">Import data from Excel, CSV, or pharmacy exports</p>
-          </div>
-          
-          <!-- AI Extract (PRO) -->
-          <div class="border rounded-xl p-6 cursor-pointer hover:shadow-lg transition relative">
-            <span class="absolute top-3 right-3 px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs font-medium">PRO</span>
-            <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-              <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+
+            <div class="grid grid-cols-3 gap-6">
+              <!-- Option 1: File Upload -->
+              <div class="bg-white rounded-xl p-6 border-2 border-gray-200 hover:border-teal-500 hover:shadow-lg transition-all cursor-pointer group">
+                <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-teal-500 transition-colors">
+                  <svg class="w-7 h-7 text-teal-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                  </svg>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-2">Upload File</h3>
+                <p class="text-sm text-gray-500 mb-4">Import data from Excel, CSV, or pharmacy system export</p>
+                <div class="flex items-center gap-2 text-xs text-gray-400">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                  <span>Fastest for bulk data</span>
+                </div>
+              </div>
+
+              <!-- Option 2: Quick Entry -->
+              <div class="bg-white rounded-xl p-6 border-2 border-teal-500 shadow-lg cursor-pointer group relative">
+                <div class="absolute -top-2 -right-2 px-2 py-1 bg-teal-500 text-white text-xs font-medium rounded-full">Recommended</div>
+                <div class="w-14 h-14 bg-teal-500 rounded-xl flex items-center justify-center mb-4">
+                  <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-2">Quick Entry</h3>
+                <p class="text-sm text-gray-500 mb-4">Fast form with smart autocomplete and ATC lookup</p>
+                <div class="flex items-center gap-2 text-xs text-teal-600">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path></svg>
+                  <span>Best for daily updates</span>
+                </div>
+              </div>
+
+              <!-- Option 3: Manual Entry -->
+              <div class="bg-white rounded-xl p-6 border-2 border-gray-200 hover:border-teal-500 hover:shadow-lg transition-all cursor-pointer group">
+                <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-teal-500 transition-colors">
+                  <svg class="w-7 h-7 text-gray-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                  </svg>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-2">Detailed Form</h3>
+                <p class="text-sm text-gray-500 mb-4">Full form with all fields for complex products</p>
+                <div class="flex items-center gap-2 text-xs text-gray-400">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                  <span>Most complete</span>
+                </div>
+              </div>
             </div>
-            <h3 class="font-semibold text-gray-800 mb-2">AI Data Extraction</h3>
-            <p class="text-sm text-gray-500">Auto-extract data from any document format</p>
-            <span class="inline-block mt-2 px-2 py-1 bg-amber-50 text-amber-600 rounded text-xs">EXPERIMENTAL</span>
+
+            <!-- Recent Activity -->
+            <div class="mt-10 bg-white rounded-xl p-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-semibold text-gray-800">Recent Entries</h3>
+                <a href="#" class="text-sm text-teal-600 hover:underline">View all →</a>
+              </div>
+              <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                      <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <div>
+                      <p class="text-sm font-medium text-gray-800">January 2025 - ICU Ward</p>
+                      <p class="text-xs text-gray-500">42 products • 1,245 DDDs</p>
+                    </div>
+                  </div>
+                  <span class="px-2 py-1 text-xs font-medium status-validated rounded-full">Validated</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">
+                      <svg class="w-4 h-4 text-amber-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <div>
+                      <p class="text-sm font-medium text-gray-800">January 2025 - Surgery Ward</p>
+                      <p class="text-xs text-gray-500">38 products • 987 DDDs</p>
+                    </div>
+                  </div>
+                  <span class="px-2 py-1 text-xs font-medium status-pending rounded-full">Pending Review</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SCREEN 2: Quick Entry Form -->
-  <div class="max-w-7xl mx-auto mb-10">
-    <div class="border-2 border-gray-300 rounded-xl overflow-hidden">
-      <div class="screen-label flex justify-between">
-        <span>SCREEN 2: Quick Entry Form</span>
-        <span class="text-gray-400">Route: /hospital/data-entry/quick</span>
+  <!-- ==================== SCREEN 2: File Upload ==================== -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="screen-container">
+      <div class="screen-label flex items-center justify-between">
+        <span>SCREEN 2: File Upload Flow</span>
+        <span class="text-gray-400 font-normal">Route: /data-entry/upload</span>
       </div>
+      
       <div class="bg-white p-8">
-        <div class="flex items-center gap-3 mb-6">
-          <button class="text-teal-600">← Back</button>
-          <h2 class="text-xl font-bold text-gray-800">Quick Entry</h2>
-        </div>
-        
-        <form class="max-w-2xl space-y-5">
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Period</label>
-              <input type="month" value="2026-01" class="w-full px-4 py-3 border rounded-lg">
+        <div class="max-w-3xl mx-auto">
+          <!-- Progress Steps -->
+          <div class="flex items-center justify-between mb-10">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-teal-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+              <span class="font-medium text-teal-600">Upload</span>
             </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Ward / Department</label>
-              <select class="w-full px-4 py-3 border rounded-lg">
-                <option>All Wards (Hospital Total)</option>
-                <option>ICU</option>
-                <option>Surgery</option>
-                <option>Medicine</option>
-              </select>
+            <div class="flex-1 h-1 bg-gray-200 mx-4"></div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold">2</div>
+              <span class="text-gray-400">Map Columns</span>
+            </div>
+            <div class="flex-1 h-1 bg-gray-200 mx-4"></div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold">3</div>
+              <span class="text-gray-400">Review</span>
+            </div>
+            <div class="flex-1 h-1 bg-gray-200 mx-4"></div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold">4</div>
+              <span class="text-gray-400">Submit</span>
             </div>
           </div>
-          
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Antibiotic Product</label>
-            <select class="w-full px-4 py-3 border rounded-lg">
-              <option>Select from catalogue...</option>
-              <option>Amoxicillin 500mg Capsules</option>
-              <option>Amoxicillin 250mg/5ml Suspension</option>
-              <option>Ampicillin 500mg Vial</option>
+
+          <!-- Upload Zone -->
+          <div class="drag-zone rounded-xl p-12 text-center cursor-pointer">
+            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+              </svg>
+            </div>
+            <p class="text-lg font-medium text-gray-700 mb-2">Drop your file here or click to browse</p>
+            <p class="text-sm text-gray-500 mb-4">Supports Excel (.xlsx), CSV, or pharmacy system exports</p>
+            <button class="px-6 py-2 bg-teal-600 text-white rounded-lg font-medium hover:bg-teal-700">
+              Select File
+            </button>
+          </div>
+
+          <!-- Template Download -->
+          <div class="mt-6 p-4 bg-blue-50 rounded-xl flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="font-medium text-blue-800">Need a template?</p>
+                <p class="text-sm text-blue-600">Download our Excel template with all required columns</p>
+              </div>
+            </div>
+            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+              Download Template
+            </button>
+          </div>
+
+          <!-- Accepted Formats -->
+          <div class="mt-6 grid grid-cols-3 gap-4">
+            <div class="p-4 bg-gray-50 rounded-lg text-center">
+              <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                <span class="text-green-600 font-bold text-xs">XLS</span>
+              </div>
+              <p class="text-sm font-medium text-gray-700">Excel</p>
+              <p class="text-xs text-gray-500">.xlsx, .xls</p>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg text-center">
+              <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                <span class="text-blue-600 font-bold text-xs">CSV</span>
+              </div>
+              <p class="text-sm font-medium text-gray-700">CSV</p>
+              <p class="text-xs text-gray-500">.csv</p>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg text-center">
+              <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                <span class="text-purple-600 font-bold text-xs">RX</span>
+              </div>
+              <p class="text-sm font-medium text-gray-700">Pharmacy Export</p>
+              <p class="text-xs text-gray-500">System-specific</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 3: Quick Entry Form ==================== -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="screen-container">
+      <div class="screen-label flex items-center justify-between">
+        <span>SCREEN 3: Quick Entry Form (Smart Autocomplete)</span>
+        <span class="text-gray-400 font-normal">Route: /data-entry/quick</span>
+      </div>
+      
+      <div class="bg-gray-50">
+        <!-- Context Bar -->
+        <div class="bg-white border-b px-6 py-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <a href="#" class="text-gray-400 hover:text-gray-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+              </a>
+              <h1 class="text-lg font-semibold text-gray-800">Quick Entry</h1>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="flex items-center gap-2">
+                <span class="text-sm text-gray-500">Period:</span>
+                <select class="px-3 py-1.5 border rounded-lg text-sm bg-white">
+                  <option>January 2025</option>
+                  <option>December 2024</option>
+                </select>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-sm text-gray-500">Ward:</span>
+                <select class="px-3 py-1.5 border rounded-lg text-sm bg-white">
+                  <option>ICU</option>
+                  <option>Surgery</option>
+                  <option>Medicine</option>
+                  <option>Pediatrics</option>
+                  <option>All Wards (Hospital Total)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry Form -->
+        <div class="p-6">
+          <div class="max-w-4xl mx-auto">
+            
+            <!-- Smart Search Box -->
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Search Antimicrobial</label>
+              <div class="relative">
+                <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
+                  <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                  </svg>
+                </div>
+                <input type="text" 
+                       placeholder="Search by ID, generic name, brand name, or ATC code..." 
+                       value="amox"
+                       class="w-full pl-12 pr-4 py-4 text-lg border-2 border-teal-500 rounded-xl input-focus">
+                
+                <!-- Autocomplete Dropdown -->
+                <div class="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border z-10">
+                  <div class="p-2 border-b bg-gray-50 rounded-t-xl flex items-center justify-between">
+                    <p class="text-xs text-gray-500 font-medium">MATCHING PRODUCTS</p>
+                    <div class="flex gap-2 text-xs">
+                      <span class="px-2 py-0.5 bg-teal-100 text-teal-700 rounded">ID</span>
+                      <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded">Generic</span>
+                      <span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded">Brand</span>
+                      <span class="px-2 py-0.5 bg-gray-200 text-gray-600 rounded">ATC</span>
+                    </div>
+                  </div>
+                  <div class="max-h-80 overflow-y-auto">
+                    <!-- Result 1: Matched on Generic Name -->
+                    <div class="p-3 autocomplete-item cursor-pointer border-b border-l-4 border-l-teal-500 bg-teal-50">
+                      <div class="flex items-center justify-between">
+                        <div class="flex-1">
+                          <div class="flex items-center gap-2 mb-1">
+                            <span class="px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded text-xs font-mono">PRD-00142</span>
+                            <span class="text-xs text-gray-400">•</span>
+                            <span class="px-1.5 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">J01CA04</span>
+                          </div>
+                          <p class="font-medium text-gray-800"><span class="bg-yellow-200 text-yellow-800 px-0.5 rounded">Amox</span>icillin 500mg Capsules</p>
+                          <div class="flex items-center gap-2 mt-1">
+                            <span class="text-xs text-purple-600 font-medium">Amoxil®</span>
+                            <span class="text-xs text-gray-400">by GSK</span>
+                            <span class="text-xs text-gray-400">•</span>
+                            <span class="text-xs text-gray-500">Oral • Pack of 100</span>
+                          </div>
+                        </div>
+                        <div class="text-right ml-4">
+                          <span class="px-2 py-1 text-xs font-medium aware-access rounded-full">Access</span>
+                          <p class="text-xs text-gray-400 mt-1">DDD: 1.5g</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Result 2: Different brand, same generic -->
+                    <div class="p-3 autocomplete-item cursor-pointer border-b">
+                      <div class="flex items-center justify-between">
+                        <div class="flex-1">
+                          <div class="flex items-center gap-2 mb-1">
+                            <span class="px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded text-xs font-mono">PRD-00143</span>
+                            <span class="text-xs text-gray-400">•</span>
+                            <span class="px-1.5 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">J01CA04</span>
+                          </div>
+                          <p class="font-medium text-gray-800"><span class="bg-yellow-200 text-yellow-800 px-0.5 rounded">Amox</span>icillin 500mg Capsules</p>
+                          <div class="flex items-center gap-2 mt-1">
+                            <span class="text-xs text-purple-600 font-medium">Trimox®</span>
+                            <span class="text-xs text-gray-400">by Sandoz</span>
+                            <span class="text-xs text-gray-400">•</span>
+                            <span class="text-xs text-gray-500">Oral • Pack of 50</span>
+                          </div>
+                        </div>
+                        <div class="text-right ml-4">
+                          <span class="px-2 py-1 text-xs font-medium aware-access rounded-full">Access</span>
+                          <p class="text-xs text-gray-400 mt-1">DDD: 1.5g</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Result 3: Amoxicillin IV -->
+                    <div class="p-3 autocomplete-item cursor-pointer border-b">
+                      <div class="flex items-center justify-between">
+                        <div class="flex-1">
+                          <div class="flex items-center gap-2 mb-1">
+                            <span class="px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded text-xs font-mono">PRD-00144</span>
+                            <span class="text-xs text-gray-400">•</span>
+                            <span class="px-1.5 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">J01CA04</span>
+                          </div>
+                          <p class="font-medium text-gray-800"><span class="bg-yellow-200 text-yellow-800 px-0.5 rounded">Amox</span>icillin 1g Injection</p>
+                          <div class="flex items-center gap-2 mt-1">
+                            <span class="text-xs text-purple-600 font-medium">Amoxil® IV</span>
+                            <span class="text-xs text-gray-400">by GSK</span>
+                            <span class="text-xs text-gray-400">•</span>
+                            <span class="text-xs text-gray-500">Parenteral • Pack of 10</span>
+                          </div>
+                        </div>
+                        <div class="text-right ml-4">
+                          <span class="px-2 py-1 text-xs font-medium aware-access rounded-full">Access</span>
+                          <p class="text-xs text-gray-400 mt-1">DDD: 3g</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Result 4: Combination product -->
+                    <div class="p-3 autocomplete-item cursor-pointer border-b">
+                      <div class="flex items-center justify-between">
+                        <div class="flex-1">
+                          <div class="flex items-center gap-2 mb-1">
+                            <span class="px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded text-xs font-mono">PRD-00156</span>
+                            <span class="text-xs text-gray-400">•</span>
+                            <span class="px-1.5 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">J01CR02</span>
+                          </div>
+                          <p class="font-medium text-gray-800"><span class="bg-yellow-200 text-yellow-800 px-0.5 rounded">Amox</span>icillin + Clavulanic acid 625mg</p>
+                          <div class="flex items-center gap-2 mt-1">
+                            <span class="text-xs text-purple-600 font-medium">Augmentin®</span>
+                            <span class="text-xs text-gray-400">by GSK</span>
+                            <span class="text-xs text-gray-400">•</span>
+                            <span class="text-xs text-gray-500">Oral • Pack of 14</span>
+                          </div>
+                        </div>
+                        <div class="text-right ml-4">
+                          <span class="px-2 py-1 text-xs font-medium aware-access rounded-full">Access</span>
+                          <p class="text-xs text-gray-400 mt-1">DDD: 1.5g</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Result 5: Local brand -->
+                    <div class="p-3 autocomplete-item cursor-pointer">
+                      <div class="flex items-center justify-between">
+                        <div class="flex-1">
+                          <div class="flex items-center gap-2 mb-1">
+                            <span class="px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded text-xs font-mono">PRD-00289</span>
+                            <span class="text-xs text-gray-400">•</span>
+                            <span class="px-1.5 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">J01CA04</span>
+                          </div>
+                          <p class="font-medium text-gray-800"><span class="bg-yellow-200 text-yellow-800 px-0.5 rounded">Amox</span>icillin 250mg Suspension</p>
+                          <div class="flex items-center gap-2 mt-1">
+                            <span class="text-xs text-purple-600 font-medium">Lamoxy®</span>
+                            <span class="text-xs text-gray-400">by Lao Pharma</span>
+                            <span class="text-xs text-gray-400">•</span>
+                            <span class="text-xs text-gray-500">Oral • 100ml bottle</span>
+                            <span class="px-1.5 py-0.5 bg-pink-100 text-pink-600 rounded text-xs">Pediatric</span>
+                          </div>
+                        </div>
+                        <div class="text-right ml-4">
+                          <span class="px-2 py-1 text-xs font-medium aware-access rounded-full">Access</span>
+                          <p class="text-xs text-gray-400 mt-1">DDD: 1.5g</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-2 border-t bg-gray-50 rounded-b-xl flex items-center justify-between">
+                    <p class="text-xs text-gray-500">
+                      <span class="font-medium">5 results</span> • Press ↵ to select • ↑↓ to navigate
+                    </p>
+                    <a href="#" class="text-xs text-teal-600 hover:underline">+ Add new product to catalog</a>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-3 flex items-center gap-4 text-xs text-gray-500">
+                <span class="flex items-center gap-1">
+                  <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                  Search by: Product ID (PRD-xxxxx), Generic name, Brand name, or ATC code
+                </span>
+              </div>
+            </div>
+
+            <!-- Selected Product Details -->
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-6 border-2 border-teal-100">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded text-xs font-mono">PRD-00142</span>
+                      <span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">J01CA04</span>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mt-1">Amoxicillin 500mg Capsules</h3>
+                    <div class="flex items-center gap-2 mt-0.5">
+                      <span class="text-sm text-purple-600 font-medium">Amoxil®</span>
+                      <span class="text-xs text-gray-400">by GSK</span>
+                      <span class="text-xs text-gray-400">•</span>
+                      <span class="text-xs text-gray-500">Beta-lactam antibacterial, Penicillin</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="px-3 py-1 text-sm font-medium aware-access rounded-full">Access</span>
+                  <p class="text-xs text-gray-400 mt-1">Auto-filled from catalog</p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-4 gap-4">
+                <!-- Route -->
+                <div>
+                  <label class="block text-xs font-medium text-gray-500 mb-1">Route *</label>
+                  <select class="w-full px-3 py-2 border rounded-lg text-sm bg-gray-50 input-focus" disabled>
+                    <option selected>Oral</option>
+                  </select>
+                  <p class="text-xs text-teal-600 mt-1 font-medium">DDD: 1.5 g</p>
+                </div>
+
+                <!-- Strength (Pre-filled from catalog) -->
+                <div>
+                  <label class="block text-xs font-medium text-gray-500 mb-1">Strength</label>
+                  <div class="flex gap-2">
+                    <input type="number" value="500" class="w-full px-3 py-2 border rounded-lg text-sm bg-gray-50" disabled>
+                    <span class="px-3 py-2 border rounded-lg text-sm bg-gray-50 text-gray-500">mg</span>
+                  </div>
+                  <p class="text-xs text-gray-400 mt-1">From catalog</p>
+                </div>
+
+                <!-- Packsize (Pre-filled from catalog) -->
+                <div>
+                  <label class="block text-xs font-medium text-gray-500 mb-1">Pack Size</label>
+                  <input type="number" value="100" class="w-full px-3 py-2 border rounded-lg text-sm bg-gray-50" disabled>
+                  <p class="text-xs text-gray-400 mt-1">100 caps/pack</p>
+                </div>
+
+                <!-- Quantity - User input -->
+                <div>
+                  <label class="block text-xs font-medium text-gray-500 mb-1">Quantity (Packs) *</label>
+                  <input type="number" value="50" placeholder="Enter quantity" class="w-full px-3 py-2 border-2 border-teal-500 rounded-lg text-sm input-focus font-medium bg-white">
+                  <p class="text-xs text-teal-600 mt-1">← Enter this</p>
+                </div>
+              </div>
+
+              <!-- Calculated DDD Preview -->
+              <div class="mt-4 p-3 bg-teal-50 rounded-lg flex items-center justify-between">
+                <div class="flex items-center gap-4 text-sm">
+                  <div>
+                    <span class="text-gray-500">Total units:</span>
+                    <span class="font-medium text-gray-700 ml-1">5,000</span>
+                  </div>
+                  <span class="text-gray-300">→</span>
+                  <div>
+                    <span class="text-gray-500">Total grams:</span>
+                    <span class="font-medium text-gray-700 ml-1">2,500 g</span>
+                  </div>
+                  <span class="text-gray-300">→</span>
+                  <div>
+                    <span class="text-gray-500">Calculated DDDs:</span>
+                    <span class="font-bold text-teal-600 text-lg ml-1">1,666.67</span>
+                  </div>
+                </div>
+                <button class="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium hover:bg-teal-700 flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                  </svg>
+                  Add Entry
+                </button>
+              </div>
+            </div>
+
+            <!-- Current Session Entries -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+              <div class="p-4 border-b flex items-center justify-between">
+                <div>
+                  <h3 class="font-semibold text-gray-800">Current Session</h3>
+                  <p class="text-xs text-gray-500">ICU • January 2025</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-sm text-gray-500">4 entries • 1,891.67 DDDs</span>
+                  <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-200">
+                    Save Draft
+                  </button>
+                  <button class="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium hover:bg-teal-700">
+                    Submit for Review
+                  </button>
+                </div>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th class="text-left py-3 px-4 font-medium text-gray-600">ID</th>
+                      <th class="text-left py-3 px-4 font-medium text-gray-600">Product</th>
+                      <th class="text-left py-3 px-4 font-medium text-gray-600">Brand</th>
+                      <th class="text-left py-3 px-4 font-medium text-gray-600">ATC</th>
+                      <th class="text-left py-3 px-4 font-medium text-gray-600">Route</th>
+                      <th class="text-right py-3 px-4 font-medium text-gray-600">Qty</th>
+                      <th class="text-right py-3 px-4 font-medium text-gray-600">DDDs</th>
+                      <th class="text-center py-3 px-4 font-medium text-gray-600">AWaRe</th>
+                      <th class="text-center py-3 px-4 font-medium text-gray-600"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b hover:bg-gray-50">
+                      <td class="py-3 px-4 font-mono text-xs text-gray-500">PRD-00201</td>
+                      <td class="py-3 px-4 font-medium">Ceftriaxone 1g Inj</td>
+                      <td class="py-3 px-4 text-purple-600 text-sm">Rocephin®</td>
+                      <td class="py-3 px-4 text-gray-500">J01DD04</td>
+                      <td class="py-3 px-4">Parenteral</td>
+                      <td class="py-3 px-4 text-right">200 vials</td>
+                      <td class="py-3 px-4 text-right font-medium">100.00</td>
+                      <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 text-xs font-medium aware-watch rounded-full">Watch</span></td>
+                      <td class="py-3 px-4 text-center">
+                        <button class="text-gray-400 hover:text-red-500">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                      <td class="py-3 px-4 font-mono text-xs text-gray-500">PRD-00089</td>
+                      <td class="py-3 px-4 font-medium">Metronidazole 500mg Tab</td>
+                      <td class="py-3 px-4 text-purple-600 text-sm">Flagyl®</td>
+                      <td class="py-3 px-4 text-gray-500">J01XD01</td>
+                      <td class="py-3 px-4">Oral</td>
+                      <td class="py-3 px-4 text-right">300 tabs</td>
+                      <td class="py-3 px-4 text-right font-medium">100.00</td>
+                      <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 text-xs font-medium aware-access rounded-full">Access</span></td>
+                      <td class="py-3 px-4 text-center">
+                        <button class="text-gray-400 hover:text-red-500">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                      <td class="py-3 px-4 font-mono text-xs text-gray-500">PRD-00312</td>
+                      <td class="py-3 px-4 font-medium">Vancomycin 1g Inj</td>
+                      <td class="py-3 px-4 text-purple-600 text-sm">Vancocin®</td>
+                      <td class="py-3 px-4 text-gray-500">J01XA01</td>
+                      <td class="py-3 px-4">Parenteral</td>
+                      <td class="py-3 px-4 text-right">50 vials</td>
+                      <td class="py-3 px-4 text-right font-medium">25.00</td>
+                      <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 text-xs font-medium aware-reserve rounded-full">Reserve</span></td>
+                      <td class="py-3 px-4 text-center">
+                        <button class="text-gray-400 hover:text-red-500">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50 bg-teal-50">
+                      <td class="py-3 px-4 font-mono text-xs text-gray-500">PRD-00142</td>
+                      <td class="py-3 px-4 font-medium">Amoxicillin 500mg Caps</td>
+                      <td class="py-3 px-4 text-purple-600 text-sm">Amoxil®</td>
+                      <td class="py-3 px-4 text-gray-500">J01CA04</td>
+                      <td class="py-3 px-4">Oral</td>
+                      <td class="py-3 px-4 text-right">5,000 caps</td>
+                      <td class="py-3 px-4 text-right font-medium">1,666.67</td>
+                      <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 text-xs font-medium aware-access rounded-full">Access</span></td>
+                      <td class="py-3 px-4 text-center">
+                        <button class="text-gray-400 hover:text-red-500">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfoot class="bg-gray-100">
+                    <tr>
+                      <td colspan="6" class="py-3 px-4 font-semibold text-gray-700">Session Total</td>
+                      <td class="py-3 px-4 text-right font-bold text-teal-600">1,891.67</td>
+                      <td colspan="2"></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 4: Validation Queue ==================== -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="screen-container">
+      <div class="screen-label flex items-center justify-between">
+        <span>SCREEN 4: Validation Queue (Data Manager View)</span>
+        <span class="text-gray-400 font-normal">Route: /data-entry/validation</span>
+      </div>
+      
+      <div class="bg-gray-50">
+        <!-- Tabs -->
+        <div class="bg-white border-b px-6">
+          <div class="flex gap-6">
+            <button class="py-4 px-2 text-sm font-medium tab-active">
+              Pending Review
+              <span class="ml-2 px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-xs">3</span>
+            </button>
+            <button class="py-4 px-2 text-sm font-medium text-gray-500 hover:text-gray-700">
+              Validated
+              <span class="ml-2 px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs">24</span>
+            </button>
+            <button class="py-4 px-2 text-sm font-medium text-gray-500 hover:text-gray-700">
+              Rejected
+              <span class="ml-2 px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs">2</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="p-6">
+          <div class="space-y-4">
+            <!-- Pending Item 1 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden border-l-4 border-l-amber-500">
+              <div class="p-4">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                      <span class="text-blue-600 font-medium text-sm">BV</span>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-gray-800">January 2025 - Surgery Ward</p>
+                      <p class="text-xs text-gray-500">Submitted by Bounmy V. • 2 hours ago</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <span class="px-2 py-1 text-xs font-medium status-pending rounded-full">Pending Review</span>
+                    <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-200">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="grid grid-cols-5 gap-4 p-3 bg-gray-50 rounded-lg text-sm">
+                  <div>
+                    <p class="text-gray-500 text-xs">Products</p>
+                    <p class="font-semibold">38</p>
+                  </div>
+                  <div>
+                    <p class="text-gray-500 text-xs">Total DDDs</p>
+                    <p class="font-semibold">987.5</p>
+                  </div>
+                  <div>
+                    <p class="text-gray-500 text-xs">Access %</p>
+                    <p class="font-semibold text-green-600">62%</p>
+                  </div>
+                  <div>
+                    <p class="text-gray-500 text-xs">Watch %</p>
+                    <p class="font-semibold text-amber-600">34%</p>
+                  </div>
+                  <div>
+                    <p class="text-gray-500 text-xs">Reserve %</p>
+                    <p class="font-semibold text-red-600">4%</p>
+                  </div>
+                </div>
+
+                <!-- Validation Warnings -->
+                <div class="mt-3 p-3 bg-amber-50 rounded-lg">
+                  <div class="flex items-center gap-2 text-amber-700 text-sm">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                    <span class="font-medium">1 validation warning:</span>
+                    <span>Meropenem quantity unusually high (200 vials) — please verify</span>
+                  </div>
+                </div>
+
+                <div class="mt-4 flex items-center justify-end gap-3">
+                  <button class="px-4 py-2 border border-red-300 text-red-600 rounded-lg text-sm font-medium hover:bg-red-50 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    Reject with Feedback
+                  </button>
+                  <button class="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Validate & Approve
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pending Item 2 -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden border-l-4 border-l-amber-500">
+              <div class="p-4">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                      <span class="text-blue-600 font-medium text-sm">BV</span>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-gray-800">January 2025 - Medicine Ward</p>
+                      <p class="text-xs text-gray-500">Submitted by Bounmy V. • 3 hours ago</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <span class="px-2 py-1 text-xs font-medium status-pending rounded-full">Pending Review</span>
+                    <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-200">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="grid grid-cols-5 gap-4 p-3 bg-gray-50 rounded-lg text-sm">
+                  <div>
+                    <p class="text-gray-500 text-xs">Products</p>
+                    <p class="font-semibold">52</p>
+                  </div>
+                  <div>
+                    <p class="text-gray-500 text-xs">Total DDDs</p>
+                    <p class="font-semibold">1,456.2</p>
+                  </div>
+                  <div>
+                    <p class="text-gray-500 text-xs">Access %</p>
+                    <p class="font-semibold text-green-600">71%</p>
+                  </div>
+                  <div>
+                    <p class="text-gray-500 text-xs">Watch %</p>
+                    <p class="font-semibold text-amber-600">26%</p>
+                  </div>
+                  <div>
+                    <p class="text-gray-500 text-xs">Reserve %</p>
+                    <p class="font-semibold text-red-600">3%</p>
+                  </div>
+                </div>
+
+                <div class="mt-3 p-3 bg-green-50 rounded-lg">
+                  <div class="flex items-center gap-2 text-green-700 text-sm">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                    <span>All validation checks passed</span>
+                  </div>
+                </div>
+
+                <div class="mt-4 flex items-center justify-end gap-3">
+                  <button class="px-4 py-2 border border-red-300 text-red-600 rounded-lg text-sm font-medium hover:bg-red-50 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    Reject with Feedback
+                  </button>
+                  <button class="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Validate & Approve
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 5: Denominator Entry ==================== -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="screen-container">
+      <div class="screen-label flex items-center justify-between">
+        <span>SCREEN 5: Denominator Data Entry (Hospital Activity)</span>
+        <span class="text-gray-400 font-normal">Route: /data-entry/denominators</span>
+      </div>
+      
+      <div class="bg-white p-8">
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-800">Hospital Activity Data</h1>
+            <p class="text-gray-500 mt-2">Enter denominators to calculate consumption density (DDD per 100 patient-days)</p>
+          </div>
+
+          <!-- Period Selection -->
+          <div class="bg-teal-50 rounded-xl p-4 mb-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="font-medium text-teal-800">Period: January 2025</p>
+                <p class="text-xs text-teal-600">31 days</p>
+              </div>
+            </div>
+            <select class="px-4 py-2 border border-teal-300 rounded-lg text-sm bg-white">
+              <option>January 2025</option>
+              <option>December 2024</option>
+              <option>November 2024</option>
             </select>
           </div>
-          
-          <div class="grid grid-cols-3 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Quantity</label>
-              <input type="number" placeholder="0" class="w-full px-4 py-3 border rounded-lg">
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Unit</label>
-              <select class="w-full px-4 py-3 border rounded-lg">
-                <option>Tablets/Capsules</option>
-                <option>Vials</option>
-                <option>Bottles</option>
-                <option>Grams</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Calculated DDD</label>
-              <input type="text" value="--" disabled class="w-full px-4 py-3 border rounded-lg bg-gray-50 text-gray-500">
+
+          <!-- Hospital-Level Entry -->
+          <div class="bg-gray-50 rounded-xl p-6 mb-6">
+            <h3 class="font-semibold text-gray-800 mb-4 flex items-center gap-2">
+              <span class="w-6 h-6 bg-teal-600 rounded-full flex items-center justify-center text-white text-xs font-bold">H</span>
+              Hospital-Wide Totals
+            </h3>
+            <div class="grid grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Patient-Days *</label>
+                <input type="number" value="32450" class="w-full px-4 py-3 border rounded-lg input-focus text-lg font-medium">
+                <p class="text-xs text-gray-500 mt-1">Sum of inpatient days</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Admissions</label>
+                <input type="number" value="4200" class="w-full px-4 py-3 border rounded-lg input-focus text-lg font-medium">
+                <p class="text-xs text-gray-500 mt-1">Total admissions</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Bed-Days</label>
+                <input type="number" value="35000" class="w-full px-4 py-3 border rounded-lg input-focus text-lg font-medium">
+                <p class="text-xs text-gray-500 mt-1">Occupied bed days</p>
+              </div>
             </div>
           </div>
-          
-          <div class="p-4 bg-teal-50 rounded-lg">
-            <p class="text-sm text-teal-700"><strong>Auto-calculation:</strong> DDD will be calculated based on product selection and quantity</p>
+
+          <!-- Ward-Level Entry (PRO) -->
+          <div class="bg-white rounded-xl border-2 border-dashed border-gray-300 p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold text-gray-800 flex items-center gap-2">
+                Ward-Level Breakdown
+                <span class="tier-badge pro-badge">PRO</span>
+              </h3>
+              <button class="text-sm text-teal-600 hover:underline">+ Add Ward</button>
+            </div>
+            
+            <div class="space-y-3">
+              <div class="grid grid-cols-4 gap-3 items-center p-3 bg-gray-50 rounded-lg">
+                <div>
+                  <p class="text-sm font-medium text-gray-700">ICU</p>
+                  <p class="text-xs text-gray-500">Intensive Care</p>
+                </div>
+                <input type="number" value="1240" placeholder="Patient-days" class="px-3 py-2 border rounded-lg text-sm input-focus">
+                <input type="number" value="180" placeholder="Admissions" class="px-3 py-2 border rounded-lg text-sm input-focus">
+                <input type="number" value="1500" placeholder="Bed-days" class="px-3 py-2 border rounded-lg text-sm input-focus">
+              </div>
+              <div class="grid grid-cols-4 gap-3 items-center p-3 bg-gray-50 rounded-lg">
+                <div>
+                  <p class="text-sm font-medium text-gray-700">Surgery</p>
+                  <p class="text-xs text-gray-500">Surgical Ward</p>
+                </div>
+                <input type="number" value="5600" placeholder="Patient-days" class="px-3 py-2 border rounded-lg text-sm input-focus">
+                <input type="number" value="720" placeholder="Admissions" class="px-3 py-2 border rounded-lg text-sm input-focus">
+                <input type="number" value="6200" placeholder="Bed-days" class="px-3 py-2 border rounded-lg text-sm input-focus">
+              </div>
+              <div class="grid grid-cols-4 gap-3 items-center p-3 bg-gray-50 rounded-lg">
+                <div>
+                  <p class="text-sm font-medium text-gray-700">Medicine</p>
+                  <p class="text-xs text-gray-500">Medical Ward</p>
+                </div>
+                <input type="number" value="8900" placeholder="Patient-days" class="px-3 py-2 border rounded-lg text-sm input-focus">
+                <input type="number" value="1100" placeholder="Admissions" class="px-3 py-2 border rounded-lg text-sm input-focus">
+                <input type="number" value="9500" placeholder="Bed-days" class="px-3 py-2 border rounded-lg text-sm input-focus">
+              </div>
+            </div>
+
+            <!-- Validation Check -->
+            <div class="mt-4 p-3 bg-green-50 rounded-lg flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span class="text-sm text-green-700">Ward totals (15,740) align with hospital total within acceptable variance</span>
+            </div>
           </div>
-          
-          <div class="flex gap-3">
-            <button type="submit" class="px-6 py-3 bg-teal-600 text-white font-medium rounded-lg">Add Record</button>
-            <button type="button" class="px-6 py-3 border text-gray-700 font-medium rounded-lg">Add Another</button>
+
+          <!-- Save Button -->
+          <div class="mt-6 flex items-center justify-end gap-3">
+            <button class="px-6 py-3 bg-gray-100 text-gray-600 rounded-lg font-medium hover:bg-gray-200">
+              Cancel
+            </button>
+            <button class="px-6 py-3 bg-teal-600 text-white rounded-lg font-medium hover:bg-teal-700 flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Save Denominators
+            </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- SCREEN 3: File Upload -->
-  <div class="max-w-7xl mx-auto mb-10">
-    <div class="border-2 border-gray-300 rounded-xl overflow-hidden">
-      <div class="screen-label flex justify-between">
-        <span>SCREEN 3: File Upload</span>
-        <span class="text-gray-400">Route: /hospital/data-entry/upload</span>
+  <!-- ==================== SCREEN 6: Product Catalog Management ==================== -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="screen-container">
+      <div class="screen-label flex items-center justify-between">
+        <span>SCREEN 6: Product Catalog Management (Build Your Masterlist)</span>
+        <span class="text-gray-400 font-normal">Route: /settings/product-catalog</span>
       </div>
-      <div class="bg-white p-8">
-        <div class="flex items-center gap-3 mb-6">
-          <button class="text-teal-600">← Back</button>
-          <h2 class="text-xl font-bold text-gray-800">Upload Data File</h2>
-        </div>
-        
-        <div class="max-w-2xl">
-          <!-- Drop Zone -->
-          <div class="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center mb-6">
-            <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-            <p class="text-gray-600 mb-2">Drag and drop your file here, or</p>
-            <button class="px-4 py-2 bg-teal-600 text-white rounded-lg font-medium">Browse Files</button>
-            <p class="text-sm text-gray-400 mt-4">Supported: Excel (.xlsx, .xls), CSV, pharmacy system exports</p>
-          </div>
-          
-          <!-- Template Download -->
-          <div class="p-4 bg-gray-50 rounded-lg flex items-center justify-between">
+      
+      <div class="bg-gray-50">
+        <!-- Header -->
+        <div class="bg-white border-b px-6 py-4">
+          <div class="flex items-center justify-between">
             <div>
-              <p class="font-medium text-gray-800">Need a template?</p>
-              <p class="text-sm text-gray-500">Download our standard Excel template</p>
+              <h1 class="text-xl font-bold text-gray-800">Product Catalog</h1>
+              <p class="text-sm text-gray-500">Manage your hospital's antimicrobial masterlist</p>
             </div>
-            <button class="px-4 py-2 border text-teal-600 font-medium rounded-lg">Download Template</button>
+            <div class="flex items-center gap-3">
+              <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-200 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                </svg>
+                Import from Template
+              </button>
+              <button class="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium hover:bg-teal-700 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Add New Product
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="bg-white border-b px-6 py-3">
+          <div class="flex items-center gap-8">
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-bold text-gray-800">156</span>
+              <span class="text-sm text-gray-500">Total Products</span>
+            </div>
+            <div class="h-8 w-px bg-gray-200"></div>
+            <div class="flex items-center gap-4 text-sm">
+              <span class="flex items-center gap-1">
+                <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                <span class="text-gray-600">98 Access</span>
+              </span>
+              <span class="flex items-center gap-1">
+                <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                <span class="text-gray-600">47 Watch</span>
+              </span>
+              <span class="flex items-center gap-1">
+                <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                <span class="text-gray-600">11 Reserve</span>
+              </span>
+            </div>
+            <div class="h-8 w-px bg-gray-200"></div>
+            <div class="flex items-center gap-4 text-sm">
+              <span class="text-gray-600">89 Oral</span>
+              <span class="text-gray-400">|</span>
+              <span class="text-gray-600">67 Parenteral</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="px-6 py-4 bg-white border-b">
+          <div class="flex items-center gap-4">
+            <div class="flex-1 relative">
+              <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              <input type="text" placeholder="Search by ID, generic name, brand name, or ATC..." class="w-full pl-10 pr-4 py-2 border rounded-lg text-sm input-focus">
+            </div>
+            <select class="px-3 py-2 border rounded-lg text-sm bg-white">
+              <option>All AWaRe Categories</option>
+              <option>Access</option>
+              <option>Watch</option>
+              <option>Reserve</option>
+            </select>
+            <select class="px-3 py-2 border rounded-lg text-sm bg-white">
+              <option>All Routes</option>
+              <option>Oral</option>
+              <option>Parenteral</option>
+            </select>
+            <select class="px-3 py-2 border rounded-lg text-sm bg-white">
+              <option>All ATC Groups</option>
+              <option>J01C - Beta-lactams, Penicillins</option>
+              <option>J01D - Beta-lactams, Cephalosporins</option>
+              <option>J01F - Macrolides</option>
+              <option>J01M - Quinolones</option>
+              <option>J01X - Other antibacterials</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Product List -->
+        <div class="p-6">
+          <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <table class="w-full text-sm">
+              <thead class="bg-gray-50 border-b">
+                <tr>
+                  <th class="text-left py-3 px-4 font-medium text-gray-600">Product ID</th>
+                  <th class="text-left py-3 px-4 font-medium text-gray-600">Generic Name</th>
+                  <th class="text-left py-3 px-4 font-medium text-gray-600">Brand Name</th>
+                  <th class="text-left py-3 px-4 font-medium text-gray-600">ATC Code</th>
+                  <th class="text-left py-3 px-4 font-medium text-gray-600">Strength</th>
+                  <th class="text-left py-3 px-4 font-medium text-gray-600">Route</th>
+                  <th class="text-left py-3 px-4 font-medium text-gray-600">Pack Size</th>
+                  <th class="text-center py-3 px-4 font-medium text-gray-600">AWaRe</th>
+                  <th class="text-center py-3 px-4 font-medium text-gray-600">DDD</th>
+                  <th class="text-center py-3 px-4 font-medium text-gray-600">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b hover:bg-gray-50">
+                  <td class="py-3 px-4 font-mono text-xs text-gray-500">PRD-00142</td>
+                  <td class="py-3 px-4 font-medium">Amoxicillin</td>
+                  <td class="py-3 px-4 text-purple-600">Amoxil®</td>
+                  <td class="py-3 px-4 text-gray-500">J01CA04</td>
+                  <td class="py-3 px-4">500 mg</td>
+                  <td class="py-3 px-4">Oral</td>
+                  <td class="py-3 px-4">100 caps</td>
+                  <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 text-xs font-medium aware-access rounded-full">Access</span></td>
+                  <td class="py-3 px-4 text-center text-gray-600">1.5 g</td>
+                  <td class="py-3 px-4 text-center">
+                    <div class="flex items-center justify-center gap-2">
+                      <button class="text-gray-400 hover:text-teal-600" title="Edit">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                      </button>
+                      <button class="text-gray-400 hover:text-red-500" title="Delete">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b hover:bg-gray-50">
+                  <td class="py-3 px-4 font-mono text-xs text-gray-500">PRD-00143</td>
+                  <td class="py-3 px-4 font-medium">Amoxicillin</td>
+                  <td class="py-3 px-4 text-purple-600">Trimox®</td>
+                  <td class="py-3 px-4 text-gray-500">J01CA04</td>
+                  <td class="py-3 px-4">500 mg</td>
+                  <td class="py-3 px-4">Oral</td>
+                  <td class="py-3 px-4">50 caps</td>
+                  <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 text-xs font-medium aware-access rounded-full">Access</span></td>
+                  <td class="py-3 px-4 text-center text-gray-600">1.5 g</td>
+                  <td class="py-3 px-4 text-center">
+                    <div class="flex items-center justify-center gap-2">
+                      <button class="text-gray-400 hover:text-teal-600" title="Edit">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                      </button>
+                      <button class="text-gray-400 hover:text-red-500" title="Delete">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b hover:bg-gray-50">
+                  <td class="py-3 px-4 font-mono text-xs text-gray-500">PRD-00201</td>
+                  <td class="py-3 px-4 font-medium">Ceftriaxone</td>
+                  <td class="py-3 px-4 text-purple-600">Rocephin®</td>
+                  <td class="py-3 px-4 text-gray-500">J01DD04</td>
+                  <td class="py-3 px-4">1 g</td>
+                  <td class="py-3 px-4">Parenteral</td>
+                  <td class="py-3 px-4">10 vials</td>
+                  <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 text-xs font-medium aware-watch rounded-full">Watch</span></td>
+                  <td class="py-3 px-4 text-center text-gray-600">2 g</td>
+                  <td class="py-3 px-4 text-center">
+                    <div class="flex items-center justify-center gap-2">
+                      <button class="text-gray-400 hover:text-teal-600" title="Edit">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                      </button>
+                      <button class="text-gray-400 hover:text-red-500" title="Delete">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b hover:bg-gray-50">
+                  <td class="py-3 px-4 font-mono text-xs text-gray-500">PRD-00312</td>
+                  <td class="py-3 px-4 font-medium">Vancomycin</td>
+                  <td class="py-3 px-4 text-purple-600">Vancocin®</td>
+                  <td class="py-3 px-4 text-gray-500">J01XA01</td>
+                  <td class="py-3 px-4">1 g</td>
+                  <td class="py-3 px-4">Parenteral</td>
+                  <td class="py-3 px-4">1 vial</td>
+                  <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 text-xs font-medium aware-reserve rounded-full">Reserve</span></td>
+                  <td class="py-3 px-4 text-center text-gray-600">2 g</td>
+                  <td class="py-3 px-4 text-center">
+                    <div class="flex items-center justify-center gap-2">
+                      <button class="text-gray-400 hover:text-teal-600" title="Edit">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                      </button>
+                      <button class="text-gray-400 hover:text-red-500" title="Delete">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <!-- Pagination -->
+            <div class="px-4 py-3 bg-gray-50 border-t flex items-center justify-between">
+              <p class="text-sm text-gray-500">Showing 1-10 of 156 products</p>
+              <div class="flex items-center gap-2">
+                <button class="px-3 py-1 border rounded text-sm text-gray-400" disabled>Previous</button>
+                <button class="px-3 py-1 bg-teal-600 text-white rounded text-sm">1</button>
+                <button class="px-3 py-1 border rounded text-sm text-gray-600 hover:bg-gray-100">2</button>
+                <button class="px-3 py-1 border rounded text-sm text-gray-600 hover:bg-gray-100">3</button>
+                <span class="text-gray-400">...</span>
+                <button class="px-3 py-1 border rounded text-sm text-gray-600 hover:bg-gray-100">16</button>
+                <button class="px-3 py-1 border rounded text-sm text-gray-600 hover:bg-gray-100">Next</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SCREEN 4: Data Validation -->
-  <div class="max-w-7xl mx-auto mb-10">
-    <div class="border-2 border-gray-300 rounded-xl overflow-hidden">
-      <div class="screen-label flex justify-between">
-        <span>SCREEN 4: Data Validation Preview</span>
-        <span class="text-gray-400">After file upload</span>
+  <!-- ==================== SCREEN 7: Add/Edit Product Modal ==================== -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="screen-container">
+      <div class="screen-label flex items-center justify-between">
+        <span>SCREEN 7: Add New Product Modal (With ATC Lookup)</span>
+        <span class="text-gray-400 font-normal">Modal overlay on /settings/product-catalog</span>
       </div>
-      <div class="bg-white p-8">
-        <h2 class="text-xl font-bold text-gray-800 mb-2">Review Imported Data</h2>
-        <p class="text-gray-600 mb-6">Please verify the data before saving</p>
-        
-        <!-- Validation Summary -->
-        <div class="grid grid-cols-3 gap-4 mb-6">
-          <div class="p-4 bg-green-50 border border-green-200 rounded-lg">
-            <p class="text-2xl font-bold text-green-600">142</p>
-            <p class="text-sm text-green-700">Records valid</p>
+      
+      <div class="bg-gray-900/50 p-8 flex items-center justify-center min-h-[700px]">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden">
+          <!-- Modal Header -->
+          <div class="px-6 py-4 border-b flex items-center justify-between bg-gray-50">
+            <div>
+              <h2 class="text-lg font-bold text-gray-800">Add New Product</h2>
+              <p class="text-sm text-gray-500">Add an antimicrobial to your hospital's catalog</p>
+            </div>
+            <button class="text-gray-400 hover:text-gray-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
           </div>
-          <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg">
-            <p class="text-2xl font-bold text-amber-600">8</p>
-            <p class="text-sm text-amber-700">Warnings (review)</p>
+
+          <!-- Modal Body -->
+          <div class="p-6">
+            <!-- Step 1: ATC Lookup -->
+            <div class="mb-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-6 h-6 bg-teal-600 rounded-full flex items-center justify-center text-white text-xs font-bold">1</span>
+                <label class="font-medium text-gray-700">Start with ATC Code or Substance Name</label>
+              </div>
+              <div class="relative">
+                <input type="text" 
+                       placeholder="Type ATC code (e.g., J01CA04) or substance name (e.g., Amoxicillin)..." 
+                       value="J01CA04"
+                       class="w-full px-4 py-3 border-2 border-teal-500 rounded-xl input-focus">
+                
+                <!-- ATC Lookup Result -->
+                <div class="mt-3 p-4 bg-teal-50 rounded-xl border border-teal-200">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <div class="flex items-center gap-2 mb-1">
+                        <span class="px-2 py-0.5 bg-teal-600 text-white rounded text-xs font-mono">J01CA04</span>
+                        <span class="px-2 py-0.5 aware-access rounded text-xs font-medium">Access</span>
+                      </div>
+                      <p class="font-semibold text-gray-800">Amoxicillin</p>
+                      <p class="text-xs text-gray-500">Beta-lactam antibacterials, Penicillins with extended spectrum</p>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-xs text-gray-500">DDD Values</p>
+                      <p class="text-sm font-medium">Oral: <span class="text-teal-600">1.5 g</span></p>
+                      <p class="text-sm font-medium">Parenteral: <span class="text-teal-600">3 g</span></p>
+                    </div>
+                  </div>
+                  <div class="mt-2 pt-2 border-t border-teal-200 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                    <span class="text-sm text-green-700">ATC code found in WHO database • AWaRe and DDD auto-filled</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2: Product Details -->
+            <div class="mb-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-6 h-6 bg-teal-600 rounded-full flex items-center justify-center text-white text-xs font-bold">2</span>
+                <label class="font-medium text-gray-700">Enter Product Details</label>
+              </div>
+              
+              <div class="grid grid-cols-2 gap-4">
+                <!-- Product ID -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-600 mb-1">Product ID *</label>
+                  <div class="flex gap-2">
+                    <input type="text" value="PRD-00157" class="flex-1 px-3 py-2 border rounded-lg text-sm input-focus font-mono">
+                    <button class="px-3 py-2 bg-gray-100 text-gray-600 rounded-lg text-xs hover:bg-gray-200" title="Auto-generate">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </button>
+                  </div>
+                  <p class="text-xs text-gray-400 mt-1">Auto-generated or custom</p>
+                </div>
+
+                <!-- Brand Name -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-600 mb-1">Brand Name</label>
+                  <input type="text" placeholder="e.g., Amoxil, Trimox" class="w-full px-3 py-2 border rounded-lg text-sm input-focus">
+                </div>
+
+                <!-- Generic Name (Pre-filled) -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-600 mb-1">Generic Name *</label>
+                  <input type="text" value="Amoxicillin" class="w-full px-3 py-2 border rounded-lg text-sm bg-gray-50" readonly>
+                  <p class="text-xs text-gray-400 mt-1">From ATC lookup</p>
+                </div>
+
+                <!-- Manufacturer -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-600 mb-1">Manufacturer</label>
+                  <input type="text" placeholder="e.g., GSK, Pfizer" class="w-full px-3 py-2 border rounded-lg text-sm input-focus">
+                </div>
+
+                <!-- Route -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-600 mb-1">Route *</label>
+                  <select class="w-full px-3 py-2 border rounded-lg text-sm bg-white input-focus">
+                    <option selected>Oral</option>
+                    <option>Parenteral</option>
+                    <option>Rectal</option>
+                    <option>Inhalation</option>
+                  </select>
+                  <p class="text-xs text-teal-600 mt-1 font-medium">DDD: 1.5 g</p>
+                </div>
+
+                <!-- Form -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-600 mb-1">Form *</label>
+                  <select class="w-full px-3 py-2 border rounded-lg text-sm bg-white input-focus">
+                    <option>Capsule</option>
+                    <option>Tablet</option>
+                    <option>Suspension</option>
+                    <option>Injection/Vial</option>
+                    <option>Powder for injection</option>
+                    <option>Syrup</option>
+                  </select>
+                </div>
+
+                <!-- Strength -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-600 mb-1">Strength *</label>
+                  <div class="flex gap-2">
+                    <input type="number" placeholder="500" class="flex-1 px-3 py-2 border rounded-lg text-sm input-focus">
+                    <select class="px-3 py-2 border rounded-lg text-sm bg-white">
+                      <option>mg</option>
+                      <option>g</option>
+                      <option>MU</option>
+                      <option>mg/ml</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Pack Size -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-600 mb-1">Pack Size *</label>
+                  <div class="flex gap-2">
+                    <input type="number" placeholder="100" class="flex-1 px-3 py-2 border rounded-lg text-sm input-focus">
+                    <span class="px-3 py-2 bg-gray-100 border rounded-lg text-sm text-gray-500">units/pack</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Optional Fields -->
+            <div class="mb-6 p-4 bg-gray-50 rounded-xl">
+              <button class="flex items-center gap-2 text-sm font-medium text-gray-600 w-full" onclick="this.nextElementSibling.classList.toggle('hidden')">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                Optional Fields
+              </button>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label class="flex items-center gap-2 text-sm">
+                    <input type="checkbox" class="rounded border-gray-300 text-teal-600">
+                    <span>Pediatric formulation</span>
+                  </label>
+                </div>
+                <div>
+                  <label class="flex items-center gap-2 text-sm">
+                    <input type="checkbox" class="rounded border-gray-300 text-teal-600">
+                    <span>Combination product</span>
+                  </label>
+                </div>
+                <div class="col-span-2">
+                  <label class="block text-sm font-medium text-gray-600 mb-1">Unit Cost (optional)</label>
+                  <div class="flex gap-2">
+                    <input type="number" placeholder="0.00" class="flex-1 px-3 py-2 border rounded-lg text-sm input-focus">
+                    <select class="px-3 py-2 border rounded-lg text-sm bg-white">
+                      <option>USD</option>
+                      <option>LAK</option>
+                      <option>THB</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="p-4 bg-teal-50 rounded-xl border border-teal-200">
+              <p class="text-sm font-medium text-teal-800 mb-2">Product Summary</p>
+              <div class="flex items-center justify-between text-sm">
+                <div>
+                  <span class="font-mono text-gray-500">PRD-00157</span>
+                  <span class="mx-2 text-gray-300">•</span>
+                  <span class="font-medium">Amoxicillin 500mg Capsules</span>
+                  <span class="mx-2 text-gray-300">•</span>
+                  <span class="text-gray-500">100/pack</span>
+                </div>
+                <span class="px-2 py-0.5 aware-access rounded text-xs font-medium">Access</span>
+              </div>
+            </div>
           </div>
-          <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p class="text-2xl font-bold text-red-600">3</p>
-            <p class="text-sm text-red-700">Errors (fix required)</p>
+
+          <!-- Modal Footer -->
+          <div class="px-6 py-4 border-t bg-gray-50 flex items-center justify-between">
+            <button class="text-sm text-gray-500 hover:text-gray-700">Cancel</button>
+            <div class="flex items-center gap-3">
+              <button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-200">
+                Save & Add Another
+              </button>
+              <button class="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium hover:bg-teal-700 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Save Product
+              </button>
+            </div>
           </div>
         </div>
-        
-        <!-- Data Table Preview -->
-        <div class="border rounded-lg overflow-hidden mb-6">
-          <table class="w-full text-sm">
-            <thead class="bg-gray-50">
-              <tr>
-                <th class="text-left py-3 px-4 font-medium">Status</th>
-                <th class="text-left py-3 px-4 font-medium">Product</th>
-                <th class="text-left py-3 px-4 font-medium">Quantity</th>
-                <th class="text-left py-3 px-4 font-medium">DDD</th>
-                <th class="text-left py-3 px-4 font-medium">Period</th>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 8: Import Products from Template ==================== -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="screen-container">
+      <div class="screen-label flex items-center justify-between">
+        <span>SCREEN 8: Import Products (Bulk Masterlist Setup)</span>
+        <span class="text-gray-400 font-normal">Route: /settings/product-catalog/import</span>
+      </div>
+      
+      <div class="bg-white p-8">
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-800">Build Your Product Catalog</h1>
+            <p class="text-gray-500 mt-2">Choose how to set up your hospital's antimicrobial masterlist</p>
+          </div>
+
+          <!-- Option Cards -->
+          <div class="grid grid-cols-2 gap-6 mb-8">
+            <!-- Option 1: Start from WHO Template -->
+            <div class="bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-6 border-2 border-teal-500 cursor-pointer hover:shadow-lg transition-all">
+              <div class="w-12 h-12 bg-teal-500 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 class="font-bold text-gray-800 mb-2">Start from WHO Essential Medicines</h3>
+              <p class="text-sm text-gray-600 mb-4">Pre-loaded with 150+ antimicrobials from the WHO Model List of Essential Medicines with correct ATC codes, DDD values, and AWaRe classifications.</p>
+              <div class="flex items-center gap-2 text-teal-600 text-sm font-medium">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                Recommended for new hospitals
+              </div>
+            </div>
+
+            <!-- Option 2: Upload Existing List -->
+            <div class="bg-gray-50 rounded-xl p-6 border-2 border-gray-200 cursor-pointer hover:border-teal-500 hover:shadow-lg transition-all">
+              <div class="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                </svg>
+              </div>
+              <h3 class="font-bold text-gray-800 mb-2">Upload Your Existing List</h3>
+              <p class="text-sm text-gray-600 mb-4">Import your hospital's current formulary from Excel or CSV. We'll match products to ATC codes and fill in DDD values automatically.</p>
+              <div class="flex items-center gap-2 text-gray-500 text-sm">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                For hospitals with existing data
+              </div>
+            </div>
+          </div>
+
+          <!-- WHO Template Preview -->
+          <div class="bg-white rounded-xl border p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold text-gray-800">WHO Essential Medicines Template Preview</h3>
+              <span class="text-xs text-gray-500">150 antimicrobials included</span>
+            </div>
+            
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="text-left py-2 px-3 font-medium text-gray-600">Generic Name</th>
+                    <th class="text-left py-2 px-3 font-medium text-gray-600">ATC</th>
+                    <th class="text-left py-2 px-3 font-medium text-gray-600">Route</th>
+                    <th class="text-left py-2 px-3 font-medium text-gray-600">DDD</th>
+                    <th class="text-center py-2 px-3 font-medium text-gray-600">AWaRe</th>
+                    <th class="text-center py-2 px-3 font-medium text-gray-600">Include</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b">
+                    <td class="py-2 px-3">Amoxicillin</td>
+                    <td class="py-2 px-3 text-gray-500">J01CA04</td>
+                    <td class="py-2 px-3">Oral</td>
+                    <td class="py-2 px-3">1.5 g</td>
+                    <td class="py-2 px-3 text-center"><span class="px-1.5 py-0.5 text-xs font-medium aware-access rounded">Access</span></td>
+                    <td class="py-2 px-3 text-center"><input type="checkbox" checked class="rounded border-gray-300 text-teal-600"></td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="py-2 px-3">Amoxicillin + Clavulanic acid</td>
+                    <td class="py-2 px-3 text-gray-500">J01CR02</td>
+                    <td class="py-2 px-3">Oral</td>
+                    <td class="py-2 px-3">1.5 g</td>
+                    <td class="py-2 px-3 text-center"><span class="px-1.5 py-0.5 text-xs font-medium aware-access rounded">Access</span></td>
+                    <td class="py-2 px-3 text-center"><input type="checkbox" checked class="rounded border-gray-300 text-teal-600"></td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="py-2 px-3">Ceftriaxone</td>
+                    <td class="py-2 px-3 text-gray-500">J01DD04</td>
+                    <td class="py-2 px-3">Parenteral</td>
+                    <td class="py-2 px-3">2 g</td>
+                    <td class="py-2 px-3 text-center"><span class="px-1.5 py-0.5 text-xs font-medium aware-watch rounded">Watch</span></td>
+                    <td class="py-2 px-3 text-center"><input type="checkbox" checked class="rounded border-gray-300 text-teal-600"></td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="py-2 px-3">Ciprofloxacin</td>
+                    <td class="py-2 px-3 text-gray-500">J01MA02</td>
+                    <td class="py-2 px-3">Oral</td>
+                    <td class="py-2 px-3">1 g</td>
+                    <td class="py-2 px-3 text-center"><span class="px-1.5 py-0.5 text-xs font-medium aware-watch rounded">Watch</span></td>
+                    <td class="py-2 px-3 text-center"><input type="checkbox" checked class="rounded border-gray-300 text-teal-600"></td>
+                  </tr>
+                  <tr class="border-b bg-gray-50">
+                    <td colspan="6" class="py-2 px-3 text-center text-gray-500">... and 146 more antimicrobials</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+              <p class="text-sm text-blue-700">
+                <strong>💡 What happens next:</strong> After importing, you'll add your hospital-specific details like brand names, manufacturers, and pack sizes for each product you stock.
+              </p>
+            </div>
+
+            <div class="mt-6 flex items-center justify-between">
+              <div class="flex items-center gap-4">
+                <label class="flex items-center gap-2 text-sm">
+                  <input type="checkbox" checked class="rounded border-gray-300 text-teal-600">
+                  <span>Select all</span>
+                </label>
+                <span class="text-sm text-gray-500">142 selected</span>
+              </div>
+              <button class="px-6 py-3 bg-teal-600 text-white rounded-lg font-medium hover:bg-teal-700 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                </svg>
+                Import Selected Products
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Design Notes ==================== -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+      <h2 class="text-lg font-bold text-yellow-800 mb-4">📋 Design Notes for Quickfox Team</h2>
+      
+      <div class="grid grid-cols-2 gap-6 text-sm">
+        <div>
+          <h3 class="font-semibold text-yellow-800 mb-2">Product Identification & Search</h3>
+          <ul class="space-y-2 text-yellow-700">
+            <li>• <strong>Product ID:</strong> Unique identifier (e.g., PRD-00142) — auto-generated or hospital-assigned</li>
+            <li>• <strong>Search indexes:</strong> product_id, generic_name, brand_name, atc5 — all searchable</li>
+            <li>• <strong>Autocomplete:</strong> Show ID, generic, brand, manufacturer, route, pack size in results</li>
+            <li>• <strong>Highlight matching:</strong> Yellow highlight on matched text in search results</li>
+            <li>• <strong>Pre-filled fields:</strong> When product selected, auto-fill strength, packsize, route from catalog</li>
+            <li>• <strong>User only enters:</strong> Quantity (packs) — everything else comes from product master</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold text-yellow-800 mb-2">Data Entry Principles</h3>
+          <ul class="space-y-2 text-yellow-700">
+            <li>• <strong>Instant DDD calculation:</strong> Show computed DDDs in real-time as quantity changes</li>
+            <li>• <strong>AWaRe badges:</strong> Color-code entries immediately (green/amber/red)</li>
+            <li>• <strong>Draft saving:</strong> Auto-save every 30 seconds</li>
+            <li>• <strong>Session management:</strong> Group entries by ward + period</li>
+            <li>• <strong>Add new product:</strong> Link to add product to catalog if not found</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-yellow-200">
+        <h3 class="font-semibold text-yellow-800 mb-2">Product Catalog Table (dim_product)</h3>
+        <div class="bg-white rounded-lg p-4 overflow-x-auto">
+          <table class="text-xs w-full">
+            <thead>
+              <tr class="border-b">
+                <th class="text-left py-2 px-2 font-semibold">Field</th>
+                <th class="text-left py-2 px-2 font-semibold">Type</th>
+                <th class="text-left py-2 px-2 font-semibold">Example</th>
+                <th class="text-left py-2 px-2 font-semibold">Searchable</th>
               </tr>
             </thead>
-            <tbody>
-              <tr class="border-t">
-                <td class="py-3 px-4"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
-                <td class="py-3 px-4">Amoxicillin 500mg</td>
-                <td class="py-3 px-4">2,450</td>
-                <td class="py-3 px-4">1,225</td>
-                <td class="py-3 px-4">Jan 2026</td>
-              </tr>
-              <tr class="border-t bg-amber-50">
-                <td class="py-3 px-4"><span class="w-2 h-2 bg-amber-500 rounded-full inline-block"></span></td>
-                <td class="py-3 px-4">Ceftriaxone 1g</td>
-                <td class="py-3 px-4">890</td>
-                <td class="py-3 px-4">445</td>
-                <td class="py-3 px-4 text-amber-600">⚠️ Unusually high</td>
-              </tr>
-              <tr class="border-t bg-red-50">
-                <td class="py-3 px-4"><span class="w-2 h-2 bg-red-500 rounded-full inline-block"></span></td>
-                <td class="py-3 px-4 text-red-600">Unknown Product</td>
-                <td class="py-3 px-4">120</td>
-                <td class="py-3 px-4">--</td>
-                <td class="py-3 px-4 text-red-600">❌ Not in catalogue</td>
-              </tr>
+            <tbody class="text-gray-600">
+              <tr class="border-b"><td class="py-1 px-2 font-mono">product_id</td><td class="py-1 px-2">String</td><td class="py-1 px-2">PRD-00142</td><td class="py-1 px-2">✓ Yes</td></tr>
+              <tr class="border-b"><td class="py-1 px-2 font-mono">generic_name</td><td class="py-1 px-2">String</td><td class="py-1 px-2">Amoxicillin</td><td class="py-1 px-2">✓ Yes</td></tr>
+              <tr class="border-b"><td class="py-1 px-2 font-mono">brand_name</td><td class="py-1 px-2">String</td><td class="py-1 px-2">Amoxil</td><td class="py-1 px-2">✓ Yes</td></tr>
+              <tr class="border-b"><td class="py-1 px-2 font-mono">manufacturer</td><td class="py-1 px-2">String</td><td class="py-1 px-2">GSK</td><td class="py-1 px-2">✓ Yes</td></tr>
+              <tr class="border-b"><td class="py-1 px-2 font-mono">atc5</td><td class="py-1 px-2">String</td><td class="py-1 px-2">J01CA04</td><td class="py-1 px-2">✓ Yes</td></tr>
+              <tr class="border-b"><td class="py-1 px-2 font-mono">route_admin</td><td class="py-1 px-2">Enum</td><td class="py-1 px-2">O (Oral)</td><td class="py-1 px-2">Filter</td></tr>
+              <tr class="border-b"><td class="py-1 px-2 font-mono">strength</td><td class="py-1 px-2">Decimal</td><td class="py-1 px-2">500</td><td class="py-1 px-2">—</td></tr>
+              <tr class="border-b"><td class="py-1 px-2 font-mono">strength_unit</td><td class="py-1 px-2">String</td><td class="py-1 px-2">mg</td><td class="py-1 px-2">—</td></tr>
+              <tr class="border-b"><td class="py-1 px-2 font-mono">packsize</td><td class="py-1 px-2">Integer</td><td class="py-1 px-2">100</td><td class="py-1 px-2">—</td></tr>
+              <tr><td class="py-1 px-2 font-mono">form</td><td class="py-1 px-2">String</td><td class="py-1 px-2">Capsule</td><td class="py-1 px-2">—</td></tr>
             </tbody>
           </table>
         </div>
-        
-        <div class="flex gap-3">
-          <button class="px-6 py-3 bg-teal-600 text-white font-medium rounded-lg">Save Valid Records (142)</button>
-          <button class="px-6 py-3 border text-gray-700 font-medium rounded-lg">Fix Errors</button>
-          <button class="px-6 py-3 text-gray-500">Cancel</button>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-yellow-200 grid grid-cols-2 gap-6">
+        <div>
+          <h3 class="font-semibold text-yellow-800 mb-2">Validation Flow</h3>
+          <ul class="space-y-2 text-yellow-700 text-sm">
+            <li>• <strong>Data Entry Specialist:</strong> Creates entries (status: pending)</li>
+            <li>• <strong>Data Manager:</strong> Reviews and validates or rejects</li>
+            <li>• <strong>Admin:</strong> Can edit validated data, delete permanently</li>
+            <li>• <strong>Plausibility checks:</strong> Flag unusual quantities, missing data</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold text-yellow-800 mb-2">File Upload Supported Formats</h3>
+          <ul class="space-y-2 text-yellow-700 text-sm">
+            <li>• <strong>Excel (.xlsx, .xls):</strong> WHO template format, custom hospital formats</li>
+            <li>• <strong>CSV:</strong> UTF-8, comma or semicolon delimited</li>
+            <li>• <strong>Pharmacy System Exports:</strong> Custom parsers for common systems</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-yellow-200">
+        <h3 class="font-semibold text-yellow-800 mb-2">Routes Structure</h3>
+        <div class="grid grid-cols-2 gap-4 text-xs">
+          <div>
+            <p class="font-medium text-yellow-700 mb-2">Data Entry</p>
+            <div class="flex flex-wrap gap-2">
+              <code class="bg-yellow-100 px-2 py-1 rounded">/data-entry</code>
+              <code class="bg-yellow-100 px-2 py-1 rounded">/data-entry/upload</code>
+              <code class="bg-yellow-100 px-2 py-1 rounded">/data-entry/quick</code>
+              <code class="bg-yellow-100 px-2 py-1 rounded">/data-entry/detailed</code>
+              <code class="bg-yellow-100 px-2 py-1 rounded">/data-entry/denominators</code>
+              <code class="bg-yellow-100 px-2 py-1 rounded">/data-entry/validation</code>
+              <code class="bg-yellow-100 px-2 py-1 rounded">/data-entry/history</code>
+            </div>
+          </div>
+          <div>
+            <p class="font-medium text-yellow-700 mb-2">Product Catalog</p>
+            <div class="flex flex-wrap gap-2">
+              <code class="bg-yellow-100 px-2 py-1 rounded">/settings/product-catalog</code>
+              <code class="bg-yellow-100 px-2 py-1 rounded">/settings/product-catalog/add</code>
+              <code class="bg-yellow-100 px-2 py-1 rounded">/settings/product-catalog/edit/:id</code>
+              <code class="bg-yellow-100 px-2 py-1 rounded">/settings/product-catalog/import</code>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SCREEN 5: AI Data Extraction (PRO) -->
-  <div class="max-w-7xl mx-auto">
-    <div class="border-2 border-purple-300 rounded-xl overflow-hidden">
-      <div class="screen-label flex justify-between bg-purple-700">
-        <span>SCREEN 5: AI Data Extraction (PRO Feature)</span>
-        <span class="px-2 py-1 bg-amber-500 rounded text-xs">EXPERIMENTAL</span>
-      </div>
-      <div class="bg-white p-8">
-        <div class="flex items-center gap-3 mb-6">
-          <button class="text-purple-600">← Back</button>
-          <h2 class="text-xl font-bold text-gray-800">AI Data Extraction</h2>
-          <span class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs">BETA</span>
-        </div>
-        
-        <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg mb-6">
-          <p class="text-sm text-amber-800"><strong>⚠️ Experimental Feature:</strong> AI extraction attempts to auto-detect data from uploaded documents. Always verify results before saving.</p>
-        </div>
-        
-        <div class="max-w-2xl">
-          <!-- Upload -->
-          <div class="border-2 border-dashed border-purple-300 rounded-xl p-8 text-center mb-6 bg-purple-50">
-            <svg class="w-12 h-12 text-purple-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-            <p class="text-gray-600 mb-2">Upload any document for AI extraction</p>
-            <button class="px-4 py-2 bg-purple-600 text-white rounded-lg font-medium">Select File</button>
-            <p class="text-sm text-gray-400 mt-4">Supports: PDF, Images, Excel, Word, Pharmacy printouts</p>
-          </div>
-          
-          <!-- Extraction Results Preview -->
-          <div class="border rounded-lg p-4">
-            <div class="flex items-center justify-between mb-4">
-              <h4 class="font-medium text-gray-800">Extraction Results</h4>
-              <div class="flex gap-2">
-                <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">High Confidence: 85%</span>
-                <span class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs">Medium: 12%</span>
-                <span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs">Low: 3%</span>
-              </div>
-            </div>
-            <p class="text-sm text-gray-500">Upload a file to see AI-extracted data with confidence scores</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Footer -->
+  <div class="max-w-7xl mx-auto text-center text-gray-400 text-sm py-8">
+    <p>AbXInsight - Data Entry Mockups</p>
+    <p class="mt-1">For Quickfox Design Team</p>
   </div>
 
 </body>

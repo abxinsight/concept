@@ -3,208 +3,1063 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AbXInsight - Platform Sitemap & Information Architecture</title>
+  <title>AbXInsight - Complete Sitemap & User Journey</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     body { font-family: 'Inter', sans-serif; }
-    .route-box { border-left: 3px solid; padding-left: 12px; }
-    .hospital-route { border-color: #0D9488; background: #F0FDFA; }
-    .country-route { border-color: #7C3AED; background: #FAF5FF; }
-    .public-route { border-color: #64748B; background: #F8FAFC; }
+    .node {
+      transition: all 0.2s ease;
+    }
+    .node:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.15);
+    }
+    .connector {
+      stroke-dasharray: 5, 5;
+      animation: dash 30s linear infinite;
+    }
+    @keyframes dash {
+      to { stroke-dashoffset: -1000; }
+    }
+    .tier-basic { background: #64748B; }
+    .tier-pro { background: #0D9488; }
+    .tier-ultra { background: #7C3AED; }
+    .module-hospital { border-color: #0D9488; }
+    .module-country { border-color: #7C3AED; }
+    .module-shared { border-color: #6B7280; }
+    @media print {
+      body { background: white; }
+      .no-print { display: none; }
+    }
   </style>
 </head>
-<body class="bg-gray-100 min-h-screen p-8">
+<body class="bg-gray-100 min-h-screen">
 
   <!-- Header -->
-  <div class="max-w-7xl mx-auto mb-8">
-    <div class="flex items-center gap-4 mb-4">
-      <svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="url(#hG)"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g><defs><linearGradient id="hG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
-      <div>
-        <h1 class="text-3xl font-bold text-gray-800">AbXInsight Platform Sitemap</h1>
-        <p class="text-gray-600">Complete Information Architecture & Route Reference</p>
+  <div class="bg-white border-b sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-8 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
+            <rect width="64" height="64" rx="14" fill="url(#sitemapLogo)"/>
+            <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g>
+            <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g>
+            <defs><linearGradient id="sitemapLogo" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
+          </svg>
+          <div>
+            <h1 class="text-xl font-bold text-gray-800">AbXInsight Platform Sitemap</h1>
+            <p class="text-sm text-gray-500">Complete User Journey & Information Architecture</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 no-print">
+          <div class="flex items-center gap-2 text-sm">
+            <span class="w-3 h-3 rounded-full tier-basic"></span>
+            <span class="text-gray-600">Basic</span>
+            <span class="w-3 h-3 rounded-full tier-pro ml-3"></span>
+            <span class="text-gray-600">Pro</span>
+            <span class="w-3 h-3 rounded-full tier-ultra ml-3"></span>
+            <span class="text-gray-600">Ultra</span>
+          </div>
+          <button onclick="window.print()" class="px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium hover:bg-gray-200">
+            Print / Save PDF
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Legend -->
-  <div class="max-w-7xl mx-auto mb-8">
-    <div class="bg-white rounded-xl p-4 shadow-sm flex gap-6">
-      <div class="flex items-center gap-2"><span class="w-4 h-4 bg-gray-500 rounded"></span><span class="text-sm">Public Routes</span></div>
-      <div class="flex items-center gap-2"><span class="w-4 h-4 bg-teal-500 rounded"></span><span class="text-sm">Hospital Module</span></div>
-      <div class="flex items-center gap-2"><span class="w-4 h-4 bg-purple-500 rounded"></span><span class="text-sm">Country Module</span></div>
-      <div class="flex items-center gap-2 ml-auto">
-        <span class="px-2 py-1 bg-gray-100 rounded text-xs">BASIC</span>
-        <span class="px-2 py-1 bg-teal-100 rounded text-xs">PRO</span>
-        <span class="px-2 py-1 bg-purple-100 rounded text-xs">ULTRA</span>
+  <div class="max-w-7xl mx-auto px-8 py-6">
+    <div class="bg-white rounded-xl p-4 shadow-sm flex items-center justify-between">
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 rounded border-2 border-teal-500 bg-teal-50"></div>
+          <span class="text-sm text-gray-600">Hospital Module</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 rounded border-2 border-purple-500 bg-purple-50"></div>
+          <span class="text-sm text-gray-600">Country Module</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 rounded border-2 border-gray-400 bg-gray-50"></div>
+          <span class="text-sm text-gray-600">Shared / Public</span>
+        </div>
+      </div>
+      <div class="text-sm text-gray-500">
+        For Quickfox Development Team • January 2026
       </div>
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto grid grid-cols-3 gap-6">
-
-    <!-- Public Routes -->
+  <!-- ==================== SECTION 1: PUBLIC PAGES ==================== -->
+  <div class="max-w-7xl mx-auto px-8 pb-8">
+    <div class="mb-4 flex items-center gap-3">
+      <span class="px-3 py-1 bg-gray-600 text-white rounded-full text-sm font-semibold">1</span>
+      <h2 class="text-lg font-bold text-gray-800">Public Pages (No Authentication)</h2>
+    </div>
+    
     <div class="bg-white rounded-xl p-6 shadow-sm">
-      <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-        <span class="w-8 h-8 bg-gray-500 rounded-lg flex items-center justify-center text-white text-sm">🌐</span>
-        Public Routes
-      </h2>
-      <div class="space-y-3">
-        <div class="route-box public-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/</code>
-          <p class="text-xs text-gray-600 mt-1">Marketing landing page</p>
+      <div class="flex items-start gap-8">
+        <!-- Landing Page -->
+        <div class="node bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-5 border-2 border-gray-300 w-64">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 bg-gray-600 rounded-lg flex items-center justify-center">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            </div>
+            <div>
+              <p class="font-bold text-gray-800">Landing Page</p>
+              <p class="text-xs text-gray-500">Marketing site</p>
+            </div>
+          </div>
+          <code class="text-xs bg-gray-200 px-2 py-1 rounded block mb-3">/</code>
+          <ul class="text-xs text-gray-600 space-y-1">
+            <li>• Hero section</li>
+            <li>• Features overview</li>
+            <li>• Our Story timeline</li>
+            <li>• Global statistics</li>
+            <li>• CTA buttons</li>
+          </ul>
         </div>
-        <div class="route-box public-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/login</code>
-          <p class="text-xs text-gray-600 mt-1">User login</p>
+
+        <div class="flex items-center">
+          <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </div>
-        <div class="route-box public-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/register</code>
-          <p class="text-xs text-gray-600 mt-1">New user registration</p>
+
+        <!-- Auth Pages -->
+        <div class="flex flex-col gap-4">
+          <div class="node bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-5 border-2 border-gray-300 w-64">
+            <div class="flex items-center gap-2 mb-3">
+              <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+              </div>
+              <div>
+                <p class="font-bold text-gray-800">Login</p>
+                <p class="text-xs text-gray-500">Existing users</p>
+              </div>
+            </div>
+            <code class="text-xs bg-gray-200 px-2 py-1 rounded block mb-3">/login</code>
+            <ul class="text-xs text-gray-600 space-y-1">
+              <li>• Email/password</li>
+              <li>• Remember me</li>
+              <li>• Forgot password link</li>
+            </ul>
+            <div class="mt-3 pt-3 border-t border-gray-200">
+              <p class="text-xs text-gray-500">→ Goes directly to their dashboard</p>
+            </div>
+          </div>
+
+          <div class="node bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-5 border-2 border-gray-300 w-64">
+            <div class="flex items-center gap-2 mb-3">
+              <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+              </div>
+              <div>
+                <p class="font-bold text-gray-800">Register</p>
+                <p class="text-xs text-gray-500">New users</p>
+              </div>
+            </div>
+            <code class="text-xs bg-gray-200 px-2 py-1 rounded block mb-3">/register</code>
+            <ul class="text-xs text-gray-600 space-y-1">
+              <li>• Personal details</li>
+              <li>• Organization info</li>
+              <li>• Email verification</li>
+            </ul>
+            <div class="mt-3 pt-3 border-t border-gray-200">
+              <p class="text-xs text-teal-600 font-medium">→ Goes to Dashboard Selection</p>
+            </div>
+          </div>
         </div>
-        <div class="route-box public-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/select-dashboard</code>
-          <p class="text-xs text-gray-600 mt-1">Module selection (new users only)</p>
+
+        <div class="flex items-center">
+          <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </div>
-        <div class="route-box public-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/forgot-password</code>
-          <p class="text-xs text-gray-600 mt-1">Password reset</p>
-        </div>
-        <div class="route-box public-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/pricing</code>
-          <p class="text-xs text-gray-600 mt-1">Pricing page</p>
-        </div>
-        <div class="route-box public-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/about</code>
-          <p class="text-xs text-gray-600 mt-1">About AbXInsight</p>
-        </div>
-        <div class="route-box public-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/contact</code>
-          <p class="text-xs text-gray-600 mt-1">Contact form</p>
+
+        <!-- Dashboard Selection - Only after registration -->
+        <div class="node bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border-2 border-amber-300 w-80">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg>
+            </div>
+            <div>
+              <p class="font-bold text-gray-800">Dashboard Selection</p>
+              <p class="text-xs text-amber-600 font-medium">Only after registration</p>
+            </div>
+          </div>
+          <code class="text-xs bg-gray-200 px-2 py-1 rounded block mb-3">/select-dashboard</code>
+          <p class="text-xs text-gray-500 mb-3">Choose module type AND subscription tier:</p>
+          
+          <!-- Hospital Options -->
+          <div class="mb-3">
+            <p class="text-xs font-bold text-teal-700 mb-2">🏥 Hospital Monitoring</p>
+            <div class="grid grid-cols-3 gap-1">
+              <div class="p-1.5 bg-gray-100 rounded text-center">
+                <p class="text-xs font-medium text-gray-700">Basic</p>
+                <p class="text-xs text-gray-400">Free</p>
+              </div>
+              <div class="p-1.5 bg-teal-100 rounded text-center border border-teal-300">
+                <p class="text-xs font-medium text-teal-700">Pro</p>
+                <p class="text-xs text-teal-500">$299/yr</p>
+              </div>
+              <div class="p-1.5 bg-purple-100 rounded text-center">
+                <p class="text-xs font-medium text-purple-700">Ultra</p>
+                <p class="text-xs text-purple-500">$499/yr</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Country Options -->
+          <div>
+            <p class="text-xs font-bold text-purple-700 mb-2">🌍 Country Monitoring</p>
+            <div class="grid grid-cols-3 gap-1">
+              <div class="p-1.5 bg-gray-100 rounded text-center">
+                <p class="text-xs font-medium text-gray-700">Basic</p>
+                <p class="text-xs text-gray-400">Free</p>
+              </div>
+              <div class="p-1.5 bg-teal-100 rounded text-center">
+                <p class="text-xs font-medium text-teal-700">Pro</p>
+                <p class="text-xs text-teal-500">$299/yr</p>
+              </div>
+              <div class="p-1.5 bg-purple-100 rounded text-center">
+                <p class="text-xs font-medium text-purple-700">Ultra</p>
+                <p class="text-xs text-purple-500">$499/yr</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- Hospital Routes -->
-    <div class="bg-white rounded-xl p-6 shadow-sm">
-      <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-        <span class="w-8 h-8 bg-teal-500 rounded-lg flex items-center justify-center text-white text-sm">🏥</span>
-        Hospital Module
-      </h2>
-      <div class="space-y-3">
-        <div class="route-box hospital-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/hospital/home</code>
-          <p class="text-xs text-gray-600 mt-1">Hospital landing page</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
-        </div>
-        <div class="route-box hospital-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/hospital/dashboard</code>
-          <p class="text-xs text-gray-600 mt-1">Main analytics dashboard</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
-        </div>
-        <div class="route-box hospital-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/hospital/data-entry</code>
-          <p class="text-xs text-gray-600 mt-1">Data entry hub</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
-        </div>
-        <div class="route-box hospital-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/hospital/catalogue</code>
-          <p class="text-xs text-gray-600 mt-1">Antibiotic product catalogue</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
-        </div>
-        <div class="route-box hospital-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/hospital/reports</code>
-          <p class="text-xs text-gray-600 mt-1">Reports & exports</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-teal-200 text-teal-800 rounded text-xs">PRO+</span>
-        </div>
-        <div class="route-box hospital-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/hospital/training</code>
-          <p class="text-xs text-gray-600 mt-1">Training modules</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-teal-200 text-teal-800 rounded text-xs">PRO+</span>
-        </div>
-        <div class="route-box hospital-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/hospital/ai-agent</code>
-          <p class="text-xs text-gray-600 mt-1">AI Stewardship Agent</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-purple-200 text-purple-800 rounded text-xs">ULTRA</span>
-        </div>
-        <div class="route-box hospital-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/hospital/settings</code>
-          <p class="text-xs text-gray-600 mt-1">Facility & user settings</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Country Routes -->
-    <div class="bg-white rounded-xl p-6 shadow-sm">
-      <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-        <span class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white text-sm">🌍</span>
-        Country Module
-      </h2>
-      <div class="space-y-3">
-        <div class="route-box country-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/country/home</code>
-          <p class="text-xs text-gray-600 mt-1">Country landing page</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
-        </div>
-        <div class="route-box country-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/country/dashboard</code>
-          <p class="text-xs text-gray-600 mt-1">National surveillance dashboard</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
-        </div>
-        <div class="route-box country-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/country/facilities</code>
-          <p class="text-xs text-gray-600 mt-1">Facility registry</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
-        </div>
-        <div class="route-box country-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/country/glass-export</code>
-          <p class="text-xs text-gray-600 mt-1">WHO GLASS / WPRACSS export</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
-        </div>
-        <div class="route-box country-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/country/reports</code>
-          <p class="text-xs text-gray-600 mt-1">National reports</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-purple-200 text-purple-800 rounded text-xs">PRO+</span>
-        </div>
-        <div class="route-box country-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/country/benchmarking</code>
-          <p class="text-xs text-gray-600 mt-1">Regional benchmarking</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-purple-200 text-purple-800 rounded text-xs">PRO+</span>
-        </div>
-        <div class="route-box country-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/country/ai-advisor</code>
-          <p class="text-xs text-gray-600 mt-1">AI Policy Advisor</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-purple-200 text-purple-800 rounded text-xs">ULTRA</span>
-        </div>
-        <div class="route-box country-route p-3 rounded-r-lg">
-          <code class="text-sm font-mono">/country/settings</code>
-          <p class="text-xs text-gray-600 mt-1">Country & user settings</p>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 rounded text-xs">ALL TIERS</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- User Flow Diagram -->
-  <div class="max-w-7xl mx-auto mt-8">
-    <div class="bg-white rounded-xl p-6 shadow-sm">
-      <h2 class="text-lg font-bold text-gray-800 mb-4">User Flow Diagram</h2>
-      <div class="flex items-center justify-center gap-2 text-sm flex-wrap">
-        <div class="px-3 py-2 bg-gray-100 rounded-lg">/ (Landing)</div>
-        <span>→</span>
-        <div class="px-3 py-2 bg-gray-100 rounded-lg">/register</div>
-        <span>→</span>
-        <div class="px-3 py-2 bg-purple-100 rounded-lg border-2 border-purple-300">/select-dashboard</div>
-        <span>→</span>
-        <div class="flex gap-2">
-          <div class="px-3 py-2 bg-teal-500 text-white rounded-lg">/hospital/home</div>
-          <span class="text-gray-400">or</span>
-          <div class="px-3 py-2 bg-purple-500 text-white rounded-lg">/country/home</div>
+  <!-- ==================== SECTION 2: HOSPITAL MODULE ==================== -->
+  <div class="max-w-7xl mx-auto px-8 pb-8">
+    <div class="mb-4 flex items-center gap-3">
+      <span class="px-3 py-1 bg-teal-600 text-white rounded-full text-sm font-semibold">2</span>
+      <h2 class="text-lg font-bold text-gray-800">Hospital Module</h2>
+      <span class="text-sm text-gray-500">— Single facility monitoring</span>
+    </div>
+
+    <div class="bg-white rounded-xl p-6 shadow-sm border-2 border-teal-200">
+      
+      <!-- Hospital Navigation -->
+      <div class="mb-6 p-4 bg-teal-50 rounded-lg">
+        <p class="text-sm font-semibold text-teal-800 mb-2">Main Navigation</p>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="px-3 py-1 bg-teal-600 text-white rounded text-xs font-medium">Home</span>
+          <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Dashboard</span>
+          <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Data Entry</span>
+          <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Antibiotic Catalogue</span>
+          <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Reports</span>
+          <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Settings</span>
+          <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">AI Agent</span>
         </div>
       </div>
-      <p class="text-center text-xs text-gray-500 mt-4">Returning users skip /select-dashboard and go directly to their module home</p>
+
+      <div class="grid grid-cols-5 gap-4">
+        
+        <!-- Home Section (NEW) -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wide">Home</p>
+          
+          <div class="node bg-gradient-to-br from-teal-50 to-teal-100 rounded-lg p-4 border-2 border-teal-500">
+            <p class="font-semibold text-gray-800 text-sm">Hospital Home</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/home</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Welcome message</p>
+              <p>• Quick stats summary</p>
+              <p>• Navigation cards</p>
+              <p>• Tier-based access</p>
+              <p>• Upgrade prompts</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-basic text-white rounded">BASIC</span>
+          </div>
+
+          <div class="p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+            <p class="text-xs font-semibold text-yellow-800 mb-1">Navigation Cards:</p>
+            <div class="space-y-1 text-xs text-yellow-700">
+              <p>• Dashboard <span class="text-gray-400">(Basic)</span></p>
+              <p>• Data Entry <span class="text-gray-400">(Basic)</span></p>
+              <p>• Antibiotic Catalogue <span class="text-gray-400">(Basic)</span></p>
+              <p>• Reports <span class="text-teal-600">(Pro)</span></p>
+              <p>• Settings <span class="text-gray-400">(Basic)</span></p>
+              <p>• AI Agent <span class="text-purple-600">(Ultra)</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wide">Dashboard</p>
+          
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">My Facility</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/dashboard</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Total consumption</p>
+              <p>• AWaRe distribution</p>
+              <p>• Route breakdown</p>
+              <p>• Monthly sparkline</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-basic text-white rounded">BASIC</span>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Top 10 Antibiotics</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/dashboard</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Ranked by DDD</p>
+              <p>• AWaRe color-coded</p>
+              <p>• Filter by route</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-pro text-white rounded">PRO</span>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Ward Comparison</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/dashboard/wards</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• ICU vs non-ICU</p>
+              <p>• DDD per 100 bed-days</p>
+              <p>• Alerts for outliers</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-pro text-white rounded">PRO</span>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Spending Analysis</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/dashboard/spending</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Cost by AWaRe</p>
+              <p>• % of revenue</p>
+              <p>• Cost per DDD</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-ultra text-white rounded">ULTRA</span>
+          </div>
+        </div>
+
+        <!-- Data Entry Section -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wide">Data Entry</p>
+          
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Entry Hub</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/data-entry</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Choose method</p>
+              <p>• Recent entries</p>
+              <p>• Quick stats</p>
+            </div>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Quick Entry</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/data-entry/quick</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Smart autocomplete</p>
+              <p>• Search ID/name/brand</p>
+              <p>• Real-time DDD calc</p>
+              <p>• Session management</p>
+            </div>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">File Upload</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/data-entry/upload</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Excel/CSV import</p>
+              <p>• Column mapping</p>
+              <p>• Validation preview</p>
+            </div>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Denominators</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/data-entry/denominators</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Patient-days</p>
+              <p>• Admissions</p>
+              <p>• Ward breakdown</p>
+            </div>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Validation Queue</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/data-entry/validation</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Pending entries</p>
+              <p>• Approve/Reject</p>
+              <p>• Data Manager only</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reports Section -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wide">Reports</p>
+          
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Monthly Report</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/reports/monthly</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• PDF export</p>
+              <p>• Trend summary</p>
+              <p>• Key metrics</p>
+            </div>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Annual Report</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/reports/annual</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Year comparison</p>
+              <p>• Stewardship metrics</p>
+              <p>• DU75/DU90</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-pro text-white rounded">PRO</span>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Data Export</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/reports/export</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Raw data Excel</p>
+              <p>• Custom date range</p>
+              <p>• Filter by ward</p>
+            </div>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">AI Stewardship Advisor</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/reports/ai-advisor</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Pattern detection</p>
+              <p>• Recommendations</p>
+              <p>• Anomaly alerts</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-ultra text-white rounded">ULTRA</span>
+          </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wide">Settings</p>
+          
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Facility Profile</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/settings/facility</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Hospital details</p>
+              <p>• Bed capacity</p>
+              <p>• National data sharing</p>
+            </div>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Ward Structure</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/settings/wards</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Define wards</p>
+              <p>• ICU flags</p>
+              <p>• Department groups</p>
+            </div>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">User Management</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/settings/users</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Invite users</p>
+              <p>• Assign roles</p>
+              <p>• Admin/Manager/Entry</p>
+            </div>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Subscription</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/settings/billing</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Current plan</p>
+              <p>• Upgrade options</p>
+              <p>• Usage stats</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Antibiotic Catalogue Section (NEW) -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wide">Antibiotic Catalogue</p>
+          
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Product Catalogue</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/catalogue</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• View all products</p>
+              <p>• Search & filter</p>
+              <p>• AWaRe breakdown</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-basic text-white rounded">BASIC</span>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Add Product</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/catalogue/add</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• ATC lookup</p>
+              <p>• Brand/strength</p>
+              <p>• Auto-fill DDD</p>
+            </div>
+          </div>
+
+          <div class="node bg-teal-50 rounded-lg p-4 border-2 module-hospital">
+            <p class="font-semibold text-gray-800 text-sm">Import Products</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/catalogue/import</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• WHO template</p>
+              <p>• Upload existing list</p>
+              <p>• Bulk add</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Agent Section (NEW) -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wide">AI Stewardship</p>
+          
+          <div class="node bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-4 border-2 border-purple-300">
+            <p class="font-semibold text-gray-800 text-sm">AI Agent Home</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/ai-agent</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Latest insights</p>
+              <p>• Recommendations</p>
+              <p>• Chat interface</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-ultra text-white rounded">ULTRA</span>
+          </div>
+
+          <div class="node bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-4 border-2 border-purple-300">
+            <p class="font-semibold text-gray-800 text-sm">Anomaly Detection</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/ai-agent/anomalies</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Unusual patterns</p>
+              <p>• Spike alerts</p>
+              <p>• Ward comparisons</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-ultra text-white rounded">ULTRA</span>
+          </div>
+
+          <div class="node bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-4 border-2 border-purple-300">
+            <p class="font-semibold text-gray-800 text-sm">Optimization Tips</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/hospital/ai-agent/tips</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• IV-to-oral switch</p>
+              <p>• Formulary suggestions</p>
+              <p>• Benchmark insights</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-ultra text-white rounded">ULTRA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 3: COUNTRY MODULE ==================== -->
+  <div class="max-w-7xl mx-auto px-8 pb-8">
+    <div class="mb-4 flex items-center gap-3">
+      <span class="px-3 py-1 bg-purple-600 text-white rounded-full text-sm font-semibold">3</span>
+      <h2 class="text-lg font-bold text-gray-800">Country Module</h2>
+      <span class="text-sm text-gray-500">— Multi-facility surveillance</span>
+    </div>
+
+    <div class="bg-white rounded-xl p-6 shadow-sm border-2 border-purple-200">
+      
+      <!-- Country Navigation -->
+      <div class="mb-6 p-4 bg-purple-50 rounded-lg">
+        <p class="text-sm font-semibold text-purple-800 mb-2">Main Navigation</p>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="px-3 py-1 bg-purple-600 text-white rounded text-xs font-medium">Dashboard</span>
+          <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Facilities</span>
+          <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Reports</span>
+          <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">Settings</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-4 gap-4">
+        
+        <!-- Dashboard Section -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wide">Dashboard</p>
+          
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Country Overview</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/dashboard</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Aggregate consumption</p>
+              <p>• AWaRe country %</p>
+              <p>• Coverage stats</p>
+              <p>• Year-over-year</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-basic text-white rounded">BASIC</span>
+          </div>
+
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Regional Breakdown</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/dashboard/regions</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Province comparison</p>
+              <p>• Map visualization</p>
+              <p>• Regional trends</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-pro text-white rounded">PRO</span>
+          </div>
+
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Facility Drill-Down</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/dashboard/facilities</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Hospital rankings</p>
+              <p>• Outlier detection</p>
+              <p>• Individual facility view</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-pro text-white rounded">PRO</span>
+          </div>
+
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Sector Analysis</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/dashboard/sectors</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Public vs Private</p>
+              <p>• Hospital type</p>
+              <p>• Teaching status</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-ultra text-white rounded">ULTRA</span>
+          </div>
+        </div>
+
+        <!-- Facilities Section -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wide">Facilities</p>
+          
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Facility Registry</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/facilities</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• All hospitals list</p>
+              <p>• Filter by region</p>
+              <p>• Reporting status</p>
+            </div>
+          </div>
+
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Onboarding</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/facilities/onboard</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Add new facility</p>
+              <p>• Invite hospital admin</p>
+              <p>• Approval workflow</p>
+            </div>
+          </div>
+
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Submission Monitor</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/facilities/submissions</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Who submitted</p>
+              <p>• Missing data alerts</p>
+              <p>• Reminder system</p>
+            </div>
+          </div>
+
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Coverage Tracker</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/facilities/coverage</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• % facilities reporting</p>
+              <p>• % beds covered</p>
+              <p>• Completeness score</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reports Section -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wide">Reports</p>
+          
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">WHO GLASS Export</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/reports/glass</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Standard format</p>
+              <p>• Validation checks</p>
+              <p>• Ready for submission</p>
+            </div>
+          </div>
+
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Country Report</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/reports/annual</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• PDF generation</p>
+              <p>• Charts & tables</p>
+              <p>• Executive summary</p>
+            </div>
+          </div>
+
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Data Export</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/reports/export</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Raw aggregated data</p>
+              <p>• Custom filters</p>
+              <p>• Multiple formats</p>
+            </div>
+          </div>
+
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Benchmarking</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/reports/benchmark</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Regional comparisons</p>
+              <p>• International context</p>
+              <p>• Target tracking</p>
+            </div>
+            <span class="inline-block mt-2 px-2 py-0.5 text-xs font-medium tier-pro text-white rounded">PRO</span>
+          </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wide">Settings</p>
+          
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Country Profile</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/settings/profile</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Country details</p>
+              <p>• Population data</p>
+              <p>• Administrative regions</p>
+            </div>
+          </div>
+
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">User Management</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/settings/users</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Ministry staff</p>
+              <p>• Regional admins</p>
+              <p>• View-only access</p>
+            </div>
+          </div>
+
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Reporting Periods</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/settings/periods</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Define deadlines</p>
+              <p>• Reminder schedules</p>
+              <p>• Lock past periods</p>
+            </div>
+          </div>
+
+          <div class="node bg-purple-50 rounded-lg p-4 border-2 module-country">
+            <p class="font-semibold text-gray-800 text-sm">Subscription</p>
+            <code class="text-xs bg-white px-1.5 py-0.5 rounded mt-1 block">/country/settings/billing</code>
+            <div class="mt-2 space-y-1 text-xs text-gray-600">
+              <p>• Current plan</p>
+              <p>• Facility limits</p>
+              <p>• Feature access</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 4: USER JOURNEY FLOWS ==================== -->
+  <div class="max-w-7xl mx-auto px-8 pb-8">
+    <div class="mb-4 flex items-center gap-3">
+      <span class="px-3 py-1 bg-blue-600 text-white rounded-full text-sm font-semibold">4</span>
+      <h2 class="text-lg font-bold text-gray-800">Key User Journeys</h2>
+    </div>
+
+    <div class="grid grid-cols-2 gap-6">
+      
+      <!-- Journey 1: New Hospital Setup -->
+      <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center">
+            <span class="text-lg">🏥</span>
+          </div>
+          <div>
+            <p class="font-bold text-gray-800">New Hospital Setup</p>
+            <p class="text-xs text-gray-500">First-time user onboarding</p>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-teal-600 rounded-full text-white text-xs flex items-center justify-center font-bold">1</span>
+            <span class="text-sm">Landing Page → Register</span>
+          </div>
+          <div class="ml-3 border-l-2 border-teal-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-teal-600 rounded-full text-white text-xs flex items-center justify-center font-bold">2</span>
+            <span class="text-sm">Email verification → Login</span>
+          </div>
+          <div class="ml-3 border-l-2 border-teal-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-teal-600 rounded-full text-white text-xs flex items-center justify-center font-bold">3</span>
+            <span class="text-sm">Select Dashboard → Hospital</span>
+          </div>
+          <div class="ml-3 border-l-2 border-teal-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-teal-600 rounded-full text-white text-xs flex items-center justify-center font-bold">4</span>
+            <span class="text-sm">Settings → Facility Profile</span>
+          </div>
+          <div class="ml-3 border-l-2 border-teal-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-teal-600 rounded-full text-white text-xs flex items-center justify-center font-bold">5</span>
+            <span class="text-sm">Settings → Import Product Catalog</span>
+          </div>
+          <div class="ml-3 border-l-2 border-teal-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-teal-600 rounded-full text-white text-xs flex items-center justify-center font-bold">6</span>
+            <span class="text-sm">Data Entry → Denominators</span>
+          </div>
+          <div class="ml-3 border-l-2 border-teal-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-teal-600 rounded-full text-white text-xs flex items-center justify-center font-bold">7</span>
+            <span class="text-sm">Data Entry → Quick Entry ✅</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Journey 2: Monthly Data Entry -->
+      <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+            <span class="text-lg">📊</span>
+          </div>
+          <div>
+            <p class="font-bold text-gray-800">Monthly Data Entry</p>
+            <p class="text-xs text-gray-500">Routine consumption reporting</p>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-blue-600 rounded-full text-white text-xs flex items-center justify-center font-bold">1</span>
+            <span class="text-sm">Login → Hospital Dashboard</span>
+          </div>
+          <div class="ml-3 border-l-2 border-blue-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-blue-600 rounded-full text-white text-xs flex items-center justify-center font-bold">2</span>
+            <span class="text-sm">Data Entry → Denominators (if new month)</span>
+          </div>
+          <div class="ml-3 border-l-2 border-blue-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-blue-600 rounded-full text-white text-xs flex items-center justify-center font-bold">3</span>
+            <span class="text-sm">Data Entry → Quick Entry OR Upload</span>
+          </div>
+          <div class="ml-3 border-l-2 border-blue-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-blue-600 rounded-full text-white text-xs flex items-center justify-center font-bold">4</span>
+            <span class="text-sm">Submit for Review</span>
+          </div>
+          <div class="ml-3 border-l-2 border-blue-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-blue-600 rounded-full text-white text-xs flex items-center justify-center font-bold">5</span>
+            <span class="text-sm">Data Manager → Validation Queue</span>
+          </div>
+          <div class="ml-3 border-l-2 border-blue-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-blue-600 rounded-full text-white text-xs flex items-center justify-center font-bold">6</span>
+            <span class="text-sm">Validate → Dashboard updates ✅</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Journey 3: Country Surveillance -->
+      <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+            <span class="text-lg">🌍</span>
+          </div>
+          <div>
+            <p class="font-bold text-gray-800">Country Surveillance</p>
+            <p class="text-xs text-gray-500">Ministry of Health workflow</p>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-purple-600 rounded-full text-white text-xs flex items-center justify-center font-bold">1</span>
+            <span class="text-sm">Login → Country Dashboard</span>
+          </div>
+          <div class="ml-3 border-l-2 border-purple-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-purple-600 rounded-full text-white text-xs flex items-center justify-center font-bold">2</span>
+            <span class="text-sm">Check Submission Monitor</span>
+          </div>
+          <div class="ml-3 border-l-2 border-purple-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-purple-600 rounded-full text-white text-xs flex items-center justify-center font-bold">3</span>
+            <span class="text-sm">Send reminders to non-reporters</span>
+          </div>
+          <div class="ml-3 border-l-2 border-purple-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-purple-600 rounded-full text-white text-xs flex items-center justify-center font-bold">4</span>
+            <span class="text-sm">Review country metrics</span>
+          </div>
+          <div class="ml-3 border-l-2 border-purple-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-purple-600 rounded-full text-white text-xs flex items-center justify-center font-bold">5</span>
+            <span class="text-sm">Generate WHO GLASS report</span>
+          </div>
+          <div class="ml-3 border-l-2 border-purple-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-purple-600 rounded-full text-white text-xs flex items-center justify-center font-bold">6</span>
+            <span class="text-sm">Export & Submit to WHO ✅</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Journey 4: Add New Product -->
+      <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+            <span class="text-lg">💊</span>
+          </div>
+          <div>
+            <p class="font-bold text-gray-800">Add New Product</p>
+            <p class="text-xs text-gray-500">Expand product catalog</p>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-amber-600 rounded-full text-white text-xs flex items-center justify-center font-bold">1</span>
+            <span class="text-sm">Quick Entry → Search product</span>
+          </div>
+          <div class="ml-3 border-l-2 border-amber-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-amber-600 rounded-full text-white text-xs flex items-center justify-center font-bold">2</span>
+            <span class="text-sm">"Not found" → Add new product</span>
+          </div>
+          <div class="ml-3 border-l-2 border-amber-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-amber-600 rounded-full text-white text-xs flex items-center justify-center font-bold">3</span>
+            <span class="text-sm">Enter ATC code → Auto-lookup</span>
+          </div>
+          <div class="ml-3 border-l-2 border-amber-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-amber-600 rounded-full text-white text-xs flex items-center justify-center font-bold">4</span>
+            <span class="text-sm">Fill brand, strength, packsize</span>
+          </div>
+          <div class="ml-3 border-l-2 border-amber-200 h-4"></div>
+          <div class="flex items-center gap-3">
+            <span class="w-6 h-6 bg-amber-600 rounded-full text-white text-xs flex items-center justify-center font-bold">5</span>
+            <span class="text-sm">Save → Return to Quick Entry ✅</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 5: COMPLETE ROUTE MAP ==================== -->
+  <div class="max-w-7xl mx-auto px-8 pb-12">
+    <div class="mb-4 flex items-center gap-3">
+      <span class="px-3 py-1 bg-gray-600 text-white rounded-full text-sm font-semibold">5</span>
+      <h2 class="text-lg font-bold text-gray-800">Complete Route Reference</h2>
+    </div>
+
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <div class="grid grid-cols-3 gap-8">
+        
+        <!-- Public Routes -->
+        <div>
+          <p class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-gray-500"></span>
+            Public Routes
+          </p>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between"><code class="text-xs bg-gray-100 px-2 py-1 rounded">/</code><span class="text-gray-500">Landing page</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-gray-100 px-2 py-1 rounded">/login</code><span class="text-gray-500">Login</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-gray-100 px-2 py-1 rounded">/register</code><span class="text-gray-500">Register</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-gray-100 px-2 py-1 rounded">/forgot-password</code><span class="text-gray-500">Password reset</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-gray-100 px-2 py-1 rounded">/verify-email</code><span class="text-gray-500">Email verification</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-gray-100 px-2 py-1 rounded">/select-dashboard</code><span class="text-gray-500">Module selection</span></div>
+          </div>
+        </div>
+
+        <!-- Hospital Routes -->
+        <div>
+          <p class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-teal-500"></span>
+            Hospital Routes
+          </p>
+          <div class="space-y-2 text-sm">
+            <p class="text-xs text-gray-400 font-medium uppercase mt-2">Home</p>
+            <div class="flex justify-between"><code class="text-xs bg-teal-50 px-2 py-1 rounded">/hospital/home</code><span class="text-gray-500">Landing</span></div>
+            <p class="text-xs text-gray-400 font-medium uppercase mt-2">Dashboard</p>
+            <div class="flex justify-between"><code class="text-xs bg-teal-50 px-2 py-1 rounded">/hospital/dashboard</code><span class="text-gray-500">Main</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-teal-50 px-2 py-1 rounded">/hospital/dashboard/wards</code><span class="text-gray-500">Wards</span></div>
+            <p class="text-xs text-gray-400 font-medium uppercase mt-2">Data Entry</p>
+            <div class="flex justify-between"><code class="text-xs bg-teal-50 px-2 py-1 rounded">/hospital/data-entry</code><span class="text-gray-500">Hub</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-teal-50 px-2 py-1 rounded">/hospital/data-entry/quick</code><span class="text-gray-500">Quick</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-teal-50 px-2 py-1 rounded">/hospital/data-entry/upload</code><span class="text-gray-500">Upload</span></div>
+            <p class="text-xs text-gray-400 font-medium uppercase mt-2">Catalogue</p>
+            <div class="flex justify-between"><code class="text-xs bg-teal-50 px-2 py-1 rounded">/hospital/catalogue</code><span class="text-gray-500">List</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-teal-50 px-2 py-1 rounded">/hospital/catalogue/import</code><span class="text-gray-500">Import</span></div>
+            <p class="text-xs text-gray-400 font-medium uppercase mt-2">AI Agent</p>
+            <div class="flex justify-between"><code class="text-xs bg-purple-50 px-2 py-1 rounded">/hospital/ai-agent</code><span class="text-purple-500">Home</span></div>
+            <p class="text-xs text-gray-400 font-medium uppercase mt-2">Settings</p>
+            <div class="flex justify-between"><code class="text-xs bg-teal-50 px-2 py-1 rounded">/hospital/settings/users</code><span class="text-gray-500">Users</span></div>
+          </div>
+        </div>
+
+        <!-- Country Routes -->
+        <div>
+          <p class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-purple-500"></span>
+            Country Routes
+          </p>
+          <div class="space-y-2 text-sm">
+            <p class="text-xs text-gray-400 font-medium uppercase mt-2">Dashboard</p>
+            <div class="flex justify-between"><code class="text-xs bg-purple-50 px-2 py-1 rounded">/country/dashboard</code><span class="text-gray-500">Overview</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-purple-50 px-2 py-1 rounded">/country/dashboard/regions</code><span class="text-gray-500">Regions</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-purple-50 px-2 py-1 rounded">/country/dashboard/facilities</code><span class="text-gray-500">Facilities</span></div>
+            <p class="text-xs text-gray-400 font-medium uppercase mt-2">Facilities</p>
+            <div class="flex justify-between"><code class="text-xs bg-purple-50 px-2 py-1 rounded">/country/facilities</code><span class="text-gray-500">Registry</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-purple-50 px-2 py-1 rounded">/country/facilities/onboard</code><span class="text-gray-500">Onboard</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-purple-50 px-2 py-1 rounded">/country/facilities/submissions</code><span class="text-gray-500">Monitor</span></div>
+            <p class="text-xs text-gray-400 font-medium uppercase mt-2">Reports</p>
+            <div class="flex justify-between"><code class="text-xs bg-purple-50 px-2 py-1 rounded">/country/reports/glass</code><span class="text-gray-500">GLASS</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-purple-50 px-2 py-1 rounded">/country/reports/annual</code><span class="text-gray-500">Annual</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-purple-50 px-2 py-1 rounded">/country/reports/export</code><span class="text-gray-500">Export</span></div>
+            <p class="text-xs text-gray-400 font-medium uppercase mt-2">Settings</p>
+            <div class="flex justify-between"><code class="text-xs bg-purple-50 px-2 py-1 rounded">/country/settings/profile</code><span class="text-gray-500">Profile</span></div>
+            <div class="flex justify-between"><code class="text-xs bg-purple-50 px-2 py-1 rounded">/country/settings/users</code><span class="text-gray-500">Users</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="bg-gray-800 text-white py-6 px-8">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
+              <rect width="64" height="64" rx="14" fill="url(#abxLogo52)"/>
+              <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g>
+              <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g>
+              <defs><linearGradient id="abxLogo52" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
+            </svg>
+        <div>
+          <p class="font-semibold">AbXInsight Platform Sitemap</p>
+          <p class="text-sm text-gray-400">Complete Information Architecture</p>
+        </div>
+      </div>
+      <div class="text-right text-sm text-gray-400">
+        <p>For Quickfox Development Team</p>
+        <p>Version 1.0 • January 2026</p>
+      </div>
     </div>
   </div>
 

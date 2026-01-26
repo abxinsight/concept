@@ -3,223 +3,738 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AbXInsight - Hospital Dashboard</title>
+  <title>AbXInsight - Hospital Monitoring Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     body { font-family: 'Inter', sans-serif; }
+    .tier-badge { font-size: 10px; padding: 2px 8px; border-radius: 9999px; font-weight: 600; }
+    .basic-badge { background: #64748B; color: white; }
+    .pro-badge { background: #0D9488; color: white; }
+    .ultra-badge { background: #7C3AED; color: white; }
+    .nav-tab { padding: 12px 24px; font-weight: 500; border-bottom: 3px solid transparent; }
+    .nav-tab.active { border-bottom-color: #0D9488; color: #0D9488; }
+    .nav-tab:not(.active) { color: #64748B; }
   </style>
 </head>
 <body class="bg-gray-100 min-h-screen">
-
-  <!-- Top Nav -->
-  <nav class="bg-white border-b px-6 py-3 flex items-center justify-between">
-    <div class="flex items-center gap-4">
-      <svg width="36" height="36" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="url(#nG)"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g><defs><linearGradient id="nG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
-      <span class="text-lg font-bold text-gray-800">AbXInsight</span>
-      <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">Hospital</span>
-    </div>
-    <div class="flex items-center gap-6">
-      <a href="#" class="text-sm text-gray-600 hover:text-teal-600">Home</a>
-      <a href="#" class="text-sm text-teal-600 font-medium">Dashboard</a>
-      <a href="#" class="text-sm text-gray-600 hover:text-teal-600">Data Entry</a>
-      <a href="#" class="text-sm text-gray-600 hover:text-teal-600">Catalogue</a>
-      <a href="#" class="text-sm text-gray-600 hover:text-teal-600">Settings</a>
-    </div>
-    <div class="flex items-center gap-2">
-      <div class="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 font-semibold text-sm">JD</div>
-      <span class="text-sm text-gray-600">John Doe</span>
-    </div>
-  </nav>
-
-  <!-- Dashboard Content -->
-  <div class="p-6">
-    <!-- Header -->
-    <div class="mb-6 flex items-center justify-between">
-      <div>
-        <h1 class="text-2xl font-bold text-gray-800">Antibiotic Use Dashboard</h1>
-        <p class="text-gray-600">City General Hospital • January 2026</p>
-      </div>
-      <div class="flex gap-3">
-        <select class="px-4 py-2 border rounded-lg text-sm">
-          <option>Last 12 months</option>
-          <option>Last 6 months</option>
-          <option>Last 3 months</option>
-        </select>
-        <button class="px-4 py-2 bg-teal-600 text-white rounded-lg text-sm font-medium">Export Report</button>
-      </div>
-    </div>
-
-    <!-- Key Metrics -->
-    <div class="grid grid-cols-4 gap-4 mb-6">
-      <div class="bg-white rounded-xl p-5 border">
-        <p class="text-sm text-gray-500 mb-1">Total DDD/100 Patient-Days</p>
-        <p class="text-3xl font-bold text-gray-800">67.4</p>
-        <p class="text-sm text-green-600 mt-1">↓ 5.2% vs last month</p>
-      </div>
-      <div class="bg-white rounded-xl p-5 border">
-        <p class="text-sm text-gray-500 mb-1">AWaRe Access %</p>
-        <p class="text-3xl font-bold text-green-600">62%</p>
-        <p class="text-sm text-gray-500 mt-1">Target: ≥60%</p>
-      </div>
-      <div class="bg-white rounded-xl p-5 border">
-        <p class="text-sm text-gray-500 mb-1">AWaRe Watch %</p>
-        <p class="text-3xl font-bold text-amber-600">28%</p>
-        <p class="text-sm text-gray-500 mt-1">Target: ≤30%</p>
-      </div>
-      <div class="bg-white rounded-xl p-5 border">
-        <p class="text-sm text-gray-500 mb-1">AWaRe Reserve %</p>
-        <p class="text-3xl font-bold text-red-600">10%</p>
-        <p class="text-sm text-gray-500 mt-1">Target: ≤10%</p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-3 gap-6">
-      <!-- AWaRe Chart -->
-      <div class="col-span-2 bg-white rounded-xl p-5 border">
-        <h3 class="font-semibold text-gray-800 mb-4">AWaRe Classification Trend</h3>
-        <div class="h-64 flex items-end justify-around gap-4 px-4">
-          <!-- Simulated bar chart -->
-          <div class="flex flex-col items-center gap-2 flex-1">
-            <div class="w-full flex flex-col gap-1">
-              <div class="h-8 bg-red-400 rounded-t"></div>
-              <div class="h-20 bg-amber-400"></div>
-              <div class="h-32 bg-green-400 rounded-b"></div>
+  
+  <!-- Header -->
+  <div class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="flex items-center justify-between py-4">
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2">
+            <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
+              <rect width="64" height="64" rx="14" fill="url(#abxLogo65)"/>
+              <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g>
+              <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g>
+              <defs><linearGradient id="abxLogo65" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
+            </svg>
+            <div>
+              <h1 class="text-xl font-bold text-gray-800">AbXInsight</h1>
+              <p class="text-xs text-gray-500">Track Antibiotic Use. Combat AMR.</p>
+              <p class="text-xs text-gray-500">Hospital Monitoring</p>
             </div>
-            <span class="text-xs text-gray-500">Oct</span>
           </div>
-          <div class="flex flex-col items-center gap-2 flex-1">
-            <div class="w-full flex flex-col gap-1">
-              <div class="h-6 bg-red-400 rounded-t"></div>
-              <div class="h-18 bg-amber-400"></div>
-              <div class="h-36 bg-green-400 rounded-b"></div>
-            </div>
-            <span class="text-xs text-gray-500">Nov</span>
-          </div>
-          <div class="flex flex-col items-center gap-2 flex-1">
-            <div class="w-full flex flex-col gap-1">
-              <div class="h-7 bg-red-400 rounded-t"></div>
-              <div class="h-16 bg-amber-400"></div>
-              <div class="h-40 bg-green-400 rounded-b"></div>
-            </div>
-            <span class="text-xs text-gray-500">Dec</span>
-          </div>
-          <div class="flex flex-col items-center gap-2 flex-1">
-            <div class="w-full flex flex-col gap-1">
-              <div class="h-6 bg-red-400 rounded-t"></div>
-              <div class="h-18 bg-amber-400"></div>
-              <div class="h-38 bg-green-400 rounded-b"></div>
-            </div>
-            <span class="text-xs text-gray-500">Jan</span>
+          <div class="ml-8 px-4 py-2 bg-teal-50 rounded-lg border border-teal-200">
+            <p class="text-xs text-teal-600 font-medium">Central General Hospital</p>
+            <p class="text-xs text-teal-500">350 beds • Tertiary Care</p>
           </div>
         </div>
-        <div class="flex justify-center gap-6 mt-4">
-          <span class="flex items-center gap-2 text-sm"><span class="w-3 h-3 bg-green-400 rounded"></span> Access</span>
-          <span class="flex items-center gap-2 text-sm"><span class="w-3 h-3 bg-amber-400 rounded"></span> Watch</span>
-          <span class="flex items-center gap-2 text-sm"><span class="w-3 h-3 bg-red-400 rounded"></span> Reserve</span>
+        <div class="flex items-center gap-4">
+          <button class="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg text-sm text-gray-600">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            Jan - Dec 2024
+          </button>
+          <button class="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg text-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </svg>
+            Export Report
+          </button>
         </div>
       </div>
+      
+      <!-- Navigation Tabs -->
+      <div class="flex border-b">
+        <button class="nav-tab active">My Facility</button>
+        <button class="nav-tab flex items-center gap-2">
+          Network View
+          <span class="tier-badge pro-badge">PRO</span>
+        </button>
+        <button class="nav-tab flex items-center gap-2">
+          Benchmarking
+          <span class="tier-badge pro-badge">PRO</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
-      <!-- Top 10 Antibiotics -->
-      <div class="bg-white rounded-xl p-5 border">
-        <h3 class="font-semibold text-gray-800 mb-4">Top 10 Antibiotics (by DDD)</h3>
-        <div class="space-y-3">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-green-400 rounded-full"></span>
-              <span class="text-sm">Amoxicillin</span>
-            </div>
-            <span class="text-sm font-medium">15.2</span>
+  <div class="max-w-7xl mx-auto p-8">
+    
+    <!-- Data Status Banner -->
+    <div class="mb-6 bg-white rounded-xl shadow-sm p-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-6">
+          <div>
+            <p class="text-xs text-gray-500 uppercase tracking-wide">Period</p>
+            <p class="font-semibold text-gray-800">Jan - Dec 2024</p>
           </div>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-green-400 rounded-full"></span>
-              <span class="text-sm">Ampicillin</span>
-            </div>
-            <span class="text-sm font-medium">12.8</span>
+          <div class="h-8 w-px bg-gray-200"></div>
+          <div>
+            <p class="text-xs text-gray-500 uppercase tracking-wide">Data Source</p>
+            <p class="font-semibold text-gray-800">Pharmacy Dispensing</p>
           </div>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-amber-400 rounded-full"></span>
-              <span class="text-sm">Ceftriaxone</span>
-            </div>
-            <span class="text-sm font-medium">9.4</span>
+          <div class="h-8 w-px bg-gray-200"></div>
+          <div>
+            <p class="text-xs text-gray-500 uppercase tracking-wide">ATC/DDD Version</p>
+            <p class="font-semibold text-gray-800">WHOCC 2024</p>
           </div>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-amber-400 rounded-full"></span>
-              <span class="text-sm">Azithromycin</span>
-            </div>
-            <span class="text-sm font-medium">7.1</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="text-right">
+            <p class="text-xs text-gray-500">Denominator</p>
+            <p class="text-sm font-medium text-teal-600">32,450 Patient-Days</p>
           </div>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-green-400 rounded-full"></span>
-              <span class="text-sm">Metronidazole</span>
-            </div>
-            <span class="text-sm font-medium">6.3</span>
+          <div class="flex items-center gap-2 px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-xs font-medium">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+            Data Validated
           </div>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-amber-400 rounded-full"></span>
-              <span class="text-sm">Ciprofloxacin</span>
-            </div>
-            <span class="text-sm font-medium">5.8</span>
-          </div>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-green-400 rounded-full"></span>
-              <span class="text-sm">Doxycycline</span>
-            </div>
-            <span class="text-sm font-medium">4.2</span>
-          </div>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-red-400 rounded-full"></span>
-              <span class="text-sm">Meropenem</span>
-            </div>
-            <span class="text-sm font-medium">3.1</span>
-          </div>
+          <span class="tier-badge pro-badge">PRO</span>
         </div>
       </div>
     </div>
 
-    <!-- Ward Comparison (PRO feature indicator) -->
-    <div class="mt-6 bg-white rounded-xl p-5 border">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="font-semibold text-gray-800">Ward Comparison</h3>
-        <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs">PRO FEATURE</span>
+    <!-- ============ BASIC TIER WIDGETS ============ -->
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Core Metrics</h3>
+        <span class="tier-badge basic-badge">BASIC</span>
       </div>
-      <div class="grid grid-cols-5 gap-4">
-        <div class="text-center p-4 bg-gray-50 rounded-lg">
-          <p class="text-2xl font-bold text-gray-800">72.1</p>
-          <p class="text-sm text-gray-500">ICU</p>
-          <p class="text-xs text-red-500">↑ High</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Widget 1: Total Consumption -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">Total Consumption</p>
+              <p class="text-xs text-gray-400">Consumption density indicator</p>
+            </div>
+            <select class="text-xs border rounded px-2 py-1 text-gray-600 bg-white">
+              <option selected>DDD/100 Patient-Days</option>
+              <option>DDD/100 Bed-Days</option>
+              <option>DDD/100 Admissions</option>
+            </select>
+          </div>
+          <div class="flex items-end gap-3">
+            <span class="text-5xl font-bold text-gray-900">42.3</span>
+            <div class="mb-2">
+              <div class="flex items-center text-green-600 text-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                </svg>
+                <span class="ml-1 font-medium">-12.4%</span>
+              </div>
+              <p class="text-xs text-gray-400">vs. 2023</p>
+            </div>
+          </div>
+          <!-- Calculation breakdown -->
+          <div class="mt-4 p-3 bg-gray-50 rounded-lg text-xs text-gray-500">
+            <div class="flex justify-between">
+              <span>Total DDDs:</span>
+              <span class="font-medium text-gray-700">13,724</span>
+            </div>
+            <div class="flex justify-between">
+              <span>÷ Patient-Days:</span>
+              <span class="font-medium text-gray-700">32,450</span>
+            </div>
+            <div class="flex justify-between border-t border-gray-200 pt-1 mt-1">
+              <span>× 100 =</span>
+              <span class="font-bold text-teal-600">42.3</span>
+            </div>
+          </div>
+          <div class="mt-4 h-16">
+            <canvas id="hospitalSparkline"></canvas>
+          </div>
+          <div class="mt-2 flex justify-between text-xs text-gray-400">
+            <span>Jan</span>
+            <span>Jun</span>
+            <span>Dec</span>
+          </div>
         </div>
-        <div class="text-center p-4 bg-gray-50 rounded-lg">
-          <p class="text-2xl font-bold text-gray-800">58.3</p>
-          <p class="text-sm text-gray-500">Surgery</p>
-          <p class="text-xs text-amber-500">Average</p>
+
+        <!-- Widget 2: Route of Administration -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">Route of Administration</p>
+              <p class="text-xs text-gray-400">Target: ≥60% Oral (IV-to-Oral switch)</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-center py-2">
+            <canvas id="hospitalRouteChart" width="160" height="160"></canvas>
+          </div>
+          <div class="grid grid-cols-2 gap-2 mt-4">
+            <div class="text-center p-3 bg-teal-50 rounded-lg">
+              <p class="text-2xl font-bold text-teal-600">58%</p>
+              <p class="text-xs text-gray-500">Oral</p>
+              <p class="text-xs text-teal-600 font-medium">7,960 DDD</p>
+            </div>
+            <div class="text-center p-3 bg-orange-50 rounded-lg">
+              <p class="text-2xl font-bold text-orange-500">42%</p>
+              <p class="text-xs text-gray-500">Parenteral</p>
+              <p class="text-xs text-orange-600 font-medium">5,764 DDD</p>
+            </div>
+          </div>
+          <div class="mt-3 p-2 bg-amber-50 rounded-lg text-center">
+            <p class="text-xs text-amber-700">⚠️ 2% below oral target — consider IV-to-oral switch protocols</p>
+          </div>
         </div>
-        <div class="text-center p-4 bg-gray-50 rounded-lg">
-          <p class="text-2xl font-bold text-gray-800">45.2</p>
-          <p class="text-sm text-gray-500">Medicine</p>
-          <p class="text-xs text-green-500">↓ Good</p>
-        </div>
-        <div class="text-center p-4 bg-gray-50 rounded-lg">
-          <p class="text-2xl font-bold text-gray-800">38.7</p>
-          <p class="text-sm text-gray-500">Pediatrics</p>
-          <p class="text-xs text-green-500">↓ Good</p>
-        </div>
-        <div class="text-center p-4 bg-gray-50 rounded-lg">
-          <p class="text-2xl font-bold text-gray-800">29.4</p>
-          <p class="text-sm text-gray-500">OPD</p>
-          <p class="text-xs text-green-500">↓ Low</p>
+
+        <!-- Widget 3: AWaRe Classification -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">AWaRe Classification</p>
+              <p class="text-xs text-gray-400">WHO Target: ≥60% Access</p>
+            </div>
+            <a href="#" class="text-xs text-teal-600 hover:underline">What is AWaRe? →</a>
+          </div>
+          <div class="flex items-center justify-center py-2">
+            <canvas id="hospitalAwareChart" width="160" height="160"></canvas>
+          </div>
+          <div class="space-y-2 mt-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                <span class="text-sm text-gray-600">Access</span>
+              </div>
+              <div class="text-right">
+                <span class="text-sm font-semibold text-green-600">68%</span>
+                <span class="text-xs text-gray-400 ml-1">(9,332 DDD)</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                <span class="text-sm text-gray-600">Watch</span>
+              </div>
+              <div class="text-right">
+                <span class="text-sm font-semibold text-amber-600">28%</span>
+                <span class="text-xs text-gray-400 ml-1">(3,843 DDD)</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <span class="text-sm text-gray-600">Reserve</span>
+              </div>
+              <div class="text-right">
+                <span class="text-sm font-semibold text-red-600">4%</span>
+                <span class="text-xs text-gray-400 ml-1">(549 DDD)</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 p-2 bg-green-50 rounded-lg text-center">
+            <p class="text-xs text-green-700">✓ Meeting WHO 60% Access target</p>
+          </div>
         </div>
       </div>
+    </div>
+
+    <!-- ============ PRO TIER WIDGETS ============ -->
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Advanced Analytics</h3>
+        <span class="tier-badge pro-badge">PRO</span>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        
+        <!-- Widget 4: Top 10 Antibiotics -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">Top 10 Antibiotics</p>
+              <p class="text-xs text-gray-400">By DDD/100 Admissions</p>
+            </div>
+            <div class="flex gap-1">
+              <button class="text-xs px-3 py-1 bg-teal-600 text-white rounded-full">All</button>
+              <button class="text-xs px-3 py-1 bg-gray-100 text-gray-600 rounded-full">Oral</button>
+              <button class="text-xs px-3 py-1 bg-gray-100 text-gray-600 rounded-full">IV</button>
+            </div>
+          </div>
+          <canvas id="hospitalTop10" height="280"></canvas>
+        </div>
+
+        <!-- Widget 5: DU75/DU90 -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">Drug Utilization Indices</p>
+              <p class="text-xs text-gray-400">Fewer drugs = more focused prescribing</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="text-center p-6 bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl border border-teal-200">
+              <p class="text-6xl font-bold text-teal-600">5</p>
+              <p class="text-sm text-gray-600 mt-2 font-medium">DU75</p>
+              <p class="text-xs text-gray-500">drugs = 75% of use</p>
+              <div class="flex items-center justify-center text-green-600 text-xs mt-3 bg-green-50 rounded-full py-1">
+                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                </svg>
+                Improved from 7
+              </div>
+            </div>
+            <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl border border-purple-200">
+              <p class="text-6xl font-bold text-purple-600">9</p>
+              <p class="text-sm text-gray-600 mt-2 font-medium">DU90</p>
+              <p class="text-xs text-gray-500">drugs = 90% of use</p>
+              <div class="flex items-center justify-center text-gray-500 text-xs mt-3 bg-gray-50 rounded-full py-1">
+                No change from 2023
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-4">
+            <p class="text-xs text-gray-500 mb-2 font-medium">DU75 Composition:</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-3 py-1.5 bg-green-100 text-green-700 rounded-full font-medium">Amoxicillin (22%)</span>
+              <span class="text-xs px-3 py-1.5 bg-green-100 text-green-700 rounded-full font-medium">Ceftriaxone (18%)</span>
+              <span class="text-xs px-3 py-1.5 bg-green-100 text-green-700 rounded-full font-medium">Ampicillin (14%)</span>
+              <span class="text-xs px-3 py-1.5 bg-amber-100 text-amber-700 rounded-full font-medium">Ciprofloxacin (12%)</span>
+              <span class="text-xs px-3 py-1.5 bg-green-100 text-green-700 rounded-full font-medium">Metronidazole (9%)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        
+        <!-- Widget 6: Ward/Unit Analysis -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">Consumption by Ward</p>
+              <p class="text-xs text-gray-400">DDD per 100 bed-days (ward-level denominators required)</p>
+            </div>
+            <button class="text-xs px-3 py-1 bg-gray-100 text-gray-600 rounded-full">View Details →</button>
+          </div>
+          <canvas id="hospitalWardChart" height="220"></canvas>
+          <div class="mt-3 p-2 bg-red-50 rounded-lg flex items-center gap-2">
+            <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+            <span class="text-xs text-red-700">ICU consumption &gt;100 — review stewardship protocols</span>
+          </div>
+        </div>
+
+        <!-- Widget 7: Monthly Trend -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">Monthly Trend</p>
+              <p class="text-xs text-gray-400">DDD/100 Patient-Days over time</p>
+            </div>
+            <div class="flex gap-2">
+              <select class="text-xs border rounded px-2 py-1 text-gray-600 bg-white">
+                <option selected>DDD/100 Patient-Days</option>
+                <option>DDD/100 Admissions</option>
+              </select>
+              <select class="text-xs border rounded px-2 py-1 text-gray-600 bg-white">
+                <option>2024 vs 2023</option>
+                <option>2023 vs 2022</option>
+              </select>
+            </div>
+          </div>
+          <canvas id="hospitalTrendChart" height="220"></canvas>
+          <div class="mt-3 text-xs text-gray-500 text-center">
+            ℹ️ Trends are only comparable when data source remains consistent across periods
+          </div>
+        </div>
+      </div>
+
+      <!-- Widget 8: Spending Analysis -->
+      <div class="bg-white rounded-xl shadow-sm p-6">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <p class="text-sm text-gray-500 font-medium">Spending Analysis</p>
+            <p class="text-xs text-gray-400">Antibiotic expenditure vs hospital revenue</p>
+          </div>
+          <button class="text-xs px-3 py-1 bg-gray-100 text-gray-600 rounded-full">Configure Revenue Data →</button>
+        </div>
+        
+        <!-- Revenue Context Banner -->
+        <div class="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-blue-800">Annual Hospital Revenue</p>
+                <p class="text-xs text-blue-600">Total operating revenue for 2024</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-2xl font-bold text-blue-800">$18.5M</p>
+              <p class="text-xs text-blue-600">↑ 4% vs 2023</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-5 gap-4 mb-6">
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <p class="text-xs text-gray-500">Total AB Spending</p>
+            <p class="text-2xl font-bold text-gray-800">$124,500</p>
+            <p class="text-xs text-green-600">↓ 8% vs 2023</p>
+          </div>
+          <div class="p-4 bg-purple-50 rounded-lg border border-purple-200">
+            <p class="text-xs text-purple-600 font-medium">% of Revenue</p>
+            <p class="text-2xl font-bold text-purple-700">0.67%</p>
+            <p class="text-xs text-green-600">↓ from 0.76%</p>
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <p class="text-xs text-gray-500">Cost per Admission</p>
+            <p class="text-2xl font-bold text-gray-800">$18.20</p>
+            <p class="text-xs text-green-600">↓ 12% vs 2023</p>
+          </div>
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <p class="text-xs text-gray-500">Cost per DDD</p>
+            <p class="text-2xl font-bold text-gray-800">$2.45</p>
+            <p class="text-xs text-amber-600">↑ 3% vs 2023</p>
+          </div>
+          <div class="p-4 bg-amber-50 rounded-lg border border-amber-200">
+            <p class="text-xs text-amber-600 font-medium">Watch Spending</p>
+            <p class="text-2xl font-bold text-amber-700">$48,200</p>
+            <p class="text-xs text-gray-500">39% of AB total</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <p class="text-xs text-gray-500 mb-2 font-medium">Spending by AWaRe Category</p>
+            <canvas id="hospitalSpendingChart" height="140"></canvas>
+          </div>
+          <div>
+            <p class="text-xs text-gray-500 mb-2 font-medium">AB Spending as % of Revenue (Trend)</p>
+            <canvas id="revenuePercentChart" height="140"></canvas>
+          </div>
+        </div>
+
+        <!-- Benchmark Context -->
+        <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+          <p class="text-xs text-gray-500 mb-3 font-medium">Benchmark Comparison</p>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="text-center">
+              <p class="text-lg font-bold text-gray-800">0.67%</p>
+              <p class="text-xs text-gray-500">Your Hospital</p>
+              <div class="mt-1 h-2 bg-green-500 rounded-full"></div>
+            </div>
+            <div class="text-center">
+              <p class="text-lg font-bold text-gray-400">0.85%</p>
+              <p class="text-xs text-gray-500">Network Average</p>
+              <div class="mt-1 h-2 bg-gray-300 rounded-full"></div>
+            </div>
+            <div class="text-center">
+              <p class="text-lg font-bold text-gray-400">1.2%</p>
+              <p class="text-xs text-gray-500">National Average</p>
+              <div class="mt-1 h-2 bg-gray-300 rounded-full"></div>
+            </div>
+          </div>
+          <p class="text-xs text-green-600 mt-3 text-center">✓ Your antibiotic spending is 21% below network average</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ AI STEWARDSHIP AGENT ============ -->
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">AI Stewardship Advisor</h3>
+        <span class="tier-badge basic-badge">ALL TIERS</span>
+      </div>
+      
+      <!-- Floating AI Chat Button -->
+      <div class="fixed bottom-8 right-8 z-50">
+        <div class="relative">
+          <button class="w-14 h-14 bg-gradient-to-r from-teal-600 to-teal-500 rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+            </svg>
+          </button>
+          <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
+            <span class="text-white text-xs">1</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- AI Insights Panel -->
+      <div class="bg-gradient-to-r from-teal-600 to-teal-500 rounded-xl shadow-sm p-6 text-white">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-semibold text-lg mb-2">AI Insights for Your Facility</h4>
+            <div class="space-y-3">
+              <div class="bg-white/10 rounded-lg p-3">
+                <p class="text-sm">📊 <strong>Good progress:</strong> Your Access category improved from 62% to 68% this year. You're now meeting the WHO 60% target.</p>
+              </div>
+              <div class="bg-white/10 rounded-lg p-3">
+                <p class="text-sm">⚠️ <strong>Attention needed:</strong> ICU consumption (145 DDD/100 bed-days) is 40% higher than similar facilities. Consider reviewing carbapenem use.</p>
+              </div>
+              <div class="bg-white/10 rounded-lg p-3">
+                <p class="text-sm">💡 <strong>Suggestion:</strong> Your oral antibiotic rate (58%) is slightly below target. Switching eligible IV ceftriaxone patients to oral alternatives could improve this.</p>
+              </div>
+            </div>
+            <button class="mt-4 px-4 py-2 bg-white text-teal-600 rounded-lg text-sm font-medium hover:bg-teal-50 transition-colors">
+              Chat with AI Advisor →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center text-gray-400 text-sm py-8 border-t">
+      <p>AbXInsight - Hospital Monitoring Dashboard Mockup</p>
+      <p class="mt-1">For Quickfox Development Team</p>
     </div>
 
   </div>
+
+  <script>
+    // Hospital Sparkline
+    new Chart(document.getElementById('hospitalSparkline'), {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+          data: [48.2, 46.5, 45.8, 44.2, 43.5, 42.8, 43.1, 41.5, 42.0, 41.2, 42.5, 42.3],
+          borderColor: '#0D9488',
+          borderWidth: 2,
+          fill: true,
+          backgroundColor: 'rgba(13, 148, 136, 0.1)',
+          tension: 0.4,
+          pointRadius: 0,
+          pointHoverRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { display: false },
+          y: { display: false, min: 35, max: 55 }
+        }
+      }
+    });
+
+    // Hospital Route Chart
+    new Chart(document.getElementById('hospitalRouteChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Oral', 'Parenteral'],
+        datasets: [{
+          data: [58, 42],
+          backgroundColor: ['#0D9488', '#F97316'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        cutout: '70%',
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    // Hospital AWaRe Chart
+    new Chart(document.getElementById('hospitalAwareChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Access', 'Watch', 'Reserve'],
+        datasets: [{
+          data: [68, 28, 4],
+          backgroundColor: ['#10B981', '#F59E0B', '#EF4444'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        cutout: '70%',
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    // Hospital Top 10
+    new Chart(document.getElementById('hospitalTop10'), {
+      type: 'bar',
+      data: {
+        labels: ['Amoxicillin', 'Ceftriaxone', 'Ampicillin', 'Ciprofloxacin', 'Metronidazole', 'Cefazolin', 'Azithromycin', 'Gentamicin', 'Vancomycin', 'Meropenem'],
+        datasets: [{
+          data: [9.3, 7.6, 5.9, 5.1, 3.8, 3.2, 2.8, 2.1, 1.2, 0.9],
+          backgroundColor: ['#10B981', '#F59E0B', '#10B981', '#F59E0B', '#10B981', '#10B981', '#F59E0B', '#F59E0B', '#EF4444', '#EF4444'],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { 
+            title: { display: true, text: 'DDD/100 Admissions', font: { size: 11 } },
+            grid: { display: false }
+          },
+          y: { grid: { display: false } }
+        }
+      }
+    });
+
+    // Hospital Ward Chart
+    new Chart(document.getElementById('hospitalWardChart'), {
+      type: 'bar',
+      data: {
+        labels: ['ICU', 'Surgery', 'Emergency', 'Medicine', 'OB-GYN', 'Pediatrics', 'Outpatient'],
+        datasets: [{
+          label: 'DDD/100 bed-days',
+          data: [145, 92, 88, 72, 45, 38, 22],
+          backgroundColor: function(context) {
+            const value = context.raw;
+            if (value > 100) return '#EF4444';
+            if (value > 70) return '#F59E0B';
+            return '#10B981';
+          },
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { 
+            title: { display: true, text: 'DDD/100 bed-days', font: { size: 11 } },
+            beginAtZero: true
+          },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    // Hospital Trend Chart
+    new Chart(document.getElementById('hospitalTrendChart'), {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [
+          {
+            label: '2024',
+            data: [48.2, 46.5, 45.8, 44.2, 43.5, 42.8, 43.1, 41.5, 42.0, 41.2, 42.5, 42.3],
+            borderColor: '#0D9488',
+            backgroundColor: 'rgba(13, 148, 136, 0.1)',
+            fill: true,
+            tension: 0.4,
+            borderWidth: 2
+          },
+          {
+            label: '2023',
+            data: [52.1, 50.8, 51.2, 49.5, 48.8, 47.2, 48.5, 46.8, 47.5, 46.2, 47.8, 48.3],
+            borderColor: '#94A3B8',
+            borderDash: [5, 5],
+            fill: false,
+            tension: 0.4,
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { 
+          legend: { 
+            position: 'top',
+            labels: { boxWidth: 12, padding: 15 }
+          } 
+        },
+        scales: {
+          y: { 
+            beginAtZero: false,
+            min: 35,
+            max: 55
+          }
+        }
+      }
+    });
+
+    // Hospital Spending Chart
+    new Chart(document.getElementById('hospitalSpendingChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Access', 'Watch', 'Reserve'],
+        datasets: [{
+          label: 'Spending ($)',
+          data: [62500, 48200, 13800],
+          backgroundColor: ['#10B981', '#F59E0B', '#EF4444'],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { 
+            title: { display: true, text: 'USD', font: { size: 10 } },
+            grid: { display: false }
+          },
+          y: { grid: { display: false } }
+        }
+      }
+    });
+
+    // Revenue Percentage Trend Chart
+    new Chart(document.getElementById('revenuePercentChart'), {
+      type: 'line',
+      data: {
+        labels: ['2020', '2021', '2022', '2023', '2024'],
+        datasets: [{
+          label: 'AB % of Revenue',
+          data: [0.92, 0.88, 0.82, 0.76, 0.67],
+          borderColor: '#7C3AED',
+          backgroundColor: 'rgba(124, 58, 237, 0.1)',
+          fill: true,
+          tension: 0.4,
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { 
+            beginAtZero: true,
+            max: 1.2,
+            title: { display: true, text: '%', font: { size: 10 } },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(1) + '%';
+              }
+            }
+          },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+  </script>
 
 </body>
 </html>

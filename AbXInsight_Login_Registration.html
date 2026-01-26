@@ -6,111 +6,174 @@
   <title>AbXInsight - Login & Registration Flow</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     body { font-family: 'Inter', sans-serif; }
-    .screen-container { border: 2px solid #E5E7EB; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-    .screen-label { background: #1E293B; color: white; padding: 8px 16px; font-size: 12px; font-weight: 600; }
-    .tier-card { transition: all 0.2s ease; }
-    .tier-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.1); }
+    .screen-container {
+      border: 2px solid #E5E7EB;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .screen-label {
+      background: #1E293B;
+      color: white;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .tier-card {
+      transition: all 0.2s ease;
+    }
+    .tier-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+    }
+    .tier-card.locked {
+      opacity: 0.7;
+    }
+    .tier-card.locked:hover {
+      transform: none;
+    }
   </style>
 </head>
 <body class="bg-gray-200 min-h-screen p-8">
   
   <!-- Header -->
   <div class="max-w-7xl mx-auto mb-8">
-    <div class="flex items-center gap-4 mb-4">
-      <svg width="48" height="48" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="64" height="64" rx="14" fill="url(#hG)"/>
-        <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g>
-        <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g>
-        <defs><linearGradient id="hG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
-      </svg>
-      <div>
-        <h1 class="text-3xl font-bold text-gray-800">AbXInsight - User Flow Design</h1>
-        <p class="text-gray-600">Login, Registration & Dashboard Selection for Quickfox Team</p>
-      </div>
+    <h1 class="text-3xl font-bold text-gray-800">AbXInsight - User Flow Design Specification</h1>
+    <p class="text-gray-600 mt-2">Login, Registration & Dashboard Selection Flow for Designer Team</p>
+    <div class="flex gap-4 mt-4">
+      <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">UI/UX Guide</span>
+      <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">Quickfox Design Team</span>
     </div>
   </div>
 
-  <!-- Flow Diagram -->
-  <div class="max-w-7xl mx-auto mb-10">
+  <!-- FLOW DIAGRAM -->
+  <div class="max-w-7xl mx-auto mb-12">
     <div class="bg-white rounded-xl p-6 shadow-sm">
       <h2 class="text-lg font-bold text-gray-800 mb-4">User Flow Overview</h2>
-      <div class="flex items-center justify-center gap-3 flex-wrap text-sm">
-        <div class="px-3 py-2 bg-gray-100 rounded-lg">Landing Page</div>
-        <span class="text-gray-400">→</span>
-        <div class="px-3 py-2 bg-teal-100 rounded-lg">Login / Register</div>
-        <span class="text-gray-400">→</span>
-        <div class="px-3 py-2 bg-purple-100 rounded-lg border-2 border-purple-400">Dashboard Selection<br><span class="text-xs">(New users only)</span></div>
-        <span class="text-gray-400">→</span>
-        <div class="px-3 py-2 bg-teal-500 text-white rounded-lg">Hospital Home</div>
-        <span class="text-gray-300">or</span>
-        <div class="px-3 py-2 bg-purple-500 text-white rounded-lg">Country Home</div>
-      </div>
-      <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-800">
-        <strong>Important:</strong> Dashboard Selection only appears after <strong>new registration</strong>. Returning users go directly to their module home.
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <div class="px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium text-center">
+          Landing Page<br><span class="text-xs text-gray-500">(Marketing)</span>
+        </div>
+        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+        <div class="px-4 py-2 bg-teal-100 rounded-lg text-sm font-medium text-center">
+          Login / Register<br><span class="text-xs text-teal-600">Screen 1 & 2</span>
+        </div>
+        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+        <div class="px-4 py-2 bg-purple-100 rounded-lg text-sm font-medium text-center">
+          Dashboard Selection<br><span class="text-xs text-purple-600">Screen 3 (Critical)</span>
+        </div>
+        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+        <div class="flex gap-2">
+          <div class="px-4 py-2 bg-teal-500 text-white rounded-lg text-sm font-medium text-center">
+            Hospital<br><span class="text-xs opacity-80">Dashboard</span>
+          </div>
+          <div class="px-4 py-2 bg-purple-500 text-white rounded-lg text-sm font-medium text-center">
+            National<br><span class="text-xs opacity-80">Dashboard</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- SCREEN 1: LOGIN -->
-  <div class="max-w-7xl mx-auto mb-10">
+  <div class="max-w-7xl mx-auto mb-12">
     <div class="screen-container">
-      <div class="screen-label flex justify-between">
-        <span>SCREEN 1: Login</span>
-        <span class="text-gray-400">Route: /login</span>
+      <div class="screen-label flex items-center justify-between">
+        <span>SCREEN 1: Login Page</span>
+        <span class="text-gray-400 font-normal">Route: /login</span>
       </div>
-      <div class="bg-gradient-to-br from-teal-600 to-purple-600 min-h-[500px] flex">
-        <div class="w-1/2 p-10 text-white flex flex-col justify-center">
-          <div class="flex items-center gap-3 mb-6">
-            <svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="white"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#0D9488"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#7C3AED" fill-opacity="0.5"/></g></svg>
-            <div><h1 class="text-2xl font-bold">AbXInsight</h1><p class="text-teal-200 text-sm">Track Antibiotic Use. Combat AMR.</p></div>
-          </div>
-          <h2 class="text-3xl font-bold mb-4">Track. Analyze.<br>Improve Stewardship.</h2>
-          <p class="text-teal-100">Monitor antibiotic use at hospital or country level.</p>
-        </div>
-        <div class="w-1/2 bg-white flex items-center justify-center p-10">
-          <div class="w-full max-w-sm">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Welcome back</h2>
-            <div class="space-y-4">
-              <div><label class="block text-sm font-medium text-gray-700 mb-1">Email</label><input type="email" class="w-full px-4 py-3 border rounded-lg" placeholder="you@example.com"></div>
-              <div><label class="block text-sm font-medium text-gray-700 mb-1">Password</label><input type="password" class="w-full px-4 py-3 border rounded-lg" placeholder="••••••••"></div>
-              <button class="w-full py-3 bg-gradient-to-r from-teal-600 to-purple-600 text-white font-semibold rounded-lg">Sign In</button>
+      <div class="bg-gradient-to-br from-teal-600 to-teal-700 min-h-[600px] flex">
+        <!-- Left Side - Branding -->
+        <div class="w-1/2 p-12 flex flex-col justify-center text-white">
+          <div class="flex items-center gap-3 mb-8">
+            <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+              <rect width="64" height="64" rx="14" fill="white"/>
+              <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#0D9488"/></g>
+              <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#7C3AED" fill-opacity="0.5"/></g>
+            </svg>
+            <div>
+              <h1 class="text-3xl font-bold">AbXInsight</h1>
+              <p class="text-teal-200 text-sm">Track Antibiotic Use. Combat AMR.</p>
             </div>
-            <p class="mt-4 text-center text-sm text-gray-500">Don't have an account? <a href="#" class="text-teal-600 font-medium">Create one</a></p>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SCREEN 2: REGISTER -->
-  <div class="max-w-7xl mx-auto mb-10">
-    <div class="screen-container">
-      <div class="screen-label flex justify-between">
-        <span>SCREEN 2: Register</span>
-        <span class="text-gray-400">Route: /register</span>
-      </div>
-      <div class="bg-gradient-to-br from-teal-600 to-purple-600 min-h-[500px] flex">
-        <div class="w-1/2 p-10 text-white flex flex-col justify-center">
-          <div class="flex items-center gap-3 mb-6">
-            <svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="white"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#0D9488"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#7C3AED" fill-opacity="0.5"/></g></svg>
-            <div><h1 class="text-2xl font-bold">AbXInsight</h1><p class="text-teal-200 text-sm">Track Antibiotic Use. Combat AMR.</p></div>
-          </div>
-          <h2 class="text-3xl font-bold mb-4">Join the fight<br>against AMR.</h2>
-          <p class="text-teal-100">Free Basic tier available for all hospitals and countries.</p>
-        </div>
-        <div class="w-1/2 bg-white flex items-center justify-center p-10">
-          <div class="w-full max-w-sm">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Create account</h2>
-            <div class="space-y-4">
-              <div class="grid grid-cols-2 gap-3">
-                <div><label class="block text-sm font-medium text-gray-700 mb-1">First name</label><input class="w-full px-3 py-2 border rounded-lg"></div>
-                <div><label class="block text-sm font-medium text-gray-700 mb-1">Last name</label><input class="w-full px-3 py-2 border rounded-lg"></div>
+          <h2 class="text-4xl font-bold mb-4">Monitor. Analyze.<br>Improve Stewardship.</h2>
+          <p class="text-teal-100 text-lg mb-8">
+            Track antimicrobial consumption at hospital or national level. 
+            Make data-driven decisions to combat antimicrobial resistance.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
               </div>
-              <div><label class="block text-sm font-medium text-gray-700 mb-1">Email</label><input type="email" class="w-full px-4 py-3 border rounded-lg"></div>
-              <div><label class="block text-sm font-medium text-gray-700 mb-1">Password</label><input type="password" class="w-full px-4 py-3 border rounded-lg"></div>
-              <button class="w-full py-3 bg-gradient-to-r from-teal-600 to-purple-600 text-white font-semibold rounded-lg">Create Account</button>
+              <span>Free Basic tier - No credit card required</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <span>WHO AWaRe classification built-in</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <span>AI-powered stewardship guidance</span>
+            </div>
+          </div>
+        </div>
+        <!-- Right Side - Login Form -->
+        <div class="w-1/2 bg-white flex items-center justify-center p-12">
+          <div class="w-full max-w-md">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Welcome back</h2>
+            <p class="text-gray-500 mb-8">Sign in to your account to continue</p>
+            
+            <form class="space-y-5">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Email address</label>
+                <input type="email" placeholder="you@example.com" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                <input type="password" placeholder="••••••••" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+              </div>
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="w-4 h-4 text-teal-600 rounded">
+                  <span class="text-sm text-gray-600">Remember me</span>
+                </label>
+                <a href="#" class="text-sm text-teal-600 hover:underline">Forgot password?</a>
+              </div>
+              <button type="submit" class="w-full py-3 bg-teal-600 text-white font-medium rounded-lg hover:bg-teal-700 transition-colors">
+                Sign in
+              </button>
+            </form>
+
+            <div class="mt-6 text-center">
+              <span class="text-gray-500 text-sm">Don't have an account?</span>
+              <a href="#" class="text-teal-600 text-sm font-medium hover:underline ml-1">Create free account</a>
+            </div>
+
+            <div class="mt-8 pt-6 border-t">
+              <p class="text-xs text-gray-400 text-center">
+                By signing in, you agree to our Terms of Service and Privacy Policy
+              </p>
             </div>
           </div>
         </div>
@@ -118,147 +181,682 @@
     </div>
   </div>
 
-  <!-- SCREEN 3: DASHBOARD SELECTION (FIXED) -->
-  <div class="max-w-7xl mx-auto mb-10">
+  <!-- SCREEN 2: REGISTRATION -->
+  <div class="max-w-7xl mx-auto mb-12">
     <div class="screen-container">
-      <div class="screen-label flex justify-between bg-purple-900">
-        <span>SCREEN 3: Dashboard Selection (New Users Only) ⭐ CRITICAL</span>
-        <span class="text-purple-300">Route: /select-dashboard</span>
+      <div class="screen-label flex items-center justify-between">
+        <span>SCREEN 2: Registration Page</span>
+        <span class="text-gray-400 font-normal">Route: /register</span>
       </div>
-      <div class="bg-gray-50 p-8">
-        
-        <!-- Header -->
-        <div class="text-center mb-8">
-          <svg class="mx-auto mb-4" width="56" height="56" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="14" fill="url(#sG)"/><g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g><g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g><defs><linearGradient id="sG" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs></svg>
-          <h1 class="text-2xl font-bold text-gray-800">Welcome to AbXInsight!</h1>
-          <p class="text-gray-600">Choose your antibiotic use tracking environment</p>
-        </div>
-
-        <!-- Two Column Selection -->
-        <div class="grid grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <div class="bg-gradient-to-br from-teal-600 to-teal-700 min-h-[700px] flex">
+        <!-- Left Side - Branding (same as login) -->
+        <div class="w-1/2 p-12 flex flex-col justify-center text-white">
+          <div class="flex items-center gap-3 mb-8">
+            <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+              <rect width="64" height="64" rx="14" fill="white"/>
+              <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#0D9488"/></g>
+              <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#7C3AED" fill-opacity="0.5"/></g>
+            </svg>
+            <div>
+              <h1 class="text-3xl font-bold">AbXInsight</h1>
+              <p class="text-teal-200 text-sm">Track Antibiotic Use. Combat AMR.</p>
+            </div>
+          </div>
+          <h2 class="text-4xl font-bold mb-4">Start for Free</h2>
+          <p class="text-teal-100 text-lg mb-8">
+            Create your account in minutes and start monitoring antimicrobial consumption today.
+            Upgrade anytime as your needs grow.
+          </p>
           
-          <!-- Hospital Tracking -->
-          <div>
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+          <!-- What you get with free tier -->
+          <div class="bg-white/10 rounded-xl p-6">
+            <p class="font-semibold mb-4">Free Basic Tier includes:</p>
+            <div class="space-y-3 text-sm">
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-teal-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Core consumption dashboard (DDD/DID)</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-teal-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>AWaRe classification breakdown</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-teal-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Route of administration analysis</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-teal-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>AI Stewardship Advisor access</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-teal-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>CSV export</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right Side - Registration Form -->
+        <div class="w-1/2 bg-white flex items-center justify-center p-12">
+          <div class="w-full max-w-md">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Create your account</h2>
+            <p class="text-gray-500 mb-8">Start with our free Basic tier - no credit card required</p>
+            
+            <form class="space-y-4">
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">First name</label>
+                  <input type="text" placeholder="John" 
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Last name</label>
+                  <input type="text" placeholder="Doe" 
+                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+                </div>
               </div>
               <div>
-                <h2 class="font-bold text-gray-800">Hospital Tracking</h2>
-                <p class="text-xs text-gray-500">For hospitals & healthcare facilities</p>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Email address</label>
+                <input type="email" placeholder="you@example.com" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Organization / Institution</label>
+                <input type="text" placeholder="Hospital name or Ministry" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Country</label>
+                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white">
+                  <option value="">Select your country</option>
+                  <option>Lao PDR</option>
+                  <option>Vietnam</option>
+                  <option>Thailand</option>
+                  <option>Cambodia</option>
+                  <option>Indonesia</option>
+                  <option>Nepal</option>
+                  <option>Other...</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                <input type="password" placeholder="Minimum 8 characters" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+              </div>
+              <div class="pt-2">
+                <label class="flex items-start gap-3">
+                  <input type="checkbox" class="w-4 h-4 text-teal-600 rounded mt-1">
+                  <span class="text-sm text-gray-600">I agree to the <a href="#" class="text-teal-600 hover:underline">Terms of Service</a> and <a href="#" class="text-teal-600 hover:underline">Privacy Policy</a></span>
+                </label>
+              </div>
+              <button type="submit" class="w-full py-3 bg-teal-600 text-white font-medium rounded-lg hover:bg-teal-700 transition-colors">
+                Create free account
+              </button>
+            </form>
+
+            <div class="mt-6 text-center">
+              <span class="text-gray-500 text-sm">Already have an account?</span>
+              <a href="#" class="text-teal-600 text-sm font-medium hover:underline ml-1">Sign in</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: DASHBOARD SELECTION (CRITICAL) -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="screen-container">
+      <div class="screen-label flex items-center justify-between bg-purple-900">
+        <span>SCREEN 3: Dashboard Selection (Post-Login Landing Page) ⭐ CRITICAL</span>
+        <span class="text-purple-300 font-normal">Route: /dashboard or /home</span>
+      </div>
+      <div class="bg-gray-50 min-h-[900px] p-8">
+        
+        <!-- Top Navigation Bar -->
+        <div class="bg-white rounded-xl shadow-sm px-6 py-4 mb-6 flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
+              <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
+              <rect width="64" height="64" rx="14" fill="url(#abxLogo44)"/>
+              <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g>
+              <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g>
+              <defs><linearGradient id="abxLogo44" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
+            </svg>
+              <span class="text-xl font-bold text-gray-800">AbXInsight</span>
+            </div>
+            <p class="text-xs text-gray-500">Track Antibiotic Use. Combat AMR.</p>
+          <div class="flex items-center gap-4">
+            <button class="text-gray-600 hover:text-gray-800">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+              </svg>
+            </button>
+            <div class="flex items-center gap-3 pl-4 border-l">
+              <div class="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center">
+                <span class="text-teal-600 font-semibold">JD</span>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-gray-800">John Doe</p>
+                <p class="text-xs text-gray-500">Basic Tier</p>
+              </div>
+              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secondary Navigation Links -->
+        <div class="bg-white rounded-xl shadow-sm px-6 py-3 mb-8 flex items-center justify-center gap-8">
+          <a href="/our-story" class="flex items-center gap-2 text-gray-600 hover:text-teal-600 transition-colors text-sm font-medium">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+            Our Story
+          </a>
+          <a href="/team" class="flex items-center gap-2 text-gray-600 hover:text-teal-600 transition-colors text-sm font-medium">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Our Team
+          </a>
+          <a href="/why-monitor-amr" class="flex items-center gap-2 text-gray-600 hover:text-teal-600 transition-colors text-sm font-medium">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+            Why Monitor Antibiotics?
+          </a>
+          <a href="/contact" class="flex items-center gap-2 text-gray-600 hover:text-teal-600 transition-colors text-sm font-medium">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            Contact Us
+          </a>
+        </div>
+
+        <!-- Welcome Section -->
+        <div class="text-center mb-10">
+          <h1 class="text-3xl font-bold text-gray-800 mb-2">Welcome to AbXInsight</h1>
+          <p class="text-gray-600 text-lg">Choose your monitoring environment to get started</p>
+        </div>
+
+        <!-- Main Selection Area -->
+        <div class="grid grid-cols-2 gap-8 max-w-6xl mx-auto">
+          
+          <!-- LEFT SIDE: Hospital Monitoring -->
+          <div class="space-y-4">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-teal-600 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-xl font-bold text-gray-800">Hospital Monitoring</h2>
+                <p class="text-sm text-gray-500">For hospitals, clinics & healthcare facilities</p>
               </div>
             </div>
-            
-            <!-- Basic -->
-            <div class="tier-card bg-white rounded-xl border-2 border-teal-500 p-4 mb-3">
-              <div class="flex justify-between items-center mb-2">
-                <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-bold">BASIC</span>
-                <span class="text-xl font-bold">Free</span>
+
+            <!-- Basic Tier Card - ACCESSIBLE -->
+            <div class="tier-card bg-white rounded-xl border-2 border-teal-500 p-6 cursor-pointer hover:shadow-lg">
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold">BASIC</span>
+                <span class="text-2xl font-bold text-gray-800">Free</span>
               </div>
-              <p class="text-sm text-gray-600 mb-3">Individual hospitals starting stewardship</p>
-              <button class="w-full py-2 bg-teal-600 text-white text-sm font-medium rounded-lg">Start Free →</button>
+              <p class="text-gray-600 text-sm mb-4">Perfect for individual hospitals starting their stewardship journey</p>
+              <ul class="space-y-2 text-sm text-gray-600 mb-4">
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Core dashboard (DDD/100 admissions)
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  AWaRe classification
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  AI Stewardship Advisor
+                </li>
+              </ul>
+              <!-- Language badge -->
+              <div class="flex items-center gap-2 mb-4 p-2 bg-teal-50 rounded-lg">
+                <svg class="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                </svg>
+                <span class="text-xs text-teal-700 font-medium">Available in 10+ languages</span>
+              </div>
+              <!-- Learn more link -->
+              <a href="/hospital/features" class="flex items-center gap-1 text-teal-600 text-sm font-medium hover:underline mb-4">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Learn how Hospital Basic works →
+              </a>
+              <button class="w-full py-3 bg-teal-600 text-white font-medium rounded-lg hover:bg-teal-700">
+                Enter Hospital Dashboard →
+              </button>
             </div>
-            
-            <!-- Pro -->
-            <div class="tier-card bg-white rounded-xl border p-4 mb-3">
-              <div class="flex justify-between items-center mb-2">
-                <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-bold">PRO</span>
-                <span class="text-xl font-bold">$299<span class="text-sm text-gray-500">/yr</span></span>
+
+            <!-- Pro Tier Card - LOCKED (triggers payment) -->
+            <div class="tier-card locked bg-white rounded-xl border border-gray-200 p-6 relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-teal-100 to-transparent"></div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm font-semibold">PRO</span>
+                <div class="text-right">
+                  <span class="text-2xl font-bold text-gray-800">$299</span>
+                  <span class="text-gray-500 text-sm">/year</span>
+                </div>
               </div>
-              <p class="text-sm text-gray-600 mb-3">Hospital networks, reports, AI extraction</p>
-              <button class="w-full py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg">Upgrade to Pro</button>
+              <p class="text-gray-600 text-sm mb-4">For hospital networks and advanced analytics needs</p>
+              <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  All Basic features +
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  AI-powered data upload
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Multi-facility comparison
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Spending & revenue analysis
+                </li>
+              </ul>
+              <button class="w-full py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+                Upgrade to Pro
+              </button>
             </div>
-            
-            <!-- Ultra -->
-            <div class="tier-card bg-white rounded-xl border p-4">
-              <div class="flex justify-between items-center mb-2">
-                <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-bold">ULTRA</span>
-                <span class="text-xl font-bold">$499<span class="text-sm text-gray-500">/yr</span></span>
+
+            <!-- Ultra Tier Card - LOCKED (contact sales) -->
+            <div class="tier-card locked bg-white rounded-xl border border-gray-200 p-6 relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-purple-100 to-transparent"></div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">ULTRA</span>
+                <span class="text-lg font-semibold text-gray-600">Custom</span>
               </div>
-              <p class="text-sm text-gray-600 mb-3">AI Stewardship Agent, custom metrics</p>
-              <button class="w-full py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg">Upgrade to Ultra</button>
+              <p class="text-gray-600 text-sm mb-4">Enterprise features for large hospital groups</p>
+              <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  All Pro features +
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Custom dashboards
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  White-label branding
+                </li>
+              </ul>
+              <button class="w-full py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200">
+                Contact Sales
+              </button>
             </div>
           </div>
 
-          <!-- Country Tracking -->
-          <div>
+          <!-- RIGHT SIDE: Country Monitoring -->
+          <div class="space-y-4">
             <div class="flex items-center gap-3 mb-4">
-              <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
               </div>
               <div>
-                <h2 class="font-bold text-gray-800">Country Tracking</h2>
-                <p class="text-xs text-gray-500">For ministries & governments</p>
+                <h2 class="text-xl font-bold text-gray-800">Country Monitoring</h2>
+                <p class="text-sm text-gray-500">For ministries, governments & policy makers</p>
               </div>
             </div>
-            
-            <!-- Basic -->
-            <div class="tier-card bg-white rounded-xl border-2 border-purple-500 p-4 mb-3">
-              <div class="flex justify-between items-center mb-2">
-                <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-bold">BASIC</span>
-                <span class="text-xl font-bold">Free</span>
+
+            <!-- Basic Tier Card - ACCESSIBLE -->
+            <div class="tier-card bg-white rounded-xl border-2 border-purple-500 p-6 cursor-pointer hover:shadow-lg">
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold">BASIC</span>
+                <span class="text-2xl font-bold text-gray-800">Free</span>
               </div>
-              <p class="text-sm text-gray-600 mb-3">WHO GLASS / WPRACSS / ESAC-Net export</p>
-              <button class="w-full py-2 bg-purple-600 text-white text-sm font-medium rounded-lg">Start Free →</button>
+              <p class="text-gray-600 text-sm mb-4">Essential national surveillance for countries starting Antibiotic Use Tracking</p>
+              <ul class="space-y-2 text-sm text-gray-600 mb-4">
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Core dashboard (DID)
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  AWaRe classification
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  WHO GLASS / ESAC-Net / WPRACSS export
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  AI Policy Advisor
+                </li>
+              </ul>
+              <!-- Language badge -->
+              <div class="flex items-center gap-2 mb-4 p-2 bg-purple-50 rounded-lg">
+                <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                </svg>
+                <span class="text-xs text-purple-700 font-medium">Available in 10+ languages</span>
+              </div>
+              <!-- Learn more link -->
+              <a href="/country/features" class="flex items-center gap-1 text-purple-600 text-sm font-medium hover:underline mb-4">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Learn how Country Basic works →
+              </a>
+              <button class="w-full py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700">
+                Enter Country Dashboard →
+              </button>
             </div>
-            
-            <!-- Pro -->
-            <div class="tier-card bg-white rounded-xl border p-4 mb-3">
-              <div class="flex justify-between items-center mb-2">
-                <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-bold">PRO</span>
-                <span class="text-xl font-bold">$299<span class="text-sm text-gray-500">/yr</span></span>
+
+            <!-- Pro Tier Card - LOCKED -->
+            <div class="tier-card locked bg-white rounded-xl border border-gray-200 p-6 relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-purple-100 to-transparent"></div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">PRO</span>
+                <div class="text-right">
+                  <span class="text-2xl font-bold text-gray-800">$299</span>
+                  <span class="text-gray-500 text-sm">/year</span>
+                </div>
               </div>
-              <p class="text-sm text-gray-600 mb-3">Regional breakdown, facility drill-down</p>
-              <button class="w-full py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg">Upgrade to Pro</button>
+              <p class="text-gray-600 text-sm mb-4">Advanced regional analysis and benchmarking</p>
+              <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  All Basic features +
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Regional breakdown
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Cross-country benchmarking
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Facility drill-down
+                </li>
+              </ul>
+              <button class="w-full py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+                Upgrade to Pro
+              </button>
             </div>
-            
-            <!-- Ultra -->
-            <div class="tier-card bg-white rounded-xl border p-4">
-              <div class="flex justify-between items-center mb-2">
-                <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-bold">ULTRA</span>
-                <span class="text-xl font-bold">$499<span class="text-sm text-gray-500">/yr</span></span>
+
+            <!-- Ultra Tier Card - LOCKED -->
+            <div class="tier-card locked bg-white rounded-xl border border-gray-200 p-6 relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-indigo-100 to-transparent"></div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-semibold">ULTRA</span>
+                <span class="text-lg font-semibold text-gray-600">Custom</span>
               </div>
-              <p class="text-sm text-gray-600 mb-3">AI Policy Advisor, custom metrics, API</p>
-              <button class="w-full py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg">Upgrade to Ultra</button>
+              <p class="text-gray-600 text-sm mb-4">Complete national surveillance platform with hospital integration</p>
+              <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  All Pro features +
+                </li>
+                <li class="flex items-center gap-2 font-medium text-indigo-700">
+                  <svg class="w-4 h-4 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Hospital ↔ National integration ⭐
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  GIS map visualization
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  One Health module
+                </li>
+              </ul>
+              <button class="w-full py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200">
+                Contact Sales
+              </button>
             </div>
           </div>
+
+        </div>
+
+        <!-- Footer Help Text -->
+        <div class="text-center mt-10">
+          <p class="text-gray-500 text-sm">
+            Not sure which to choose? <a href="/hospital-vs-national" class="text-teal-600 hover:underline">Learn more about Hospital vs Country monitoring</a>
+            or <a href="/contact" class="text-teal-600 hover:underline">contact us</a> for guidance.
+          </p>
         </div>
 
       </div>
     </div>
   </div>
 
-  <!-- Design Notes -->
-  <div class="max-w-7xl mx-auto">
-    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
-      <h2 class="font-bold text-yellow-800 mb-4">📋 Quickfox Implementation Notes</h2>
-      <div class="grid grid-cols-3 gap-6 text-sm">
-        <div>
-          <h3 class="font-semibold text-yellow-800 mb-2">User Flow</h3>
-          <ul class="text-yellow-700 space-y-1">
-            <li>• <strong>New users:</strong> Register → Dashboard Selection → Module Home</li>
-            <li>• <strong>Returning users:</strong> Login → Directly to Module Home</li>
-            <li>• Store user's module choice in database</li>
-          </ul>
+  <!-- SCREEN 4: PAYMENT PAGE -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="screen-container">
+      <div class="screen-label flex items-center justify-between">
+        <span>SCREEN 4: Payment Page (Pro Tier Upgrade)</span>
+        <span class="text-gray-400 font-normal">Route: /upgrade/pro</span>
+      </div>
+      <div class="bg-gray-50 min-h-[600px] flex">
+        <!-- Left Side - Order Summary -->
+        <div class="w-2/5 bg-teal-600 p-10 text-white">
+          <div class="flex items-center gap-2 mb-8">
+            <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
+              <rect width="64" height="64" rx="14" fill="white"/>
+              <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#0D9488"/></g>
+              <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="#7C3AED" fill-opacity="0.5"/></g>
+            </svg>
+            <span class="text-xl font-bold">AbXInsight</span>
+          </div>
+          <p class="text-teal-200 text-xs mb-8">Track Antibiotic Use. Combat AMR.</p>
+          
+          <h2 class="text-2xl font-bold mb-6">Upgrade to Pro</h2>
+          
+          <div class="bg-white/10 rounded-xl p-6 mb-6">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-lg font-semibold">Pro Tier - Hospital</span>
+              <span class="text-2xl font-bold">$299</span>
+            </div>
+            <p class="text-teal-100 text-sm mb-4">Annual subscription (billed yearly)</p>
+            <hr class="border-white/20 my-4">
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between">
+                <span class="text-teal-100">Subtotal</span>
+                <span>$299.00</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-teal-100">Tax</span>
+                <span>$0.00</span>
+              </div>
+              <hr class="border-white/20 my-2">
+              <div class="flex justify-between text-lg font-bold">
+                <span>Total</span>
+                <span>$299.00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-sm">
+            <p class="font-semibold">What's included:</p>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>All Basic features</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>AI-powered data upload</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Advanced analytics & widgets</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Email support</span>
+            </div>
+          </div>
         </div>
-        <div>
-          <h3 class="font-semibold text-yellow-800 mb-2">Pricing</h3>
-          <ul class="text-yellow-700 space-y-1">
-            <li>• Basic: Free (both modules)</li>
-            <li>• Pro: $299/year (both modules)</li>
-            <li>• Ultra: $499/year (both modules)</li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="font-semibold text-yellow-800 mb-2">Terminology</h3>
-          <ul class="text-yellow-700 space-y-1">
-            <li>• Use "Antibiotic Use Tracking"</li>
-            <li>• Use "Country" not "National"</li>
-            <li>• Brand: <strong>AbXInsight</strong> (capital I)</li>
-          </ul>
+        
+        <!-- Right Side - Payment Form -->
+        <div class="w-3/5 bg-white p-10">
+          <h2 class="text-2xl font-bold text-gray-800 mb-2">Payment Details</h2>
+          <p class="text-gray-500 mb-8">Complete your purchase securely</p>
+
+          <form class="space-y-5">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Cardholder Name</label>
+              <input type="text" placeholder="Name on card" 
+                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Card Number</label>
+              <div class="relative">
+                <input type="text" placeholder="1234 5678 9012 3456" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 pr-20">
+                <div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/100px-Visa_Inc._logo.svg.png" alt="Visa" class="h-6">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/100px-Mastercard-logo.svg.png" alt="Mastercard" class="h-6">
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Expiry Date</label>
+                <input type="text" placeholder="MM / YY" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">CVC</label>
+                <input type="text" placeholder="123" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Billing Address</label>
+              <input type="text" placeholder="Street address" 
+                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 mb-3">
+              <div class="grid grid-cols-2 gap-3">
+                <input type="text" placeholder="City" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+                <input type="text" placeholder="Country" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+              </div>
+            </div>
+
+            <div class="pt-4">
+              <button type="submit" class="w-full py-4 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 flex items-center justify-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+                Pay $299.00
+              </button>
+            </div>
+
+            <div class="flex items-center justify-center gap-4 pt-4 text-gray-400 text-xs">
+              <div class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+                <span>Secure checkout</span>
+              </div>
+              <span>•</span>
+              <span>Powered by Stripe</span>
+            </div>
+          </form>
+
+          <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+            <p class="text-xs text-gray-500">
+              <strong>Need an invoice instead?</strong> For institutional purchases, 
+              <a href="#" class="text-teal-600 hover:underline">request an invoice</a> and pay via bank transfer.
+            </p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- DESIGN NOTES -->
+  <div class="max-w-7xl mx-auto mb-12">
+    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+      <h2 class="text-lg font-bold text-yellow-800 mb-4">📋 Design Notes for Quickfox Team</h2>
+      
+      <div class="grid grid-cols-2 gap-6 text-sm">
+        <div>
+          <h3 class="font-semibold text-yellow-800 mb-2">User Flow Logic</h3>
+          <ul class="space-y-2 text-yellow-700">
+            <li>• New user registers → automatically gets Basic tier</li>
+            <li>• After login → always lands on Dashboard Selection page</li>
+            <li>• User can access BOTH Hospital AND National (if needed)</li>
+            <li>• Basic tier buttons → go directly to dashboard</li>
+            <li>• Pro/Ultra buttons → trigger payment/contact flow</li>
+            <li>• User's tier status stored per monitoring mode</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold text-yellow-800 mb-2">Technical Considerations</h3>
+          <ul class="space-y-2 text-yellow-700">
+            <li>• Payment integration: Stripe recommended</li>
+            <li>• Store user tier separately for Hospital vs National</li>
+            <li>• Session should remember last-used monitoring mode</li>
+            <li>• Dashboard Selection can be bypassed via direct URL if tier unlocked</li>
+            <li>• Invoice option needed for institutional customers</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-yellow-200">
+        <h3 class="font-semibold text-yellow-800 mb-2">Routes Structure</h3>
+        <div class="flex flex-wrap gap-3 text-xs">
+          <code class="bg-yellow-100 px-2 py-1 rounded">/login</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/register</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/dashboard</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/our-story</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/team</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/why-monitor-amr</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/contact</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/hospital/features</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/hospital/basic</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/hospital/pro</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/national/features</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/national/basic</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/national/pro</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/upgrade/pro</code>
+          <code class="bg-yellow-100 px-2 py-1 rounded">/contact-sales</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="max-w-7xl mx-auto text-center text-gray-400 text-sm py-8">
+    <p>AbXInsight - Login & Registration Flow Design Specification</p>
+    <p class="mt-1">For Quickfox Design Team</p>
   </div>
 
 </body>
