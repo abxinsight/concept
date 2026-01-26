@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AbXuse - Monitor Antibiotic Use. Combat AMR.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .gradient-text {
+      background: linear-gradient(135deg, #0D9488 0%, #7C3AED 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, #0D9488 0%, #0F766E 50%, #7C3AED 100%);
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+<body class="bg-white">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-lg">Ab</span>
+          </div>
+          <div>
+            <span class="text-xl font-bold text-gray-800">AbXuse</span>
+            <p class="text-xs text-gray-500 -mt-1">Monitor Antibiotic Use. Combat AMR.</p>
+          </div>
+        </div>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#story" class="text-gray-600 hover:text-teal-600 transition-colors">Our Story</a>
+          <a href="#features" class="text-gray-600 hover:text-teal-600 transition-colors">Features</a>
+          <a href="#solutions" class="text-gray-600 hover:text-teal-600 transition-colors">Solutions</a>
+          <a href="#pricing" class="text-gray-600 hover:text-teal-600 transition-colors">Pricing</a>
+          <a href="#team" class="text-gray-600 hover:text-teal-600 transition-colors">Team</a>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="/login" class="text-gray-600 hover:text-teal-600 transition-colors">Sign in</a>
+          <a href="/register" class="px-5 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors font-medium">
+            Get Started Free
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-gradient pt-32 pb-20 text-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full mb-6">
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            <span class="text-sm">Launching 2026 — Built for global health impact</span>
+          </div>
+          <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Monitor. Analyze.<br>
+            <span class="text-teal-200">Combat AMR.</span>
+          </h1>
+          <p class="text-xl text-teal-100 mb-8 leading-relaxed">
+            AbXuse is an open-source antimicrobial consumption monitoring platform 
+            built by global health experts. From single hospitals to national surveillance — 
+            make data-driven decisions to fight antimicrobial resistance.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="/register" class="px-8 py-4 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors flex items-center gap-2">
+              Start Free Today
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+            <a href="#demo" class="px-8 py-4 bg-white/10 text-white rounded-lg font-semibold hover:bg-white/20 transition-colors flex items-center gap-2">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+              </svg>
+              Watch Demo
+            </a>
+          </div>
+          <div class="mt-10 flex items-center gap-8 text-sm text-teal-200">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span>Free because preserving our antibiotics is a global public good</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span>WHO GLASS compatible</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span>Open source core</span>
+            </div>
+          </div>
+        </div>
+        <div class="relative">
+          <!-- Dashboard Preview Mockup -->
+          <div class="bg-white rounded-2xl shadow-2xl p-4 transform rotate-1">
+            <div class="bg-gray-100 rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-4">
+                <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+              </div>
+              <div class="grid grid-cols-3 gap-4 mb-4">
+                <div class="bg-white rounded-lg p-4 shadow-sm">
+                  <p class="text-xs text-gray-500">Total DID</p>
+                  <p class="text-2xl font-bold text-gray-800">6.49</p>
+                  <p class="text-xs text-green-600">↓ 23%</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 shadow-sm">
+                  <p class="text-xs text-gray-500">Access %</p>
+                  <p class="text-2xl font-bold text-green-600">65%</p>
+                  <p class="text-xs text-green-600">✓ Target met</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 shadow-sm">
+                  <p class="text-xs text-gray-500">Facilities</p>
+                  <p class="text-2xl font-bold text-purple-600">247</p>
+                  <p class="text-xs text-gray-500">connected</p>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg p-4 shadow-sm">
+                <div class="flex justify-between items-center mb-2">
+                  <p class="text-xs text-gray-500">AWaRe Classification</p>
+                </div>
+                <div class="flex gap-2">
+                  <div class="h-4 bg-green-500 rounded" style="width: 65%"></div>
+                  <div class="h-4 bg-amber-500 rounded" style="width: 32%"></div>
+                  <div class="h-4 bg-red-500 rounded" style="width: 3%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>Access 65%</span>
+                  <span>Watch 32%</span>
+                  <span>Reserve 3%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Floating badges -->
+          <div class="absolute -top-4 -right-4 bg-white rounded-lg shadow-lg px-4 py-2 transform rotate-3">
+            <p class="text-xs text-gray-500">Powered by</p>
+            <p class="font-bold text-purple-600">AI Stewardship</p>
+          </div>
+          <div class="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-lg px-4 py-2 transform -rotate-3">
+            <p class="text-xs text-gray-500">Export to</p>
+            <p class="font-bold text-blue-600">WHO GLASS</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story Section -->
+  <section id="story" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-3xl mx-auto text-center mb-16">
+        <span class="text-teal-600 font-semibold text-sm uppercase tracking-wide">Our Story</span>
+        <h2 class="text-4xl font-bold text-gray-800 mt-4 mb-6">Born from the Field,<br>Built for Impact</h2>
+        <p class="text-xl text-gray-600">
+          AbXuse wasn't created in a boardroom. It was built in the hospitals and ministries 
+          of the countries that need it most.
+        </p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="relative">
+        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-teal-500 to-purple-500 rounded-full"></div>
+        
+        <!-- Timeline Item 1: 2018 -->
+        <div class="relative flex items-center mb-16">
+          <div class="w-1/2 pr-12 text-right">
+            <span class="text-teal-600 font-semibold">2018 - The Beginning</span>
+            <h3 class="text-2xl font-bold text-gray-800 mt-2">A Gap in the System</h3>
+            <p class="text-gray-600 mt-3">
+              Working with WHO and the Fleming Fund across Southeast Asia, we saw the same problem everywhere: 
+              countries wanted to monitor antimicrobial consumption and had a strong desire to report to WHO or WOAH, 
+              but there were no easy, user-friendly tools available. Existing solutions were too complex, with long delays 
+              between dispensing and reporting. Excel spreadsheets were the norm.
+            </p>
+          </div>
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-teal-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+            1
+          </div>
+          <div class="w-1/2 pl-12">
+            <div class="bg-teal-50 rounded-xl p-6">
+              <p class="text-teal-700 italic">"We had the methodology, we had the WHO guidelines, but no accessible tool to implement them at scale."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item 2: 2024 -->
+        <div class="relative flex items-center mb-16">
+          <div class="w-1/2 pr-12 text-right">
+            <div class="bg-amber-50 rounded-xl p-6">
+              <p class="text-amber-700 italic">"Hospitals want to contribute to national surveillance, but there's a disconnect between private and public sectors."</p>
+            </div>
+          </div>
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+            2
+          </div>
+          <div class="w-1/2 pl-12">
+            <span class="text-amber-600 font-semibold">2024 - A New Realisation</span>
+            <h3 class="text-2xl font-bold text-gray-800 mt-2">Bridging the Gap</h3>
+            <p class="text-gray-600 mt-3">
+              We discovered that hospitals — both public and private — genuinely want to contribute to national 
+              surveillance efforts. But there was no easy way to connect them. We set out to bridge that gap 
+              with seamless hospital-to-national data integration.
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 3: 2025 -->
+        <div class="relative flex items-center mb-16">
+          <div class="w-1/2 pr-12 text-right">
+            <span class="text-purple-600 font-semibold">2025 - Rising to the Challenge</span>
+            <h3 class="text-2xl font-bold text-gray-800 mt-2">When the World Needs Us Most</h3>
+            <p class="text-gray-600 mt-3">
+              WHO is having to do more with less. The Fleming Fund is ending. But the needs are greater than ever. 
+              That's when we decided: let's step up and help countries continue their surveillance efforts. 
+              With AI now omnipresent, we can analyse data faster and bring clinical guidelines to life — 
+              making stewardship actionable, not just theoretical.
+            </p>
+          </div>
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+            3
+          </div>
+          <div class="w-1/2 pl-12">
+            <div class="bg-purple-50 rounded-xl p-6">
+              <p class="text-purple-700 italic">"What if we could make antibiotic use monitoring as simple as uploading a file and clicking a button?"</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item 3b: 2025 - The Reality -->
+        <div class="relative flex items-center mb-16">
+          <div class="w-1/2 pr-12 text-right">
+            <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+              <p class="text-xs text-red-500 font-semibold mb-2">SOURCE: TRACSS GLOBAL MONITORING</p>
+              <div class="flex justify-end gap-4">
+                <div class="text-center">
+                  <p class="text-3xl font-bold text-red-600">20%</p>
+                  <p class="text-xs text-red-500">No national<br>monitoring</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-3xl font-bold text-amber-600">28%</p>
+                  <p class="text-xs text-amber-600">Very limited<br>capacity</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-red-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+          </div>
+          <div class="w-1/2 pl-12">
+            <span class="text-red-600 font-semibold">2025 - The Reality</span>
+            <h3 class="text-2xl font-bold text-gray-800 mt-2">A Global Gap</h3>
+            <p class="text-gray-600 mt-3">
+              According to TRACSS (Global Monitoring), nearly 20% of countries worldwide have no national 
+              antimicrobial consumption monitoring system, and another 28% have very limited capacity. 
+              That's almost half the world flying blind on antibiotic use.
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 4: Early 2026 -->
+        <div class="relative flex items-center mb-16">
+          <div class="w-1/2 pr-12 text-right">
+            <div class="bg-teal-50 rounded-xl p-6">
+              <p class="text-sm text-teal-600 mb-2">Building with</p>
+              <div class="flex justify-end gap-2">
+                <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">🇱🇦 Lao PDR</span>
+                <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">🇳🇵 Nepal</span>
+                <span class="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">🇰🇭 Cambodia</span>
+              </div>
+            </div>
+          </div>
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-teal-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+            4
+          </div>
+          <div class="w-1/2 pl-12">
+            <span class="text-teal-600 font-semibold">Early 2026 - From Concept to Reality</span>
+            <h3 class="text-2xl font-bold text-gray-800 mt-2">Building with Partners</h3>
+            <p class="text-gray-600 mt-3">
+              We are partnering with hospitals in Lao PDR, Nepal, and Cambodia to build and refine AbXuse. 
+              Every feature is being tested and validated by pharmacists, epidemiologists, hospital managers, 
+              and public health experts who will actually use it.
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 5: Late 2026 -->
+        <div class="relative flex items-center">
+          <div class="w-1/2 pr-12 text-right">
+            <span class="text-indigo-600 font-semibold">Late 2026 - Scaling Impact</span>
+            <h3 class="text-2xl font-bold text-gray-800 mt-2">National Deployments</h3>
+            <p class="text-gray-600 mt-3">
+              AbXuse goes national. Ministries of Health will begin using the platform for country-wide surveillance. 
+              The Hospital-National integration enables data to flow seamlessly from facilities 
+              to national dashboards, and directly into WHO GLASS submissions.
+            </p>
+          </div>
+          <div class="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-r from-teal-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+            5
+          </div>
+          <div class="w-1/2 pl-12">
+            <div class="bg-gradient-to-r from-teal-500 to-purple-500 rounded-xl p-6 text-white">
+              <p class="font-semibold mb-3">Our Goals</p>
+              <div class="grid grid-cols-2 gap-4 text-center">
+                <div>
+                  <p class="text-3xl font-bold">10+</p>
+                  <p class="text-sm opacity-80">Countries</p>
+                </div>
+                <div>
+                  <p class="text-3xl font-bold">200+</p>
+                  <p class="text-sm opacity-80">Facilities</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="py-24 bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="text-teal-400 font-semibold text-sm uppercase tracking-wide">Our Mission</span>
+          <h2 class="text-4xl font-bold mt-4 mb-6">Making AMC Surveillance Accessible to Every Country</h2>
+          <p class="text-gray-300 text-lg mb-8">
+            Antimicrobial resistance is a global crisis that doesn't respect borders. Yet the tools to combat it 
+            have been out of reach for many countries. We believe that shouldn't be the case.
+          </p>
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="w-12 h-12 bg-teal-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg">Open Source Methodology</h3>
+                <p class="text-gray-400">The basic platform is free and open source. Every country deserves access to quality AMC surveillance.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg">Built by Experts</h3>
+                <p class="text-gray-400">Developed from a deep understanding of the methods used by frontline health workers who understand the real challenges.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg">Designed for Action</h3>
+                <p class="text-gray-400">Not just dashboards — actionable insights and AI-powered stewardship recommendations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="bg-gradient-to-br from-teal-500/20 to-purple-500/20 rounded-2xl p-8">
+            <div class="grid grid-cols-2 gap-6">
+              <div class="bg-gray-800 rounded-xl p-6 text-center">
+                <p class="text-4xl font-bold text-teal-400">700K+</p>
+                <p class="text-gray-400 mt-2">Deaths from AMR annually</p>
+              </div>
+              <div class="bg-gray-800 rounded-xl p-6 text-center">
+                <p class="text-4xl font-bold text-purple-400">10M</p>
+                <p class="text-gray-400 mt-2">Projected by 2050</p>
+              </div>
+              <div class="bg-gray-800 rounded-xl p-6 text-center col-span-2">
+                <p class="text-2xl font-bold text-white">The time to act is now.</p>
+                <p class="text-gray-400 mt-2">Better data leads to better stewardship.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-teal-600 font-semibold text-sm uppercase tracking-wide">Features</span>
+        <h2 class="text-4xl font-bold text-gray-800 mt-4 mb-6">Everything You Need for AMC Surveillance</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          From data collection to international reporting, AbXuse covers the complete surveillance workflow.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="card-hover bg-white rounded-xl p-8 border border-gray-100 shadow-sm">
+          <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">Intuitive Dashboards</h3>
+          <p class="text-gray-600">
+            Pre-built visualizations for DDD/DID, AWaRe classification, route of administration, 
+            and top antibiotics. No data science degree required.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="card-hover bg-white rounded-xl p-8 border border-gray-100 shadow-sm">
+          <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">AI-Powered Processing</h3>
+          <p class="text-gray-600">
+            Upload any format — pharmacy reports, procurement data, even scanned documents. 
+            Our AI extracts, maps to ATC codes, and calculates DDDs automatically.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="card-hover bg-white rounded-xl p-8 border border-gray-100 shadow-sm">
+          <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">International Reporting</h3>
+          <p class="text-gray-600">
+            One-click export to WHO GLASS, ESAC-Net, and WPRACSS formats. 
+            Meet your international reporting obligations effortlessly.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="card-hover bg-white rounded-xl p-8 border border-gray-100 shadow-sm">
+          <div class="w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">AI Stewardship Advisor</h3>
+          <p class="text-gray-600">
+            Get contextual guidance from an AI trained by clinical microbiologists, pharmacists, 
+            and infectious disease specialists. Available in every tier.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="card-hover bg-white rounded-xl p-8 border border-gray-100 shadow-sm">
+          <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">Hospital ↔ National Link</h3>
+          <p class="text-gray-600">
+            Connect hospital-level data directly to national surveillance. 
+            Automatic aggregation, data quality tracking, and facility drill-down.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="card-hover bg-white rounded-xl p-8 border border-gray-100 shadow-sm">
+          <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-3">One Health Ready</h3>
+          <p class="text-gray-600">
+            Track antimicrobial use across human, animal, and agricultural sectors. 
+            True One Health surveillance in a single platform.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions Section -->
+  <section id="solutions" class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-teal-600 font-semibold text-sm uppercase tracking-wide">Solutions</span>
+        <h2 class="text-4xl font-bold text-gray-800 mt-4 mb-6">Two Platforms, One Mission</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Whether you're a single hospital or a national ministry, AbXuse adapts to your needs.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Hospital Monitoring -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-teal-500">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-16 h-16 bg-teal-100 rounded-xl flex items-center justify-center">
+              <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-800">Hospital Monitoring</h3>
+              <p class="text-gray-500">For hospitals, clinics & healthcare facilities</p>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-6">
+            Track antibiotic consumption at the facility level. Monitor by ward, compare over time, 
+            analyze spending, and get AI-powered stewardship recommendations.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              DDD per 100 admissions / bed-days
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Ward-level breakdown
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Multi-facility network view
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Spending & revenue analysis
+            </li>
+          </ul>
+          <a href="/register" class="inline-flex items-center gap-2 px-6 py-3 bg-teal-600 text-white rounded-lg font-medium hover:bg-teal-700 transition-colors">
+            Start Hospital Monitoring
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- National Monitoring -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-purple-500">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center">
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-800">National Monitoring</h3>
+              <p class="text-gray-500">For ministries, governments & policy makers</p>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-6">
+            Aggregate data from across the country. Regional breakdowns, cross-country benchmarking, 
+            policy impact tracking, and direct WHO GLASS submission.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              DDD per 1,000 inhabitants per day (DID)
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Regional & provincial breakdown
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Hospital network integration
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              WHO GLASS / ESAC-Net export
+            </li>
+          </ul>
+          <a href="/register" class="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors">
+            Start National Monitoring
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-teal-600 font-semibold text-sm uppercase tracking-wide">Pricing</span>
+        <h2 class="text-4xl font-bold text-gray-800 mt-4 mb-6">Simple, Transparent Pricing</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Start free, upgrade when you need more. Same pricing for Hospital and National monitoring.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Basic -->
+        <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
+          <div class="text-center mb-8">
+            <span class="px-4 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold">BASIC</span>
+            <div class="mt-6">
+              <span class="text-5xl font-bold text-gray-800">Free</span>
+            </div>
+            <p class="text-gray-500 mt-2">Forever free, open source</p>
+          </div>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Core dashboard
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              AWaRe classification
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              WHO GLASS export
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              AI Stewardship Advisor
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Up to 5 users
+            </li>
+          </ul>
+          <a href="/register" class="block w-full py-3 text-center bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors">
+            Get Started Free
+          </a>
+        </div>
+
+        <!-- Pro -->
+        <div class="bg-white rounded-2xl p-8 border-2 border-teal-500 shadow-lg relative">
+          <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+            <span class="px-4 py-1 bg-teal-500 text-white rounded-full text-sm font-semibold">MOST POPULAR</span>
+          </div>
+          <div class="text-center mb-8">
+            <span class="px-4 py-1 bg-teal-100 text-teal-700 rounded-full text-sm font-semibold">PRO</span>
+            <div class="mt-6">
+              <span class="text-5xl font-bold text-gray-800">$499</span>
+              <span class="text-gray-500">/year</span>
+            </div>
+            <p class="text-gray-500 mt-2">For growing organizations</p>
+          </div>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Everything in Basic +
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              AI-powered data upload
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Advanced analytics
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Multi-facility / regional
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Email support
+            </li>
+          </ul>
+          <a href="/register" class="block w-full py-3 text-center bg-teal-600 text-white rounded-lg font-medium hover:bg-teal-700 transition-colors">
+            Start Pro Trial
+          </a>
+        </div>
+
+        <!-- Ultra -->
+        <div class="bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl p-8 text-white shadow-lg">
+          <div class="text-center mb-8">
+            <span class="px-4 py-1 bg-white/20 text-white rounded-full text-sm font-semibold">ULTRA</span>
+            <div class="mt-6">
+              <span class="text-4xl font-bold">Custom</span>
+            </div>
+            <p class="text-purple-200 mt-2">For ministries & enterprises</p>
+          </div>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-purple-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Everything in Pro +
+            </li>
+            <li class="flex items-center gap-3 font-semibold">
+              <svg class="w-5 h-5 text-purple-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Hospital ↔ National link ⭐
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-purple-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              GIS visualization
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-purple-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              One Health module
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-purple-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              Dedicated support
+            </li>
+          </ul>
+          <a href="/contact" class="block w-full py-3 text-center bg-white text-purple-600 rounded-lg font-medium hover:bg-purple-50 transition-colors">
+            Contact Sales
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team/Global Presence Section -->
+  <section id="team" class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-teal-600 font-semibold text-sm uppercase tracking-wide">Global Presence</span>
+        <h2 class="text-4xl font-bold text-gray-800 mt-4 mb-6">Built Across Borders</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Our team spans four countries, bringing together diverse perspectives and local expertise.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-8">
+        <div class="bg-white rounded-xl p-8 shadow-sm text-center min-w-[200px]">
+          <span class="text-4xl mb-4 block">🇰🇷</span>
+          <h3 class="font-bold text-gray-800">South Korea</h3>
+          <p class="text-gray-500 text-sm">Technology & Development</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 shadow-sm text-center min-w-[200px]">
+          <span class="text-4xl mb-4 block">🇳🇵</span>
+          <h3 class="font-bold text-gray-800">Nepal</h3>
+          <p class="text-gray-500 text-sm">Implementation & Support</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 shadow-sm text-center min-w-[200px]">
+          <span class="text-4xl mb-4 block">🇧🇪</span>
+          <h3 class="font-bold text-gray-800">Belgium</h3>
+          <p class="text-gray-500 text-sm">Product & Strategy</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 shadow-sm text-center min-w-[200px]">
+          <span class="text-4xl mb-4 block">🇻🇳</span>
+          <h3 class="font-bold text-gray-800">Viet Nam</h3>
+          <p class="text-gray-500 text-sm">Research & Partnerships</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 hero-gradient text-white">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold mb-6">Ready to Start Your AMC Surveillance Journey?</h2>
+      <p class="text-xl text-teal-100 mb-10">
+        Join us in building a global community committed to monitoring antimicrobial consumption 
+        and fighting antimicrobial resistance together.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/register" class="px-8 py-4 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors">
+          Create Free Account
+        </a>
+        <a href="/contact" class="px-8 py-4 bg-white/10 text-white rounded-lg font-semibold hover:bg-white/20 transition-colors">
+          Talk to Our Team
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-lg">Ab</span>
+            </div>
+            <div>
+              <span class="text-xl font-bold text-white">AbXuse</span>
+              <p class="text-xs text-gray-500">Monitor Antibiotic Use. Combat AMR.</p>
+            </div>
+          </div>
+          <p class="text-sm">
+            Open-source antimicrobial consumption monitoring platform. 
+            Built for global health impact.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Product</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#features" class="hover:text-teal-400 transition-colors">Features</a></li>
+            <li><a href="#pricing" class="hover:text-teal-400 transition-colors">Pricing</a></li>
+            <li><a href="#" class="hover:text-teal-400 transition-colors">Documentation</a></li>
+            <li><a href="#" class="hover:text-teal-400 transition-colors">API</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Company</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#story" class="hover:text-teal-400 transition-colors">Our Story</a></li>
+            <li><a href="#team" class="hover:text-teal-400 transition-colors">Team</a></li>
+            <li><a href="#" class="hover:text-teal-400 transition-colors">Careers</a></li>
+            <li><a href="#" class="hover:text-teal-400 transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Resources</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-teal-400 transition-colors">WHO AWaRe</a></li>
+            <li><a href="#" class="hover:text-teal-400 transition-colors">GLASS Guidelines</a></li>
+            <li><a href="#" class="hover:text-teal-400 transition-colors">AMR Learning</a></li>
+            <li><a href="#" class="hover:text-teal-400 transition-colors">Support</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-12 pt-8 flex flex-wrap justify-between items-center">
+        <p class="text-sm">© 2024 AbXuse. All rights reserved.</p>
+        <div class="flex gap-6 text-sm">
+          <a href="#" class="hover:text-teal-400 transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-teal-400 transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

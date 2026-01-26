@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AbXuse - National Monitoring Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .tier-badge { font-size: 10px; padding: 2px 8px; border-radius: 9999px; font-weight: 600; }
+    .basic-badge { background: #64748B; color: white; }
+    .pro-badge { background: #0D9488; color: white; }
+    .ultra-badge { background: #7C3AED; color: white; }
+    .nav-tab { padding: 12px 24px; font-weight: 500; border-bottom: 3px solid transparent; }
+    .nav-tab.active { border-bottom-color: #7C3AED; color: #7C3AED; }
+    .nav-tab:not(.active) { color: #64748B; }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  
+  <!-- Header -->
+  <div class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="flex items-center justify-between py-4">
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2">
+            <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-lg">Ab</span>
+            </div>
+            <div>
+              <h1 class="text-xl font-bold text-gray-800">AbXuse</h1>
+              <p class="text-xs text-gray-500">Monitor Antibiotic Use. Combat AMR.</p>
+              <p class="text-xs text-gray-500">National Monitoring</p>
+            </div>
+          </div>
+          <div class="ml-8 px-4 py-2 bg-purple-50 rounded-lg border border-purple-200">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">🇱🇦</span>
+              <div>
+                <p class="text-xs text-purple-600 font-medium">Lao People's Democratic Republic</p>
+                <p class="text-xs text-purple-500">Ministry of Health • Population: 7.5M</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg text-sm text-gray-600">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            2020 - 2024
+          </button>
+          <div class="flex gap-2">
+            <button class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              WHO GLASS
+            </button>
+            <button class="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg text-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+              Export
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Navigation Tabs -->
+      <div class="flex border-b">
+        <button class="nav-tab active">National Overview</button>
+        <button class="nav-tab flex items-center gap-2">
+          Regional Breakdown
+          <span class="tier-badge pro-badge">PRO</span>
+        </button>
+        <button class="nav-tab flex items-center gap-2">
+          Facility Drill-Down
+          <span class="tier-badge pro-badge">PRO</span>
+        </button>
+        <button class="nav-tab flex items-center gap-2">
+          Policy Tracking
+          <span class="tier-badge ultra-badge">ULTRA</span>
+        </button>
+        <button class="nav-tab flex items-center gap-2">
+          Cross-Country
+          <span class="tier-badge ultra-badge">ULTRA</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto p-8">
+    
+    <!-- Tier Indicator -->
+    <div class="mb-6 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <h2 class="text-lg font-semibold text-gray-800">National Dashboard</h2>
+        <span class="text-sm text-gray-500">|</span>
+        <span class="text-sm text-gray-500">Showing: 2020-2024 Trend Data</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-xs text-gray-500">Current Plan:</span>
+        <span class="tier-badge ultra-badge">ULTRA</span>
+      </div>
+    </div>
+
+    <!-- ============ BASIC TIER WIDGETS ============ -->
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Core National Metrics</h3>
+        <span class="tier-badge basic-badge">BASIC</span>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        
+        <!-- Widget 1: Total DID -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">Total Consumption (DID)</p>
+              <p class="text-xs text-gray-400">DDD per 1,000 inhabitants per day</p>
+            </div>
+          </div>
+          <div class="flex items-end gap-3">
+            <span class="text-5xl font-bold text-gray-900">6.49</span>
+            <div class="mb-2">
+              <div class="flex items-center text-green-600 text-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                </svg>
+                <span class="ml-1 font-medium">-23.5%</span>
+              </div>
+              <p class="text-xs text-gray-400">vs. 2020</p>
+            </div>
+          </div>
+          <div class="mt-4 h-20">
+            <canvas id="nationalSparkline"></canvas>
+          </div>
+          <div class="mt-2 flex justify-between text-xs text-gray-400">
+            <span>2020</span>
+            <span>2022</span>
+            <span>2024</span>
+          </div>
+        </div>
+
+        <!-- Widget 2: Route of Administration -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">Route of Administration</p>
+              <p class="text-xs text-gray-400">National aggregate</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-center py-2">
+            <canvas id="nationalRouteChart" width="160" height="160"></canvas>
+          </div>
+          <div class="grid grid-cols-2 gap-2 mt-4">
+            <div class="text-center p-3 bg-teal-50 rounded-lg">
+              <p class="text-2xl font-bold text-teal-600">72%</p>
+              <p class="text-xs text-gray-500">Oral</p>
+            </div>
+            <div class="text-center p-3 bg-orange-50 rounded-lg">
+              <p class="text-2xl font-bold text-orange-500">28%</p>
+              <p class="text-xs text-gray-500">Parenteral</p>
+            </div>
+          </div>
+          <div class="mt-3 p-2 bg-green-50 rounded-lg text-center">
+            <p class="text-xs text-green-700">✓ Excellent oral usage rate</p>
+          </div>
+        </div>
+
+        <!-- Widget 3: AWaRe Classification -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">AWaRe Classification</p>
+              <p class="text-xs text-gray-400">WHO Target: ≥60% Access</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-center py-2">
+            <canvas id="nationalAwareChart" width="160" height="160"></canvas>
+          </div>
+          <div class="space-y-2 mt-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                <span class="text-sm text-gray-600">Access</span>
+              </div>
+              <span class="text-sm font-semibold text-green-600">65%</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                <span class="text-sm text-gray-600">Watch</span>
+              </div>
+              <span class="text-sm font-semibold text-amber-600">32%</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <span class="text-sm text-gray-600">Reserve</span>
+              </div>
+              <span class="text-sm font-semibold text-red-600">3%</span>
+            </div>
+          </div>
+          <div class="mt-3 p-2 bg-green-50 rounded-lg text-center">
+            <p class="text-xs text-green-700">✓ Meeting WHO 60% Access target</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- International Reporting - NOW IN BASIC TIER -->
+      <div class="bg-white rounded-xl shadow-sm p-6">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <p class="text-sm text-gray-500 font-medium">International Reporting</p>
+            <p class="text-xs text-gray-400">Export-ready submission formats for global surveillance</p>
+          </div>
+          <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-medium">Free in Basic</span>
+        </div>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-sm">WHO</span>
+              </div>
+              <div>
+                <p class="font-medium text-gray-800">WHO GLASS</p>
+                <p class="text-xs text-gray-500">Global AMC Surveillance</p>
+              </div>
+            </div>
+            <button class="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg">Export</button>
+          </div>
+          <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-sm">EU</span>
+              </div>
+              <div>
+                <p class="font-medium text-gray-800">ESAC-Net</p>
+                <p class="text-xs text-gray-500">European Surveillance</p>
+              </div>
+            </div>
+            <button class="px-4 py-2 bg-green-600 text-white text-sm rounded-lg">Export</button>
+          </div>
+          <div class="flex items-center justify-between p-4 bg-purple-50 rounded-lg border border-purple-200">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-xs">WPRO</span>
+              </div>
+              <div>
+                <p class="font-medium text-gray-800">WPRACSS</p>
+                <p class="text-xs text-gray-500">Western Pacific Region</p>
+              </div>
+            </div>
+            <button class="px-4 py-2 bg-purple-600 text-white text-sm rounded-lg">Export</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PRO TIER WIDGETS ============ -->
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Regional & Trend Analysis</h3>
+        <span class="tier-badge pro-badge">PRO</span>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        
+        <!-- Widget 4: Multi-Year Trend -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">National Consumption Trend</p>
+              <p class="text-xs text-gray-400">DID over time</p>
+            </div>
+          </div>
+          <canvas id="nationalTrendChart" height="220"></canvas>
+        </div>
+
+        <!-- Widget 5: AWaRe Trend -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">AWaRe Classification Trend</p>
+              <p class="text-xs text-gray-400">Progress toward 60% Access target</p>
+            </div>
+          </div>
+          <canvas id="awareTrendChart" height="220"></canvas>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        
+        <!-- Widget 6: Regional Breakdown Table -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">Regional Breakdown</p>
+              <p class="text-xs text-gray-400">Consumption by province/region</p>
+            </div>
+            <button class="text-xs px-3 py-1 bg-gray-100 text-gray-600 rounded-full">View Map →</button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-left text-gray-500 border-b">
+                  <th class="pb-3 font-medium">Region</th>
+                  <th class="pb-3 font-medium">DID</th>
+                  <th class="pb-3 font-medium">Access %</th>
+                  <th class="pb-3 font-medium">Trend</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-700">
+                <tr class="border-b border-gray-100">
+                  <td class="py-3 font-medium">Vientiane Capital</td>
+                  <td>8.2</td>
+                  <td><span class="text-amber-600">58%</span></td>
+                  <td class="text-green-600">↓ 12%</td>
+                </tr>
+                <tr class="border-b border-gray-100">
+                  <td class="py-3 font-medium">Northern Region</td>
+                  <td>5.4</td>
+                  <td><span class="text-green-600">72%</span></td>
+                  <td class="text-green-600">↓ 18%</td>
+                </tr>
+                <tr class="border-b border-gray-100">
+                  <td class="py-3 font-medium">Central Region</td>
+                  <td>6.8</td>
+                  <td><span class="text-green-600">64%</span></td>
+                  <td class="text-green-600">↓ 15%</td>
+                </tr>
+                <tr class="border-b border-gray-100 bg-red-50">
+                  <td class="py-3 font-medium">Southern Region</td>
+                  <td class="text-red-600 font-medium">9.1</td>
+                  <td><span class="text-red-600">52%</span></td>
+                  <td class="text-red-600">↑ 5%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Widget 7: Top 10 National -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">Top 10 Antibiotics (National)</p>
+              <p class="text-xs text-gray-400">By DID</p>
+            </div>
+          </div>
+          <canvas id="nationalTop10" height="260"></canvas>
+        </div>
+      </div>
+
+      <!-- Widget 8: Cross-Country Benchmarking -->
+      <div class="bg-white rounded-xl shadow-sm p-6">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <p class="text-sm text-gray-500 font-medium">Regional Benchmarking (ASEAN)</p>
+            <p class="text-xs text-gray-400">Comparison with neighboring countries</p>
+          </div>
+          <span class="tier-badge pro-badge">PRO</span>
+        </div>
+        <canvas id="benchmarkChart" height="150"></canvas>
+      </div>
+    </div>
+
+    <!-- ============ ULTRA TIER WIDGETS ============ -->
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Ultra Features</h3>
+        <span class="tier-badge ultra-badge">ULTRA</span>
+      </div>
+
+      <!-- CRITICAL: Hospital-National Integration -->
+      <div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl shadow-lg p-6 mb-6 text-white">
+        <div class="flex items-start gap-4">
+          <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-2">
+              <h4 class="font-bold text-xl">Hospital ↔ National Integration</h4>
+              <span class="px-2 py-1 bg-white/20 rounded text-xs font-semibold">CRITICAL FEATURE</span>
+            </div>
+            <p class="text-purple-100 mb-4">Connect hospital-level surveillance directly to national monitoring. Aggregate facility data automatically for comprehensive national oversight.</p>
+            
+            <div class="grid grid-cols-3 gap-4 mb-4">
+              <div class="bg-white/10 rounded-lg p-4 text-center">
+                <p class="text-3xl font-bold">247</p>
+                <p class="text-xs text-purple-200">Connected Hospitals</p>
+              </div>
+              <div class="bg-white/10 rounded-lg p-4 text-center">
+                <p class="text-3xl font-bold">18</p>
+                <p class="text-xs text-purple-200">Provinces Covered</p>
+              </div>
+              <div class="bg-white/10 rounded-lg p-4 text-center">
+                <p class="text-3xl font-bold">92%</p>
+                <p class="text-xs text-purple-200">Data Completeness</p>
+              </div>
+            </div>
+
+            <div class="flex gap-3">
+              <button class="px-4 py-2 bg-white text-purple-600 rounded-lg text-sm font-medium hover:bg-purple-50">
+                Manage Connected Facilities →
+              </button>
+              <button class="px-4 py-2 bg-white/20 text-white rounded-lg text-sm font-medium hover:bg-white/30">
+                View Data Flow
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hospital Network Overview Widget -->
+      <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <p class="text-sm text-gray-500 font-medium">Connected Hospital Network</p>
+            <p class="text-xs text-gray-400">Real-time data aggregation from facility level</p>
+          </div>
+          <div class="flex gap-2">
+            <button class="text-xs px-3 py-1 bg-purple-600 text-white rounded-full">All Facilities</button>
+            <button class="text-xs px-3 py-1 bg-gray-100 text-gray-600 rounded-full">By Region</button>
+            <button class="text-xs px-3 py-1 bg-gray-100 text-gray-600 rounded-full">By Type</button>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-4 gap-4 mb-6">
+          <div class="p-4 bg-green-50 rounded-lg border border-green-200">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-green-600 font-medium">Reporting On Time</span>
+              <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            </div>
+            <p class="text-2xl font-bold text-green-700">198</p>
+            <p class="text-xs text-green-600">facilities (80%)</p>
+          </div>
+          <div class="p-4 bg-amber-50 rounded-lg border border-amber-200">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-amber-600 font-medium">Delayed</span>
+            </div>
+            <p class="text-2xl font-bold text-amber-700">32</p>
+            <p class="text-xs text-amber-600">facilities (13%)</p>
+          </div>
+          <div class="p-4 bg-red-50 rounded-lg border border-red-200">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-red-600 font-medium">Not Reporting</span>
+            </div>
+            <p class="text-2xl font-bold text-red-700">17</p>
+            <p class="text-xs text-red-600">facilities (7%)</p>
+          </div>
+          <div class="p-4 bg-purple-50 rounded-lg border border-purple-200">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-purple-600 font-medium">Data Quality Score</span>
+            </div>
+            <p class="text-2xl font-bold text-purple-700">94.2%</p>
+            <p class="text-xs text-purple-600">above threshold</p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="text-left text-gray-500 border-b">
+                <th class="pb-3 font-medium">Facility</th>
+                <th class="pb-3 font-medium">Region</th>
+                <th class="pb-3 font-medium">Type</th>
+                <th class="pb-3 font-medium">Last Report</th>
+                <th class="pb-3 font-medium">DDD/100 Adm</th>
+                <th class="pb-3 font-medium">Access %</th>
+                <th class="pb-3 font-medium">Status</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-700">
+              <tr class="border-b border-gray-100">
+                <td class="py-3 font-medium">Mahosot Hospital</td>
+                <td>Vientiane</td>
+                <td>Tertiary</td>
+                <td>2 hours ago</td>
+                <td>45.2</td>
+                <td class="text-green-600">68%</td>
+                <td><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="py-3 font-medium">Setthathirath Hospital</td>
+                <td>Vientiane</td>
+                <td>Secondary</td>
+                <td>5 hours ago</td>
+                <td>38.7</td>
+                <td class="text-green-600">72%</td>
+                <td><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="py-3 font-medium">Luang Prabang Provincial</td>
+                <td>Northern</td>
+                <td>Provincial</td>
+                <td>1 day ago</td>
+                <td>52.1</td>
+                <td class="text-amber-600">58%</td>
+                <td><span class="w-2 h-2 bg-amber-500 rounded-full inline-block"></span></td>
+              </tr>
+              <tr class="border-b border-gray-100 bg-red-50">
+                <td class="py-3 font-medium">Savannakhet Provincial</td>
+                <td>Southern</td>
+                <td>Provincial</td>
+                <td class="text-red-600">15 days ago</td>
+                <td>—</td>
+                <td>—</td>
+                <td><span class="w-2 h-2 bg-red-500 rounded-full inline-block"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-4 text-center">
+          <button class="text-sm text-purple-600 hover:underline">View all 247 facilities →</button>
+        </div>
+      </div>
+      
+      <!-- Data Flow Diagram -->
+      <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <p class="text-sm text-gray-500 font-medium">Data Aggregation Flow</p>
+            <p class="text-xs text-gray-400">How hospital data flows to national dashboard</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-center gap-4 py-8">
+          <!-- Hospital Level -->
+          <div class="text-center">
+            <div class="w-20 h-20 bg-teal-100 rounded-xl flex items-center justify-center mx-auto mb-2 border-2 border-teal-500">
+              <svg class="w-10 h-10 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-medium text-gray-700">Hospitals</p>
+            <p class="text-xs text-gray-500">247 facilities</p>
+            <p class="text-xs text-teal-600">DDD/100 Admissions</p>
+          </div>
+          
+          <!-- Arrow -->
+          <div class="flex flex-col items-center">
+            <svg class="w-12 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+            <p class="text-xs text-gray-400">Auto-sync</p>
+          </div>
+
+          <!-- Aggregation -->
+          <div class="text-center">
+            <div class="w-20 h-20 bg-indigo-100 rounded-xl flex items-center justify-center mx-auto mb-2 border-2 border-indigo-500">
+              <svg class="w-10 h-10 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-medium text-gray-700">Aggregation</p>
+            <p class="text-xs text-gray-500">Data warehouse</p>
+            <p class="text-xs text-indigo-600">Validation & QC</p>
+          </div>
+
+          <!-- Arrow -->
+          <div class="flex flex-col items-center">
+            <svg class="w-12 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+            <p class="text-xs text-gray-400">Transform</p>
+          </div>
+
+          <!-- National Level -->
+          <div class="text-center">
+            <div class="w-20 h-20 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-2 border-2 border-purple-500">
+              <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <p class="text-sm font-medium text-gray-700">National</p>
+            <p class="text-xs text-gray-500">Ministry dashboard</p>
+            <p class="text-xs text-purple-600">DID calculation</p>
+          </div>
+        </div>
+        
+        <div class="bg-purple-50 rounded-lg p-4 mt-4">
+          <p class="text-sm text-purple-800"><strong>How it works:</strong> Hospitals using AbXuse (any tier) can opt-in to share anonymized data with the national platform. Data is automatically aggregated, validated, and transformed from DDD/100 Admissions to DID for national reporting.</p>
+        </div>
+      </div>
+      
+      <!-- GIS Map -->
+      <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <p class="text-sm text-gray-500 font-medium">Geographic Consumption Map</p>
+            <p class="text-xs text-gray-400">Interactive map by province</p>
+          </div>
+          <div class="flex gap-2">
+            <button class="text-xs px-3 py-1 bg-purple-600 text-white rounded-full">DID</button>
+            <button class="text-xs px-3 py-1 bg-gray-100 text-gray-600 rounded-full">AWaRe</button>
+            <button class="text-xs px-3 py-1 bg-gray-100 text-gray-600 rounded-full">Trend</button>
+          </div>
+        </div>
+        <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg p-4" style="height: 400px;">
+          <svg viewBox="0 0 500 380" class="w-full h-full">
+            <!-- Map Background -->
+            <rect x="0" y="0" width="500" height="380" fill="#f8fafc" rx="8"/>
+            
+            <!-- Laos-inspired country shape -->
+            <!-- Northern Region -->
+            <path d="M150 40 L220 30 L280 50 L300 90 L260 130 L200 140 L150 120 L130 80 Z" 
+                  fill="#10B981" stroke="#059669" stroke-width="2" opacity="0.85"/>
+            <text x="200" y="85" font-size="11" fill="#065F46" text-anchor="middle" font-weight="600">Northern</text>
+            <text x="200" y="100" font-size="9" fill="#065F46" text-anchor="middle">DID: 5.4</text>
+            
+            <!-- Vientiane Capital -->
+            <path d="M260 130 L300 90 L340 110 L350 150 L320 180 L280 170 L250 150 Z" 
+                  fill="#F59E0B" stroke="#D97706" stroke-width="2" opacity="0.85"/>
+            <text x="295" y="140" font-size="11" fill="#92400E" text-anchor="middle" font-weight="600">Vientiane</text>
+            <text x="295" y="155" font-size="9" fill="#92400E" text-anchor="middle">DID: 8.2</text>
+            
+            <!-- Central Region -->
+            <path d="M200 140 L260 130 L280 170 L300 220 L260 280 L200 260 L180 200 L170 160 Z" 
+                  fill="#10B981" stroke="#059669" stroke-width="2" opacity="0.85"/>
+            <text x="225" y="200" font-size="11" fill="#065F46" text-anchor="middle" font-weight="600">Central</text>
+            <text x="225" y="215" font-size="9" fill="#065F46" text-anchor="middle">DID: 6.8</text>
+            
+            <!-- Southern Region -->
+            <path d="M200 260 L260 280 L280 330 L250 360 L200 350 L170 310 L180 280 Z" 
+                  fill="#EF4444" stroke="#DC2626" stroke-width="2" opacity="0.85"/>
+            <text x="225" y="315" font-size="11" fill="#991B1B" text-anchor="middle" font-weight="600">Southern</text>
+            <text x="225" y="330" font-size="9" fill="#991B1B" text-anchor="middle">DID: 9.1 ⚠️</text>
+            
+            <!-- Legend -->
+            <rect x="380" y="40" width="100" height="100" fill="white" stroke="#E5E7EB" rx="4"/>
+            <text x="390" y="58" font-size="10" fill="#374151" font-weight="600">DID Legend</text>
+            
+            <rect x="390" y="68" width="14" height="14" fill="#10B981" rx="2"/>
+            <text x="410" y="79" font-size="9" fill="#374151">Low (&lt;7)</text>
+            
+            <rect x="390" y="88" width="14" height="14" fill="#F59E0B" rx="2"/>
+            <text x="410" y="99" font-size="9" fill="#374151">Medium (7-8)</text>
+            
+            <rect x="390" y="108" width="14" height="14" fill="#EF4444" rx="2"/>
+            <text x="410" y="119" font-size="9" fill="#374151">High (&gt;8)</text>
+            
+            <!-- Scale -->
+            <text x="400" y="160" font-size="8" fill="#9CA3AF">Click region for details</text>
+            
+            <!-- National Average Indicator -->
+            <rect x="380" y="180" width="100" height="50" fill="#7C3AED" stroke="#6D28D9" rx="4" opacity="0.9"/>
+            <text x="430" y="200" font-size="9" fill="white" text-anchor="middle">National DID</text>
+            <text x="430" y="220" font-size="16" fill="white" text-anchor="middle" font-weight="bold">6.49</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        
+        <!-- Policy Impact Timeline -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">Policy Impact Timeline</p>
+              <p class="text-xs text-gray-400">Interventions and outcomes</p>
+            </div>
+          </div>
+          <div class="relative">
+            <canvas id="policyChart" height="200"></canvas>
+          </div>
+          <div class="mt-4 space-y-2">
+            <div class="flex items-center gap-3 p-2 bg-purple-50 rounded-lg">
+              <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
+              <div>
+                <p class="text-xs font-medium text-purple-800">2021: National AMR Action Plan</p>
+                <p class="text-xs text-purple-600">Stewardship guidelines introduced</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-2 bg-purple-50 rounded-lg">
+              <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
+              <div>
+                <p class="text-xs font-medium text-purple-800">2023: AWaRe Integration</p>
+                <p class="text-xs text-purple-600">Essential medicines list updated</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Advanced Reporting Templates (Ultra Enhancement) -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="text-sm text-gray-500 font-medium">Advanced Reporting</p>
+              <p class="text-xs text-gray-400">Ministry templates & custom reports</p>
+            </div>
+            <span class="tier-badge ultra-badge">ULTRA</span>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gray-600 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-800">Ministry Report Templates</p>
+                  <p class="text-xs text-gray-500">Customized for your government</p>
+                </div>
+              </div>
+              <button class="px-4 py-2 bg-gray-600 text-white text-sm rounded-lg">Generate</button>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-800">Custom Report Builder</p>
+                  <p class="text-xs text-gray-500">Create your own report templates</p>
+                </div>
+              </div>
+              <button class="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg">Build</button>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-medium text-gray-800">Scheduled Reports</p>
+                  <p class="text-xs text-gray-500">Automated delivery to stakeholders</p>
+                </div>
+              </div>
+              <button class="px-4 py-2 bg-amber-600 text-white text-sm rounded-lg">Schedule</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Dashboard Builder Preview -->
+      <div class="bg-white rounded-xl shadow-sm p-6">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <p class="text-sm text-gray-500 font-medium">Custom Dashboard Builder</p>
+            <p class="text-xs text-gray-400">Drag and drop widgets to create your view</p>
+          </div>
+          <button class="px-4 py-2 bg-purple-600 text-white text-sm rounded-lg">
+            + Create Custom Dashboard
+          </button>
+        </div>
+        <div class="grid grid-cols-4 gap-4">
+          <div class="p-4 border-2 border-dashed border-gray-200 rounded-lg text-center">
+            <div class="w-10 h-10 bg-gray-100 rounded-lg mx-auto mb-2 flex items-center justify-center">
+              <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <p class="text-xs text-gray-500">KPI Card</p>
+          </div>
+          <div class="p-4 border-2 border-dashed border-gray-200 rounded-lg text-center">
+            <div class="w-10 h-10 bg-gray-100 rounded-lg mx-auto mb-2 flex items-center justify-center">
+              <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+              </svg>
+            </div>
+            <p class="text-xs text-gray-500">Pie Chart</p>
+          </div>
+          <div class="p-4 border-2 border-dashed border-gray-200 rounded-lg text-center">
+            <div class="w-10 h-10 bg-gray-100 rounded-lg mx-auto mb-2 flex items-center justify-center">
+              <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+              </svg>
+            </div>
+            <p class="text-xs text-gray-500">Line Chart</p>
+          </div>
+          <div class="p-4 border-2 border-dashed border-gray-200 rounded-lg text-center">
+            <div class="w-10 h-10 bg-gray-100 rounded-lg mx-auto mb-2 flex items-center justify-center">
+              <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+              </svg>
+            </div>
+            <p class="text-xs text-gray-500">Map Widget</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ AI STEWARDSHIP AGENT ============ -->
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-4">
+        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">AI Policy Advisor</h3>
+        <span class="tier-badge basic-badge">ALL TIERS</span>
+      </div>
+      
+      <!-- Floating AI Chat Button -->
+      <div class="fixed bottom-8 right-8 z-50">
+        <div class="relative">
+          <button class="w-14 h-14 bg-gradient-to-r from-purple-600 to-purple-500 rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+            </svg>
+          </button>
+          <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
+            <span class="text-white text-xs">2</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- AI Insights Panel -->
+      <div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl shadow-sm p-6 text-white">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-semibold text-lg mb-2">National AI Policy Insights</h4>
+            <div class="space-y-3">
+              <div class="bg-white/10 rounded-lg p-3">
+                <p class="text-sm">📊 <strong>National Progress:</strong> Overall consumption decreased 23.5% since 2020. Your NAP interventions are working - continue current strategies.</p>
+              </div>
+              <div class="bg-white/10 rounded-lg p-3">
+                <p class="text-sm">⚠️ <strong>Priority Alert:</strong> Southern Region shows increasing consumption (+5%) and low Access rate (52%). Recommend targeted stewardship training for this region.</p>
+              </div>
+              <div class="bg-white/10 rounded-lg p-3">
+                <p class="text-sm">🌏 <strong>Regional Comparison:</strong> Lao PDR (DID 6.49) is performing better than regional average (DID 8.2). Well below Thailand (15.2) and Vietnam (11.8).</p>
+              </div>
+              <div class="bg-white/10 rounded-lg p-3">
+                <p class="text-sm">📋 <strong>GLASS Readiness:</strong> Your data is complete and ready for WHO GLASS submission. Key indicators meet quality thresholds.</p>
+              </div>
+            </div>
+            <button class="mt-4 px-4 py-2 bg-white text-purple-600 rounded-lg text-sm font-medium hover:bg-purple-50 transition-colors">
+              Chat with AI Policy Advisor →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center text-gray-400 text-sm py-8 border-t">
+      <p>AbXuse - National Monitoring Dashboard Mockup</p>
+      <p class="mt-1">For Quickfox Development Team</p>
+    </div>
+
+  </div>
+
+  <script>
+    // National Sparkline (5-year trend)
+    new Chart(document.getElementById('nationalSparkline'), {
+      type: 'line',
+      data: {
+        labels: ['2020', '2021', '2022', '2023', '2024'],
+        datasets: [{
+          data: [8.48, 7.82, 7.15, 6.78, 6.49],
+          borderColor: '#7C3AED',
+          borderWidth: 3,
+          fill: true,
+          backgroundColor: 'rgba(124, 58, 237, 0.1)',
+          tension: 0.4,
+          pointRadius: 4,
+          pointBackgroundColor: '#7C3AED'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { display: false },
+          y: { display: false, min: 5, max: 10 }
+        }
+      }
+    });
+
+    // National Route Chart
+    new Chart(document.getElementById('nationalRouteChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Oral', 'Parenteral'],
+        datasets: [{
+          data: [72, 28],
+          backgroundColor: ['#0D9488', '#F97316'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        cutout: '70%',
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    // National AWaRe Chart
+    new Chart(document.getElementById('nationalAwareChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Access', 'Watch', 'Reserve'],
+        datasets: [{
+          data: [65, 32, 3],
+          backgroundColor: ['#10B981', '#F59E0B', '#EF4444'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        cutout: '70%',
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    // National Multi-Year Trend
+    new Chart(document.getElementById('nationalTrendChart'), {
+      type: 'line',
+      data: {
+        labels: ['2020', '2021', '2022', '2023', '2024'],
+        datasets: [{
+          label: 'Total DID',
+          data: [8.48, 7.82, 7.15, 6.78, 6.49],
+          borderColor: '#7C3AED',
+          backgroundColor: 'rgba(124, 58, 237, 0.1)',
+          fill: true,
+          tension: 0.4,
+          borderWidth: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { 
+          legend: { display: false }
+        },
+        scales: {
+          y: { 
+            beginAtZero: false,
+            min: 5,
+            max: 10,
+            title: { display: true, text: 'DID', font: { size: 11 } }
+          }
+        }
+      }
+    });
+
+    // AWaRe Trend Chart
+    new Chart(document.getElementById('awareTrendChart'), {
+      type: 'line',
+      data: {
+        labels: ['2020', '2021', '2022', '2023', '2024'],
+        datasets: [
+          {
+            label: 'Access',
+            data: [52, 55, 58, 62, 65],
+            borderColor: '#10B981',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            fill: true,
+            tension: 0.4
+          },
+          {
+            label: 'Watch',
+            data: [44, 41, 38, 35, 32],
+            borderColor: '#F59E0B',
+            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+            fill: true,
+            tension: 0.4
+          },
+          {
+            label: 'Reserve',
+            data: [4, 4, 4, 3, 3],
+            borderColor: '#EF4444',
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            fill: true,
+            tension: 0.4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { 
+          legend: { 
+            position: 'top',
+            labels: { boxWidth: 12, padding: 15 }
+          }
+        },
+        scales: {
+          y: { 
+            beginAtZero: true,
+            max: 100,
+            title: { display: true, text: '%', font: { size: 11 } }
+          }
+        }
+      }
+    });
+
+    // National Top 10
+    new Chart(document.getElementById('nationalTop10'), {
+      type: 'bar',
+      data: {
+        labels: ['Amoxicillin', 'Ampicillin', 'Ciprofloxacin', 'Metronidazole', 'Azithromycin', 'Doxycycline', 'Ceftriaxone', 'Co-amoxiclav', 'Gentamicin', 'Sulfamethoxazole'],
+        datasets: [{
+          data: [1.82, 1.24, 0.95, 0.68, 0.52, 0.48, 0.35, 0.28, 0.22, 0.18],
+          backgroundColor: ['#10B981', '#10B981', '#F59E0B', '#10B981', '#F59E0B', '#10B981', '#F59E0B', '#F59E0B', '#F59E0B', '#10B981'],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { 
+            title: { display: true, text: 'DID', font: { size: 11 } },
+            grid: { display: false }
+          },
+          y: { grid: { display: false } }
+        }
+      }
+    });
+
+    // Cross-Country Benchmark
+    new Chart(document.getElementById('benchmarkChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Thailand', 'Vietnam', 'Cambodia', 'Lao PDR', 'Myanmar', 'Indonesia'],
+        datasets: [{
+          label: 'DID',
+          data: [15.2, 11.8, 8.5, 6.49, 5.8, 4.2],
+          backgroundColor: function(context) {
+            const label = context.chart.data.labels[context.dataIndex];
+            return label === 'Lao PDR' ? '#7C3AED' : '#94A3B8';
+          },
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { 
+            title: { display: true, text: 'DID', font: { size: 11 } },
+            beginAtZero: true
+          },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    // Policy Impact Chart
+    new Chart(document.getElementById('policyChart'), {
+      type: 'line',
+      data: {
+        labels: ['2020', '2021', '2022', '2023', '2024'],
+        datasets: [{
+          label: 'National DID',
+          data: [8.48, 7.82, 7.15, 6.78, 6.49],
+          borderColor: '#7C3AED',
+          backgroundColor: 'rgba(124, 58, 237, 0.1)',
+          fill: true,
+          tension: 0.4,
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { 
+            beginAtZero: false,
+            min: 5,
+            max: 10
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

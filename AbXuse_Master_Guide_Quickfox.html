@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AbXuse - Master Design & Development Guide for Quickfox</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .section-card {
+      border: 2px solid #E5E7EB;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .section-header {
+      background: linear-gradient(135deg, #0D9488 0%, #7C3AED 100%);
+      color: white;
+      padding: 16px 24px;
+    }
+    .table-header { background: #F8FAFC; }
+    .check-icon { color: #10B981; }
+    .cross-icon { color: #EF4444; }
+    .tier-basic { background: #64748B; color: white; }
+    .tier-pro { background: #0D9488; color: white; }
+    .tier-ultra { background: #7C3AED; color: white; }
+    code { background: #F1F5F9; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+    .file-card { border-left: 4px solid #0D9488; }
+    @media print {
+      body { font-size: 11px; }
+      .no-print { display: none; }
+      .section-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-teal-600 to-purple-600 text-white py-8 px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center">
+          <span class="text-teal-600 font-bold text-2xl">Ab</span>
+        </div>
+        <div>
+          <h1 class="text-3xl font-bold">AbXuse Platform</h1>
+          <p class="text-teal-100">Master Design & Development Guide</p>
+        </div>
+      </div>
+      <p class="text-lg text-white/90 max-w-3xl">
+        This document serves as the single source of truth for all naming conventions, pricing tiers, 
+        feature availability, and implementation guidance for the Quickfox development team.
+      </p>
+      <div class="flex gap-4 mt-6">
+        <span class="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium">Version 1.0</span>
+        <span class="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium">January 2026</span>
+        <span class="px-4 py-2 bg-white/20 rounded-lg text-sm font-medium">For Quickfox Team</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-8 py-8">
+
+    <!-- ==================== SECTION 1: TERMINOLOGY ==================== -->
+    <div class="section-card mb-8">
+      <div class="section-header">
+        <h2 class="text-xl font-bold">1. Standard Terminology</h2>
+        <p class="text-white/80 text-sm">Use these terms consistently across all pages</p>
+      </div>
+      <div class="p-6 bg-white">
+        <div class="grid grid-cols-2 gap-8">
+          <div>
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <span class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center text-teal-600">🏥</span>
+              Hospital Module
+            </h3>
+            <table class="w-full text-sm">
+              <tr class="border-b">
+                <td class="py-2 font-medium text-gray-600">Module Name:</td>
+                <td class="py-2"><strong>Hospital Monitoring</strong></td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 font-medium text-gray-600">Route Prefix:</td>
+                <td class="py-2"><code>/hospital/</code></td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 font-medium text-gray-600">Primary Color:</td>
+                <td class="py-2"><span class="inline-flex items-center gap-2"><span class="w-4 h-4 bg-teal-600 rounded"></span> Teal (#0D9488)</span></td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 font-medium text-gray-600">Target Users:</td>
+                <td class="py-2">Hospitals, Clinics, Healthcare Facilities</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-medium text-gray-600">Key Metric:</td>
+                <td class="py-2">DDD/100 Patient-Days (or Bed-Days)</td>
+              </tr>
+            </table>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <span class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600">🌍</span>
+              Country Module
+            </h3>
+            <table class="w-full text-sm">
+              <tr class="border-b">
+                <td class="py-2 font-medium text-gray-600">Module Name:</td>
+                <td class="py-2"><strong>Country Monitoring</strong></td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 font-medium text-gray-600">Route Prefix:</td>
+                <td class="py-2"><code>/country/</code></td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 font-medium text-gray-600">Primary Color:</td>
+                <td class="py-2"><span class="inline-flex items-center gap-2"><span class="w-4 h-4 bg-purple-600 rounded"></span> Purple (#7C3AED)</span></td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-2 font-medium text-gray-600">Target Users:</td>
+                <td class="py-2">Ministries of Health, Governments, Policy Makers</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-medium text-gray-600">Key Metric:</td>
+                <td class="py-2">DID (DDD/1000 Inhabitants/Day)</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <h4 class="font-bold text-red-800 mb-2">⚠️ DO NOT USE These Terms:</h4>
+          <ul class="text-sm text-red-700 grid grid-cols-3 gap-2">
+            <li>❌ "National Monitoring" → Use "Country Monitoring"</li>
+            <li>❌ "/national/" routes → Use "/country/"</li>
+            <li>❌ "National Dashboard" → Use "Country Dashboard"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 2: PRICING TIERS ==================== -->
+    <div class="section-card mb-8">
+      <div class="section-header">
+        <h2 class="text-xl font-bold">2. Pricing Tiers (Official)</h2>
+        <p class="text-white/80 text-sm">Standardized pricing across all pages</p>
+      </div>
+      <div class="p-6 bg-white">
+        
+        <!-- Hospital Pricing -->
+        <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+          <span class="w-6 h-6 bg-teal-500 rounded text-white text-xs flex items-center justify-center">🏥</span>
+          Hospital Monitoring Pricing
+        </h3>
+        <div class="grid grid-cols-3 gap-4 mb-8">
+          <div class="border-2 border-gray-300 rounded-xl p-5">
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 tier-basic rounded-full text-xs font-bold">BASIC</span>
+              <span class="text-2xl font-bold text-gray-800">Free</span>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">For individual hospitals starting their stewardship journey</p>
+            <ul class="text-sm space-y-2">
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> Core Dashboard</li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> Data Entry (Manual & Upload)</li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> Antibiotic Catalogue</li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> AWaRe Classification</li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> Basic Settings</li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross-icon">✗</span> Reports & Export</li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross-icon">✗</span> Multi-facility Comparison</li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross-icon">✗</span> AI Data Extraction</li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross-icon">✗</span> Training Modules</li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross-icon">✗</span> AI Stewardship Agent</li>
+            </ul>
+          </div>
+          <div class="border-2 border-teal-500 rounded-xl p-5 relative">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-teal-500 text-white text-xs font-bold rounded-full">POPULAR</div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 tier-pro rounded-full text-xs font-bold">PRO</span>
+              <div class="text-right">
+                <span class="text-2xl font-bold text-gray-800">$299</span>
+                <span class="text-gray-500 text-sm">/year</span>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">For hospital networks and regional/brand groups</p>
+            <ul class="text-sm space-y-2">
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> Everything in Basic</li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Reports & PDF Export</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Ward-level Analysis</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Multi-facility Comparison</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Top 10 Antibiotics</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Data Export (Excel/CSV)</strong></li>
+              <li class="flex items-center gap-2">
+                <span class="check-icon">✓</span> 
+                <strong>AI Data Extraction</strong>
+                <span class="px-1 py-0.5 bg-amber-100 text-amber-700 rounded text-xs">BETA</span>
+              </li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Training Modules</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Designated User Support</strong></li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross-icon">✗</span> AI Stewardship Agent</li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross-icon">✗</span> Custom Metrics Builder</li>
+            </ul>
+          </div>
+          <div class="border-2 border-purple-500 rounded-xl p-5 bg-gradient-to-br from-purple-50 to-white">
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 tier-ultra rounded-full text-xs font-bold">ULTRA</span>
+              <div class="text-right">
+                <span class="text-2xl font-bold text-gray-800">$499</span>
+                <span class="text-gray-500 text-sm">/year</span>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">For hospitals wanting AI-powered optimization & custom metrics</p>
+            <ul class="text-sm space-y-2">
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> Everything in Pro</li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>AI Stewardship Agent</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Custom Metrics Builder</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Anomaly Detection</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Optimization Tips</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Spending Analysis</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Benchmarking</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Training Modules</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Designated User Support</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Country Pricing -->
+        <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+          <span class="w-6 h-6 bg-purple-500 rounded text-white text-xs flex items-center justify-center">🌍</span>
+          Country Monitoring Pricing
+        </h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="border-2 border-gray-300 rounded-xl p-5">
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 tier-basic rounded-full text-xs font-bold">BASIC</span>
+              <span class="text-2xl font-bold text-gray-800">Free</span>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">For countries starting AMC surveillance</p>
+            <ul class="text-sm space-y-2">
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> Country Dashboard</li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> Facility Registry</li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> AWaRe Classification</li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> Export to WHO GLASS</li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> Export to WPRACSS</li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> Export to ESAC-Net</li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross-icon">✗</span> Regional Breakdown</li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross-icon">✗</span> Facility Drill-down</li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross-icon">✗</span> Training Modules</li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross-icon">✗</span> AI Policy Advisor</li>
+            </ul>
+          </div>
+          <div class="border-2 border-purple-500 rounded-xl p-5 relative">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded-full">RECOMMENDED</div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 tier-pro rounded-full text-xs font-bold">PRO</span>
+              <div class="text-right">
+                <span class="text-2xl font-bold text-gray-800">$299</span>
+                <span class="text-gray-500 text-sm">/year</span>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">For comprehensive national surveillance</p>
+            <ul class="text-sm space-y-2">
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> Everything in Basic</li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Regional Breakdown</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Facility Drill-down</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Benchmarking</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Country Reports</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Training Modules</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Designated User Support</strong></li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross-icon">✗</span> AI Policy Advisor</li>
+              <li class="flex items-center gap-2 text-gray-400"><span class="cross-icon">✗</span> Sector Analysis</li>
+            </ul>
+          </div>
+          <div class="border-2 border-purple-500 rounded-xl p-5 bg-gradient-to-br from-purple-50 to-white">
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 tier-ultra rounded-full text-xs font-bold">ULTRA</span>
+              <div class="text-right">
+                <span class="text-2xl font-bold text-gray-800">$499</span>
+                <span class="text-gray-500 text-sm">/year</span>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">For AI-powered policy insights & custom metrics</p>
+            <ul class="text-sm space-y-2">
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> Everything in Pro</li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>AI Policy Advisor</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Sector Analysis</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Predictive Analytics</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Custom Metrics Builder</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>API Access</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Training Modules</strong></li>
+              <li class="flex items-center gap-2"><span class="check-icon">✓</span> <strong>Designated User Support</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <h4 class="font-bold text-blue-800 mb-2">💡 Pricing Display Rules:</h4>
+          <ul class="text-sm text-blue-700 space-y-1">
+            <li>• Always show prices in <strong>USD per year</strong> format (e.g., "$299/year")</li>
+            <li>• Basic tier is always "Free" - no payment required</li>
+            <li>• Show "POPULAR" badge on Hospital Pro, "RECOMMENDED" badge on Country Pro</li>
+            <li>• Hospital and Country tiers have <strong>same pricing structure</strong>: Pro $299/year, Ultra $499/year</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 3: FEATURE ACCESS MATRIX ==================== -->
+    <div class="section-card mb-8">
+      <div class="section-header">
+        <h2 class="text-xl font-bold">3. Feature Access Matrix</h2>
+        <p class="text-white/80 text-sm">Which features are available in which tier</p>
+      </div>
+      <div class="p-6 bg-white">
+        
+        <h3 class="font-bold text-gray-800 mb-4">Hospital Module Features</h3>
+        <table class="w-full text-sm border-collapse mb-8">
+          <thead>
+            <tr class="table-header">
+              <th class="text-left py-3 px-4 border font-semibold">Feature / Page</th>
+              <th class="text-center py-3 px-4 border font-semibold w-24"><span class="tier-basic px-2 py-1 rounded text-xs">BASIC</span></th>
+              <th class="text-center py-3 px-4 border font-semibold w-24"><span class="tier-pro px-2 py-1 rounded text-xs">PRO</span></th>
+              <th class="text-center py-3 px-4 border font-semibold w-24"><span class="tier-ultra px-2 py-1 rounded text-xs">ULTRA</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="py-2 px-4 border font-medium" colspan="4">HOME</td></tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Hospital Home Landing</td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr><td class="py-2 px-4 border font-medium" colspan="4">DASHBOARD</td></tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Core Metrics (AWaRe %, Route %, Totals)</td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 border pl-8">Monthly Trend Sparkline</td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Top 10 Antibiotics</td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 border pl-8">Ward-level Comparison</td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Multi-facility Comparison</td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 border pl-8">Spending Analysis</td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Custom Metrics Builder</td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr><td class="py-2 px-4 border font-medium" colspan="4">DATA ENTRY</td></tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Quick Entry Form</td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 border pl-8">File Upload (Excel/CSV)</td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Denominators Entry</td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 border pl-8">Validation Queue</td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr class="bg-amber-50">
+              <td class="py-2 px-4 border pl-8">
+                <div class="flex items-center gap-2">
+                  AI Data Extraction
+                  <span class="px-1.5 py-0.5 bg-amber-200 text-amber-800 rounded text-xs font-medium">EXPERIMENTAL</span>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">Auto-extract data from any dataset format</p>
+              </td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr><td class="py-2 px-4 border font-medium" colspan="4">ANTIBIOTIC CATALOGUE</td></tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">View & Manage Products</td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 border pl-8">Add/Edit Products</td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Import from WHO Template</td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr><td class="py-2 px-4 border font-medium" colspan="4">REPORTS</td></tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Monthly Report (PDF)</td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 border pl-8">Annual Report (PDF)</td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Data Export (Excel/CSV)</td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr><td class="py-2 px-4 border font-medium" colspan="4">SETTINGS</td></tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Facility Profile</td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 border pl-8">User Management</td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Ward Structure</td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr><td class="py-2 px-4 border font-medium" colspan="4">TRAINING & SUPPORT</td></tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Training Modules</td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 border pl-8">Designated User Support</td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr><td class="py-2 px-4 border font-medium" colspan="4">AI STEWARDSHIP AGENT</td></tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">AI Agent Home</td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 border pl-8">Anomaly Detection</td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="py-2 px-4 border pl-8">Optimization Tips</td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="cross-icon text-lg">✗</span></td>
+              <td class="text-center border"><span class="check-icon text-lg">✓</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+          <h4 class="font-bold text-yellow-800 mb-2">🔒 Locked Feature UI Pattern:</h4>
+          <ul class="text-sm text-yellow-700 space-y-1">
+            <li>• Show locked features with <strong>50% opacity overlay</strong></li>
+            <li>• Display <strong>lock icon</strong> and tier badge (e.g., "Requires Pro")</li>
+            <li>• Include <strong>"Upgrade" button</strong> that links to /hospital/settings/billing</li>
+            <li>• Navigation cards for locked features should not be clickable</li>
+          </ul>
+        </div>
+
+        <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg mt-4">
+          <h4 class="font-bold text-amber-800 mb-2">🧪 Experimental Features (AI Data Extraction)</h4>
+          <p class="text-sm text-amber-700 mb-3">
+            The <strong>AI Data Extraction</strong> feature uses AI to crawl through any uploaded dataset and attempt to extract 
+            relevant antimicrobial consumption data. This is marked as <span class="px-1.5 py-0.5 bg-amber-200 text-amber-800 rounded text-xs font-medium">EXPERIMENTAL</span> because:
+          </p>
+          <ul class="text-sm text-amber-700 space-y-1 mb-3">
+            <li>• AI extraction may contain errors and requires human verification</li>
+            <li>• Works best with structured data but can attempt unstructured formats</li>
+            <li>• Users must review and confirm all extracted data before saving</li>
+            <li>• Extraction confidence scores should be displayed for each field</li>
+          </ul>
+          <p class="text-sm text-amber-800 font-medium">Quickfox Implementation:</p>
+          <ul class="text-sm text-amber-700 space-y-1">
+            <li>• Add "AI Extract" button next to file upload (PRO+ only)</li>
+            <li>• Show extraction preview with confidence indicators (green/amber/red)</li>
+            <li>• Allow users to edit/correct extracted values before confirming</li>
+            <li>• Display warning banner: "AI-extracted data - please verify before saving"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 4: USER JOURNEY ==================== -->
+    <div class="section-card mb-8">
+      <div class="section-header">
+        <h2 class="text-xl font-bold">4. User Journey Flow</h2>
+        <p class="text-white/80 text-sm">Standard navigation paths through the application</p>
+      </div>
+      <div class="p-6 bg-white">
+        
+        <h3 class="font-bold text-gray-800 mb-4">Primary User Flow</h3>
+        <div class="flex items-center gap-2 flex-wrap mb-6 p-4 bg-gray-50 rounded-lg">
+          <div class="px-3 py-2 bg-gray-200 rounded-lg text-sm font-medium">Landing Page<br><code class="text-xs">/</code></div>
+          <span class="text-gray-400">→</span>
+          <div class="px-3 py-2 bg-gray-200 rounded-lg text-sm font-medium">Register<br><code class="text-xs">/register</code></div>
+          <span class="text-gray-400">→</span>
+          <div class="px-3 py-2 bg-amber-100 rounded-lg text-sm font-medium border-2 border-amber-400">Dashboard Selection<br><code class="text-xs">/select-dashboard</code></div>
+          <span class="text-gray-400">→</span>
+          <div class="flex gap-2">
+            <div class="px-3 py-2 bg-teal-100 rounded-lg text-sm font-medium">Hospital Home<br><code class="text-xs">/hospital/home</code></div>
+            <span class="text-gray-400">or</span>
+            <div class="px-3 py-2 bg-purple-100 rounded-lg text-sm font-medium">Country Home<br><code class="text-xs">/country/home</code></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-semibold text-gray-700 mb-3">Returning User (Login)</h4>
+            <div class="p-4 bg-gray-50 rounded-lg text-sm">
+              <div class="flex items-center gap-2 mb-2">
+                <code>/login</code> <span class="text-gray-400">→</span> <strong>Directly to their module home</strong>
+              </div>
+              <p class="text-gray-500">Users with existing accounts go straight to /hospital/home or /country/home (based on their registered module)</p>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-700 mb-3">New User (Register)</h4>
+            <div class="p-4 bg-amber-50 rounded-lg text-sm border border-amber-200">
+              <div class="flex items-center gap-2 mb-2">
+                <code>/register</code> <span class="text-gray-400">→</span> <code>/select-dashboard</code> <span class="text-gray-400">→</span> <strong>Module home</strong>
+              </div>
+              <p class="text-amber-700">New users MUST go through Dashboard Selection to choose their module AND tier</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="font-bold text-gray-800 mt-8 mb-4">Hospital Module Navigation</h3>
+        <div class="grid grid-cols-6 gap-3 text-center text-sm">
+          <div class="p-3 bg-teal-500 text-white rounded-lg font-medium">
+            Home<br><code class="text-xs opacity-80">/hospital/home</code>
+          </div>
+          <div class="p-3 bg-teal-100 text-teal-800 rounded-lg">
+            Dashboard<br><code class="text-xs">/hospital/dashboard</code>
+          </div>
+          <div class="p-3 bg-teal-100 text-teal-800 rounded-lg">
+            Data Entry<br><code class="text-xs">/hospital/data-entry</code>
+          </div>
+          <div class="p-3 bg-teal-100 text-teal-800 rounded-lg">
+            Catalogue<br><code class="text-xs">/hospital/catalogue</code>
+          </div>
+          <div class="p-3 bg-teal-100 text-teal-800 rounded-lg border-2 border-teal-400">
+            Reports<br><code class="text-xs">/hospital/reports</code><br><span class="text-xs text-teal-600">PRO+</span>
+          </div>
+          <div class="p-3 bg-purple-100 text-purple-800 rounded-lg border-2 border-purple-400">
+            AI Agent<br><code class="text-xs">/hospital/ai-agent</code><br><span class="text-xs text-purple-600">ULTRA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 5: FILE INVENTORY ==================== -->
+    <div class="section-card mb-8">
+      <div class="section-header">
+        <h2 class="text-xl font-bold">5. File Inventory & Implementation Tasks</h2>
+        <p class="text-white/80 text-sm">All HTML mockups and what Quickfox should do with each</p>
+      </div>
+      <div class="p-6 bg-white">
+        
+        <!-- File 1 -->
+        <div class="file-card bg-gray-50 rounded-lg p-5 mb-4">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h4 class="font-bold text-gray-800">AbXuse_Platform_Sitemap.html</h4>
+              <p class="text-sm text-gray-500">Complete information architecture</p>
+            </div>
+            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">REFERENCE DOC</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Purpose:</p>
+              <p class="text-gray-600">Shows all routes, user journeys, and feature access by tier. Use as the master reference for building navigation.</p>
+            </div>
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Quickfox Action:</p>
+              <ul class="text-gray-600 space-y-1">
+                <li>• Use as navigation reference</li>
+                <li>• Implement all listed routes</li>
+                <li>• Follow tier-based access rules</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- File 2 -->
+        <div class="file-card bg-gray-50 rounded-lg p-5 mb-4">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h4 class="font-bold text-gray-800">AbXuse_Marketing_Landing_Page.html</h4>
+              <p class="text-sm text-gray-500">Public marketing website</p>
+            </div>
+            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">BUILD PAGE</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Route:</p>
+              <code>/</code>
+            </div>
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Quickfox Action:</p>
+              <ul class="text-gray-600 space-y-1">
+                <li>• Build as static marketing page</li>
+                <li>• Update pricing to match Section 2</li>
+                <li>• Change "National" to "Country"</li>
+                <li>• Add CTA buttons to /login and /register</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- File 3 -->
+        <div class="file-card bg-gray-50 rounded-lg p-5 mb-4">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h4 class="font-bold text-gray-800">AbXuse_Login_Registration_Flow.html</h4>
+              <p class="text-sm text-gray-500">Authentication screens</p>
+            </div>
+            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">BUILD PAGE</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Routes:</p>
+              <code>/login</code>, <code>/register</code>, <code>/select-dashboard</code>
+            </div>
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Quickfox Action:</p>
+              <ul class="text-gray-600 space-y-1">
+                <li>• Change "National" to "Country" throughout</li>
+                <li>• Update pricing: Hospital Pro $49/mo, Ultra $149/mo</li>
+                <li>• Update pricing: Country Pro $299/mo, Ultra $599/mo</li>
+                <li>• Dashboard Selection only shows after registration</li>
+                <li>• Login goes directly to user's module home</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- File 4 -->
+        <div class="file-card bg-gray-50 rounded-lg p-5 mb-4">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h4 class="font-bold text-gray-800">AbXuse_Hospital_Home_Landing.html</h4>
+              <p class="text-sm text-gray-500">Hospital module main navigation</p>
+            </div>
+            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">BUILD PAGE</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Route:</p>
+              <code>/hospital/home</code>
+            </div>
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Quickfox Action:</p>
+              <ul class="text-gray-600 space-y-1">
+                <li>• Implement as main hospital landing page</li>
+                <li>• Show 6 navigation cards with tier-based locking</li>
+                <li>• Dynamically show/hide features based on user's tier</li>
+                <li>• Show upgrade banner for Basic/Pro users</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- File 5 -->
+        <div class="file-card bg-gray-50 rounded-lg p-5 mb-4">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h4 class="font-bold text-gray-800">AbXuse_Hospital_Dashboard_Mockup.html</h4>
+              <p class="text-sm text-gray-500">Hospital consumption dashboard</p>
+            </div>
+            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">BUILD PAGE</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Route:</p>
+              <code>/hospital/dashboard</code>
+            </div>
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Quickfox Action:</p>
+              <ul class="text-gray-600 space-y-1">
+                <li>• Build with Chart.js for visualizations</li>
+                <li>• Lock "Top 10" section for Basic users</li>
+                <li>• Lock "Ward Comparison" for Basic users</li>
+                <li>• Lock "Spending" for Basic/Pro users</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- File 6 -->
+        <div class="file-card bg-gray-50 rounded-lg p-5 mb-4">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h4 class="font-bold text-gray-800">AbXuse_Data_Entry_Mockups.html</h4>
+              <p class="text-sm text-gray-500">Data entry screens (8 screens)</p>
+            </div>
+            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">BUILD PAGE</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Routes:</p>
+              <code>/hospital/data-entry/*</code>, <code>/hospital/catalogue/*</code>
+            </div>
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Quickfox Action:</p>
+              <ul class="text-gray-600 space-y-1">
+                <li>• Build all 8 screens as separate components</li>
+                <li>• Implement smart autocomplete search</li>
+                <li>• Data Entry is available to ALL tiers</li>
+                <li>• Product Catalogue is available to ALL tiers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- File 7 -->
+        <div class="file-card bg-gray-50 rounded-lg p-5 mb-4">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h4 class="font-bold text-gray-800">AbXuse_National_Dashboard_Mockup.html</h4>
+              <p class="text-sm text-gray-500">Country module dashboard</p>
+            </div>
+            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">NEEDS UPDATE</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Route:</p>
+              <code>/country/dashboard</code>
+            </div>
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Quickfox Action:</p>
+              <ul class="text-gray-600 space-y-1">
+                <li>• Rename all "National" to "Country"</li>
+                <li>• Update route from /national/ to /country/</li>
+                <li>• Update pricing to Country tier pricing</li>
+                <li>• Build Country Home landing page (similar to Hospital Home)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- File 8 -->
+        <div class="file-card bg-gray-50 rounded-lg p-5 mb-4">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h4 class="font-bold text-gray-800">AbXuse_Account_User_Management.html</h4>
+              <p class="text-sm text-gray-500">User management screens</p>
+            </div>
+            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">BUILD PAGE</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Route:</p>
+              <code>/hospital/settings/users</code>
+            </div>
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Quickfox Action:</p>
+              <ul class="text-gray-600 space-y-1">
+                <li>• Build user management CRUD</li>
+                <li>• Implement role-based access (Admin, Manager, Entry)</li>
+                <li>• Available to ALL tiers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- File 9 -->
+        <div class="file-card bg-gray-50 rounded-lg p-5 mb-4">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h4 class="font-bold text-gray-800">AbXuse_Hospital_AMC_Technical_Guide.html</h4>
+              <p class="text-sm text-gray-500">Technical documentation</p>
+            </div>
+            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">REFERENCE DOC</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Purpose:</p>
+              <p class="text-gray-600">Technical guide for DDD calculations, AWaRe classification, database structure</p>
+            </div>
+            <div>
+              <p class="font-medium text-gray-700 mb-1">Quickfox Action:</p>
+              <ul class="text-gray-600 space-y-1">
+                <li>• Use as backend logic reference</li>
+                <li>• Implement calculation formulas as documented</li>
+                <li>• Follow database schema specifications</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 6: IMPLEMENTATION CHECKLIST ==================== -->
+    <div class="section-card mb-8">
+      <div class="section-header">
+        <h2 class="text-xl font-bold">6. Implementation Checklist</h2>
+        <p class="text-white/80 text-sm">Step-by-step development tasks</p>
+      </div>
+      <div class="p-6 bg-white">
+        
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <h3 class="font-bold text-gray-800 mb-4">Phase 1: Core Infrastructure</h3>
+            <ul class="space-y-2 text-sm">
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Set up routing with /hospital/ and /country/ prefixes</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Implement authentication (login/register)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build tier-based access control middleware</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Create user database with module & tier fields</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build Dashboard Selection page (/select-dashboard)</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-800 mb-4">Phase 2: Hospital Module</h3>
+            <ul class="space-y-2 text-sm">
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build Hospital Home (/hospital/home)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build Hospital Dashboard with tier locking</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build Data Entry screens (all 5)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build Antibiotic Catalogue (all 3 screens)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build Reports section (Pro+ only)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build AI Agent section (Ultra only)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build Settings screens</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6 mt-6">
+          <div>
+            <h3 class="font-bold text-gray-800 mb-4">Phase 3: Country Module</h3>
+            <ul class="space-y-2 text-sm">
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build Country Home (/country/home)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build Country Dashboard with tier locking</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build Facility Registry</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build WHO GLASS Export</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build Country Reports (Pro+ only)</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-800 mb-4">Phase 4: Polish & Integration</h3>
+            <ul class="space-y-2 text-sm">
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Implement Stripe payment integration</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Build upgrade/downgrade flow</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Add upgrade banners to all relevant pages</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Test tier-based feature access</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <input type="checkbox" class="mt-1">
+                <span>Responsive design testing</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 7: DESIGN SYSTEM ==================== -->
+    <div class="section-card mb-8">
+      <div class="section-header">
+        <h2 class="text-xl font-bold">7. Design System Reference</h2>
+        <p class="text-white/80 text-sm">Colors, badges, and UI patterns</p>
+      </div>
+      <div class="p-6 bg-white">
+        
+        <h3 class="font-bold text-gray-800 mb-4">Color Palette</h3>
+        <div class="grid grid-cols-6 gap-4 mb-6">
+          <div class="text-center">
+            <div class="w-full h-16 bg-teal-600 rounded-lg mb-2"></div>
+            <p class="text-xs font-medium">Teal (Hospital)</p>
+            <p class="text-xs text-gray-500">#0D9488</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-16 bg-purple-600 rounded-lg mb-2"></div>
+            <p class="text-xs font-medium">Purple (Country)</p>
+            <p class="text-xs text-gray-500">#7C3AED</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-16 bg-gray-500 rounded-lg mb-2"></div>
+            <p class="text-xs font-medium">Gray (Basic)</p>
+            <p class="text-xs text-gray-500">#64748B</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-16 bg-green-500 rounded-lg mb-2"></div>
+            <p class="text-xs font-medium">Green (Access)</p>
+            <p class="text-xs text-gray-500">#22C55E</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-16 bg-amber-500 rounded-lg mb-2"></div>
+            <p class="text-xs font-medium">Amber (Watch)</p>
+            <p class="text-xs text-gray-500">#F59E0B</p>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-16 bg-red-500 rounded-lg mb-2"></div>
+            <p class="text-xs font-medium">Red (Reserve)</p>
+            <p class="text-xs text-gray-500">#EF4444</p>
+          </div>
+        </div>
+
+        <h3 class="font-bold text-gray-800 mb-4">Tier Badges</h3>
+        <div class="flex items-center gap-4 mb-6">
+          <span class="px-3 py-1 tier-basic rounded-full text-xs font-bold">BASIC</span>
+          <span class="px-3 py-1 tier-pro rounded-full text-xs font-bold">PRO</span>
+          <span class="px-3 py-1 tier-ultra rounded-full text-xs font-bold">ULTRA</span>
+          <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Access</span>
+          <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-bold">Watch</span>
+          <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold">Reserve</span>
+        </div>
+
+        <h3 class="font-bold text-gray-800 mb-4">Locked Feature Pattern</h3>
+        <div class="bg-gray-100 rounded-lg p-4 flex items-center gap-4">
+          <div class="relative w-48 h-32 bg-white rounded-lg border-2 border-gray-200 overflow-hidden">
+            <div class="absolute inset-0 bg-gray-50/80 flex items-center justify-center z-10">
+              <div class="text-center">
+                <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-1">
+                  <span class="text-gray-400">🔒</span>
+                </div>
+                <p class="text-xs font-medium text-gray-600">Requires Pro</p>
+                <button class="mt-1 px-2 py-1 bg-teal-600 text-white rounded text-xs">Upgrade</button>
+              </div>
+            </div>
+            <div class="p-3 opacity-50">
+              <p class="font-medium text-sm">Reports</p>
+              <p class="text-xs text-gray-500">Locked content...</p>
+            </div>
+          </div>
+          <div class="text-sm text-gray-600">
+            <p class="font-medium mb-2">Implementation:</p>
+            <ul class="space-y-1 text-xs">
+              <li>• 80% opacity gray overlay</li>
+              <li>• Centered lock icon</li>
+              <li>• "Requires [Tier]" text</li>
+              <li>• Upgrade button links to /settings/billing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="bg-gray-800 text-white py-6 px-8">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 bg-teal-500 rounded-lg flex items-center justify-center">
+          <span class="font-bold">Ab</span>
+        </div>
+        <div>
+          <p class="font-semibold">AbXuse Master Guide</p>
+          <p class="text-sm text-gray-400">Single Source of Truth for Development</p>
+        </div>
+      </div>
+      <div class="text-right text-sm text-gray-400">
+        <p>For Quickfox Development Team</p>
+        <p>Version 1.0 • January 2026</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

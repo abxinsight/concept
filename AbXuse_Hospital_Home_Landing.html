@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AbXuse - Hospital Module Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .nav-card {
+      transition: all 0.2s ease;
+    }
+    .nav-card:not(.locked):hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+    }
+    .nav-card.locked {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .nav-card.locked:hover {
+      transform: none;
+    }
+    .tier-badge { font-size: 10px; padding: 2px 8px; border-radius: 9999px; font-weight: 600; }
+    .basic-badge { background: #64748B; color: white; }
+    .pro-badge { background: #0D9488; color: white; }
+    .ultra-badge { background: #7C3AED; color: white; }
+    .upgrade-banner {
+      background: linear-gradient(135deg, #0D9488 0%, #7C3AED 100%);
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+  <!-- ==================== BASIC TIER VERSION ==================== -->
+  <div class="mb-16">
+    <div class="bg-gray-800 text-white text-center py-2 text-sm font-medium">
+      MOCKUP: Basic Tier View
+    </div>
+    
+    <!-- Header -->
+    <div class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="flex items-center justify-between py-4">
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
+              <div class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-lg">Ab</span>
+              </div>
+              <div>
+                <h1 class="text-xl font-bold text-gray-800">AbXuse</h1>
+                <p class="text-xs text-gray-500">Hospital Monitoring</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg">
+              <span class="tier-badge basic-badge">BASIC</span>
+              <span class="text-sm text-gray-600">Free Plan</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-sm text-gray-600">Central General Hospital</span>
+              <div class="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center">
+                <span class="text-teal-600 font-medium text-sm">DK</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upgrade Banner -->
+    <div class="upgrade-banner text-white py-3 px-8">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd"></path></svg>
+          <span class="font-medium">Unlock ward-level analysis, reports, and AI stewardship with Pro or Ultra</span>
+        </div>
+        <button class="px-4 py-1.5 bg-white text-teal-600 rounded-lg text-sm font-semibold hover:bg-gray-100">
+          Upgrade Now
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-8 py-8">
+      <!-- Welcome Section -->
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-800">Welcome back, Dr. Khamla</h2>
+        <p class="text-gray-500 mt-1">Central General Hospital • Last data entry: January 15, 2025</p>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-4 gap-4 mb-8">
+        <div class="bg-white rounded-xl p-4 shadow-sm">
+          <p class="text-sm text-gray-500">Total DDDs (Jan 2025)</p>
+          <p class="text-2xl font-bold text-gray-800">13,724</p>
+          <p class="text-xs text-green-600 mt-1">↑ 3.2% vs Dec</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm">
+          <p class="text-sm text-gray-500">DDD/100 Patient-Days</p>
+          <p class="text-2xl font-bold text-gray-800">42.3</p>
+          <p class="text-xs text-gray-400 mt-1">WHO benchmark: 40-60</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm">
+          <p class="text-sm text-gray-500">Access Antibiotics</p>
+          <p class="text-2xl font-bold text-green-600">68%</p>
+          <p class="text-xs text-green-600 mt-1">✓ Above 60% target</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm">
+          <p class="text-sm text-gray-500">Oral Route</p>
+          <p class="text-2xl font-bold text-amber-600">58%</p>
+          <p class="text-xs text-amber-600 mt-1">2% below target</p>
+        </div>
+      </div>
+
+      <!-- Navigation Cards -->
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">What would you like to do?</h3>
+      <div class="grid grid-cols-3 gap-6">
+        
+        <!-- Dashboard - BASIC -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-teal-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge basic-badge">BASIC</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Dashboard</h4>
+          <p class="text-sm text-gray-500 mb-4">View your consumption metrics, AWaRe distribution, and monthly trends.</p>
+          <div class="flex items-center text-teal-600 text-sm font-medium">
+            <span>Open Dashboard</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- Data Entry - BASIC -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-teal-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge basic-badge">BASIC</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Data Entry</h4>
+          <p class="text-sm text-gray-500 mb-4">Enter consumption data via quick entry form or file upload.</p>
+          <div class="flex items-center text-teal-600 text-sm font-medium">
+            <span>Enter Data</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- Antibiotic Catalogue - BASIC -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-teal-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge basic-badge">BASIC</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Antibiotic Catalogue</h4>
+          <p class="text-sm text-gray-500 mb-4">Manage your hospital's antimicrobial masterlist and product details.</p>
+          <div class="flex items-center text-teal-600 text-sm font-medium">
+            <span>Manage Catalogue</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- Reports - PRO (Locked) -->
+        <div class="nav-card locked bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200 relative overflow-hidden">
+          <div class="absolute inset-0 bg-gray-50/80 flex items-center justify-center z-10">
+            <div class="text-center">
+              <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+              </div>
+              <p class="text-sm font-medium text-gray-600">Requires Pro</p>
+              <button class="mt-2 px-3 py-1 bg-teal-600 text-white rounded text-xs font-medium hover:bg-teal-700">Upgrade</button>
+            </div>
+          </div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge pro-badge">PRO</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Reports</h4>
+          <p class="text-sm text-gray-500 mb-4">Generate monthly & annual reports with detailed analysis.</p>
+        </div>
+
+        <!-- Settings - BASIC -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-teal-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge basic-badge">BASIC</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Settings</h4>
+          <p class="text-sm text-gray-500 mb-4">Manage facility profile, users, wards, and account settings.</p>
+          <div class="flex items-center text-teal-600 text-sm font-medium">
+            <span>Open Settings</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- AI Stewardship Agent - ULTRA (Locked) -->
+        <div class="nav-card locked bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200 relative overflow-hidden">
+          <div class="absolute inset-0 bg-gray-50/80 flex items-center justify-center z-10">
+            <div class="text-center">
+              <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+              </div>
+              <p class="text-sm font-medium text-gray-600">Requires Ultra</p>
+              <button class="mt-2 px-3 py-1 bg-purple-600 text-white rounded text-xs font-medium hover:bg-purple-700">Upgrade</button>
+            </div>
+          </div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge ultra-badge">ULTRA</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">AI Stewardship Agent</h4>
+          <p class="text-sm text-gray-500 mb-4">Get AI-powered recommendations and anomaly detection.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PRO TIER VERSION ==================== -->
+  <div class="mb-16">
+    <div class="bg-teal-700 text-white text-center py-2 text-sm font-medium">
+      MOCKUP: Pro Tier View
+    </div>
+    
+    <!-- Header -->
+    <div class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="flex items-center justify-between py-4">
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
+              <div class="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-lg">Ab</span>
+              </div>
+              <div>
+                <h1 class="text-xl font-bold text-gray-800">AbXuse</h1>
+                <p class="text-xs text-gray-500">Hospital Monitoring</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 px-3 py-1.5 bg-teal-50 rounded-lg border border-teal-200">
+              <span class="tier-badge pro-badge">PRO</span>
+              <span class="text-sm text-teal-700">$299/year</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-sm text-gray-600">Central General Hospital</span>
+              <div class="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center">
+                <span class="text-teal-600 font-medium text-sm">DK</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upgrade Banner (to Ultra) -->
+    <div class="bg-gradient-to-r from-purple-600 to-purple-700 text-white py-3 px-8">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd"></path></svg>
+          <span class="font-medium">Unlock AI Stewardship Agent and spending analysis with Ultra</span>
+        </div>
+        <button class="px-4 py-1.5 bg-white text-purple-600 rounded-lg text-sm font-semibold hover:bg-gray-100">
+          Upgrade to Ultra
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-8 py-8">
+      <!-- Welcome Section -->
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-800">Welcome back, Dr. Khamla</h2>
+        <p class="text-gray-500 mt-1">Central General Hospital • Last data entry: January 15, 2025</p>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-4 gap-4 mb-8">
+        <div class="bg-white rounded-xl p-4 shadow-sm">
+          <p class="text-sm text-gray-500">Total DDDs (Jan 2025)</p>
+          <p class="text-2xl font-bold text-gray-800">13,724</p>
+          <p class="text-xs text-green-600 mt-1">↑ 3.2% vs Dec</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm">
+          <p class="text-sm text-gray-500">DDD/100 Patient-Days</p>
+          <p class="text-2xl font-bold text-gray-800">42.3</p>
+          <p class="text-xs text-gray-400 mt-1">WHO benchmark: 40-60</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm">
+          <p class="text-sm text-gray-500">Access Antibiotics</p>
+          <p class="text-2xl font-bold text-green-600">68%</p>
+          <p class="text-xs text-green-600 mt-1">✓ Above 60% target</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm">
+          <p class="text-sm text-gray-500">Oral Route</p>
+          <p class="text-2xl font-bold text-amber-600">58%</p>
+          <p class="text-xs text-amber-600 mt-1">2% below target</p>
+        </div>
+      </div>
+
+      <!-- Navigation Cards -->
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">What would you like to do?</h3>
+      <div class="grid grid-cols-3 gap-6">
+        
+        <!-- Dashboard - BASIC -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-teal-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge basic-badge">BASIC</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Dashboard</h4>
+          <p class="text-sm text-gray-500 mb-4">View consumption metrics, AWaRe distribution, ward comparisons, and trends.</p>
+          <div class="flex items-center text-teal-600 text-sm font-medium">
+            <span>Open Dashboard</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- Data Entry - BASIC -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-teal-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge basic-badge">BASIC</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Data Entry</h4>
+          <p class="text-sm text-gray-500 mb-4">Enter consumption data via quick entry form or file upload.</p>
+          <div class="flex items-center text-teal-600 text-sm font-medium">
+            <span>Enter Data</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- Antibiotic Catalogue - BASIC -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-teal-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge basic-badge">BASIC</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Antibiotic Catalogue</h4>
+          <p class="text-sm text-gray-500 mb-4">Manage your hospital's antimicrobial masterlist and product details.</p>
+          <div class="flex items-center text-teal-600 text-sm font-medium">
+            <span>Manage Catalogue</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- Reports - PRO (Unlocked) -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-teal-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge pro-badge">PRO</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Reports</h4>
+          <p class="text-sm text-gray-500 mb-4">Generate monthly & annual reports with detailed analysis and export.</p>
+          <div class="flex items-center text-teal-600 text-sm font-medium">
+            <span>View Reports</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- Settings - BASIC -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-teal-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge basic-badge">BASIC</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Settings</h4>
+          <p class="text-sm text-gray-500 mb-4">Manage facility profile, users, wards, and account settings.</p>
+          <div class="flex items-center text-teal-600 text-sm font-medium">
+            <span>Open Settings</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- AI Stewardship Agent - ULTRA (Locked) -->
+        <div class="nav-card locked bg-white rounded-xl p-6 shadow-sm border-2 border-gray-200 relative overflow-hidden">
+          <div class="absolute inset-0 bg-gray-50/80 flex items-center justify-center z-10">
+            <div class="text-center">
+              <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+              </div>
+              <p class="text-sm font-medium text-gray-600">Requires Ultra</p>
+              <button class="mt-2 px-3 py-1 bg-purple-600 text-white rounded text-xs font-medium hover:bg-purple-700">Upgrade</button>
+            </div>
+          </div>
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge ultra-badge">ULTRA</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">AI Stewardship Agent</h4>
+          <p class="text-sm text-gray-500 mb-4">Get AI-powered recommendations and anomaly detection.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ULTRA TIER VERSION ==================== -->
+  <div class="mb-16">
+    <div class="bg-purple-700 text-white text-center py-2 text-sm font-medium">
+      MOCKUP: Ultra Tier View
+    </div>
+    
+    <!-- Header -->
+    <div class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="flex items-center justify-between py-4">
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
+              <div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-lg">Ab</span>
+              </div>
+              <div>
+                <h1 class="text-xl font-bold text-gray-800">AbXuse</h1>
+                <p class="text-xs text-gray-500">Hospital Monitoring</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-lg border border-purple-200">
+              <span class="tier-badge ultra-badge">ULTRA</span>
+              <span class="text-sm text-purple-700">$499/year</span>
+              <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd"></path></svg>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-sm text-gray-600">Central General Hospital</span>
+              <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                <span class="text-purple-600 font-medium text-sm">DK</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-8 py-8">
+      <!-- Welcome Section -->
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-800">Welcome back, Dr. Khamla</h2>
+        <p class="text-gray-500 mt-1">Central General Hospital • Last data entry: January 15, 2025</p>
+      </div>
+
+      <!-- Quick Stats with AI Insight -->
+      <div class="grid grid-cols-4 gap-4 mb-4">
+        <div class="bg-white rounded-xl p-4 shadow-sm">
+          <p class="text-sm text-gray-500">Total DDDs (Jan 2025)</p>
+          <p class="text-2xl font-bold text-gray-800">13,724</p>
+          <p class="text-xs text-green-600 mt-1">↑ 3.2% vs Dec</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm">
+          <p class="text-sm text-gray-500">DDD/100 Patient-Days</p>
+          <p class="text-2xl font-bold text-gray-800">42.3</p>
+          <p class="text-xs text-gray-400 mt-1">WHO benchmark: 40-60</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm">
+          <p class="text-sm text-gray-500">Access Antibiotics</p>
+          <p class="text-2xl font-bold text-green-600">68%</p>
+          <p class="text-xs text-green-600 mt-1">✓ Above 60% target</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm">
+          <p class="text-sm text-gray-500">Oral Route</p>
+          <p class="text-2xl font-bold text-amber-600">58%</p>
+          <p class="text-xs text-amber-600 mt-1">2% below target</p>
+        </div>
+      </div>
+
+      <!-- AI Insight Banner -->
+      <div class="mb-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-4 border border-purple-200">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <p class="font-semibold text-purple-800">AI Stewardship Insight</p>
+              <span class="px-2 py-0.5 bg-purple-100 text-purple-600 rounded text-xs">New</span>
+            </div>
+            <p class="text-sm text-purple-700">ICU Ceftriaxone usage increased 45% this month. Consider reviewing empiric therapy protocols — 3 similar hospitals reduced Watch antibiotic usage by switching to Ampicillin-Sulbactam for uncomplicated cases.</p>
+          </div>
+          <button class="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700 flex-shrink-0">
+            View Details
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Cards -->
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">What would you like to do?</h3>
+      <div class="grid grid-cols-3 gap-6">
+        
+        <!-- Dashboard - BASIC -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-purple-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge basic-badge">BASIC</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Dashboard</h4>
+          <p class="text-sm text-gray-500 mb-4">View consumption metrics, AWaRe distribution, ward comparisons, and trends.</p>
+          <div class="flex items-center text-purple-600 text-sm font-medium">
+            <span>Open Dashboard</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- Data Entry - BASIC -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-purple-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge basic-badge">BASIC</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Data Entry</h4>
+          <p class="text-sm text-gray-500 mb-4">Enter consumption data via quick entry form or file upload.</p>
+          <div class="flex items-center text-purple-600 text-sm font-medium">
+            <span>Enter Data</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- Antibiotic Catalogue - BASIC -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-purple-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge basic-badge">BASIC</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Antibiotic Catalogue</h4>
+          <p class="text-sm text-gray-500 mb-4">Manage your hospital's antimicrobial masterlist and product details.</p>
+          <div class="flex items-center text-purple-600 text-sm font-medium">
+            <span>Manage Catalogue</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- Reports - PRO (Unlocked) -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-purple-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge pro-badge">PRO</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Reports</h4>
+          <p class="text-sm text-gray-500 mb-4">Generate monthly & annual reports with detailed analysis and export.</p>
+          <div class="flex items-center text-purple-600 text-sm font-medium">
+            <span>View Reports</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- Settings - BASIC -->
+        <a href="#" class="nav-card bg-white rounded-xl p-6 shadow-sm border-2 border-transparent hover:border-purple-500">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <span class="tier-badge basic-badge">BASIC</span>
+          </div>
+          <h4 class="font-bold text-gray-800 text-lg mb-2">Settings</h4>
+          <p class="text-sm text-gray-500 mb-4">Manage facility profile, users, wards, and account settings.</p>
+          <div class="flex items-center text-purple-600 text-sm font-medium">
+            <span>Open Settings</span>
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        </a>
+
+        <!-- AI Stewardship Agent - ULTRA (Unlocked) -->
+        <a href="#" class="nav-card bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 shadow-sm border-2 border-purple-200 hover:border-purple-500 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-200 to-pink-200 rounded-bl-full opacity-50"></div>
+          <div class="relative">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+              </div>
+              <span class="tier-badge ultra-badge">ULTRA</span>
+            </div>
+            <h4 class="font-bold text-gray-800 text-lg mb-2">AI Stewardship Agent</h4>
+            <p class="text-sm text-gray-500 mb-4">Get AI-powered recommendations, anomaly detection, and optimization tips.</p>
+            <div class="flex items-center text-purple-600 text-sm font-medium">
+              <span>Open AI Agent</span>
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Design Notes -->
+  <div class="max-w-7xl mx-auto px-8 pb-12">
+    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+      <h2 class="text-lg font-bold text-yellow-800 mb-4">📋 Design Notes for Quickfox Team</h2>
+      
+      <div class="grid grid-cols-3 gap-6 text-sm">
+        <div>
+          <h3 class="font-semibold text-yellow-800 mb-2">Navigation Cards</h3>
+          <ul class="space-y-1 text-yellow-700">
+            <li>• <strong>Dashboard</strong> — BASIC</li>
+            <li>• <strong>Data Entry</strong> — BASIC</li>
+            <li>• <strong>Antibiotic Catalogue</strong> — BASIC</li>
+            <li>• <strong>Reports</strong> — PRO ($299/yr)</li>
+            <li>• <strong>Settings</strong> — BASIC</li>
+            <li>• <strong>AI Stewardship Agent</strong> — ULTRA ($499/yr)</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold text-yellow-800 mb-2">Tier-Based Access</h3>
+          <ul class="space-y-1 text-yellow-700">
+            <li>• <strong>Basic (Free):</strong> 4 cards accessible, 2 locked</li>
+            <li>• <strong>Pro ($299/yr):</strong> 5 cards accessible, 1 locked</li>
+            <li>• <strong>Ultra ($499/yr):</strong> All 6 cards accessible</li>
+            <li>• Locked cards show upgrade CTA</li>
+            <li>• Upgrade banner at top</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold text-yellow-800 mb-2">New Features</h3>
+          <ul class="space-y-1 text-yellow-700">
+            <li>• <strong>Pro:</strong> Multi-facility comparison (hospital networks)</li>
+            <li>• <strong>Pro:</strong> Training modules</li>
+            <li>• <strong>Pro:</strong> Designated user support</li>
+            <li>• <strong>Ultra:</strong> Custom metrics builder</li>
+            <li>• <strong>Ultra:</strong> All Pro features included</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="mt-4 pt-4 border-t border-yellow-300">
+        <h3 class="font-semibold text-yellow-800 mb-2">Route</h3>
+        <code class="bg-yellow-100 px-2 py-1 rounded">/hospital/home</code>
+        <p class="mt-2 text-yellow-700">This is the landing page after login for hospital users. Quick stats + navigation cards.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
