@@ -327,14 +327,15 @@
           <div class="flex items-center gap-4">
             <div class="flex items-center gap-2">
               <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
-              <rect width="64" height="64" rx="14" fill="url(#abxLogo44)"/>
-              <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g>
-              <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g>
-              <defs><linearGradient id="abxLogo44" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
-            </svg>
+                <rect width="64" height="64" rx="14" fill="url(#abxLogo44)"/>
+                <g transform="rotate(-45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white"/></g>
+                <g transform="rotate(45, 32, 32)"><rect x="24" y="14" width="16" height="36" rx="8" fill="white" fill-opacity="0.5"/></g>
+                <defs><linearGradient id="abxLogo44" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#0D9488"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
+              </svg>
               <span class="text-xl font-bold text-gray-800">AbXInsight</span>
             </div>
             <p class="text-xs text-gray-500">Track Antibiotic Use. Combat AMR.</p>
+          </div>
           <div class="flex items-center gap-4">
             <button class="text-gray-600 hover:text-gray-800">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -417,15 +418,19 @@
               <ul class="space-y-2 text-sm text-gray-600 mb-4">
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  Core dashboard (DDD/100 admissions)
+                  Core dashboard (DDD/100 patient-days, AWaRe %)
                 </li>
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  AWaRe classification
+                  Top 10 antibiotics &amp; route breakdown
                 </li>
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  AI Stewardship Advisor
+                  Data entry (manual + file upload)
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Antibiotic catalogue management
                 </li>
               </ul>
               <!-- Language badge -->
@@ -450,10 +455,13 @@
             <!-- Pro Tier Card - LOCKED (triggers payment) -->
             <div class="tier-card locked bg-white rounded-xl border border-gray-200 p-6 relative overflow-hidden">
               <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-teal-100 to-transparent"></div>
+              <div class="absolute top-3 right-3">
+                <span class="px-2 py-0.5 bg-teal-500 text-white text-xs font-bold rounded">POPULAR</span>
+              </div>
               <div class="flex items-center justify-between mb-4">
                 <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm font-semibold">PRO</span>
                 <div class="text-right">
-                  <span class="text-2xl font-bold text-gray-800">$299</span>
+                  <span class="text-2xl font-bold text-gray-800">$499</span>
                   <span class="text-gray-500 text-sm">/year</span>
                 </div>
               </div>
@@ -465,15 +473,15 @@
                 </li>
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  AI-powered data upload
+                  Monthly trend charts
                 </li>
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  Multi-facility comparison
+                  AI-powered data extraction &amp; PDF reports
                 </li>
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  Spending & revenue analysis
+                  Virtual Technical Support
                 </li>
               </ul>
               <button class="w-full py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2">
@@ -489,7 +497,7 @@
               <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-purple-100 to-transparent"></div>
               <div class="flex items-center justify-between mb-4">
                 <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">ULTRA</span>
-                <span class="text-lg font-semibold text-gray-600">Custom</span>
+                <span class="text-lg font-semibold text-gray-600">Custom pricing</span>
               </div>
               <p class="text-gray-600 text-sm mb-4">Enterprise features for large hospital groups</p>
               <ul class="space-y-2 text-sm text-gray-600 mb-6">
@@ -499,11 +507,23 @@
                 </li>
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  Custom dashboards
+                  Antibiotic Stewardship guidance (AI)
                 </li>
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  White-label branding
+                  In-country support of global health experts
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  In-country server storage
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Custom API (HIMS, inventory, pharmacy)
+                </li>
+                <li class="flex items-center gap-2 font-medium text-purple-700">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Hospital ↔ Country integration ⭐
                 </li>
               </ul>
               <button class="w-full py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200">
@@ -532,23 +552,23 @@
                 <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold">BASIC</span>
                 <span class="text-2xl font-bold text-gray-800">Free</span>
               </div>
-              <p class="text-gray-600 text-sm mb-4">Essential national surveillance for countries starting Antibiotic Use Tracking</p>
+              <p class="text-gray-600 text-sm mb-4">Essential national surveillance for countries starting antibiotic use tracking</p>
               <ul class="space-y-2 text-sm text-gray-600 mb-4">
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  Core dashboard (DID)
+                  Core dashboard (DID, AWaRe %)
                 </li>
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  AWaRe classification
+                  Top 10 antibiotics &amp; route breakdown
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Data entry (manual + file upload)
                 </li>
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
                   WHO GLASS / ESAC-Net / WPRACSS export
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  AI Policy Advisor
                 </li>
               </ul>
               <!-- Language badge -->
@@ -573,10 +593,13 @@
             <!-- Pro Tier Card - LOCKED -->
             <div class="tier-card locked bg-white rounded-xl border border-gray-200 p-6 relative overflow-hidden">
               <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-purple-100 to-transparent"></div>
+              <div class="absolute top-3 right-3">
+                <span class="px-2 py-0.5 bg-purple-500 text-white text-xs font-bold rounded">RECOMMENDED</span>
+              </div>
               <div class="flex items-center justify-between mb-4">
                 <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">PRO</span>
                 <div class="text-right">
-                  <span class="text-2xl font-bold text-gray-800">$299</span>
+                  <span class="text-2xl font-bold text-gray-800">$499</span>
                   <span class="text-gray-500 text-sm">/year</span>
                 </div>
               </div>
@@ -588,15 +611,15 @@
                 </li>
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  Regional breakdown
+                  Monthly/yearly trend charts
                 </li>
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  Cross-country benchmarking
+                  AI-powered data extraction &amp; PDF reports
                 </li>
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  Facility drill-down
+                  Virtual Technical Support
                 </li>
               </ul>
               <button class="w-full py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2">
@@ -612,7 +635,7 @@
               <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-indigo-100 to-transparent"></div>
               <div class="flex items-center justify-between mb-4">
                 <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-semibold">ULTRA</span>
-                <span class="text-lg font-semibold text-gray-600">Custom</span>
+                <span class="text-lg font-semibold text-gray-600">Custom pricing</span>
               </div>
               <p class="text-gray-600 text-sm mb-4">Complete national surveillance platform with hospital integration</p>
               <ul class="space-y-2 text-sm text-gray-600 mb-6">
@@ -620,17 +643,25 @@
                   <svg class="w-4 h-4 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
                   All Pro features +
                 </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  In-country support of global health experts
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  In-country server storage
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Custom API (HIMS, inventory, pharmacy)
+                </li>
                 <li class="flex items-center gap-2 font-medium text-indigo-700">
                   <svg class="w-4 h-4 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  Hospital ↔ National integration ⭐
+                  Hospital ↔ Country integration ⭐
                 </li>
                 <li class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  GIS map visualization
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                  One Health module
+                  GIS map &amp; One Health module
                 </li>
               </ul>
               <button class="w-full py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200">
@@ -678,14 +709,14 @@
           <div class="bg-white/10 rounded-xl p-6 mb-6">
             <div class="flex items-center justify-between mb-4">
               <span class="text-lg font-semibold">Pro Tier - Hospital</span>
-              <span class="text-2xl font-bold">$299</span>
+              <span class="text-2xl font-bold">$499</span>
             </div>
             <p class="text-teal-100 text-sm mb-4">Annual subscription (billed yearly)</p>
             <hr class="border-white/20 my-4">
             <div class="space-y-2 text-sm">
               <div class="flex justify-between">
                 <span class="text-teal-100">Subtotal</span>
-                <span>$299.00</span>
+                <span>$499.00</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-teal-100">Tax</span>
@@ -694,7 +725,7 @@
               <hr class="border-white/20 my-2">
               <div class="flex justify-between text-lg font-bold">
                 <span>Total</span>
-                <span>$299.00</span>
+                <span>$499.00</span>
               </div>
             </div>
           </div>
@@ -774,7 +805,7 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                 </svg>
-                Pay $299.00
+                Pay $499.00
               </button>
             </div>
 
