@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AbXInsight Product ID Strategy</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .bg-gradient-brand { background: linear-gradient(135deg, #0D9488 0%, #7C3AED 100%); }
+        .doc-card { transition: all 0.3s ease; }
+        .doc-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
+        .feature-card { transition: all 0.3s ease; }
+        .feature-card:hover { background: #F0FDFA; border-color: #0D9488; }
+        pre { background: #1E293B; border-radius: 8px; padding: 1.25rem; overflow-x: auto; }
+        code { font-family: 'Consolas', monospace; font-size: 0.875rem; color: #E2E8F0; }
+        .keyword { color: #C792EA; }
+        .string { color: #C3E88D; }
+        .comment { color: #546E7A; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+
+<!-- Header -->
+<div class="bg-white border-b border-gray-200">
+<div class="max-w-7xl mx-auto px-6 py-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<svg fill="none" height="48" viewbox="0 0 64 64" width="48">
+<rect fill="url(#abxLogoMain)" height="64" rx="14" width="64"></rect>
+<g transform="rotate(-45, 32, 32)"><rect fill="white" height="36" rx="8" width="16" x="24" y="14"></rect></g>
+<g transform="rotate(45, 32, 32)"><rect fill="white" fill-opacity="0.5" height="36" rx="8" width="16" x="24" y="14"></rect></g>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="abxLogoMain" x1="0" x2="64" y1="0" y2="64">
+<stop stop-color="#0D9488"></stop>
+<stop offset="1" stop-color="#7C3AED"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div>
+<h1 class="text-2xl font-bold text-gray-800">Product ID Strategy</h1>
+<p class="text-sm text-gray-600">Flexible Product Identification System</p>
+</div>
+</div>
+<a class="text-sm text-gray-600 hover:text-teal-600" href="index.html">← Back to Documentation</a>
+</div>
+</div>
+</div>
+<!-- Hero -->
+<div class="bg-gradient-brand py-12">
+<div class="max-w-7xl mx-auto px-6 text-center text-white">
+<h2 class="text-3xl font-bold mb-4">🔑 Product ID Strategy</h2>
+<p class="text-xl text-teal-50">Flexible identification system supporting local, national, and global product catalogues</p>
+</div>
+</div>
+<!-- Main Content -->
+<div class="max-w-7xl mx-auto px-6 py-12">
+<!-- Workflow diagram: Catalogue → Availability for Data Entry -->
+<div class="bg-white rounded-xl border border-gray-200 p-8 mb-6">
+<h2 class="text-2xl font-bold text-gray-800 mb-4">📌 How the catalogue is populated and becomes available for data entry</h2>
+<p class="text-sm text-gray-700 mb-6">
+        The catalogue is built in layers: AbXInsight canonical products, then hospital and country codes as external IDs,
+        and optionally a national catalogue adoption layer (Pro and Ultra). Data entry screens search the catalogue and auto-fill
+        product fields so users only enter quantities.
+      </p>
+<!-- Responsive SVG diagram -->
+<div class="w-full overflow-x-auto">
+<svg aria-label="Catalogue population and data entry workflow diagram" class="min-w-[900px] w-full" role="img" viewbox="0 0 1200 520">
+<defs>
+<style>
+              .box { fill: #ffffff; stroke: #CBD5E1; stroke-width: 2; rx: 16; }
+              .title { font: 700 18px Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; fill: #0F172A; }
+              .text { font: 500 13px Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; fill: #334155; }
+              .small { font: 500 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; fill: #475569; }
+              .tag { font: 700 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; fill: #0F172A; }
+              .arrow { stroke: #64748B; stroke-width: 2.5; fill: none; marker-end: url(#arrowHead); }
+              .hint { fill: #F1F5F9; stroke: #CBD5E1; stroke-width: 1.5; rx: 12; }
+              .pro { fill: #F8FAFC; stroke: #0F172A; stroke-dasharray: 6 6; stroke-width: 2; rx: 18; }
+            </style>
+<marker id="arrowHead" markerheight="10" markerwidth="10" orient="auto" refx="9" refy="3">
+<path d="M0,0 L10,3 L0,6 Z" fill="#64748B"></path>
+</marker>
+</defs>
+<!-- Column headers -->
+<text class="tag" x="70" y="35">Populate catalogue</text>
+<text class="tag" x="520" y="35">Catalogue readiness</text>
+<text class="tag" x="900" y="35">Data entry uses catalogue</text>
+<!-- Left column: sources -->
+<rect class="box" height="120" width="360" x="40" y="70"></rect>
+<text class="title" x="65" y="105">1. Canonical AbX product</text>
+<text class="text" x="65" y="132">Create canonical product once</text>
+<text class="small" x="65" y="155">product_uid (UUID) and abx_product_id</text>
+<rect class="hint" height="18" width="300" x="65" y="165"></rect>
+<text class="small" x="75" y="178">ABX-J01CA04-O-0001</text>
+<rect class="box" height="140" width="360" x="40" y="210"></rect>
+<text class="title" x="65" y="245">2. Add external IDs</text>
+<text class="text" x="65" y="272">Store codes as provided</text>
+<text class="small" x="65" y="295">hospital codes and national codes are never auto-generated</text>
+<rect class="hint" height="18" width="300" x="65" y="305"></rect>
+<text class="small" x="75" y="318">hospital:MHS local_sku:SKU-001</text>
+<rect class="hint" height="18" width="300" x="65" y="327"></rect>
+<text class="small" x="75" y="340">country:LAO national_registry:LAO-DRA-2024-001</text>
+<rect class="pro" height="120" width="360" x="40" y="370"></rect>
+<text class="title" x="65" y="405">3. National adoption layer</text>
+<text class="text" x="65" y="432">Optional feature flag</text>
+<text class="small" x="65" y="455">Ultra: hospitals can optionally adopt national codes when enabled</text>
+<rect class="hint" height="18" width="300" x="65" y="465"></rect>
+<text class="small" x="75" y="478">enable_national_catalogue_adoption</text>
+<!-- Middle column: catalogue readiness -->
+<rect class="box" height="200" width="320" x="460" y="130"></rect>
+<text class="title" x="485" y="165">Hospital product catalogue</text>
+<text class="text" x="485" y="192">Hospital local mapping</text>
+<text class="small" x="485" y="215">Hospital users see their local code</text>
+<text class="small" x="485" y="238">System stores link to product_uid</text>
+<rect class="box" height="120" width="320" x="460" y="350"></rect>
+<text class="title" x="485" y="385">Search index</text>
+<text class="small" x="485" y="412">Searchable fields include:</text>
+<text class="small" x="485" y="434">abx_product_id, generic name, ATC,</text>
+<text class="small" x="485" y="456">hospital code, national code (Pro/Ultra)</text>
+<!-- Right column: data entry -->
+<rect class="box" height="150" width="320" x="840" y="110"></rect>
+<text class="title" x="865" y="145">Quick Entry</text>
+<text class="small" x="865" y="172">Search antimicrobial</text>
+<text class="small" x="865" y="195">Auto-fill route, strength, pack size, DDD</text>
+<text class="small" x="865" y="218">User enters quantity only</text>
+<rect class="box" height="150" width="320" x="840" y="280"></rect>
+<text class="title" x="865" y="315">File Upload</text>
+<text class="small" x="865" y="342">Map columns and match products</text>
+<text class="small" x="865" y="365">Match by scoped code first</text>
+<text class="small" x="865" y="388">Then fingerprint, then create if needed</text>
+<!-- Arrows -->
+<path class="arrow" d="M400 130 C 430 130, 430 200, 460 200"></path>
+<path class="arrow" d="M400 280 C 430 280, 430 240, 460 240"></path>
+<path class="arrow" d="M400 430 C 430 430, 430 410, 460 410"></path>
+<path class="arrow" d="M780 210 C 815 210, 815 170, 840 170"></path>
+<path class="arrow" d="M780 250 C 815 250, 815 330, 840 330"></path>
+<!-- Footnote -->
+<text class="small" x="40" y="510">
+            Note: Reuse of the same hospital code means additional consumption of the same product; capture this by increasing quantities in data entry, not by adding new catalogue items.
+          </text>
+</svg>
+</div>
+<div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
+<h3 class="font-semibold text-gray-900 mb-2">Population pathways</h3>
+<ol class="text-sm text-gray-700 space-y-2 list-decimal ml-5">
+<li><span class="font-semibold">Hospital catalogue setup</span>: import or add products, then link local codes to canonical products.</li>
+<li><span class="font-semibold">National module setup</span> (Pro and Ultra): create national catalogue items linked to canonical products, then allow hospitals to adopt them.</li>
+</ol>
+</div>
+<div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
+<h3 class="font-semibold text-gray-900 mb-2">Availability for data entry</h3>
+<ol class="text-sm text-gray-700 space-y-2 list-decimal ml-5">
+<li>Data entry screens search using hospital codes, abx_product_id, names, and ATC.</li>
+<li>When a product is selected, route, strength, pack size, and DDD are pulled from the catalogue automatically.</li>
+<li>Users enter quantities only, and the system calculates DDDs.</li>
+</ol>
+</div>
+<div class="mt-6 bg-gray-50 border border-gray-200 rounded-xl p-6">
+<h3 class="font-semibold text-gray-900 mb-2">Catalogue population via Excel upload</h3>
+<p class="text-sm text-gray-700 mb-4">
+          Seeding the tenant product catalogue from an existing Excel file is the recommended onboarding route.
+          It allows hospitals (Basic and Pro) and national accounts (Ultra) to import their existing pharmacy lists quickly while preserving
+          hospital and national codes exactly as provided.
+        </p>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+<div class="bg-white border border-gray-200 rounded-lg p-4">
+<div class="text-xs font-semibold text-gray-900 mb-2">Minimum columns</div>
+<ul class="text-sm text-gray-700 space-y-2 list-disc ml-5">
+<li>Generic name</li>
+<li>ATC5 code</li>
+<li>Route</li>
+<li>Strength value and unit</li>
+<li>Pack size value and unit</li>
+<li>Hospital code (if applicable)</li>
+<li>National code (optional)</li>
+</ul>
+</div>
+<div class="bg-white border border-gray-200 rounded-lg p-4">
+<div class="text-xs font-semibold text-gray-900 mb-2">Matching precedence</div>
+<ol class="text-sm text-gray-700 space-y-2 list-decimal ml-5">
+<li>Match by scoped code first (hospital or country scope)</li>
+<li>Then match by canonical fingerprint (ATC, route, strength, pack size)</li>
+<li>If no match, create new canonical product and attach external IDs</li>
+</ol>
+</div>
+<div class="bg-white border border-gray-200 rounded-lg p-4">
+<div class="text-xs font-semibold text-gray-900 mb-2">Tier specific behaviour</div>
+<ul class="text-sm text-gray-700 space-y-2 list-disc ml-5">
+<li><span class="font-semibold">Basic</span>: upload seeds a single hospital tenant catalogue</li>
+<li><span class="font-semibold">Pro</span>: upload populates a shared tenant catalogue across hospitals in the same account</li>
+<li><span class="font-semibold">Ultra</span>: optional adoption of national list, plus optional uploads to map hospital codes</li>
+</ul>
+</div>
+</div>
+<div class="mt-4 bg-white border border-gray-200 rounded-lg p-4">
+<div class="text-sm font-semibold text-gray-900 mb-2">Important rule</div>
+<p class="text-sm text-gray-700">
+            If an Excel upload repeats the same hospital product code, it should be interpreted as the same product.
+            Catalogue entries should not be duplicated. Consumption volume is captured by quantities during data entry or consumption imports.
+          </p>
+</div>
+</div>
+</div>
+<div class="mt-6 bg-white border border-gray-200 rounded-xl p-6">
+<h3 class="font-semibold text-gray-900 mb-2">Link to data entry specification</h3>
+<p class="text-sm text-gray-700">
+          This workflow aligns with the Quick Entry and File Upload flows in the AbXInsight Data Entry mockups.
+          <a class="text-teal-700 hover:text-teal-800 underline" href="https://abxinsight.github.io/concept/AbXInsight_Data_Entry.html" rel="noreferrer" target="_blank">
+            Open Data Entry HTML
+          </a>
+</p>
+</div>
+</div>
+<!-- Problem Statement -->
+<div class="bg-white rounded-xl border border-gray-200 p-8 mb-6">
+<h2 class="text-2xl font-bold text-gray-800 mb-4">The Challenge</h2>
+<div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mb-6">
+<h3 class="font-bold text-yellow-900 mb-2">🤔 Product Identification Requirements</h3>
+<ul class="text-sm text-yellow-800 space-y-2">
+<li>• <strong>Hospital-Level:</strong> Each hospital has its own product codes (SKU, formulary codes)</li>
+<li>• <strong>Country-Level:</strong> National drug registries use country-specific product codes</li>
+<li>• <strong>Global-Level:</strong> WHO needs standardized identifiers for cross-country comparison</li>
+<li>• <strong>Flexibility:</strong> System must work with existing hospital systems without forcing changes</li>
+</ul>
+</div>
+</div>
+<!-- Proposed Solution -->
+<div class="bg-white rounded-xl border border-gray-200 p-8 mb-6">
+<h2 class="text-2xl font-bold text-gray-800 mb-6">✅ Proposed Solution: Multi-Tier Product ID System</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="border-2 border-teal-200 rounded-xl p-6 bg-teal-50">
+<div class="text-3xl mb-3">🏥</div>
+<h3 class="font-bold text-teal-900 mb-2">Hospital Level</h3>
+<p class="text-sm text-teal-800 mb-3">Local product codes used in hospital systems</p>
+<div class="bg-white rounded p-3 font-mono text-xs">
+<strong>Example:</strong><br/>
+                        SKU-001<br/>
+                        FORM-AMX-500<br/>
+                        PHARM-12345
+                    </div>
+</div>
+<div class="border-2 border-purple-200 rounded-xl p-6 bg-purple-50">
+<div class="text-3xl mb-3">🏛️</div>
+<h3 class="font-bold text-purple-900 mb-2">National Level</h3>
+<p class="text-sm text-purple-800 mb-3">Country drug registry codes</p>
+<div class="bg-white rounded p-3 font-mono text-xs">
+<strong>Example:</strong><br/>
+                        FDA-12345678<br/>
+                        EMA-EU/1/12/345<br/>
+                        LAO-DRA-2024-001
+                    </div>
+</div>
+<div class="border-2 border-blue-200 rounded-xl p-6 bg-blue-50">
+<div class="text-3xl mb-3">🌍</div>
+<h3 class="font-bold text-blue-900 mb-2">AbXInsight Global</h3>
+<p class="text-sm text-blue-800 mb-3">Auto-generated universal ID</p>
+<div class="bg-white rounded p-3 font-mono text-xs">
+<strong>Example:</strong><br/>
+                        ABX-J01CA04-O-0001<br/>
+                        ABX-J01DD04-P-0523<br/>
+                        ABX-J01MA02-O-0089
+                    </div>
+</div>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-4">Database Schema Design</h3>
+<pre><code><span class="keyword">CREATE TABLE</span> hospital_product_catalogue (
+    <span class="comment">-- ==================== PRIMARY KEY (Global) ====================</span>
+    product_id VARCHAR(<span class="number">50</span>) <span class="keyword">PRIMARY KEY</span>,
+    <span class="comment">-- Format: ABX-{ATC5}-&gt;-{ROUTE}-{SEQUENCE}</span>
+    <span class="comment">-- Example: ABX-J01CA04-O-0001</span>
+    
+    hospital_id VARCHAR(<span class="number">50</span>) <span class="keyword">NOT NULL</span>,
+    
+    <span class="comment">-- ==================== LOCAL IDENTIFIERS ====================</span>
+    product_code_local VARCHAR(<span class="number">100</span>),
+    <span class="comment">-- Hospital's own SKU/formulary code</span>
+    <span class="comment">-- Examples: "SKU-001", "FORM-AMX-500", "12345"</span>
+    
+    product_code_national VARCHAR(<span class="number">100</span>),
+    <span class="comment">-- Country's drug registry code</span>
+    <span class="comment">-- Examples: "FDA-12345678", "LAO-DRA-2024-001"</span>
+    
+    product_code_manufacturer VARCHAR(<span class="number">100</span>),
+    <span class="comment">-- Manufacturer's product code / NDC</span>
+    <span class="comment">-- Examples: "0069-2060-01", "MFR-AMX-500-100"</span>
+    
+    <span class="comment">-- ==================== STANDARD FIELDS ====================</span>
+    product_name_generic VARCHAR(<span class="number">500</span>) <span class="keyword">NOT NULL</span>,
+    atc5_code VARCHAR(<span class="number">7</span>) <span class="keyword">NOT NULL</span>,
+    route_of_administration VARCHAR(<span class="number">10</span>) <span class="keyword">NOT NULL</span>,
+    strength DECIMAL(<span class="number">15,6</span>) <span class="keyword">NOT NULL</span>,
+    packsize DECIMAL(<span class="number">15,2</span>) <span class="keyword">NOT NULL</span>,
+    
+    <span class="comment">-- WHO References (Auto-populated)</span>
+    ddd_value DECIMAL(<span class="number">15,6</span>) <span class="keyword">NOT NULL</span>,
+    aware_category VARCHAR(<span class="number">20</span>) <span class="keyword">NOT NULL</span>,
+    
+    <span class="comment">-- ==================== INDEXES ====================</span>
+    <span class="keyword">CONSTRAINT</span> unique_hospital_local_code 
+        <span class="keyword">UNIQUE</span>(hospital_id, product_code_local)
+        <span class="comment">-- Ensures each hospital's local code is unique</span>
+);
+
+<span class="comment">-- Index for searching by local codes</span>
+<span class="keyword">CREATE INDEX</span> idx_product_local 
+    <span class="keyword">ON</span> hospital_product_catalogue(hospital_id, product_code_local);
+
+<span class="comment">-- Index for searching by national codes</span>
+<span class="keyword">CREATE INDEX</span> idx_product_national 
+    <span class="keyword">ON</span> hospital_product_catalogue(product_code_national);</code></pre>
+</div>
+<!-- Identifier Strategy (Multiple IDs) -->
+<div class="bg-white rounded-xl border border-gray-200 p-8 mb-6">
+<h2 class="text-2xl font-bold text-gray-800 mb-6">🆔 Implementation: Multiple Identifiers (Recommended)</h2>
+<div class="bg-teal-50 border-l-4 border-teal-500 p-6 rounded-xl mb-6">
+<h3 class="font-semibold text-teal-900 mb-2">Core principle</h3>
+<p class="text-sm text-teal-900">
+                    AbXInsight supports <span class="font-semibold">multiple identifiers per product</span>.
+                    The platform generates AbXInsight identifiers, while hospitals and countries retain and manage their own codes.
+                    Reuse of a hospital code indicates additional consumption of the same product and must be handled in consumption entry, not in the catalogue.
+                </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+<div class="border border-gray-200 rounded-xl p-6">
+<div class="text-3xl mb-3">🧬</div>
+<h3 class="font-bold text-gray-900 mb-2">AbXInsight internal key</h3>
+<p class="text-sm text-gray-700 mb-3">
+<span class="font-semibold">product_uid</span> is the immutable primary key used for joins and integrity.
+                    </p>
+<div class="bg-gray-50 rounded p-3 font-mono text-xs">
+                        product_uid (UUID)<br/>
+                        8b6f7d2a-3c3e-4c7a-9c48-2f9a2b9b4e77
+                    </div>
+</div>
+<div class="border border-gray-200 rounded-xl p-6">
+<div class="text-3xl mb-3">🌍</div>
+<h3 class="font-bold text-gray-900 mb-2">AbXInsight canonical ID</h3>
+<p class="text-sm text-gray-700 mb-3">
+<span class="font-semibold">abx_product_id</span> is globally unique and human readable, used for exports and cross-site reporting.
+                    </p>
+<div class="bg-gray-50 rounded p-3 font-mono text-xs">
+                        abx_product_id<br/>
+                        ABX-J01CA04-O-0001
+                    </div>
+</div>
+<div class="border border-gray-200 rounded-xl p-6">
+<div class="text-3xl mb-3">🏥</div>
+<h3 class="font-bold text-gray-900 mb-2">Hospital and country codes</h3>
+<p class="text-sm text-gray-700 mb-3">
+                        Hospital and country identifiers are <span class="font-semibold">user managed</span>.
+                        AbXInsight stores them as <span class="font-semibold">scoped external IDs</span> and validates uniqueness within scope.
+                        The system never auto-generates these codes.
+                    </p>
+<div class="bg-gray-50 rounded p-3 font-mono text-xs">
+                        hospital:MHS local_sku:SKU-001<br/>
+                        country:LAO national_registry:LAO-DRA-2024-001
+                    </div>
+</div>
+</div>
+<div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-xl mb-6">
+<h3 class="font-semibold text-indigo-900 mb-2">Design decision: Do not embed country or hospital strings in abx_product_id</h3>
+<p class="text-sm text-indigo-900">
+                    Keep <span class="font-semibold">abx_product_id</span> location neutral for stability and comparability.
+                    Country and hospital strings belong in scoped external IDs.
+                    Only embed locality in an identifier if you are deliberately modelling a different entity type such as a country catalogue item or hospital formulary item.
+                </p>
+</div>
+<div class="bg-emerald-50 border-l-4 border-emerald-600 p-6 rounded-xl mb-6">
+<h3 class="font-semibold text-emerald-900 mb-2">Consumption rule: reuse of the same code means more consumption</h3>
+<p class="text-sm text-emerald-900">
+                    If a hospital uses the same code again, it indicates additional consumption of the same product.
+                    This must be reflected by adjusting quantities in consumption data entry or imports, not by creating a new product catalogue record.
+                </p>
+</div>
+<div class="bg-slate-50 border-l-4 border-slate-600 p-6 rounded-xl mb-6">
+<h3 class="font-semibold text-slate-900 mb-2">Tiered capability: national catalogue adoption</h3>
+<p class="text-sm text-slate-800 mb-3">
+                    Hospitals searching and adopting national codes is an optional feature available only in the
+                    <span class="font-semibold">Pro</span> and <span class="font-semibold">Ultra</span> tiers.
+                    In <span class="font-semibold">Basic</span>, hospitals use only their own codes and local mappings.
+                </p>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+<div class="bg-white border border-slate-200 rounded-lg p-4">
+<div class="text-xs font-semibold text-slate-900 mb-2">Basic</div>
+<ul class="text-sm text-slate-800 space-y-2 list-disc ml-5">
+<li>Hospital codes drive search and consumption entry</li>
+<li>National codes may be stored for reference</li>
+<li>No hospital adoption workflow</li>
+</ul>
+</div>
+<div class="bg-white border border-slate-200 rounded-lg p-4">
+<div class="text-xs font-semibold text-slate-900 mb-2">Pro</div>
+<ul class="text-sm text-slate-800 space-y-2 list-disc ml-5">
+<li>Hospitals can search the tenant catalogue</li>
+<li>Hospitals can map local codes to national catalogue items</li>
+<li>Optional display of national code in hospital UI</li>
+</ul>
+</div>
+<div class="bg-white border border-slate-200 rounded-lg p-4">
+<div class="text-xs font-semibold text-slate-900 mb-2">Ultra</div>
+<ul class="text-sm text-slate-800 space-y-2 list-disc ml-5">
+<li>All Pro features</li>
+<li>Ability to enforce or strongly default national code usage for selected workflows</li>
+<li>National level catalogue curation and data quality rules</li>
+</ul>
+</div>
+</div>
+<div class="mt-4 bg-white border border-slate-200 rounded-lg p-4">
+<div class="text-sm font-semibold text-slate-900 mb-2">Activation mechanism</div>
+<p class="text-sm text-slate-800">
+                        Gate with a tenant configuration flag such as <span class="font-mono">enable_national_catalogue_adoption</span>.
+                        When disabled, hide national catalogue search and prevent creating hospital mappings to national codes.
+                    </p>
+</div>
+</div>
+<div class="border border-gray-200 rounded-xl p-6">
+<h3 class="text-lg font-bold text-gray-900 mb-3">Matching and import precedence</h3>
+<ol class="text-sm text-gray-700 space-y-2 list-decimal ml-5">
+<li><span class="font-semibold">Match by scoped external ID</span> first: hospital scope for hospital uploads, country scope for national lists.</li>
+<li>If no match exists, <span class="font-semibold">match by canonical fingerprint</span> based on ATC, route, strength, and packsize.</li>
+<li>If still unmatched, <span class="font-semibold">create a new canonical product</span> with a new product_uid and abx_product_id, then attach external IDs as provided.</li>
+</ol>
+</div>
+</div>
+<div class="bg-white rounded-xl border border-gray-200 p-8">
+<h2 class="text-2xl font-bold text-gray-800 mb-6">💻 Complete Implementation Example</h2>
+<h3 class="text-lg font-bold text-gray-800 mb-3">Product Search UI (Shows Both IDs)</h3>
+<div class="bg-gray-50 rounded-lg p-6 border-2 border-gray-200 mb-6">
+<div class="space-y-3">
+<div class="bg-white border border-gray-200 rounded-lg p-4 hover:bg-teal-50 hover:border-teal-500 cursor-pointer transition">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-semibold text-gray-800">Amoxicillin 500mg capsules</div>
+<div class="text-sm text-gray-600 mt-1">
+<span class="inline-block bg-gray-100 px-2 py-1 rounded text-xs font-mono">ABX-J01CA04-O-0001</span>
+<span class="mx-2 text-gray-400">|</span>
+<span class="inline-block bg-teal-100 px-2 py-1 rounded text-xs font-mono">SKU-001</span>
+<span class="mx-2 text-gray-400">•</span>
+<span class="inline-block bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Access</span>
+</div>
+</div>
+<div class="text-sm text-gray-500">100 caps/box</div>
+</div>
+</div>
+<div class="bg-white border border-gray-200 rounded-lg p-4 hover:bg-teal-50 hover:border-teal-500 cursor-pointer transition">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-semibold text-gray-800">Ceftriaxone 1g injection</div>
+<div class="text-sm text-gray-600 mt-1">
+<span class="inline-block bg-gray-100 px-2 py-1 rounded text-xs font-mono">ABX-J01DD04-P-0001</span>
+<span class="mx-2 text-gray-400">|</span>
+<span class="inline-block bg-teal-100 px-2 py-1 rounded text-xs font-mono">PHARM-2045</span>
+<span class="mx-2 text-gray-400">•</span>
+<span class="inline-block bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Watch</span>
+</div>
+</div>
+<div class="text-sm text-gray-500">10 vials/box</div>
+</div>
+</div>
+</div>
+</div>
+<h3 class="text-lg font-bold text-gray-800 mb-3">Backend: Product Creation Function</h3>
+<pre><code><span class="comment">// Python/Flask Backend</span>
+<span class="keyword">def</span> <span class="function">create_product</span>(hospital_id, product_data):
+    <span class="comment"># Generate global AbXInsight ID</span>
+    global_id = generate_abx_product_id(
+        product_data[<span class="string">'atc5_code'</span>],
+        product_data[<span class="string">'route'</span>]
+    )
+    
+    db.execute(<span class="string">"""
+        INSERT INTO hospital_product_catalogue (
+            product_id,                     -- ABX-J01CA04-O-0001
+            hospital_id,
+            product_code_local,             -- SKU-001 (hospital's code)
+            product_code_national,          -- LAO-DRA-2024-001 (optional)
+            product_name_generic,
+            atc5_code,
+            route_of_administration,
+            strength, strength_unit,
+            packsize, packsize_unit,
+            ddd_value, aware_category
+        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """</span>, (
+        global_id,
+        hospital_id,
+        product_data.get(<span class="string">'local_code'</span>),      <span class="comment"># Hospital's SKU</span>
+        product_data.get(<span class="string">'national_code'</span>),   <span class="comment"># National registry</span>
+        product_data[<span class="string">'name'</span>],
+        product_data[<span class="string">'atc5_code'</span>],
+        product_data[<span class="string">'route'</span>],
+        <span class="comment"># ... rest of fields</span>
+    ))
+    
+    <span class="keyword">return</span> global_id
+
+
+<span class="keyword">def</span> <span class="function">generate_abx_product_id</span>(atc5_code, route):
+    <span class="comment"># Get next sequence for this ATC+Route</span>
+    result = db.execute(<span class="string">"""
+        SELECT COALESCE(MAX(CAST(
+            SUBSTRING(product_id FROM 18) AS INTEGER
+        )), 0) + 1 as next_seq
+        FROM hospital_product_catalogue
+        WHERE product_id LIKE %s
+    """</span>, (f<span class="string">'ABX-{atc5_code}-{route}-%'</span>,))
+    
+    sequence = result[<span class="number">0</span>][<span class="string">'next_seq'</span>]
+    
+    <span class="keyword">return</span> f<span class="string">'ABX-{atc5_code}-{route}-{sequence:04d}'</span>
+
+
+<span class="comment"># Search by ANY ID type</span>
+<span class="keyword">def</span> <span class="function">search_products</span>(hospital_id, search_term):
+    <span class="keyword">return</span> db.execute(<span class="string">"""
+        SELECT * FROM hospital_product_catalogue
+        WHERE hospital_id = %s
+        AND (
+            product_id ILIKE %s OR
+            product_code_local ILIKE %s OR
+            product_code_national ILIKE %s OR
+            product_name_generic ILIKE %s
+        )
+    """</span>, (hospital_id, 
+                f<span class="string">'%{search_term}%'</span>,
+                f<span class="string">'%{search_term}%'</span>,
+                f<span class="string">'%{search_term}%'</span>,
+                f<span class="string">'%{search_term}%'</span>))</code></pre>
+</div>
+</div><div class="max-w-7xl mx-auto mb-8 px-6 pt-8">
+<div class="bg-white rounded-xl border border-gray-200 p-6">
+<h1 class="text-2xl font-bold text-gray-900 mb-2">AbXInsight Product ID Strategy</h1>
+<p class="text-sm text-gray-700 mb-4">Defines the multiple-identifier model, tenant catalogue ownership, tier behaviour, and matching logic used by catalogue setup and consumption data entry.</p>
+<div class="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-lg">
+<p class="text-sm text-teal-900">Quickfox implementation guidance: Use one canonical product identity (product_uid) and one canonical AbX ID (abx_product_id). Hospital and national identifiers are user-managed external codes stored with scope. Catalogues are tenant-owned and never shared across accounts. In Pro, all hospitals within the same account share one tenant catalogue. In Ultra, hospitals can optionally adopt a National List that seeds the same tenant catalogue.</p>
+</div>
+</div>
+</div><div class="max-w-7xl mx-auto mb-6 px-6">
+<div class="bg-white rounded-xl border border-gray-200 p-6">
+<h2 class="text-xl font-bold text-gray-900 mb-3">Mandatory identifiers by module</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+<div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4">
+<p class="font-semibold text-indigo-900 mb-2">Hospital Module</p>
+<ul class="text-sm text-indigo-900 space-y-2 list-disc ml-5">
+<li>Hospital Code is mandatory for each product (local product codes used in hospital systems).</li>
+<li>National Code is optional and may be recorded if available.</li>
+</ul>
+</div>
+<div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4">
+<p class="font-semibold text-indigo-900 mb-2">National Module</p>
+<ul class="text-sm text-indigo-900 space-y-2 list-disc ml-5">
+<li>National Code is mandatory for each product (as issued by the authority).</li>
+<li>Hospital Codes are not required at national level.</li>
+</ul>
+</div>
+</div>
+<h2 class="text-xl font-bold text-gray-900 mt-6 mb-3">Catalogue ownership and sharing</h2>
+<p class="text-sm text-gray-700 mb-3">
+              Product catalogues are tenant-owned and are not shared between accounts. Global ATC, AWaRe, and DDD reference tables are always provided by AbXInsight.
+            </p>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+<div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+<p class="font-semibold text-gray-900 mb-2">Basic</p>
+<p class="text-sm text-gray-700">Single hospital builds and uses its own tenant catalogue.</p>
+</div>
+<div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+<p class="font-semibold text-gray-900 mb-2">Pro</p>
+<p class="text-sm text-gray-700">Single shared tenant catalogue across hospitals in the same account. No national catalogue search or adoption.</p>
+</div>
+<div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+<p class="font-semibold text-gray-900 mb-2">Ultra</p>
+<p class="text-sm text-gray-700">Hospitals can choose to adopt the National List (seeds the tenant catalogue) or maintain their own list.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-white border-t border-gray-200 py-8 mt-12">
+<div class="max-w-7xl mx-auto px-6 text-center">
+<div class="flex items-center justify-center gap-2 mb-3">
+<svg fill="none" height="24" viewbox="0 0 64 64" width="24">
+<rect fill="url(#abxLogoFooter)" height="64" rx="14" width="64"></rect>
+<g transform="rotate(-45, 32, 32)"><rect fill="white" height="36" rx="8" width="16" x="24" y="14"></rect></g>
+<g transform="rotate(45, 32, 32)"><rect fill="white" fill-opacity="0.5" height="36" rx="8" width="16" x="24" y="14"></rect></g>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="abxLogoFooter" x1="0" x2="64" y1="0" y2="64">
+<stop stop-color="#0D9488"></stop>
+<stop offset="1" stop-color="#7C3AED"></stop>
+</lineargradient>
+</defs>
+</svg>
+<span class="font-semibold text-gray-800">AbXInsight</span>
+</div>
+<p class="text-sm text-gray-600">Product ID Strategy Guide</p>
+<p class="text-xs text-gray-500 mt-2">For Quickfox Development Team • January 2026</p>
+</div>
+</footer>
+</body>
+</html>
